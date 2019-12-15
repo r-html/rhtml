@@ -1,4 +1,4 @@
-# @rxdi/rhtml
+# @rhtml/core
 
 #### Installation
 
