@@ -1,10 +1,19 @@
+# @rhtml/core
+
+#### Installation
+
+```bash
+npm i @rhtml/core
+```
+
+#### Usage
+
+```typescript
 import { LitElement, Component, html } from '@rxdi/lit-html';
 import { BehaviorSubject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import '../packages/operators/src/index';
-import '../packages/components/src/index';
-import '../packages/hooks/src/index';
+import '@rhtml/core';
 
 interface State { counter: number }
 
@@ -22,9 +31,11 @@ interface State { counter: number }
             setState: (res: State) => State
           ) =>
             html`
-              <button
+              <rx-button
+                palette="danger"
                 @click=${() => setState({ counter: res.counter + res.counter })}
-                >Increment</button>
+                >Increment</rx-button
+              >
               ${res.counter}
             `,
           loading: () => html`adadadad`,
@@ -33,11 +44,11 @@ interface State { counter: number }
       ></rx-renderer>
 
       <rx-for .of=${['IterableItem 1', 'Iterable Item 2']}>
-        <rx-let .item=${v => html`${v}`}></rx-let>
+        <rx-let .item=${v => html``}></rx-let>
       </rx-for>
 
       <rx-monad>
-        <rx-state .value=${'dadada'}></rx-state>
+        <rx-state .value=${this.select(res => res.data.randomName)}></rx-state>
         <rx-render .state=${name => html`
           <p>${name}</p>
         `}>
@@ -51,9 +62,9 @@ interface State { counter: number }
             name
           }
         }"></rx-fetch>
-        <rx-render .state=${({ data: { continents } }) => html`
+        <rx-render .state=${({ data: { continents } }: IQueryData) => html`
           <rx-for .of=${continents}>
-            <rx-let .item=${({ name }) => name}></rx-let>
+            <rx-let .item=${({ name }: IContinent) => name}></rx-let>
           </rx-for>
         `}>
         </rx-render>
@@ -70,3 +81,5 @@ interface State { counter: number }
   }
 })
 export class RHtmlViewComponent extends LitElement {}
+
+```

@@ -25,6 +25,6 @@ export interface RenderOptions<T = any> extends OptionalProperties {
 }
 
 
-export interface GraphOptions<T> extends RenderOptions<T> {
+export interface GraphOptions<T = any> extends RenderOptions<T> {
   fetch: string;
 }

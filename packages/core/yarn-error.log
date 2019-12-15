@@ -1,0 +1,67 @@
+Arguments: 
+  /home/rampage/.nvm/versions/node/v10.16.0/bin/node /home/rampage/.nvm/versions/node/v10.16.0/bin/yarn add @rhtml/components
+
+PATH: 
+  /home/rampage/.nvm/versions/node/v10.16.0/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/rampage/Desktop/work/repos/public/rhtml/node_modules/.bin:/home/rampage/.local/bin:/home/rampage/bin:/home/rampage/Downloads/google-cloud-sdk/bin:/home/rampage/.nvm/versions/node/v10.16.0/bin:/home/rampage/.local/bin:/home/rampage/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rampage/Android/Sdk/tools/bin:/home/rampage/Android/Sdk/platform-tools:/home/rampage/Android/Sdk/emulator:/usr/lib/flutter/flutter/bin:/home/rampage/bin:/home/rampage/Android/Sdk/tools/bin:/home/rampage/Android/Sdk/platform-tools:/home/rampage/Android/Sdk/emulator:/usr/lib/flutter/flutter/bin:/home/rampage/bin
+
+Yarn version: 
+  1.19.0
+
+Node version: 
+  10.16.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.npmjs.org/@rhtml%2fcomponents: Not found
+      at Request.params.callback [as _callback] (/home/rampage/.nvm/versions/node/v10.16.0/lib/node_modules/yarn/lib/cli.js:66918:18)
+      at Request.self.callback (/home/rampage/.nvm/versions/node/v10.16.0/lib/node_modules/yarn/lib/cli.js:140539:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (/home/rampage/.nvm/versions/node/v10.16.0/lib/node_modules/yarn/lib/cli.js:141511:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (/home/rampage/.nvm/versions/node/v10.16.0/lib/node_modules/yarn/lib/cli.js:141433:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1129:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+      "name": "@rhtml/core",
+      "version": "1.0.0",
+      "description": "Reactive HyperText Markup Language",
+      "scripts": {
+        "start": "parcel ./examples/index.html --out-dir build/examples",
+        "patch": "npm version patch && npm publish --update-readme --access public",
+        "clean": "git clean -dxf",
+        "build": "rm -rf dist && tsc"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git@github.com:rxdi/rhtml.git"
+      },
+      "author": "Kristiyan Tachev",
+      "license": "MIT",
+      "devDependencies": {
+        "husky": "^3.0.9",
+        "rxjs": "^6.5.3",
+        "typescript": "^3.7.3"
+      },
+      "browserslist": [
+        "last 1 chrome versions"
+      ],
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.js",
+      "typings": "./dist/index.d.ts",
+      "dependencies": {
+        "@rxdi/core": "^0.7.40",
+        "@rxdi/lit-html": "^0.7.40"
+      }
+    }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

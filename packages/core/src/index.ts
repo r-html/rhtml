@@ -1,3 +1,3 @@
-export * from './operators';
-export * from './hooks';
-export * from './components'
+export * from '@rhtml/operators';
+export * from '@rhtml/hooks';
+export * from '@rhtml/components';
