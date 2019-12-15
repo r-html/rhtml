@@ -22,10 +22,10 @@ import { DEFAULTS } from '../tokens';
 
 
 /**
- * @customElement rx-graph
+ * @customElement r-graph
  */
 @Component({
-  selector: 'rx-graph2',
+  selector: 'r-graph',
   template(this: GraphComponent) {
     return html`
       ${async(

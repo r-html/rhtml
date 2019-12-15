@@ -1,10 +1,10 @@
 import { Component, LitElement, html, property } from '@rxdi/lit-html';
 
 /**
- * @customElement rx-if
+ * @customElement r-if
  */
 @Component({
-  selector: 'rx-if',
+  selector: 'r-if',
   template(this: IfOperator) {
     return html`
       ${this.exp

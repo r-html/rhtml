@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'rx-let',
+  selector: 'r-let',
   template(this: LetOperator) {
     return html`
       ${async(

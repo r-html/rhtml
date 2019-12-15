@@ -4,12 +4,12 @@
   "description": "Reactive HyperText Markup Language",
   "bolt": {
     "workspaces": [
-      "packages/*",
-      "examples"
+      "packages/*"
     ]
   },
   "scripts": {
     "start": "parcel ./examples/index.html --out-dir build/examples",
+    "build-docs":"parcel build ./examples/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml",
     "patch": "npm version patch && npm publish --update-readme --access public",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"

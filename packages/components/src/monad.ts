@@ -10,16 +10,16 @@ import { SettingsComponent } from './settings';
 // import { map } from 'rxjs/operators';
 
 /**
- * @customElement rx-monad
+ * @customElement r-monad
  */
 @Component({
-  selector: 'rx-monad',
+  selector: 'r-monad',
   template(this: MonadComponent) {
     return html`
       <slot></slot>
       ${this.options
         ? html`
-            <rx-renderer .options=${this.options}></rx-renderer>
+            <r-renderer .options=${this.options}></r-renderer>
           `
         : ''}
     `;
@@ -33,17 +33,17 @@ export class MonadComponent extends LitElement {
     const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
     const renderComponent = this.findNode(
       nodes,
-      'rx-render'
+      'r-render'
     ) as RenderComponent;
-    const fetchComponent = this.findNode(nodes, 'rx-fetch') as FetchComponent;
-    const stateComponent = this.findNode(nodes, 'rx-state') as StateComponent;
+    const fetchComponent = this.findNode(nodes, 'r-fetch') as FetchComponent;
+    const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
     const settingsComponent = this.findNode(
       nodes,
-      'rx-settings'
+      'r-settings'
     ) as SettingsComponent;
     let fetch: string;
     const state = await stateComponent.value;
-    // const lensComponent = this.findNode(nodes, 'rx-lens') as LensComponent;
+    // const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
     // if (lensComponent.match) {
     //   state = this.get(state, lensComponent.match);
     // } else if (lensComponent.get) {

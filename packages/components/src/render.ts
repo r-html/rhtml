@@ -7,10 +7,10 @@ import {
 } from '@rxdi/lit-html';
 
 /**
- * @customElement rx-render
+ * @customElement r-render
  */
 @Component({
-  selector: 'rx-render',
+  selector: 'r-render',
   template: () => html`
     <slot></slot>
   `

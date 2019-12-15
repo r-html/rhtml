@@ -11,10 +11,10 @@ import {
 import { RenderOptions } from './types';
 
 /**
- * @customElement rx-renderer
+ * @customElement r-renderer
  */
 @Component({
-  selector: 'rx-renderer',
+  selector: 'r-renderer',
   template(this: Renderer) {
     return html`
       ${async(

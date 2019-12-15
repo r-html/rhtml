@@ -21,7 +21,7 @@ interface State { counter: number }
   selector: 'r-html-view',
   template(this: RHtmlViewComponent) {
     return html`
-      <rx-renderer
+      <r-renderer
         .options=${{
           state: new BehaviorSubject({ counter: 1 }).pipe(
             delay(1700),
@@ -31,52 +31,52 @@ interface State { counter: number }
             setState: (res: State) => State
           ) =>
             html`
-              <rx-button
+              <r-button
                 palette="danger"
                 @click=${() => setState({ counter: res.counter + res.counter })}
-                >Increment</rx-button
+                >Increment</r-button
               >
               ${res.counter}
             `,
           loading: () => html`adadadad`,
           error: () => html`adadadadadada`
         }}
-      ></rx-renderer>
+      ></r-renderer>
 
-      <rx-for .of=${['IterableItem 1', 'Iterable Item 2']}>
-        <rx-let .item=${v => html``}></rx-let>
-      </rx-for>
+      <r-for .of=${['IterableItem 1', 'Iterable Item 2']}>
+        <r-let .item=${v => html``}></r-let>
+      </r-for>
 
-      <rx-monad>
-        <rx-state .value=${this.select(res => res.data.randomName)}></rx-state>
-        <rx-render .state=${name => html`
+      <r-monad>
+        <r-state .value=${this.select(res => res.data.randomName)}></r-state>
+        <r-render .state=${name => html`
           <p>${name}</p>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
 
-      <rx-monad>
-        <rx-settings .value=${{ fetchPolicy: 'cache-first' }}></rx-settings>
-        <rx-fetch query="{
+      <r-monad>
+        <r-settings .value=${{ fetchPolicy: 'cache-first' }}></r-settings>
+        <r-fetch query="{
           continents {
             name
           }
-        }"></rx-fetch>
-        <rx-render .state=${({ data: { continents } }: IQueryData) => html`
-          <rx-for .of=${continents}>
-            <rx-let .item=${({ name }: IContinent) => name}></rx-let>
-          </rx-for>
+        }"></r-fetch>
+        <r-render .state=${({ data: { continents } }: IQueryData) => html`
+          <r-for .of=${continents}>
+            <r-let .item=${({ name }: IContinent) => name}></r-let>
+          </r-for>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
 
-      <rx-monad>
-        <rx-fetch subscribe="{ notifications { appUpdated } }"></rx-fetch>
-        <rx-render .state=${({ data: { notifications: { appUpdated }}}) => html`
+      <r-monad>
+        <r-fetch subscribe="{ notifications { appUpdated } }"></r-fetch>
+        <r-render .state=${({ data: { notifications: { appUpdated }}}) => html`
           <p>${appUpdated}</p>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
     `;
   }
 })

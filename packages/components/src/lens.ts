@@ -1,10 +1,10 @@
 import { LitElement, Component, property } from '@rxdi/lit-html';
 
 /**
- * @customElement rx-lens
+ * @customElement r-lens
  */
 @Component({
-  selector: 'rx-lens'
+  selector: 'r-lens'
 })
 export class LensComponent extends LitElement {
   @property({ type: String }) match: string;

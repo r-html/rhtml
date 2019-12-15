@@ -1,1 +1,1 @@
-export type Operators = 'rx-let' | 'rx-for';
+export type Operators = 'r-let' | 'r-for';

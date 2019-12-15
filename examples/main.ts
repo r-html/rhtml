@@ -12,7 +12,7 @@ interface State { counter: number }
   selector: 'r-html-view',
   template(this: RHtmlViewComponent) {
     return html`
-      <rx-renderer
+      <r-renderer
         .options=${{
           state: new BehaviorSubject({ counter: 1 }).pipe(
             delay(1700),
@@ -27,45 +27,45 @@ interface State { counter: number }
                 >Increment</button>
               ${res.counter}
             `,
-          loading: () => html`adadadad`,
-          error: () => html`adadadadadada`
+          loading: () => html`Loading...`,
+          error: () => html`Error`
         }}
-      ></rx-renderer>
+      ></r-renderer>
 
-      <rx-for .of=${['IterableItem 1', 'Iterable Item 2']}>
-        <rx-let .item=${v => html`${v}`}></rx-let>
-      </rx-for>
+      <r-for .of=${['IterableItem 1', 'Iterable Item 2']}>
+        <r-let .item=${v => html`${v}`}></r-let>
+      </r-for>
 
-      <rx-monad>
-        <rx-state .value=${'dadada'}></rx-state>
-        <rx-render .state=${name => html`
+      <r-monad>
+        <r-state .value=${'dadada'}></r-state>
+        <r-render .state=${name => html`
           <p>${name}</p>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
 
-      <rx-monad>
-        <rx-settings .value=${{ fetchPolicy: 'cache-first' }}></rx-settings>
-        <rx-fetch query="{
+      <r-monad>
+        <r-settings .value=${{ fetchPolicy: 'cache-first' }}></r-settings>
+        <r-fetch query="{
           continents {
             name
           }
-        }"></rx-fetch>
-        <rx-render .state=${({ data: { continents } }) => html`
-          <rx-for .of=${continents}>
-            <rx-let .item=${({ name }) => name}></rx-let>
-          </rx-for>
+        }"></r-fetch>
+        <r-render .state=${({ data: { continents } }) => html`
+          <r-for .of=${continents}>
+            <r-let .item=${({ name }) => name}></r-let>
+          </r-for>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
 
-      <rx-monad>
-        <rx-fetch subscribe="{ notifications { appUpdated } }"></rx-fetch>
-        <rx-render .state=${({ data: { notifications: { appUpdated }}}) => html`
+      <r-monad>
+        <r-fetch subscribe="{ notifications { appUpdated } }"></r-fetch>
+        <r-render .state=${({ data: { notifications: { appUpdated }}}) => html`
           <p>${appUpdated}</p>
         `}>
-        </rx-render>
-      </rx-monad>
+        </r-render>
+      </r-monad>
     `;
   }
 })
