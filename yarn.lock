@@ -595,6 +595,11 @@ semver-compare@^1.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
   integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
 
+shades@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/shades/-/shades-2.1.0.tgz#5cefc51f6294769e3413d4e4050c9d4e7b00b245"
+  integrity sha512-6D+4+lPBjc95ptStD9PzOfrEc2d7zwxWVn2SFEbYaI4EXB5+tcChhyGwOEvbEjGb+d1QS44AcYcSYgWNz5grzg==
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"

@@ -1,24 +1,23 @@
 {
-    "name": "@rhtml/hooks",
-    "version": "1.0.0",
-    "description": "Reactive HyperText Markup Language",
-    "scripts": {
-      "start": "parcel ./examples/index.html --out-dir build/examples",
-      "patch": "npm version patch && npm publish --update-readme --access public",
-      "clean": "git clean -dxf",
-      "build": "rm -rf dist && tsc"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git@github.com:rxdi/rhtml.git"
-    },
-    "author": "Kristiyan Tachev",
-    "license": "MIT",
-    "browserslist": [
-      "last 1 chrome versions"
-    ],
-    "types": "./dist/index.d.ts",
-    "module": "./dist/index.js",
-    "typings": "./dist/index.d.ts"
-  }
-  
+  "name": "@rhtml/hooks",
+  "version": "0.0.2",
+  "description": "Reactive HyperText Markup Language",
+  "scripts": {
+    "start": "parcel ./examples/index.html --out-dir build/examples",
+    "patch": "npm version patch && npm publish --update-readme --access public",
+    "clean": "git clean -dxf",
+    "build": "rm -rf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rxdi/rhtml.git"
+  },
+  "author": "Kristiyan Tachev",
+  "license": "MIT",
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}

@@ -17,8 +17,8 @@ import {
   QueryBaseOptions,
   SubscriptionOptions
 } from 'apollo-client';
-import { GraphOptions } from '../types';
-import { DEFAULTS } from '../tokens';
+import { GraphOptions } from './types';
+import { DEFAULTS } from './tokens';
 
 
 /**

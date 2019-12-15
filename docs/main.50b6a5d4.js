@@ -8,7 +8,7 @@
                 `))))}
     `}})],Lg);pb.LetOperator=YQ;Object.defineProperty(Rh,"__esModule",{value:!0}),ir(qb),ir(pb);var Fg={};function gb(r){for(var e in r)Fg.hasOwnProperty(e)||(Fg[e]=r[e])}var hc={};Object.defineProperty(hc,"__esModule",{value:!0});var Ob={},xe=Ob&&Ob.__decorate||function(e,t,a,$){var r,o=arguments.length,n=o<3?t:null===$?$=Object.getOwnPropertyDescriptor(t,a):$;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)n=Reflect.decorate(e,t,a,$);else for(var y=e.length-1;y>=0;y--)(r=e[y])&&(n=(o<3?r(n):o>3?r(t,a,n):r(t,a))||n);return o>3&&n&&Object.defineProperty(t,a,n),n},Mi=Ob&&Ob.__metadata||function(e,t){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,t)};Object.defineProperty(Ob,"__esModule",{value:!0});let Ie=class extends g.LitElement{constructor(){super(...arguments),this.ray=e=>e}};xe([g.property({type:String}),Mi("design:type",String)],Ie.prototype,"match",void 0),xe([g.property({type:Array}),Mi("design:type",Array)],Ie.prototype,"get",void 0),xe([g.property({type:Object}),Mi("design:type",Function)],Ie.prototype,"ray",void 0);var eR=Ie=xe([g.Component({selector:"r-lens"})],Ie);Ob.LensComponent=eR;var Vb={},Ar=Vb&&Vb.__decorate||function(e,t,r,$){var o,n=arguments.length,a=n<3?t:null===$?$=Object.getOwnPropertyDescriptor(t,r):$;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(e,t,r,$);else for(var l=e.length-1;l>=0;l--)(o=e[l])&&(a=(n<3?o(a):n>3?o(t,r,a):o(t,r))||a);return n>3&&a&&Object.defineProperty(t,r,a),a},hR=Vb&&Vb.__metadata||function(e,t){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,t)};Object.defineProperty(Vb,"__esModule",{value:!0});let Br=class extends g.LitElement{};Ar([g.property({type:Object}),hR("design:type",Function)],Br.prototype,"state",void 0);var jR=Br=Ar([g.Component({selector:"r-render",template:()=>g.html`
     <slot></slot>
-  `})],Br);Vb.RenderComponent=jR;var kR,$a={},Dr=$a&&$a.__decorate||function(t,e,r,o){var n,$=arguments.length,a=$<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,r):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(t,e,r,o);else for(var i=t.length-1;i>=0;i--)(n=t[i])&&(a=($<3?n(a):$>3?n(e,r,a):n(e,r))||a);return $>3&&a&&Object.defineProperty(e,r,a),a},nR=$a&&$a.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)},oR=$a&&$a.__awaiter||function(t,e,r,o){return new(r||(r=Promise))(function(n,$){function a(t){try{s(o.next(t))}catch(e){$(e)}}function i(t){try{s(o.throw(t))}catch(e){$(e)}}function s(t){var e;t.done?n(t.value):(e=t.value,e instanceof r?e:new r(function(t){t(e)})).then(a,i)}s((o=o.apply(t,e||[])).next())})};Object.defineProperty($a,"__esModule",{value:!0});let Er=class extends g.LitElement{OnUpdateFirst(){return oR(this,void 0,void 0,function*(){const t=this.shadowRoot.querySelector("slot").assignedNodes(),e=this.findNode(t,"r-render"),r=this.findNode(t,"r-fetch"),o=this.findNode(t,"r-state"),n=this.findNode(t,"r-settings");let $;const a=yield o.value;r.query&&($=this.trim(r.query,"query")),r.subscribe&&($=this.trim(r.subscribe,"subscription")),r.mutate&&($=this.trim(r.mutate,"mutation")),this.options={settings:n.value,state:a,fetch:$,render:e.state}})}trim(t="",e){if(t.includes(e))return t;return`${e} ${t.trim().replace(/\s/g,"")}`}findNode(t,e){const r=t.find(t=>t&&t.nextSibling&&t.nextSibling.localName===e);return r?r.nextSibling:{value:null}}get(t={},e="",r){return e.replace(/\[(.+?)\]/g,".$1").split(".").reduce((t,e)=>t[e],t)||r}};Dr([g.property({type:Object}),nR("design:type","function"==typeof(kR=void 0!==hc.GraphOptions&&hc.GraphOptions)?kR:Object)],Er.prototype,"options",void 0);var qR=Er=Dr([g.Component({selector:"r-monad",template(){return g.html`
+  `})],Br);Vb.RenderComponent=jR;var kR,$a={},Dr=$a&&$a.__decorate||function(t,e,r,o){var n,$=arguments.length,a=$<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,r):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(t,e,r,o);else for(var i=t.length-1;i>=0;i--)(n=t[i])&&(a=($<3?n(a):$>3?n(e,r,a):n(e,r))||a);return $>3&&a&&Object.defineProperty(e,r,a),a},nR=$a&&$a.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)},oR=$a&&$a.__awaiter||function(t,e,r,o){return new(r||(r=Promise))(function(n,$){function a(t){try{s(o.next(t))}catch(e){$(e)}}function i(t){try{s(o.throw(t))}catch(e){$(e)}}function s(t){var e;t.done?n(t.value):(e=t.value,e instanceof r?e:new r(function(t){t(e)})).then(a,i)}s((o=o.apply(t,e||[])).next())})};Object.defineProperty($a,"__esModule",{value:!0});let Er=class extends g.LitElement{OnUpdateFirst(){return oR(this,void 0,void 0,function*(){const t=this.shadowRoot.querySelector("slot").assignedNodes(),e=this.findNode(t,"r-render"),r=this.findNode(t,"r-fetch"),o=this.findNode(t,"r-state"),n=this.findNode(t,"r-settings");let $;const a=yield o.value;r.query&&($=this.trim(r.query,"query")),r.subscribe&&($=this.trim(r.subscribe,"subscription")),r.mutate&&($=this.trim(r.mutate,"mutation")),this.options={settings:n.value,state:a,fetch:$,render:e.state}})}trim(t="",e){if(t.includes(e))return t;return`${e} ${t.trim().replace(/\s/g,"")}`}findNode(t,e){const r=t.find(t=>t&&t.nextSibling&&t.nextSibling.localName===e);return r?r.nextSibling:{value:null}}get(t={},e="",r){return e.replace(/\[(.+?)\]/g,".$1").split(".").reduce((t,e)=>t[e],t)||r}};Dr([g.property({type:Object}),nR("design:type","function"==typeof(kR=void 0!==hc.GraphOptions&&hc.GraphOptions)?kR:Object)],Er.prototype,"options",void 0);var qR=Er=Dr([g.Component({selector:"r-part",template(){return g.html`
       <slot></slot>
       ${this.options?g.html`
             <r-renderer .options=${this.options}></r-renderer>
@@ -42,15 +42,15 @@
         <r-let .item=${e=>g.html`${e}`}></r-let>
       </r-for>
 
-      <r-monad>
+      <r-part>
         <r-state .value=${"dadada"}></r-state>
         <r-render .state=${e=>g.html`
           <p>${e}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
+      <r-part>
         <r-settings .value=${{fetchPolicy:"cache-first"}}></r-settings>
         <r-fetch query="{
           continents {
@@ -63,13 +63,13 @@
           </r-for>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
+      <r-part>
         <r-fetch subscribe="{ notifications { appUpdated } }"></r-fetch>
         <r-render .state=${({data:{notifications:{appUpdated:e}}})=>g.html`
           <p>${e}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
     `})],Lx);Gc.RHtmlViewComponent=Rv;if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=Gc}else if(typeof define==="function"&&define.amd){define(function(){return Gc})}})();
