@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
       "name": "@rhtml/core",
-      "version": "1.0.0",
+      "version": "0.0.1",
       "description": "Reactive HyperText Markup Language",
       "scripts": {
         "start": "parcel ./examples/index.html --out-dir build/examples",

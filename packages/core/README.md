@@ -47,15 +47,15 @@ interface State { counter: number }
         <r-let .item=${v => html``}></r-let>
       </r-for>
 
-      <r-monad>
+      <r-part>
         <r-state .value=${this.select(res => res.data.randomName)}></r-state>
         <r-render .state=${name => html`
           <p>${name}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
+      <r-part>
         <r-settings .value=${{ fetchPolicy: 'cache-first' }}></r-settings>
         <r-fetch query="{
           continents {
@@ -68,15 +68,15 @@ interface State { counter: number }
           </r-for>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
+      <r-part>
         <r-fetch subscribe="{ notifications { appUpdated } }"></r-fetch>
         <r-render .state=${({ data: { notifications: { appUpdated }}}) => html`
           <p>${appUpdated}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
     `;
   }
 })

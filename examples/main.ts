@@ -5,6 +5,7 @@ import { delay } from 'rxjs/operators';
 import '../packages/operators/src/index';
 import '../packages/components/src/index';
 import '../packages/hooks/src/index';
+import '../packages/graphql/src/index';
 
 interface State { counter: number }
 
@@ -36,36 +37,32 @@ interface State { counter: number }
         <r-let .item=${v => html`${v}`}></r-let>
       </r-for>
 
-      <r-monad>
+      <r-part>
         <r-state .value=${'dadada'}></r-state>
         <r-render .state=${name => html`
           <p>${name}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
+      <r-part>
         <r-settings .value=${{ fetchPolicy: 'cache-first' }}></r-settings>
-        <r-fetch query="{
-          continents {
-            name
-          }
-        }"></r-fetch>
+        <r-fetch .query=${`{ continents { name } }`}></r-fetch>
         <r-render .state=${({ data: { continents } }) => html`
           <r-for .of=${continents}>
             <r-let .item=${({ name }) => name}></r-let>
           </r-for>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
 
-      <r-monad>
-        <r-fetch subscribe="{ notifications { appUpdated } }"></r-fetch>
+      <r-part>
+        <r-fetch .subscribe=${`{ notifications { appUpdated } }`}></r-fetch>
         <r-render .state=${({ data: { notifications: { appUpdated }}}) => html`
           <p>${appUpdated}</p>
         `}>
         </r-render>
-      </r-monad>
+      </r-part>
     `;
   }
 })

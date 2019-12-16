@@ -1,0 +1,7 @@
+config:
+  app:
+    local:
+      INTROSPECTION_FOLDER: ./src/introspection/
+  schema:
+    introspectionEndpoint: https://countries.trevorblades.com/
+    introspectionOutputFolder: ./develop/src/introspection

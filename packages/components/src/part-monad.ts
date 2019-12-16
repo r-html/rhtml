@@ -4,22 +4,22 @@ import { RenderComponent } from './render';
 import { StateComponent } from './state';
 import { GraphOptions } from './types';
 import { SettingsComponent } from './settings';
-// import { LensComponent } from './lens';
-// import { get, mod, all } from 'shades';
-// import { isObservable } from 'rxjs';
-// import { map } from 'rxjs/operators';
+import { LensComponent } from './lens';
+import { get, mod, all } from 'shades';
+import { isObservable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
- * @customElement r-monad
+ * @customElement r-part
  */
 @Component({
-  selector: 'r-monad',
+  selector: 'r-part',
   template(this: MonadComponent) {
     return html`
       <slot></slot>
       ${this.options
         ? html`
-            <r-renderer .options=${this.options}></r-renderer>
+            <r-graph .options=${this.options}></r-graph>
           `
         : ''}
     `;
@@ -29,56 +29,60 @@ export class MonadComponent extends LitElement {
   @property({ type: Object })
   private options: GraphOptions;
 
+  @property()
+  private fetchComponent: FetchComponent;
+
   async OnUpdateFirst() {
     const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
     const renderComponent = this.findNode(
       nodes,
       'r-render'
     ) as RenderComponent;
-    const fetchComponent = this.findNode(nodes, 'r-fetch') as FetchComponent;
+    this.fetchComponent = this.findNode(nodes, 'r-fetch') as FetchComponent;
     const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
     const settingsComponent = this.findNode(
       nodes,
       'r-settings'
     ) as SettingsComponent;
     let fetch: string;
-    const state = await stateComponent.value;
-    // const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
-    // if (lensComponent.match) {
-    //   state = this.get(state, lensComponent.match);
-    // } else if (lensComponent.get) {
-    //   lensComponent.get = lensComponent.get.map(a => a === 'all' ? all : a);
-    //   if (isObservable(state)) {
-    //     state = state.pipe(map(s => {
-    //       const expectedState = (get as any)(...lensComponent.get)(s);
-    //       if (!expectedState) {
-    //         return s;
-    //       }
-    //       return expectedState;
-    //     }));
-    //   } else {
-    //     state = (get as any)(...lensComponent.get)(state);
-    //   }
-    //   if (lensComponent.ray) {
-    //     state = lensComponent.ray(state);
-    //   }
-    // } else if (lensComponent.ray) {
-    //   if (isObservable(state)) {
-    //     state = state.pipe(map(s => lensComponent.ray(s)));
-    //   } else {
-    //     state = lensComponent.ray(state);
-    //   }
-    // }
+    let state = await stateComponent.value;
+    const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
+    if (lensComponent.match) {
+      state = this.get(state, lensComponent.match);
+    } else if (lensComponent.get) {
+      lensComponent.get = lensComponent.get.map(a => a === 'all' ? all : a);
+      if (isObservable(state)) {
+        state = state.pipe(map(s => {
+          const expectedState = (get as any)(...lensComponent.get)(s);
+          if (!expectedState) {
+            return s;
+          }
+          return expectedState;
+        }));
+      } else {
+        state = (get as any)(...lensComponent.get)(state);
+      }
+      if (lensComponent.ray) {
+        state = lensComponent.ray(state);
+      }
+    } else if (lensComponent.ray) {
+      if (isObservable(state)) {
+        state = state.pipe(map(s => lensComponent.ray(s)));
+      } else {
+        state = lensComponent.ray(state);
+      }
+    }
 
-    if (fetchComponent.query) {
-      fetch = this.trim(fetchComponent.query, 'query');
+    if (this.fetchComponent.query) {
+      fetch = this.trim(this.fetchComponent.query, 'query');
     }
-    if (fetchComponent.subscribe) {
-      fetch = this.trim(fetchComponent.subscribe, 'subscription');
+    if (this.fetchComponent.subscribe) {
+      fetch = this.trim(this.fetchComponent.subscribe, 'subscription');
     }
-    if (fetchComponent.mutate) {
-      fetch = this.trim(fetchComponent.mutate, 'mutation');
+    if (this.fetchComponent.mutate) {
+      fetch = this.trim(this.fetchComponent.mutate, 'mutation');
     }
+
     this.options = {
       settings: settingsComponent.value,
       state,

@@ -18,7 +18,7 @@ interface MonadState { myState: boolean }
   selector: 'r-html-view',
   template(this: RHtmlViewComponent) {
     return html`
-      <r-monad>
+      <r-part>
         <r-state .value=${{ myState: false }}></r-state>
         <r-render .state=${(s, setMonadState: (s: MonadState) => void) => {
           const [state$, setState, getState] = useState({ myState2: false });
@@ -31,7 +31,7 @@ interface MonadState { myState: boolean }
           `
         }}>
         </r-render>
-      </r-monad>
+      </r-part>
     `;
   }
 })
