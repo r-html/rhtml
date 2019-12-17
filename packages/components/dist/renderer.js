@@ -88,9 +88,7 @@ Renderer = __decorate([
                 ? lit_html_1.html `
             ${typeof this.options.loading === 'function'
                     ? this.options.loading()
-                    : lit_html_1.html `
-                  Default
-                `}
+                    : lit_html_1.html ``}
           `
                 : ''}
       ${this.error
@@ -98,7 +96,7 @@ Renderer = __decorate([
             ${typeof this.options.error === 'function'
                     ? this.options.error(this.error)
                     : lit_html_1.html `
-                  Default ${this.error}
+                  ${this.error}
                 `}
           `
                 : ''}

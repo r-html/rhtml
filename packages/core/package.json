@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/core",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "parcel ./examples/index.html --out-dir build/examples",
@@ -21,10 +21,10 @@
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@rhtml/operators": "^0.0.2",
-    "@rhtml/hooks": "^0.0.2",
-    "@rhtml/graphql": "^0.0.2",
-    "@rhtml/components": "^0.0.2",
+    "@rhtml/operators": "^0.0.4",
+    "@rhtml/hooks": "^0.0.4",
+    "@rhtml/graphql": "^0.0.4",
+    "@rhtml/components": "^0.0.4",
     "@rxdi/core": "^0.7.40",
     "@rxdi/graphql-client": "^0.7.38",
     "@rxdi/lit-html": "^0.7.40",

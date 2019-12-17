@@ -1,13 +1,8 @@
-import { GraphqlModuleConfig } from '@rxdi/graphql-client';
-import { DEFAULTS } from './tokens';
+
 import { html } from '@rxdi/lit-html';
+import { setConfig } from '../packages/graphql/src/settings';
 
-export interface GraphqlSettings {
-  config: GraphqlModuleConfig;
-  defaults: DEFAULTS;
-}
-
-export let GraphqlSettings: GraphqlSettings = {
+setConfig({
   config: {
     uri: 'https://countries.trevorblades.com/',
     pubsub: 'wss://pubsub.youvolio.com/subscriptions',
@@ -31,8 +26,4 @@ export let GraphqlSettings: GraphqlSettings = {
       `;
     }
   }
-};
-
-export function setConfig(config: GraphqlSettings) {
-  return (GraphqlSettings = config);
-}
+})

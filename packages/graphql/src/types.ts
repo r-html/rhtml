@@ -2,7 +2,6 @@ import { DocumentNode } from 'graphql';
 import { ErrorPolicy, FetchPolicy } from 'apollo-client';
 import { TemplateResult } from '@rxdi/lit-html';
 
-
 export interface Settings {
   query?: DocumentNode;
   mutation?: DocumentNode;

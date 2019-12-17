@@ -2,8 +2,9 @@
   "name": "@rhtml/example",
   "version": "0.0.1",
   "dependencies": {
+    "@rhtml/graphql": "^0.0.2",
     "@rxdi/lit-html": "^0.7.40",
-    "rxjs":"^6.5.3"
+    "rxjs": "^6.5.3"
   },
   "browserslist": [
     "last 1 chrome versions"

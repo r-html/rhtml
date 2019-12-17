@@ -1,4 +1,10 @@
-import { LitElement, Component, html, property } from '@rxdi/lit-html';
+import {
+  LitElement,
+  Component,
+  html,
+  property,
+  TemplateResult
+} from '@rxdi/lit-html';
 import { FetchComponent } from './fetch';
 import { RenderComponent } from './render';
 import { StateComponent } from './state';
@@ -17,11 +23,7 @@ import { map } from 'rxjs/operators';
   template(this: MonadComponent) {
     return html`
       <slot></slot>
-      ${this.options
-        ? html`
-            <r-graph .options=${this.options}></r-graph>
-          `
-        : ''}
+      ${this.options ? this.componentToRender : ''}
     `;
   }
 })
@@ -29,85 +31,102 @@ export class MonadComponent extends LitElement {
   @property({ type: Object })
   private options: GraphOptions;
 
-  @property()
-  private fetchComponent: FetchComponent;
+  private componentToRender: TemplateResult;
 
   async OnUpdateFirst() {
     const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
-    const renderComponent = this.findNode(
-      nodes,
-      'r-render'
-    ) as RenderComponent;
-    this.fetchComponent = this.findNode(nodes, 'r-fetch') as FetchComponent;
+    const renderComponent = this.findNode(nodes, 'r-render') as RenderComponent;
+    const fetchComponent = this.findNode(nodes, 'r-fetch') as FetchComponent;
     const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
-    const settingsComponent = this.findNode(
-      nodes,
-      'r-settings'
-    ) as SettingsComponent;
-    let fetch: string;
-    let state = await stateComponent.value;
+    const settings = this.findNode(nodes, 'r-settings') as SettingsComponent;
     const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
-    if (lensComponent.match) {
-      state = this.get(state, lensComponent.match);
-    } else if (lensComponent.get) {
-      lensComponent.get = lensComponent.get.map(a => a === 'all' ? all : a);
-      if (isObservable(state)) {
-        state = state.pipe(map(s => {
-          const expectedState = (get as any)(...lensComponent.get)(s);
-          if (!expectedState) {
-            return s;
-          }
-          return expectedState;
-        }));
-      } else {
-        state = (get as any)(...lensComponent.get)(state);
-      }
-      if (lensComponent.ray) {
-        state = lensComponent.ray(state);
-      }
-    } else if (lensComponent.ray) {
-      if (isObservable(state)) {
-        state = state.pipe(map(s => lensComponent.ray(s)));
-      } else {
-        state = lensComponent.ray(state);
-      }
-    }
+    const fetch: string = fetchComponent
+      ? this.applyQueries(fetchComponent)
+      : '';
 
-    if (this.fetchComponent.query) {
-      fetch = this.trim(this.fetchComponent.query, 'query');
-    }
-    if (this.fetchComponent.subscribe) {
-      fetch = this.trim(this.fetchComponent.subscribe, 'subscription');
-    }
-    if (this.fetchComponent.mutate) {
-      fetch = this.trim(this.fetchComponent.mutate, 'mutation');
-    }
+    let state = stateComponent ? await stateComponent.value : null;
 
+    if (lensComponent) {
+      state = this.applyLenses(state, lensComponent);
+    }
     this.options = {
-      settings: settingsComponent.value,
       state,
       fetch,
       render: renderComponent.state
     };
+    this.options.settings = settings ? settings.value : null;
+
+    fetchComponent
+      ? (this.componentToRender = html`
+          <r-graph .options=${this.options}></r-graph>
+        `)
+      : (this.componentToRender = html`
+          <r-renderer .options=${this.options}></r-renderer>
+        `);
   }
 
   private trim(query = '', type: 'query' | 'mutation' | 'subscription') {
     if (query.includes(type)) {
       return query;
     }
-    const trimmedQuery = query.trim().replace(/\s/g, '');
+    const trimmedQuery = query.trim().replace(/\s/g, ' ');
     return `${type} ${trimmedQuery}`;
   }
 
-  // private modState(args: any[], state) {
-  //   return new Promise((resolve, reject) => {
-  //     try {
-  //       mod(args[0], args[1], args[2], args[3], args[4])(resolve)(state);
-  //     } catch (e) {
-  //       reject(e);
-  //     }
-  //   });
-  // }
+  private applyQueries(fetchComponent: FetchComponent) {
+    if (fetchComponent.query) {
+      return this.trim(fetchComponent.query, 'query');
+    }
+    if (fetchComponent.subscribe) {
+      return this.trim(fetchComponent.subscribe, 'subscription');
+    }
+    if (fetchComponent.mutate) {
+      return this.trim(fetchComponent.mutate, 'mutation');
+    }
+    return '';
+  }
+
+  private applyLenses(state: any = {}, lensComponent: LensComponent) {
+    let newState = JSON.parse(JSON.stringify(state));
+    if (lensComponent.match) {
+      newState = this.get(newState, lensComponent.match);
+    } else if (lensComponent.get) {
+      lensComponent.get = lensComponent.get.map(a => (a === 'all' ? all : a));
+      if (isObservable(newState)) {
+        newState = newState.pipe(
+          map(s => {
+            const expectedState = (get as any)(...lensComponent.get)(s);
+            if (!expectedState) {
+              return s;
+            }
+            return expectedState;
+          })
+        );
+      } else {
+        newState = (get as any)(...lensComponent.get)(newState);
+      }
+      if (lensComponent.ray) {
+        newState = lensComponent.ray(newState);
+      }
+    } else if (lensComponent.ray) {
+      if (isObservable(newState)) {
+        newState = newState.pipe(map(s => lensComponent.ray(s)));
+      } else {
+        newState = lensComponent.ray(newState);
+      }
+    }
+    return newState;
+  }
+
+  private modState(args: any[], state) {
+    return new Promise((resolve, reject) => {
+      try {
+        mod(args[0], args[1], args[2], args[3], args[4])(resolve)(state);
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
 
   private findNode(nodes: Node[], localName: string) {
     const node = nodes.find(
@@ -116,10 +135,7 @@ export class MonadComponent extends LitElement {
         n.nextSibling &&
         (n.nextSibling as HTMLElement).localName === localName
     );
-    if (node) {
-      return node.nextSibling;
-    }
-    return { value: null };
+    return node ? node.nextSibling : null;
   }
 
   private get(obj = {}, path = '', defaultValue?) {

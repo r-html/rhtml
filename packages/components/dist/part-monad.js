@@ -19,7 +19,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
-const fetch_1 = require("./fetch");
 const shades_1 = require("shades");
 const rxjs_1 = require("rxjs");
 const operators_1 = require("rxjs/operators");
@@ -31,82 +30,99 @@ let MonadComponent = class MonadComponent extends lit_html_1.LitElement {
         return __awaiter(this, void 0, void 0, function* () {
             const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
             const renderComponent = this.findNode(nodes, 'r-render');
-            this.fetchComponent = this.findNode(nodes, 'r-fetch');
+            const fetchComponent = this.findNode(nodes, 'r-fetch');
             const stateComponent = this.findNode(nodes, 'r-state');
-            const settingsComponent = this.findNode(nodes, 'r-settings');
-            let fetch;
-            let state = yield stateComponent.value;
+            const settings = this.findNode(nodes, 'r-settings');
             const lensComponent = this.findNode(nodes, 'r-lens');
-            if (lensComponent.match) {
-                state = this.get(state, lensComponent.match);
-            }
-            else if (lensComponent.get) {
-                lensComponent.get = lensComponent.get.map(a => a === 'all' ? shades_1.all : a);
-                if (rxjs_1.isObservable(state)) {
-                    state = state.pipe(operators_1.map(s => {
-                        const expectedState = shades_1.get(...lensComponent.get)(s);
-                        if (!expectedState) {
-                            return s;
-                        }
-                        return expectedState;
-                    }));
-                }
-                else {
-                    state = shades_1.get(...lensComponent.get)(state);
-                }
-                if (lensComponent.ray) {
-                    state = lensComponent.ray(state);
-                }
-            }
-            else if (lensComponent.ray) {
-                if (rxjs_1.isObservable(state)) {
-                    state = state.pipe(operators_1.map(s => lensComponent.ray(s)));
-                }
-                else {
-                    state = lensComponent.ray(state);
-                }
-            }
-            if (this.fetchComponent.query) {
-                fetch = this.trim(this.fetchComponent.query, 'query');
-            }
-            if (this.fetchComponent.subscribe) {
-                fetch = this.trim(this.fetchComponent.subscribe, 'subscription');
-            }
-            if (this.fetchComponent.mutate) {
-                fetch = this.trim(this.fetchComponent.mutate, 'mutation');
+            const fetch = fetchComponent
+                ? this.applyQueries(fetchComponent)
+                : '';
+            let state = stateComponent ? yield stateComponent.value : null;
+            if (lensComponent) {
+                state = this.applyLenses(state, lensComponent);
             }
             this.options = {
-                settings: settingsComponent.value,
                 state,
                 fetch,
                 render: renderComponent.state
             };
+            this.options.settings = settings ? settings.value : null;
+            fetchComponent
+                ? (this.componentToRender = lit_html_1.html `
+          <r-graph .options=${this.options}></r-graph>
+        `)
+                : (this.componentToRender = lit_html_1.html `
+          <r-renderer .options=${this.options}></r-renderer>
+        `);
         });
     }
     trim(query = '', type) {
         if (query.includes(type)) {
             return query;
         }
-        const trimmedQuery = query.trim().replace(/\s/g, '');
+        const trimmedQuery = query.trim().replace(/\s/g, ' ');
         return `${type} ${trimmedQuery}`;
     }
-    // private modState(args: any[], state) {
-    //   return new Promise((resolve, reject) => {
-    //     try {
-    //       mod(args[0], args[1], args[2], args[3], args[4])(resolve)(state);
-    //     } catch (e) {
-    //       reject(e);
-    //     }
-    //   });
-    // }
+    applyQueries(fetchComponent) {
+        if (fetchComponent.query) {
+            return this.trim(fetchComponent.query, 'query');
+        }
+        if (fetchComponent.subscribe) {
+            return this.trim(fetchComponent.subscribe, 'subscription');
+        }
+        if (fetchComponent.mutate) {
+            return this.trim(fetchComponent.mutate, 'mutation');
+        }
+        return '';
+    }
+    applyLenses(state = {}, lensComponent) {
+        let newState = JSON.parse(JSON.stringify(state));
+        if (lensComponent.match) {
+            newState = this.get(newState, lensComponent.match);
+        }
+        else if (lensComponent.get) {
+            lensComponent.get = lensComponent.get.map(a => (a === 'all' ? shades_1.all : a));
+            if (rxjs_1.isObservable(newState)) {
+                newState = newState.pipe(operators_1.map(s => {
+                    const expectedState = shades_1.get(...lensComponent.get)(s);
+                    if (!expectedState) {
+                        return s;
+                    }
+                    return expectedState;
+                }));
+            }
+            else {
+                newState = shades_1.get(...lensComponent.get)(newState);
+            }
+            if (lensComponent.ray) {
+                newState = lensComponent.ray(newState);
+            }
+        }
+        else if (lensComponent.ray) {
+            if (rxjs_1.isObservable(newState)) {
+                newState = newState.pipe(operators_1.map(s => lensComponent.ray(s)));
+            }
+            else {
+                newState = lensComponent.ray(newState);
+            }
+        }
+        return newState;
+    }
+    modState(args, state) {
+        return new Promise((resolve, reject) => {
+            try {
+                shades_1.mod(args[0], args[1], args[2], args[3], args[4])(resolve)(state);
+            }
+            catch (e) {
+                reject(e);
+            }
+        });
+    }
     findNode(nodes, localName) {
         const node = nodes.find(n => n &&
             n.nextSibling &&
             n.nextSibling.localName === localName);
-        if (node) {
-            return node.nextSibling;
-        }
-        return { value: null };
+        return node ? node.nextSibling : null;
     }
     get(obj = {}, path = '', defaultValue) {
         return (path
@@ -119,21 +135,13 @@ __decorate([
     lit_html_1.property({ type: Object }),
     __metadata("design:type", Object)
 ], MonadComponent.prototype, "options", void 0);
-__decorate([
-    lit_html_1.property(),
-    __metadata("design:type", fetch_1.FetchComponent)
-], MonadComponent.prototype, "fetchComponent", void 0);
 MonadComponent = __decorate([
     lit_html_1.Component({
         selector: 'r-part',
         template() {
             return lit_html_1.html `
       <slot></slot>
-      ${this.options
-                ? lit_html_1.html `
-            <r-graph .options=${this.options}></r-graph>
-          `
-                : ''}
+      ${this.options ? this.componentToRender : ''}
     `;
         }
     })

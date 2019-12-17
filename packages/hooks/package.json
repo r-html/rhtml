@@ -1,10 +1,10 @@
 {
   "name": "@rhtml/hooks",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "parcel ./examples/index.html --out-dir build/examples",
-    "patch": "npm version patch && npm publish --update-readme --access public",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"
   },

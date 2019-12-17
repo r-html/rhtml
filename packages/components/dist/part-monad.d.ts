@@ -4,9 +4,12 @@ import { LitElement } from '@rxdi/lit-html';
  */
 export declare class MonadComponent extends LitElement {
     private options;
-    private fetchComponent;
+    private componentToRender;
     OnUpdateFirst(): Promise<void>;
     private trim;
+    private applyQueries;
+    private applyLenses;
+    private modState;
     private findNode;
     private get;
 }

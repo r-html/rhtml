@@ -24,4 +24,5 @@ GraphqlModule = __decorate([
 exports.GraphqlModule = GraphqlModule;
 __export(require("./base.service"));
 __export(require("./graph.component"));
+__export(require("./settings"));
 //# sourceMappingURL=index.js.map

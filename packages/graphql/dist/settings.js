@@ -23,18 +23,22 @@ exports.GraphqlSettings = {
     defaults: {
         error: e => {
             return lit_html_1.html `
-            <p style="color: black">
-              ${e}
-            </p>
-          `;
+        <p style="color: black">
+          ${e}
+        </p>
+      `;
         },
         loading: () => {
             return lit_html_1.html `
-            <div style="text-align: center;">
-              <rx-loading palette="danger"></rx-loading>
-            </div>
-          `;
+        <div style="text-align: center;">
+          <rx-loading palette="danger"></rx-loading>
+        </div>
+      `;
         }
     }
 };
+function setConfig(config) {
+    return (exports.GraphqlSettings = config);
+}
+exports.setConfig = setConfig;
 //# sourceMappingURL=settings.js.map

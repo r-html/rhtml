@@ -36,9 +36,7 @@ import { RenderOptions } from './types';
         ? html`
             ${typeof this.options.loading === 'function'
               ? this.options.loading()
-              : html`
-                  Default
-                `}
+              : html``}
           `
         : ''}
       ${this.error
@@ -46,7 +44,7 @@ import { RenderOptions } from './types';
             ${typeof this.options.error === 'function'
               ? this.options.error(this.error)
               : html`
-                  Default ${this.error}
+                  ${this.error}
                 `}
           `
         : ''}
