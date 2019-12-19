@@ -10,5 +10,4 @@ __export(require("./part-monad"));
 __export(require("./renderer"));
 __export(require("./settings"));
 __export(require("./state"));
-// export * from './tokens';
 //# sourceMappingURL=index.js.map
