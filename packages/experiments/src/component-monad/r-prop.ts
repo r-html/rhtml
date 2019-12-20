@@ -1,4 +1,4 @@
-import { Component, html, LitElement } from '@rxdi/lit-html';
+import { Component, html, LitElement, property } from '@rxdi/lit-html';
 
 @Component({
   selector: 'r-prop',
@@ -6,4 +6,10 @@ import { Component, html, LitElement } from '@rxdi/lit-html';
     <slot></slot>
   `
 })
-export class RPropOperator extends LitElement {}
+export class RPropOperator extends LitElement {
+  @property()
+  key: string;
+
+  @property()
+  type: string;
+}

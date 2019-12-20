@@ -6,10 +6,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -25,33 +26,15 @@ let RComponentOperator = class RComponentOperator extends lit_html_1.LitElement 
             if (propertiesComponent) {
                 yield propertiesComponent.requestUpdate();
             }
-            if (templateComponent) {
-                yield templateComponent.requestUpdate();
-            }
-            const selector = selectorComponent
-                ? selectorComponent.getAttribute('value')
-                : null;
-            const templateNodes = templateComponent ? templateComponent.nodes : [];
-            const template = document.createElement('div');
-            templateNodes.forEach(node => template.appendChild(node));
-            if (!window.customElements.get(selector)) {
-                lit_html_1.Component({
-                    selector
-                })(class extends lit_html_1.LitElement {
+            const selector = selectorComponent ? selectorComponent.innerHTML : null;
+            if (!window.customElements.get(selector) && selector) {
+                lit_html_1.Component({ selector })(class extends lit_html_1.LitElement {
+                    constructor() {
+                        super(...arguments);
+                        this.render = () => templateComponent.value(this);
+                    }
                     static get properties() {
                         return propertiesComponent.props;
-                    }
-                    OnUpdate() {
-                        function interpolate(string) {
-                            const regexes = [/{(.*?)}/g];
-                            return string.replace(regexes[0], match => match
-                                .slice(2, -1)
-                                .trim()
-                                .split('.')
-                                .reduce((el, k) => String(el[k]), this));
-                        }
-                        template.innerHTML = interpolate.call(this, template.innerHTML.trim());
-                        this.shadowRoot.appendChild(template);
                     }
                 });
             }
@@ -63,6 +46,12 @@ let RComponentOperator = class RComponentOperator extends lit_html_1.LitElement 
             }
             if (propertiesComponent) {
                 propertiesComponent.remove();
+            }
+            const script = this.findNode(nodes, 'script');
+            if (script) {
+                yield window.customElements.whenDefined(selector);
+                new Function(script.innerHTML).call(yield window.customElements.get(selector));
+                script.remove();
             }
             this.remove();
         });

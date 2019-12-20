@@ -29,21 +29,15 @@ import '@rhtml/experiments';
 ```html
 <r-component>
   <r-selector>r-pesho</r-selector>
-  <r-template .value=${(s) => html`${s.pesho}daad ${s.pesho2}`}></r-template>
   <r-props>
-    <r-prop>
-      <r-key>pesho</r-key>
-      <r-value>String</r-value>
-    </r-prop>
-    <r-prop>
-      <r-key>pesho2</r-key>
-      <r-value>String</r-value>
-    </r-prop>
-    <r-prop>
-      <r-key>pesho3</r-key>
-      <r-value>String</r-value>
-    </r-prop>
+    <r-prop key="pesho" type="Number"></r-prop>
+    <r-prop key="pesho2" type="Boolean"></r-prop>
+    <r-prop key="pesho3" type="String"></r-prop>
   </r-props>
+  <r-render .state=${(s: RPeshoComponent) => html`
+    ${s.pesho} | ${s.pesho2} | ${s.pesho3}
+  `}>
+  </r-render>
 </r-component>
 <r-pesho pesho="oh my god" pesho2="az sym pesho2" pesho3="az sym pesho3"></r-pesho>
 ```

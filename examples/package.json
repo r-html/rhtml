@@ -4,6 +4,7 @@
   "dependencies": {
     "@rhtml/graphql": "^0.0.2",
     "@rxdi/lit-html": "^0.7.40",
+    "packages": "^0.0.8",
     "rxjs": "^6.5.3"
   },
   "browserslist": [

@@ -1,4 +1,4 @@
-import { LitElement, Component, html } from '@rxdi/lit-html';
+import { LitElement, Component, html, query } from '@rxdi/lit-html';
 import { BehaviorSubject, interval } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
@@ -11,7 +11,11 @@ import '../packages/graphql/src/index';
 import '../packages/experiments/src/index';
 
 import { State, NotificationState } from './interface';
-
+interface RPeshoComponent {
+  pesho: string;
+  pesho2: string;
+  pesho3: string;
+}
 @Component({
   selector: 'r-html-view',
   template(this: RHtmlViewComponent) {
@@ -98,21 +102,28 @@ import { State, NotificationState } from './interface';
             >
               Increment Subscriptions State x2
             </button>
-            <r-pesho
-              pesho=${appUpdated}
-              pesho2="ed"
-              pesho3="az sym pesh4o3"
-            ></r-pesho>
-            <r-pesho
-              pesho=${appUpdated}
-              pesho2="dve"
-              pesho3="az sym pesho443"
-            ></r-pesho>
-            <r-pesho
-              pesho=${appUpdated}
-              pesho2="tre"
-              pesho3="az sym pesh4o3"
-            ></r-pesho>
+            <p>
+              <r-pesho
+                pesho=${appUpdated}
+                pesho2="1"
+                pesho3="az sym 1"
+              ></r-pesho>
+            </p>
+
+            <p>
+              <r-pesho
+                pesho=${appUpdated}
+                pesho2="2"
+                pesho3="az sym 2"
+              ></r-pesho>
+            </p>
+            <p>
+              <r-pesho
+                pesho=${appUpdated}
+                pesho2="3"
+                pesho3="az sym 3"
+              ></r-pesho>
+            </p>
             (will be overriten when server emit new state)
           `}
         >
@@ -122,21 +133,15 @@ import { State, NotificationState } from './interface';
       <!-- Define webcomponent 'r-pesho' with properties pesho, pesho2, pesho3 -->
       <r-component>
         <r-selector>r-pesho</r-selector>
-        <r-template .value=${(s) => html`${s.pesho}daad ${s.pesho2}`}></r-template>
         <r-props>
-          <r-prop>
-            <r-key>pesho</r-key>
-            <r-value>String</r-value>
-          </r-prop>
-          <r-prop>
-            <r-key>pesho2</r-key>
-            <r-value>String</r-value>
-          </r-prop>
-          <r-prop>
-            <r-key>pesho3</r-key>
-            <r-value>String</r-value>
-          </r-prop>
+          <r-prop key="pesho" type="Number"></r-prop>
+          <r-prop key="pesho2" type="Boolean"></r-prop>
+          <r-prop key="pesho3" type="String"></r-prop>
         </r-props>
+        <r-render .state=${(s: RPeshoComponent) => html`
+          ${s.pesho} | ${s.pesho2} | ${s.pesho3}
+        `}>
+        </r-render>
       </r-component>
     `;
   }

@@ -74,8 +74,10 @@ let GraphComponent = class GraphComponent extends lit_html_1.LitElement {
             this.result.next(detail);
             this.dispatchEvent(new CustomEvent('onData', { detail }));
         }, error => {
-            if (error.networkError) {
-                error.message = `${JSON.stringify(error.networkError.result.errors)} ${error.message}`;
+            if (error && error.networkError) {
+                if (error.networkError.result) {
+                    error.message = `${JSON.stringify(error.networkError.result.errors)} ${error.message}`;
+                }
             }
             this.result.error(error);
             this.dispatchEvent(new CustomEvent('onError', { detail: error }));

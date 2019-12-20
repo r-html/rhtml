@@ -1,6 +1,4 @@
 import { Component, html, LitElement } from '@rxdi/lit-html';
-import { Container } from '@rxdi/core';
-import { RTemplateOperator } from './r-template';
 
 @Component({
   selector: 'r-component',
@@ -12,10 +10,8 @@ export class RComponentOperator extends LitElement {
   async OnUpdate() {
     const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
     const selectorComponent = this.findNode(nodes, 'r-selector');
-    const templateComponent = this.findNode(
-      nodes,
-      'r-template'
-    ) as RTemplateOperator;
+    const renderComponent = this.findNode(nodes, 'r-render');
+
     const propertiesComponent = this.findNode(nodes, 'r-props');
 
     if (propertiesComponent) {
@@ -24,18 +20,26 @@ export class RComponentOperator extends LitElement {
     const selector = selectorComponent ? selectorComponent.innerHTML : null;
 
     if (!window.customElements.get(selector) && selector) {
-      Component({ selector })(
+      Component({
+        selector,
+        template() {
+          return renderComponent
+            ? renderComponent.state(this)
+            : html`
+                Missing template
+              `;
+        }
+      })(
         class extends LitElement {
           static get properties() {
             return propertiesComponent.props;
           }
-          render = () => templateComponent.value(this)
         }
       );
     }
 
-    if (templateComponent) {
-      templateComponent.remove();
+    if (renderComponent) {
+      renderComponent.remove();
     }
     if (selectorComponent) {
       selectorComponent.remove();

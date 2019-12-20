@@ -34,6 +34,10 @@ let MonadComponent = class MonadComponent extends lit_html_1.LitElement {
             const stateComponent = this.findNode(nodes, 'r-state');
             const settings = this.findNode(nodes, 'r-settings');
             const lensComponent = this.findNode(nodes, 'r-lens');
+            const script = this.findNode(nodes, 'script');
+            if (script) {
+                (new Function(script.innerHTML)).call(this);
+            }
             const fetch = fetchComponent
                 ? this.applyQueries(fetchComponent)
                 : '';
