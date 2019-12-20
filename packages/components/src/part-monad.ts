@@ -40,6 +40,10 @@ export class MonadComponent extends LitElement {
     const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
     const settings = this.findNode(nodes, 'r-settings') as SettingsComponent;
     const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
+    const script = this.findNode(nodes, 'script') as HTMLScriptElement;
+    if (script) {
+      (new Function(script.innerHTML)).call(this);
+    }
     const fetch: string = fetchComponent
       ? this.applyQueries(fetchComponent)
       : '';

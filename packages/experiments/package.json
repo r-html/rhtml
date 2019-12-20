@@ -1,0 +1,23 @@
+{
+  "name": "@rhtml/experiments",
+  "version": "0.0.9",
+  "description": "RHTML Experiments repo",
+  "scripts": {
+    "start": "parcel ./examples/index.html --out-dir build/examples",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public",
+    "clean": "git clean -dxf",
+    "build": "rm -rf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rxdi/rhtml.git"
+  },
+  "author": "Kristiyan Tachev",
+  "license": "MIT",
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}

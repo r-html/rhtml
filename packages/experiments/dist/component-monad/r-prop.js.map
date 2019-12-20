@@ -1,0 +1,1 @@
+{"version":3,"file":"r-prop.js","sourceRoot":"","sources":["../../src/component-monad/r-prop.ts"],"names":[],"mappings":";;;;;;;;AAAA,6CAA6D;AAQ7D,IAAa,aAAa,GAA1B,MAAa,aAAc,SAAQ,qBAAU;CAAG,CAAA;AAAnC,aAAa;IANzB,oBAAS,CAAC;QACT,QAAQ,EAAE,QAAQ;QAClB,QAAQ,EAAE,GAAG,EAAE,CAAC,eAAI,CAAA;;GAEnB;KACF,CAAC;GACW,aAAa,CAAsB;AAAnC,sCAAa"}

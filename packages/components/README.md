@@ -1,9 +1,9 @@
-# @rhtml/core
+# @rhtml/components
 
 #### Installation
 
 ```bash
-npm i @rhtml/core
+npm i @rhtml/components
 ```
 
 #### Usage
@@ -13,7 +13,7 @@ import { LitElement, Component, html } from '@rxdi/lit-html';
 import { BehaviorSubject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import '@rhtml/core';
+import '@rhtml/components';
 
 interface State { counter: number }
 
