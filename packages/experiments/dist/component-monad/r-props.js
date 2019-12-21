@@ -15,14 +15,41 @@ let RPropsOperator = class RPropsOperator extends lit_html_1.LitElement {
     OnUpdate() {
         this.nodes = this.querySelectorAll('r-prop');
         this.nodes.forEach(n => {
-            const key = n.querySelector('r-key');
-            const value = n.querySelector('r-value');
-            this.props[key.innerHTML] = value.innerHTML;
+            const k = n.querySelector('r-key');
+            const t = n.querySelector('r-type');
+            const key = n['key'] || k.innerHTML;
+            let type = n['type'] || t.innerHTML;
+            if (this.isString(type)) {
+                type = String;
+            }
+            if (this.isNumber(type)) {
+                type = Number;
+            }
+            if (this.isBoolean(type)) {
+                type = Boolean;
+            }
+            if (this.isObject(type)) {
+                type = Object;
+            }
+            this.props[key] = { type };
         });
     }
     OnDestroy() {
         this.nodes.forEach(n => n.remove());
     }
+    isString(value) {
+        return value === 'String';
+    }
+    isNumber(value) {
+        return value === 'Number';
+    }
+    isBoolean(value) {
+        return value === 'Boolean';
+    }
+    isObject(value) {
+        return value === 'Object';
+    }
+    castToType(value, type) { }
 };
 RPropsOperator = __decorate([
     lit_html_1.Component({

@@ -1,6 +1,5 @@
-import { InjectionToken } from '@rxdi/core';
 import { OptionalProperties } from './types';
 
-export const DEFAULTS = new InjectionToken<OptionalProperties>();
+export const DEFAULTS = 'optional-properties-rhtml';
 
 export interface DEFAULTS extends OptionalProperties {}

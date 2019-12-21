@@ -1,5 +1,4 @@
-import { InjectionToken } from '@rxdi/core';
 import { OptionalProperties } from './types';
-export declare const DEFAULTS: InjectionToken<OptionalProperties>;
+export declare const DEFAULTS: any;
 export interface DEFAULTS extends OptionalProperties {
 }

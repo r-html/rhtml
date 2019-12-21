@@ -4,11 +4,11 @@ import { delay, map } from 'rxjs/operators';
 
 import './setup-graphql';
 
-import '../packages/operators/src/index';
-import '../packages/components/src/index';
-import '../packages/hooks/src/index';
-import '../packages/graphql/src/index';
-import '../packages/experiments/src/index';
+import '@rhtml/hooks';
+import '@rhtml/operators';
+import '@rhtml/components';
+import '@rhtml/graphql';
+import '@rhtml/experiments';
 
 import { State, NotificationState } from './interface';
 interface RPeshoComponent {

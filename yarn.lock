@@ -19,9 +19,9 @@
     js-tokens "^4.0.0"
 
 "@rxdi/core@^0.7.40":
-  version "0.7.40"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.40.tgz#acd23960c16d663eb38b220fc2eb70c2e94461b0"
-  integrity sha512-C23vep938Gxh6lrES0PDdNb+C0RkzoXlf00BuhW1Fqab9R7CqRlD8Fs9qVNgStwtQy8A0wlneSnLUCaXvUaUGA==
+  version "0.7.41"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.41.tgz#6cf1ed8f321d7dfc069ae150419ffd89a376a9f6"
+  integrity sha512-nG0CD/yaEWFN3QY/nkp6qgWYgRirOOc+13XkFWIu2nVdYk4N4TCHafDAKtGT2iDd0pzdcwaRbB/IotX+lkxg0A==
   dependencies:
     reflect-metadata "0.1.13"
     rxjs "^6.5.3"
@@ -40,15 +40,15 @@
     apollo-link-ws "^1.0.18"
     subscriptions-transport-ws "^0.9.16"
 
-"@rxdi/lit-html@^0.7.40":
-  version "0.7.40"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.40.tgz#74ccbfa5f1812767477d0fea23209a1b622944b5"
-  integrity sha512-Je/BYUuwrK5fSYjpsfENerxjZKtOQ3tEE9fVScqA9O+An5bFY3lgHPIOwCwFNNs8evQcCHBNMYNzS10J1Us0gw==
+"@rxdi/lit-html@^0.7.42":
+  version "0.7.42"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.42.tgz#0c0bd948496b2d869e68a56e3d8603a0cbc38ef9"
+  integrity sha512-XKoyXLp877C4+s9Qo2JSlmgrGLNGDanr9SDZlv0HrZ012LQJCjCJCH/s0Dl5OzXPyzUin97pCmZ64ntggpbSbQ==
 
 "@types/node@>=6":
-  version "12.12.17"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.17.tgz#191b71e7f4c325ee0fb23bc4a996477d92b8c39b"
-  integrity sha512-Is+l3mcHvs47sKy+afn2O1rV4ldZFU7W8101cNlOd+MRbjM4Onida8jSZnJdTe/0Pcf25g9BNIUsuugmE6puHA==
+  version "12.12.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.21.tgz#aa44a6363291c7037111c47e4661ad210aded23f"
+  integrity sha512-8sRGhbpU+ck1n0PGAUgVrWrWdjSW2aqNeyC15W88GRsMpSwzv6RJGlLhE7s2RhVSOdyDmxbqlWSeThq4/7xqlA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -567,9 +567,9 @@ resolve-from@^3.0.0:
   integrity sha1-six699nWiBvItuZTM17rywoYh0g=
 
 resolve@^1.10.0:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.13.1.tgz#be0aa4c06acd53083505abb35f4d66932ab35d16"
-  integrity sha512-CxqObCX8K8YtAhOBRg+lrcdn+LK+WYOS8tSjqSFbjtrI5PnS63QPhZl4+yKfrU9tdsbMu9Anr/amegT87M9Z6w==
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.14.1.tgz#9e018c540fcf0c427d678b9931cbf45e984bcaff"
+  integrity sha512-fn5Wobh4cxbLzuHaE+nphztHy43/b++4M6SsGFC2gB8uYwf0C8LcarfCz1un7UTW8OFQg9iNjZ4xpcFVGebDPg==
   dependencies:
     path-parse "^1.0.6"
 
@@ -704,9 +704,9 @@ type-fest@^0.6.0:
   integrity sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==
 
 typescript@^3.7.3:
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.3.tgz#b36840668a16458a7025b9eabfad11b66ab85c69"
-  integrity sha512-Mcr/Qk7hXqFBXMN7p7Lusj1ktCBydylfQM/FZCk5glCNQJrCUKPkMHdo9R0MTFWsC/4kPFvDS0fDPvukfCkFsw==
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.4.tgz#1743a5ec5fef6a1fa9f3e4708e33c81c73876c19"
+  integrity sha512-A25xv5XCtarLwXpcDNZzCGvW2D1S3/bACratYBx2sax8PefsFhlYmkQicKHvpYflFS8if4zne5zT5kpJ7pzuvw==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"

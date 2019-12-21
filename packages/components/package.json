@@ -9,13 +9,8 @@
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
-    "@rxdi/core": "^0.7.40",
-    "@rxdi/graphql-client": "^0.7.38",
-    "@rxdi/lit-html": "^0.7.40",
-    "shades": "^2.1.0",
-    "rxjs": "^6.5.3",
-    "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
-    "graphql-tag": "^2.10.1"
+    "@rxdi/lit-html": "^0.7.42",
+    "shades": "^2.1.0"
   },
   "repository": {
     "type": "git",

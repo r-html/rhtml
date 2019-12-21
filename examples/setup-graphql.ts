@@ -1,6 +1,6 @@
 
 import { html } from '@rxdi/lit-html';
-import { setConfig } from '../packages/graphql/src/settings';
+import { setConfig } from '@rhtml/graphql/dist/settings';
 
 setConfig({
   config: {

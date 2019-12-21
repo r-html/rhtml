@@ -4,10 +4,12 @@
   "description": "Reactive HyperText Markup Language",
   "bolt": {
     "workspaces": [
-      "packages/*"
+      "packages/*",
+      "examples"
     ]
   },
   "scripts": {
+    "bolt": "npx bolt && rm -rf ./packages/graphql/node_modules/@rxdi/lit-html ./packages/components/node_modules/@rxdi/lit-html",
     "start": "parcel ./examples/index.html --out-dir build/examples",
     "build-docs": "parcel build ./examples/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml",
     "patch": "bolt ws exec -- npm run patch",
@@ -22,7 +24,6 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^3.0.9",
-    "rxjs": "^6.5.3",
     "typescript": "^3.7.3"
   },
   "browserslist": [
@@ -34,7 +35,7 @@
   "dependencies": {
     "@rxdi/core": "^0.7.40",
     "@rxdi/graphql-client": "^0.7.38",
-    "@rxdi/lit-html": "^0.7.40",
+    "@rxdi/lit-html": "^0.7.42",
     "shades": "^2.1.0",
     "rxjs": "^6.5.3",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
