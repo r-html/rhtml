@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@rhtml/components@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@rhtml/components/-/components-0.0.10.tgz#f899cf9d53f6949f264f8c517017e42c3b561d60"
+"@rhtml/components@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@rhtml/components/-/components-0.0.11.tgz#f899cf9d53f6949f264f8c517017e42c3b561d60"
   integrity sha512-/uXjoobY84/pyCZ1Wyi50ySiqtnzDCVHTinKlKmRYJOsX3QGVtyJygCXL5Afb0ZGwwPuMT9iwHYmU1QfYUR7Zg==
   dependencies:
     "@rxdi/core" "^0.7.40"
@@ -15,14 +15,14 @@
     rxjs "^6.5.3"
     shades "^2.1.0"
 
-"@rhtml/experiments@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@rhtml/experiments/-/experiments-0.0.10.tgz#e5a2c10bdfcd3dd64a515e1158252659a78bfbb2"
+"@rhtml/experiments@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@rhtml/experiments/-/experiments-0.0.11.tgz#e5a2c10bdfcd3dd64a515e1158252659a78bfbb2"
   integrity sha512-PmVbZlNocmwD0VByA9udlF+WAPWjeTvFQ/3+t+mf4yvUB2hjiPdZ7DEChdSzPgO49rx2IYlPY8pSGSBQc9Fmbg==
 
-"@rhtml/graphql@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@rhtml/graphql/-/graphql-0.0.10.tgz#13bd62cf6598b6dc1e305947f33176f4dbf4cc7b"
+"@rhtml/graphql@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@rhtml/graphql/-/graphql-0.0.11.tgz#13bd62cf6598b6dc1e305947f33176f4dbf4cc7b"
   integrity sha512-JDYwjwGI72thqrhBnNYdAG59qZ8AMHeHFWkYkpBm5jfdr/wvd2jLsgn8NNNjhRh+MhqNRpQwhtmQgxwaAEnXYw==
   dependencies:
     "@rxdi/core" "^0.7.40"
@@ -33,14 +33,14 @@
     rxjs "^6.5.3"
     shades "^2.1.0"
 
-"@rhtml/hooks@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@rhtml/hooks/-/hooks-0.0.10.tgz#0f7ec7f96820126f66bf1d209b0b604f184affda"
+"@rhtml/hooks@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@rhtml/hooks/-/hooks-0.0.11.tgz#0f7ec7f96820126f66bf1d209b0b604f184affda"
   integrity sha512-+3z/1LEuUV1G0jsbDitH9WERcItXE8dYHoTyMJqhUCun/4BlUmQkbm7d2kizRQblo9u5x7cGLo2tW/wPlRiN9Q==
 
-"@rhtml/operators@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@rhtml/operators/-/operators-0.0.10.tgz#fd5f4a2e74a58aa7dce2499ee1eb070830fa2e2e"
+"@rhtml/operators@0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@rhtml/operators/-/operators-0.0.11.tgz#fd5f4a2e74a58aa7dce2499ee1eb070830fa2e2e"
   integrity sha512-pxFNY4GcvihhomCug7tWhJm9niPHCJZONDptV1DR8DxAJRX9HtMNlFqs7+GAk0vaSiQ6EgnFUugDbYMDNSbNCA==
 
 "@rxdi/core@^0.7.40":

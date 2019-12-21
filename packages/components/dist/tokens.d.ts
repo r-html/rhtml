@@ -1,4 +1,4 @@
 import { OptionalProperties } from './types';
-export declare const DEFAULTS: any;
+export declare const DEFAULTS = "optional-properties-rhtml";
 export interface DEFAULTS extends OptionalProperties {
 }

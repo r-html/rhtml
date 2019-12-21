@@ -1,12 +1,15 @@
 {
   "name": "@rhtml/example",
   "version": "0.0.1",
+  "scripts": {
+    "patch": "echo"
+  },
   "dependencies": {
-    "@rhtml/components": "0.0.10",
-    "@rhtml/experiments": "^0.0.10",
-    "@rhtml/graphql": "0.0.10",
-    "@rhtml/hooks": "^0.0.10",
-    "@rhtml/operators": "0.0.10",
+    "@rhtml/components": "^0.0.12",
+    "@rhtml/experiments": "^0.0.12",
+    "@rhtml/graphql": "^0.0.12",
+    "@rhtml/hooks": "^0.0.12",
+    "@rhtml/operators": "0.0.12",
     "@rxdi/core": "^0.7.40",
     "@rxdi/lit-html": "^0.7.42",
     "rxjs": "^6.5.3"

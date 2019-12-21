@@ -6,8 +6,9 @@ export declare class Renderer extends LitElement {
     options: any;
     private loading;
     private error;
+    private state;
     private subscription;
-    private result;
     OnUpdateFirst(): void;
+    isFunction(value: any): boolean;
     OnDestroy(): void;
 }
