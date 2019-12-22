@@ -10,13 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
+function Render(config) {
+    return function (cls) {
+        if (!window.customElements.get(config.selector)) {
+            return lit_html_1.Component(config)(cls);
+        }
+    };
+}
 /**
  * @customElement r-renderer
  */
 let Renderer = class Renderer extends lit_html_1.LitElement {
-    /**
-     * @customElement r-renderer
-     */
     constructor() {
         super(...arguments);
         this.options = {
@@ -33,8 +37,7 @@ let Renderer = class Renderer extends lit_html_1.LitElement {
     }
     OnUpdateFirst() {
         if (this.options.state) {
-            if (this.isFunction(this.options.state.lift) &&
-                this.isFunction(this.options.state.subscribe)) {
+            if (this.isObservable(this.options.state)) {
                 this.subscription = this.options.state.subscribe(detail => {
                     this.state = detail;
                     this.loading = false;
@@ -51,6 +54,9 @@ let Renderer = class Renderer extends lit_html_1.LitElement {
                 this.state = this.options.state;
             }
         }
+    }
+    isObservable(value) {
+        return this.isFunction(value.lift) && this.isFunction(value.subscribe);
     }
     isFunction(value) {
         return typeof value === 'function';
@@ -78,13 +84,15 @@ __decorate([
     __metadata("design:type", Object)
 ], Renderer.prototype, "state", void 0);
 Renderer = __decorate([
-    lit_html_1.Component({
+    Render({
         selector: 'r-renderer',
         template() {
             return lit_html_1.html `
-      ${this.options.render
-                ? this.options.render(this.state, s => (this.state = s))
-                : this.state}
+      ${!this.loading
+                ? this.options.render
+                    ? this.options.render(this.state, s => (this.state = s))
+                    : this.state
+                : ''}
       ${this.loading
                 ? lit_html_1.html `
             ${this.isFunction(this.options.error)
@@ -106,107 +114,4 @@ Renderer = __decorate([
     })
 ], Renderer);
 exports.Renderer = Renderer;
-// import { Component, html, property, LitElement, async } from '@rxdi/lit-html';
-// import { map, tap, catchError } from 'rxjs/operators';
-// import {
-//   Observable,
-//   of,
-//   Subscription,
-//   ReplaySubject,
-//   BehaviorSubject,
-//   isObservable
-// } from 'rxjs';
-// import { RenderOptions } from './types';
-// /**
-//  * @customElement r-renderer
-//  */
-// @Component({
-//   selector: 'r-renderer',
-//   template(this: Renderer) {
-//     return html`
-//       ${async(
-//         this.result.pipe(
-//           map(state =>
-//             this.options.render
-//               ? this.options.render(state, data => this.result.next(data))
-//               : state
-//           ),
-//           tap(() => (this.loading = false)),
-//           catchError(e => {
-//             this.error = e;
-//             this.loading = false;
-//             return of('');
-//           })
-//         )
-//       )}
-//       ${this.loading
-//         ? html`
-//             ${typeof this.options.loading === 'function'
-//               ? this.options.loading()
-//               : html``}
-//           `
-//         : ''}
-//       ${this.error
-//         ? html`
-//             ${typeof this.options.error === 'function'
-//               ? this.options.error(this.error)
-//               : html`
-//                   ${this.error}
-//                 `}
-//           `
-//         : ''}
-//       <slot></slot>
-//     `;
-//   }
-// })
-// export class Renderer extends LitElement {
-//   @property({ type: Object })
-//   public options: any = <RenderOptions>{
-//     state: new BehaviorSubject({}),
-//     render: function(res) {
-//       return html`
-//         ${res}
-//       `;
-//     },
-//     loading: () => html``,
-//     error: () => html``
-//   };
-//   @property({ type: Boolean })
-//   private loading = true;
-//   @property({ type: String })
-//   private error = '';
-//   private subscription: Subscription;
-//   private result: ReplaySubject<any> = new ReplaySubject();
-//   OnUpdateFirst() {
-//     let task: Observable<any>;
-//     if (this.options.state) {
-//       if (isObservable(this.options.state)) {
-//         task = this.options.state;
-//         this.subscription = task.subscribe(
-//           detail => {
-//             this.result.next(detail);
-//             this.dispatchEvent(new CustomEvent('onData', { detail }));
-//           },
-//           error => {
-//             if (error.networkError) {
-//               error.message = `${JSON.stringify(
-//                 error.networkError.result.errors
-//               )} ${error.message}`;
-//             }
-//             this.result.error(error);
-//             this.dispatchEvent(new CustomEvent('onError', { detail: error }));
-//           }
-//         );
-//       } else {
-//         this.result.next(this.options.state);
-//       }
-//     }
-//   }
-//   OnDestroy() {
-//     if (this.subscription) {
-//       this.subscription.unsubscribe();
-//     }
-//     this.result.complete();
-//   }
-// }
 //# sourceMappingURL=renderer.js.map

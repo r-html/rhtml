@@ -10,6 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
+/**
+ * @customElement r-prop
+ */
 let RPropOperator = class RPropOperator extends lit_html_1.LitElement {
 };
 __decorate([

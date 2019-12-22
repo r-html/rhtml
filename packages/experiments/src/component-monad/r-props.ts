@@ -1,5 +1,7 @@
 import { Component, html, LitElement } from '@rxdi/lit-html';
-
+/**
+ * @customElement r-props
+ */
 @Component({
   selector: 'r-props',
   template: () => html`
@@ -9,8 +11,10 @@ import { Component, html, LitElement } from '@rxdi/lit-html';
 export class RPropsOperator extends LitElement {
   private nodes: NodeListOf<Element>;
   public props = {};
-  OnUpdate() {
+  OnUpdateFirst() {
+
     this.nodes = this.querySelectorAll('r-prop');
+
     this.nodes.forEach(n => {
       const k = n.querySelector('r-key');
       const t = n.querySelector('r-type');
@@ -29,6 +33,7 @@ export class RPropsOperator extends LitElement {
         type = Object;
       }
       this.props[key] = { type };
+
     });
   }
   OnDestroy() {

@@ -14,9 +14,6 @@ const lit_html_1 = require("@rxdi/lit-html");
  * @customElement r-lens
  */
 let LensComponent = class LensComponent extends lit_html_1.LitElement {
-    /**
-     * @customElement r-lens
-     */
     constructor() {
         super(...arguments);
         this.ray = (res) => res;

@@ -7,6 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
+/**
+ * @customElement r-key
+ */
 let RKeyOperator = class RKeyOperator extends lit_html_1.LitElement {
 };
 RKeyOperator = __decorate([

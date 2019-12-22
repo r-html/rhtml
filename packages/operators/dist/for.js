@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
-const rxjs_1 = require("rxjs");
+/**
+ * @customElement r-for
+ */
 let ForOperator = class ForOperator extends lit_html_1.LitElement {
     constructor() {
         super(...arguments);
-        this.of = rxjs_1.of([]);
+        this.of = [];
     }
     OnUpdate() {
         const slotNodes = this.shadowRoot.querySelector('slot').assignedNodes();
@@ -22,12 +24,7 @@ let ForOperator = class ForOperator extends lit_html_1.LitElement {
             const slotNode = slotNodes[0];
             const letOperator = slotNode.nextSibling;
             if (letOperator) {
-                if (rxjs_1.isObservable(this.of)) {
-                    letOperator.data = this.of;
-                }
-                else {
-                    letOperator.data = rxjs_1.of(this.of);
-                }
+                letOperator.data = this.of;
             }
         }
     }

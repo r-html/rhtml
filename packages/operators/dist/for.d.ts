@@ -1,6 +1,8 @@
 import { LitElement } from '@rxdi/lit-html';
-import { Observable } from 'rxjs';
+/**
+ * @customElement r-for
+ */
 export declare class ForOperator extends LitElement {
-    of: any[] | Observable<any[]>;
+    of: any;
     OnUpdate(): void;
 }

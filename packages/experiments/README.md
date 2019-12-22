@@ -96,3 +96,185 @@ We can represent this as a tree from `top` to `bottom`
 │                             └───────────────┘ └───────────────┘                                           │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
+
+
+
+
+
+### High order web components created via `html`
+
+1. `r-render > state` will be executed everytime when property is changed
+2. `State` of the component can be changed with `setState` function exposed on second argument
+3. `setState` function will trigger change detection only on properties defined inside `r-props` as `r-prop` with `key` and `type`
+4. There is a single predfined property called `loading` and  it is set by default to `true`.
+This property is important since it can be used to show loading information when long running job is executed 
+
+```html
+<r-component>
+  <r-selector>r-counter</r-selector>
+  <r-props>
+    <r-prop key="value" type="Number"></r-prop>
+  </r-props>
+  <r-render .state=${({ value, loading }, setState) => html`
+    <button @click=${() => setState({ value: value + value, loading: false })}>
+      Increment
+    </button>
+    <r-if .exp=${loading}>
+      Loading...
+    </r-if>
+    <p>${value}</p>
+  `}>
+  </r-render>
+</r-component>
+```
+
+Can be used as follow:
+
+```html
+<r-counter value="5"></r-counter>
+```
+
+
+### `Webcomponent` as a `Service`
+Important aspect of usage is that `components as a service` are `fire and forget` what does that mean ?
+
+1. When component is initialized component will be `self destroyed` with `this.remove()`
+2. Once initialized inside the `DOM Tree` `service component` will fire `run` method and is no longer needed inside the dom tree
+3. The `run` command is executed and our `running` job stay alive even after component is self removed
+4. The idea to component be removed once initialized is in order to remove unused component from the `DOM` since we use it only for getting our data from backend(for example)
+
+User service
+```ts
+import { Component } from '@rxdi/lit-html';
+import { LitServiceElement } from '@rhtml/experiments';
+
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+@Component({
+  selector: 'user-service'
+})
+export class UserService extends LitServiceElement {
+  getUserById(id: number) {
+    return of({id, name: 'Kristyian Tachev'}).pipe(delay(2000)).toPromise()
+  }
+}
+```
+
+What is `LitServiceElement` ? 
+
+1. A generic class defining 2 simple metods `run` and `OnUpdateFirst`
+
+```ts
+import { LitElement, property } from '@rxdi/lit-html';
+
+export class LitServiceElement<T = {}> extends LitElement {
+  @property({ type: Object })
+  run: (self: T) => void = () => null;
+
+  OnUpdateFirst() {
+    this.remove();
+    this.run.call(this);
+  }
+}
+
+```
+
+2. After that we can use our `webcomponent service` like so:
+
+```ts
+html`
+<user-service .run=${async function(this: UserService) {
+  const user = await this.getUserById(userId);
+  console.log(user);
+}}
+></user-service>
+`
+```
+
+Real world example
+```ts
+interface IUser {
+  id: number;
+  name: string;
+}
+interface IState {
+  userId: number;
+  user: IUser;
+}
+```
+
+```html
+<r-part>
+  <r-state .value=${{ loading: true, userId: 1, user: {} }}></r-state>
+  <r-render .state=${({ userId, loading, user }: IState, setState: (state: IState) => void) => html`
+    <user-service .run=${async function(this: UserService) {
+      setState({
+        userId,
+        user: await this.getUserById(userId),
+        loading: false
+      });
+    }}
+    ></user-service>
+    <r-if .exp=${loading}>
+      Loading
+    </r-if>
+    <r-if .exp=${!loading}>
+      <p>User id: ${user.id}</p>
+      <p>User name: ${user.name}</p>
+    </r-if>
+  `}
+  >
+  </r-render>
+</r-part>
+```
+
+### Hydrating component so it will become `web-component`
+
+```ts
+import { Hydrate } from '@rhtml/experiments';
+import { UserService } from './user.service'; /* used only for typing purposes will not be included in bundle */
+
+const UserProfile = html`
+  <r-component>
+    <r-selector>user-profile</r-selector>
+    <r-props>
+      <r-prop key="userId" type="String"></r-prop>
+    </r-props>
+    <r-render .state=${({ loading, userId, user = {} }: IState, setState: (s: IState) => void) => html`
+      <user-service .run=${async function(this: UserService) {
+        setState({
+          userId,
+          user: await this.getUserById(userId),
+          loading: false
+        });
+      }}
+      ></user-service>
+      <r-if .exp=${loading}>
+        Loading...
+      </r-if>
+      <r-if .exp=${!loading}>
+        <p>User id: ${user.id}</p>
+        <p>User name: ${user.name}</p>
+      </r-if>
+    `}>
+    </r-render>
+  </r-component>
+`;
+
+Hydrate(UserProfile);
+
+export declare class UserProfileComponent extends LitElement {
+  userId: string;
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'user-profile': UserProfileComponent;
+  }
+}
+```
+
+```html
+ <user-profile userId="100000"></user-profile>
+```

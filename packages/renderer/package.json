@@ -1,0 +1,28 @@
+{
+  "name": "@rhtml/renderer",
+  "version": "0.0.13",
+  "description": "Reactive HyperText Markup Language",
+  "scripts": {
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public",
+    "clean": "git clean -dxf",
+    "build": "rm -rf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rxdi/rhtml.git"
+  },
+  "dependencies": {
+    "@rxdi/lit-html": "^0.7.42"
+  },
+  "author": "Kristiyan Tachev",
+  "license": "MIT",
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}

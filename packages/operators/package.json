@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/operators",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "parcel ./examples/index.html --out-dir build/examples",
@@ -14,6 +14,10 @@
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
+  "dependencies": {
+    "@rxdi/lit-html": "^0.7.42",
+    "@rhtml/renderer": "^0.0.13"
+  },
   "browserslist": [
     "last 1 chrome versions"
   ],

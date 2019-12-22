@@ -1,5 +1,7 @@
 import { Component, html, LitElement, property } from '@rxdi/lit-html';
-
+/**
+ * @customElement r-prop
+ */
 @Component({
   selector: 'r-prop',
   template: () => html`

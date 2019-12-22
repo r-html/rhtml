@@ -5,11 +5,12 @@
     "patch": "echo"
   },
   "dependencies": {
-    "@rhtml/components": "^0.0.12",
-    "@rhtml/experiments": "^0.0.12",
-    "@rhtml/graphql": "^0.0.12",
-    "@rhtml/hooks": "^0.0.12",
-    "@rhtml/operators": "0.0.12",
+    "@rhtml/components": "^0.0.13",
+    "@rhtml/experiments": "^0.0.13",
+    "@rhtml/renderer": "^0.0.13",
+    "@rhtml/graphql": "^0.0.13",
+    "@rhtml/hooks": "^0.0.13",
+    "@rhtml/operators": "^0.0.13",
     "@rxdi/core": "^0.7.40",
     "@rxdi/lit-html": "^0.7.42",
     "rxjs": "^6.5.3"

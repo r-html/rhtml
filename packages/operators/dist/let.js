@@ -10,20 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
-const rxjs_1 = require("rxjs");
-const operators_1 = require("rxjs/operators");
+/**
+ * @customElement r-let
+ */
 let LetOperator = class LetOperator extends lit_html_1.LitElement {
     constructor() {
         super(...arguments);
-        this.data = rxjs_1.of([]);
+        this.data = [];
         this.item = (v) => lit_html_1.html `
       ${v}
     `;
     }
+    normalizeArray(state) {
+        if (!state || typeof state === 'string') {
+            return [];
+        }
+        if (typeof state === 'number') {
+            return Array.from(Array(state), (v, i) => i);
+        }
+        /* https://javascript.info/map-set */
+        if (state instanceof Map || state instanceof Set) {
+            return [...state.entries()];
+        }
+        if (!Array.isArray(state)) {
+            return Object.entries(state);
+        }
+        return state;
+    }
 };
 __decorate([
-    lit_html_1.property({ attribute: false }),
-    __metadata("design:type", rxjs_1.Observable)
+    lit_html_1.property({ type: Array }),
+    __metadata("design:type", Object)
 ], LetOperator.prototype, "data", void 0);
 __decorate([
     lit_html_1.property(),
@@ -34,9 +51,12 @@ LetOperator = __decorate([
         selector: 'r-let',
         template() {
             return lit_html_1.html `
-      ${lit_html_1.async(this.data.pipe(operators_1.map(v => v.map((element, index, array) => lit_html_1.html `
-                  ${this.item(element, index, array)}
-                `))))}
+      <r-renderer
+        .options=${{
+                state: this.data,
+                render: s => this.normalizeArray(s).map(this.item)
+            }}
+      ></r-renderer>
     `;
         }
     })

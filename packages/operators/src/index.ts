@@ -1,3 +1,5 @@
+import '@rhtml/renderer';
+
 import { IfOperator } from './if';
 import { ForOperator } from './for';
 import { LetOperator } from './let';

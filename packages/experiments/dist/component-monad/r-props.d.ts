@@ -1,8 +1,11 @@
 import { LitElement } from '@rxdi/lit-html';
+/**
+ * @customElement r-props
+ */
 export declare class RPropsOperator extends LitElement {
     private nodes;
     props: {};
-    OnUpdate(): void;
+    OnUpdateFirst(): void;
     OnDestroy(): void;
     isString(value: any): boolean;
     isNumber(value: any): boolean;

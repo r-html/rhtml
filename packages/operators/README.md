@@ -20,6 +20,10 @@ import '@rhtml/operators';
       <r-for .of=${['IterableItem 1', 'Iterable Item 2']}>
         <r-let .item=${v => html``}></r-let>
       </r-for>
+
+      <r-let .data=${['IterableItem 1', 'Iterable Item 2']} .item=${v => html`
+        dadada
+      `}></r-let>
     `;
   }
 })

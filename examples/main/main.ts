@@ -1,7 +1,6 @@
-import { LitElement, Component, html, query } from '@rxdi/lit-html';
+import { html, query, property } from '@rxdi/lit-html';
 import { BehaviorSubject, interval } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-
+import { map, scan, tap, take, filter } from 'rxjs/operators';
 import './setup-graphql';
 
 import '@rhtml/hooks';
@@ -11,18 +10,50 @@ import '@rhtml/graphql';
 import '@rhtml/experiments';
 
 import { State, NotificationState } from './interface';
-interface RPeshoComponent {
-  pesho: string;
-  pesho2: string;
-  pesho3: string;
+
+import { LitElement, Component } from '@rxdi/lit-html';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+interface IUser {
+  id: number;
+  name: string;
 }
+interface IState {
+  loading: boolean;
+  userId: number;
+  user: IUser;
+}
+
+/**
+ * @customElement user-service
+ */
+@Component({
+  selector: 'user-service'
+})
+export class UserService extends LitElement {
+  @property()
+  run: (self: UserService) => void;
+
+  OnUpdateFirst() {
+    this.remove();
+    this.run.call(this);
+  }
+
+  getUserById(id: number) {
+    return of({ id, name: 'Kristyian Tachev' })
+      .pipe(delay(2000))
+      .toPromise();
+  }
+}
+
 @Component({
   selector: 'r-html-view',
   template(this: RHtmlViewComponent) {
     return html`
       <r-renderer
         .options=${{
-          state: new BehaviorSubject({ counter: 1 }).pipe(delay(1700)),
+          state: of({ counter: 1 }).pipe(delay(16000)),
           render: (res: State, setState: (res: State) => State) =>
             html`
               <button
@@ -34,7 +65,12 @@ interface RPeshoComponent {
             `,
           loading: () =>
             html`
-              Loading...
+              <r-part>
+                <r-state
+                  .value=${interval(100).pipe(map(i => i / 10))}
+                ></r-state>
+                <r-render .state=${(g, s) => ` Loading ${g}s...`}></r-render>
+              </r-part>
             `,
           error: () =>
             html`
@@ -42,14 +78,78 @@ interface RPeshoComponent {
             `
         }}
       ></r-renderer>
+      <r-part>
+        <r-state .value=${{ loading: true, userId: 1, user: {} }}></r-state>
+        <r-render
+          .state=${(
+            { userId, loading, user }: IState,
+            setState: (state: IState) => void
+          ) => html`
+            <user-service
+              .run=${async function(this: UserService) {
+                setState({
+                  userId,
+                  user: await this.getUserById(userId),
+                  loading: false
+                });
+              }}
+            ></user-service>
+            <r-if .exp=${loading}>
+              Loading
+            </r-if>
+            <r-if .exp=${!loading}>
+              <p>User id: ${user.id}</p>
+              <p>User name: ${user.name}</p>
+            </r-if>
+          `}
+        >
+        </r-render>
+      </r-part>
 
-      <r-for .of=${['IterableItem 1', 'Iterable Item 2']}>
+      <r-component>
+        <r-selector>r-counter</r-selector>
+        <r-props>
+          <r-prop key="value" type="Number"></r-prop>
+        </r-props>
+        <r-render
+          .state=${(state, setState) => html`
+            <button
+              @click=${() =>
+                setState({ value: state.value + state.value, loading: false })}
+            >
+              Increment
+            </button>
+            <user-service
+              .run=${async function(this: UserService) {
+                setState({
+                  user: await this.getUserById(1),
+                  loading: false
+                });
+              }}
+            ></user-service>
+            <r-if .exp=${state.loading}>
+              Loading...
+            </r-if>
+            <p>${state.value}</p>
+            <p>User: ${JSON.stringify(state.user)}</p>
+          `}
+        >
+        </r-render>
+      </r-component>
+
+      <r-counter value="100000"></r-counter>
+
+      <!-- <r-for
+        .of=${interval(1000).pipe(
+          scan((acc, curr) => [...acc, `Item #${curr}`], [])
+        )}
+      >
         <r-let
           .item=${v => html`
-            ${v}
+            <p>${v}</p>
           `}
         ></r-let>
-      </r-for>
+      </r-for> -->
 
       <r-part>
         <r-state .value=${'Kristiyan Tachev'}></r-state>
@@ -75,9 +175,6 @@ interface RPeshoComponent {
       </r-part>
 
       <r-part>
-        <!-- <r-state .value=${interval(1000).pipe(
-          map(i => ({ data: { notifications: { appUpdated: i } } }))
-        )}></r-state> -->
         <r-fetch .subscribe=${`{ notifications { appUpdated } }`}></r-fetch>
         <r-render
           .state=${(
@@ -130,7 +227,6 @@ interface RPeshoComponent {
         </r-render>
       </r-part>
 
-      <!-- Define webcomponent 'r-pesho' with properties pesho, pesho2, pesho3 -->
       <r-component>
         <r-selector>r-pesho</r-selector>
         <r-props>
@@ -138,9 +234,11 @@ interface RPeshoComponent {
           <r-prop key="pesho2" type="Boolean"></r-prop>
           <r-prop key="pesho3" type="String"></r-prop>
         </r-props>
-        <r-render .state=${(s: RPeshoComponent) => html`
-          ${s.pesho} | ${s.pesho2} | ${s.pesho3}
-        `}>
+        <r-render
+          .state=${s => html`
+            ${s.pesho} | ${s.pesho2} | ${s.pesho3}
+          `}
+        >
         </r-render>
       </r-component>
     `;

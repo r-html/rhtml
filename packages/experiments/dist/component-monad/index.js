@@ -7,4 +7,6 @@ __export(require("./r-component"));
 __export(require("./r-key"));
 __export(require("./r-prop"));
 __export(require("./r-props"));
+__export(require("./hydrate"));
+__export(require("./lit-service-element"));
 //# sourceMappingURL=index.js.map

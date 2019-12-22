@@ -7,12 +7,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
+/**
+ * @customElement r-props
+ */
 let RPropsOperator = class RPropsOperator extends lit_html_1.LitElement {
+    /**
+     * @customElement r-props
+     */
     constructor() {
         super(...arguments);
         this.props = {};
     }
-    OnUpdate() {
+    OnUpdateFirst() {
         this.nodes = this.querySelectorAll('r-prop');
         this.nodes.forEach(n => {
             const k = n.querySelector('r-key');

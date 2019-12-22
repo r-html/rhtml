@@ -1,5 +1,8 @@
 import { LitElement } from '@rxdi/lit-html';
+/**
+ * @customElement r-component
+ */
 export declare class RComponentOperator extends LitElement {
-    OnUpdate(): Promise<void>;
+    OnUpdateFirst(): Promise<void>;
     findNode(nodes: any, localName: any): any;
 }

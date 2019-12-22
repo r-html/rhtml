@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/hooks",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "parcel ./examples/index.html --out-dir build/examples",
@@ -11,6 +11,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:rxdi/rhtml.git"
+  },
+  "dependencies": {
+    "rxjs": "^6.5.3"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",

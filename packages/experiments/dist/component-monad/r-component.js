@@ -6,18 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_html_1 = require("@rxdi/lit-html");
+/**
+ * @customElement r-component
+ */
 let RComponentOperator = class RComponentOperator extends lit_html_1.LitElement {
-    OnUpdate() {
+    OnUpdateFirst() {
         return __awaiter(this, void 0, void 0, function* () {
             const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
             const selectorComponent = this.findNode(nodes, 'r-selector');
@@ -32,14 +34,18 @@ let RComponentOperator = class RComponentOperator extends lit_html_1.LitElement 
                     selector,
                     template() {
                         return renderComponent
-                            ? renderComponent.state(this)
+                            ? renderComponent.state(this, (state) => Object.assign(this, state))
                             : lit_html_1.html `
                 Missing template
               `;
                     }
                 })(class extends lit_html_1.LitElement {
+                    constructor() {
+                        super(...arguments);
+                        this.loading = true;
+                    }
                     static get properties() {
-                        return propertiesComponent.props;
+                        return Object.assign({}, propertiesComponent.props, { loading: { type: Boolean } });
                     }
                 });
             }

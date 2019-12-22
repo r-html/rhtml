@@ -1,6 +1,9 @@
 import { LitElement } from '@rxdi/lit-html';
-import { Observable } from 'rxjs';
+/**
+ * @customElement r-let
+ */
 export declare class LetOperator extends LitElement {
-    data: Observable<any[]>;
+    data: any;
     item: any;
+    private normalizeArray;
 }
