@@ -1,18 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const lit_html_1 = require("@rxdi/lit-html");
+const interface_1 = require("./interface");
 function Hydrate(template) {
-    window.addEventListener('load', () => {
-        const selector = `r-service-module-${Math.random()
-            .toString(36)
-            .substring(7)}`;
-        const serviceModule = document.createElement(selector);
-        lit_html_1.Component({ selector, template: () => template })(class extends lit_html_1.LitElement {
-            OnUpdateFirst() {
-                setTimeout(() => serviceModule.remove(), 0);
-            }
-        });
-        document.body.append(serviceModule);
+    return new Promise(resolve => {
+        let registry = document.querySelector(interface_1.selector);
+        if (registry) {
+            registry.register(template);
+            resolve(registry);
+        }
+        else {
+            window.addEventListener(interface_1.RegistryReadyEvent, () => {
+                registry = document.querySelector(interface_1.selector);
+                registry.register(template);
+                resolve(registry);
+            });
+        }
     });
 }
 exports.Hydrate = Hydrate;

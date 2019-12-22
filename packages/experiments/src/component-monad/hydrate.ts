@@ -1,18 +1,19 @@
-import { Component, TemplateResult, LitElement } from '@rxdi/lit-html';
+import { TemplateResult } from '@rxdi/lit-html';
+import { ComponentRegister } from './component-registry';
+import { RegistryReadyEvent, selector } from './interface';
 
 export function Hydrate(template: TemplateResult) {
-  window.addEventListener('load', () => {
-    const selector = `r-service-module-${Math.random()
-      .toString(36)
-      .substring(7)}`;
-    const serviceModule = document.createElement(selector);
-    Component({ selector, template: () => template })(
-      class extends LitElement {
-        OnUpdateFirst() {
-          setTimeout(() => serviceModule.remove(), 0);
-        }
-      }
-    );
-    document.body.append(serviceModule);
+  return new Promise(resolve => {
+    let registry = document.querySelector(selector) as ComponentRegister;
+    if (registry) {
+      registry.register(template);
+      resolve(registry);
+    } else {
+      window.addEventListener(RegistryReadyEvent, () => {
+        registry = document.querySelector(selector);
+        registry.register(template);
+        resolve(registry);
+      });
+    }
   });
 }

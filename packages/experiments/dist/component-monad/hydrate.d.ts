@@ -1,2 +1,2 @@
 import { TemplateResult } from '@rxdi/lit-html';
-export declare function Hydrate(template: TemplateResult): void;
+export declare function Hydrate(template: TemplateResult): Promise<unknown>;
