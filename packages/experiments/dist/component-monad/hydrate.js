@@ -9,11 +9,13 @@ function Hydrate(template) {
             resolve(registry);
         }
         else {
-            window.addEventListener(interface_1.RegistryReadyEvent, () => {
+            const handler = () => {
                 registry = document.querySelector(interface_1.selector);
                 registry.register(template);
                 resolve(registry);
-            });
+                window.removeEventListener(interface_1.RegistryReadyEvent, handler);
+            };
+            window.addEventListener(interface_1.RegistryReadyEvent, handler);
         }
     });
 }

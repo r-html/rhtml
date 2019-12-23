@@ -6,4 +6,6 @@ export declare class LetOperator extends LitElement {
     data: any;
     item: any;
     private normalizeArray;
+    private isObservable;
+    private isFunction;
 }

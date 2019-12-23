@@ -17,7 +17,7 @@ class LitServiceElement extends lit_html_1.LitElement {
     }
     OnUpdateFirst() {
         this.remove();
-        this.run.call(this);
+        this.run(this);
     }
 }
 __decorate([

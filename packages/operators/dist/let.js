@@ -14,6 +14,9 @@ const lit_html_1 = require("@rxdi/lit-html");
  * @customElement r-let
  */
 let LetOperator = class LetOperator extends lit_html_1.LitElement {
+    /**
+     * @customElement r-let
+     */
     constructor() {
         super(...arguments);
         this.data = [];
@@ -37,6 +40,12 @@ let LetOperator = class LetOperator extends lit_html_1.LitElement {
         }
         return state;
     }
+    isObservable(value) {
+        return this.isFunction(value.lift) && this.isFunction(value.subscribe);
+    }
+    isFunction(value) {
+        return typeof value === 'function';
+    }
 };
 __decorate([
     lit_html_1.property({ type: Array }),
@@ -51,12 +60,16 @@ LetOperator = __decorate([
         selector: 'r-let',
         template() {
             return lit_html_1.html `
-      <r-renderer
-        .options=${{
-                state: this.data,
-                render: s => this.normalizeArray(s).map(this.item)
-            }}
-      ></r-renderer>
+      ${this.isObservable(this.data)
+                ? lit_html_1.html `
+            <r-renderer
+              .options=${{
+                    state: this.data,
+                    render: s => this.normalizeArray(s).map(this.item)
+                }}
+            ></r-renderer>
+          `
+                : this.normalizeArray(this.data).map(this.item)}
     `;
         }
     })

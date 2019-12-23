@@ -6,12 +6,16 @@ import { Component, LitElement, property, html } from '@rxdi/lit-html';
   selector: 'r-let',
   template(this: LetOperator) {
     return html`
-      <r-renderer
-        .options=${{
-          state: this.data,
-          render: s => this.normalizeArray(s).map(this.item)
-        }}
-      ></r-renderer>
+      ${this.isObservable(this.data)
+        ? html`
+            <r-renderer
+              .options=${{
+                state: this.data,
+                render: s => this.normalizeArray(s).map(this.item)
+              }}
+            ></r-renderer>
+          `
+        : this.normalizeArray(this.data).map(this.item)}
     `;
   }
 })
@@ -40,5 +44,12 @@ export class LetOperator extends LitElement {
       return Object.entries(state);
     }
     return state;
+  }
+
+  private isObservable(value) {
+    return this.isFunction(value.lift) && this.isFunction(value.subscribe);
+  }
+  private isFunction(value) {
+    return typeof value === 'function';
   }
 }

@@ -14,6 +14,9 @@ const lit_html_1 = require("@rxdi/lit-html");
  * @customElement r-for
  */
 let ForOperator = class ForOperator extends lit_html_1.LitElement {
+    /**
+     * @customElement r-for
+     */
     constructor() {
         super(...arguments);
         this.of = [];
