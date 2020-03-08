@@ -1,5 +1,5 @@
 {
-  "name": "@rxdi/rhtml",
+  "name": "rhtml",
   "version": "0.0.19",
   "description": "Reactive HyperText Markup Language",
   "bolt": {
