@@ -12,7 +12,7 @@
     "start": "npx parcel ./examples/main/index.html --out-dir build/examples/main",
     "start-hydrate": "npx parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
     "start-performance": "npx parcel ./examples/performance/index.html --out-dir build/examples/performance",
-    "build-docs": "npx parcel build ./examples/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml",
+    "build-docs": "npx parcel build ./examples/main/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml && cp ./docs/index.html ./docs/404.html",
     "patch": "npx bolt ws exec -- npm run patch",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"
