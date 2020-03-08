@@ -14,7 +14,7 @@
     "url": "git@github.com:rxdi/rhtml.git"
   },
   "dependencies": {
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.5.4"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
