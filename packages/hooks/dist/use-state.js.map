@@ -1,1 +1,0 @@
-{"version":3,"file":"use-state.js","sourceRoot":"","sources":["../src/use-state.ts"],"names":[],"mappings":";;AACA,mCAAgC;AAEhC,SAAgB,QAAQ,CACtB,KAAQ;IAER,MAAM,EAAE,MAAM,EAAE,QAAQ,EAAE,QAAQ,EAAE,GAAG,IAAI,aAAK,CAAC,KAAK,CAAC,CAAC;IACxD,OAAO,CAAC,MAAM,EAAE,QAAQ,EAAE,QAAQ,CAAC,CAAC;AACtC,CAAC;AALD,4BAKC"}

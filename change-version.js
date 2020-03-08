@@ -31,7 +31,9 @@ async function main() {
   });
   await Promise.all(
     modified.map(({ file, path }) =>
-      promisify(writeFile)(path, JSON.stringify(file, null, 2), { encoding: 'utf-8' })
+      promisify(writeFile)(path, JSON.stringify(file, null, 2), {
+        encoding: 'utf-8'
+      })
     )
   );
   console.log(modified);
