@@ -4,8 +4,7 @@
   "description": "Reactive HyperText Markup Language",
   "bolt": {
     "workspaces": [
-      "packages/*",
-      "examples"
+      "packages/*"
     ]
   },
   "scripts": {

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@rxdi/lit-html": "^0.7.42",
-    "@rhtml/renderer": "^0.0.13",
+    "@rhtml/renderer": "0.0.14",
     "shades": "^2.1.0"
   },
   "repository": {
