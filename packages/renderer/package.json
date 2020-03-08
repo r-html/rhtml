@@ -3,7 +3,8 @@
   "version": "0.0.20",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
-    "patch": "npm run build && npm version patch && npm publish --update-readme --access public",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"
   },

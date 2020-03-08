@@ -4,7 +4,8 @@
   "description": "RHTML Experiments repo",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
-    "patch": "npm run build && npm version patch && npm publish --update-readme --access public",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"
   },
