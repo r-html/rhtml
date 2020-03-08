@@ -7,15 +7,18 @@
   "dependencies": {
     "@rhtml/components": "^0.0.21",
     "@rhtml/experiments": "^0.0.21",
-    "@rhtml/renderer": "^0.0.21",
     "@rhtml/graphql": "^0.0.21",
     "@rhtml/hooks": "^0.0.21",
     "@rhtml/operators": "^0.0.21",
+    "@rhtml/renderer": "^0.0.21",
     "@rxdi/core": "^0.7.40",
     "@rxdi/lit-html": "^0.7.42",
     "rxjs": "^6.5.4"
   },
   "browserslist": [
     "last 1 chrome versions"
-  ]
+  ],
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
 }
