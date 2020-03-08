@@ -15,15 +15,18 @@ jobs:
           node-version: 12
           # registry-url: https://npm.pkg.github.com/
           # scope: "@rxdi"
-      - run: npm install
+      - run: npx @rxdi/bolt install
       - run: npm run lint --if-present
-      - run: npm test --if-present
+      - run: npm test
       - run: git config --global user.email 'kristiqn.tachev@gmail.com'
       - run: git config --global user.name "Kristiyan Tachev"
+      - run: npm version patch
       - run: npm config set '//registry.npmjs.org/:_authToken' "${{secrets.NPM_TOKEN}}"
       - run: npm run patch
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: git add .
+      - run: git commit --amend --no-edit
       - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

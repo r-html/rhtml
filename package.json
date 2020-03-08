@@ -10,11 +10,11 @@
   },
   "scripts": {
     "bolt": "npx bolt && rm -rf ./packages/graphql/node_modules/@rxdi/lit-html ./packages/components/node_modules/@rxdi/lit-html ./packages/renderer/node_modules/@rxdi/lit-html ./packages/operators/node_modules/@rxdi/lit-html ./packages/experiments/node_modules/@rxdi/lit-html",
-    "start": "parcel ./examples/main/index.html --out-dir build/examples/main",
-    "start-hydrate": "parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
-    "start-performance": "parcel ./examples/performance/index.html --out-dir build/examples/performance",
-    "build-docs": "parcel build ./examples/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml",
-    "patch": "bolt ws exec -- npm run patch",
+    "start": "npx parcel ./examples/main/index.html --out-dir build/examples/main",
+    "start-hydrate": "npx parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
+    "start-performance": "npx parcel ./examples/performance/index.html --out-dir build/examples/performance",
+    "build-docs": "npx parcel build ./examples/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml",
+    "patch": "npx bolt ws exec -- npm run patch",
     "clean": "git clean -dxf",
     "build": "rm -rf dist && tsc"
   },
@@ -26,7 +26,7 @@
   "license": "MIT",
   "devDependencies": {
     "husky": "^3.0.9",
-    "typescript": "^3.7.3"
+    "typescript": "^3.8.3"
   },
   "browserslist": [
     "last 1 chrome versions"
