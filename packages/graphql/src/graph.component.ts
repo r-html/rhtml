@@ -1,24 +1,25 @@
-import { Component, html, property, LitElement, async } from '@rxdi/lit-html';
-import gql from 'graphql-tag';
-import { BaseService } from './base.service';
-import { Inject, Container } from '@rxdi/core';
-import { map, tap, catchError } from 'rxjs/operators';
-import {
-  Observable,
-  of,
-  Subscription,
-  ReplaySubject,
-  BehaviorSubject,
-  isObservable
-} from 'rxjs';
+import { Container, Inject } from '@rxdi/core';
+import { async, Component, html, LitElement, property } from '@rxdi/lit-html';
 import {
   MutationOptions,
-  QueryOptions,
   QueryBaseOptions,
+  QueryOptions,
   SubscriptionOptions
 } from 'apollo-client';
-import { GraphOptions } from './types';
+import gql from 'graphql-tag';
+import {
+  BehaviorSubject,
+  isObservable,
+  Observable,
+  of,
+  ReplaySubject,
+  Subscription
+} from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+import { BaseService } from './base.service';
 import { DEFAULTS } from './tokens';
+import { GraphOptions } from './types';
 
 /**
  * @customElement r-graph
@@ -60,9 +61,9 @@ import { DEFAULTS } from './tokens';
     `;
   }
 })
-export class GraphComponent<T = any> extends LitElement {
+export class GraphComponent extends LitElement {
   @property({ type: Object })
-  public options: GraphOptions<T> = {
+  public options: GraphOptions = {
     fetch: '',
     state: new BehaviorSubject({}),
     render: res =>
@@ -85,9 +86,11 @@ export class GraphComponent<T = any> extends LitElement {
 
   private subscription: Subscription;
   private pubsubSubscription: Subscription;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private result: ReplaySubject<any> = new ReplaySubject();
 
   OnUpdateFirst() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let task: Observable<any>;
     if (this.options.state) {
       if (isObservable(this.options.state)) {
@@ -147,8 +150,8 @@ export class GraphComponent<T = any> extends LitElement {
     this.result.complete();
   }
 
-  private query(): Observable<{ data: any }> {
-    let fetch: any = this.options.fetch;
+  private query(): Observable<{ data }> {
+    let fetch = this.options.fetch;
     this.options.settings = this.options.settings || {};
     this.options.fetch = this.options.fetch || '';
     if (this.options.fetch['loc'] && this.options.fetch['loc'].source) {
@@ -175,7 +178,7 @@ export class GraphComponent<T = any> extends LitElement {
     return this.graphql.query(this.options.settings as QueryOptions);
   }
 
-  isPrimitive(test: any) {
+  isPrimitive(test) {
     return test !== Object(test);
   }
 }

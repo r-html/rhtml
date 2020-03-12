@@ -6,6 +6,6 @@ export class LitServiceElement<T = {}> extends LitElement {
 
   OnUpdateFirst() {
     this.remove();
-    this.run(this as any);
+    this.run(this as never);
   }
 }

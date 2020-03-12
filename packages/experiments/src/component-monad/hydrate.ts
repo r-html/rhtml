@@ -1,4 +1,5 @@
 import { TemplateResult } from '@rxdi/lit-html';
+
 import { ComponentRegister } from './component-registry';
 import { RegistryReadyEvent, selector } from './interface';
 

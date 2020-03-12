@@ -1,4 +1,5 @@
-import { LitElement, Component, property } from '@rxdi/lit-html';
+import { Component, LitElement, property } from '@rxdi/lit-html';
+
 import { Settings } from './types';
 
 /**

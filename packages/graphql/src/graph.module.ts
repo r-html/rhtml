@@ -1,5 +1,6 @@
 import { Module, ModuleWithProviders } from '@rxdi/core';
 import { GraphqlModule, GraphqlModuleConfig } from '@rxdi/graphql-client';
+
 import { GraphComponent } from './graph.component';
 import { DEFAULTS } from './tokens';
 

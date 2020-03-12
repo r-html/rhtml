@@ -1,11 +1,11 @@
 import '@rhtml/renderer';
 
-import { LensComponent } from './lens';
 import { FetchComponent } from './fetch';
+import { LensComponent } from './lens';
 import { MonadComponent } from './part-monad';
 import { RenderComponent } from './render';
-import { StateComponent } from './state';
 import { SettingsComponent } from './settings';
+import { StateComponent } from './state';
 
 // export * from './types';
 export * from './lens';

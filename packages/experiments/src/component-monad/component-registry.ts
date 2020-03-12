@@ -5,7 +5,8 @@ import {
   property,
   TemplateResult
 } from '@rxdi/lit-html';
-import { selector, RegistryReadyEvent } from './interface';
+
+import { RegistryReadyEvent, selector } from './interface';
 
 /**
  * @customElement r-component-register

@@ -1,12 +1,12 @@
-import { Injector, Injectable } from '@rxdi/core';
+import { Injectable, Injector } from '@rxdi/core';
 import {
   ApolloClient,
-  QueryOptions,
   MutationOptions,
+  QueryOptions,
   SubscriptionOptions
 } from '@rxdi/graphql-client';
-import { from, Observable } from 'rxjs';
 import { WatchQueryOptions } from 'apollo-client';
+import { from, Observable } from 'rxjs';
 
 @Injectable()
 export class BaseService {

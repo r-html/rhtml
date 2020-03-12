@@ -17,7 +17,7 @@ jobs:
           # scope: "@rxdi"
       - run: npx @rxdi/bolt install
       - run: npm run lint --if-present
-      - run: npm test
+      - run: npm test --if-present
       - run: git config --global user.email 'kristiqn.tachev@gmail.com'
       - run: git config --global user.name "Kristiyan Tachev"
       - run: npm version patch

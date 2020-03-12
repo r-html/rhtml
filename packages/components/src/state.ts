@@ -1,4 +1,4 @@
-import { LitElement, Component, property } from '@rxdi/lit-html';
+import { Component, LitElement, property } from '@rxdi/lit-html';
 
 /**
  * @customElement r-state
@@ -7,5 +7,5 @@ import { LitElement, Component, property } from '@rxdi/lit-html';
   selector: 'r-state'
 })
 export class StateComponent extends LitElement {
-  @property() value: any;
+  @property() value;
 }

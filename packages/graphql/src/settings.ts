@@ -1,6 +1,7 @@
 import { GraphqlModuleConfig } from '@rxdi/graphql-client';
-import { DEFAULTS } from './tokens';
 import { html } from '@rxdi/lit-html';
+
+import { DEFAULTS } from './tokens';
 
 export interface GraphqlSettings {
   config: GraphqlModuleConfig;

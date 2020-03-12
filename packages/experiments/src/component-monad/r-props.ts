@@ -12,7 +12,6 @@ export class RPropsOperator extends LitElement {
   private nodes: NodeListOf<Element>;
   public props = {};
   OnUpdateFirst() {
-
     this.nodes = this.querySelectorAll('r-prop');
 
     this.nodes.forEach(n => {
@@ -33,28 +32,25 @@ export class RPropsOperator extends LitElement {
         type = Object;
       }
       this.props[key] = { type };
-
     });
   }
   OnDestroy() {
     this.nodes.forEach(n => n.remove());
   }
 
-  isString(value: any) {
+  isString(value) {
     return value === 'String';
   }
 
-  isNumber(value: any) {
+  isNumber(value) {
     return value === 'Number';
   }
 
-  isBoolean(value: any) {
+  isBoolean(value) {
     return value === 'Boolean';
   }
 
-  isObject(value: any) {
+  isObject(value) {
     return value === 'Object';
   }
-
-  castToType(value: any, type: String | Boolean | Number | Object) {}
 }

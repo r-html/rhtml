@@ -1,7 +1,8 @@
 import { Module } from '@rxdi/core';
+
+import { GraphComponent } from './graph.component';
 import { GraphModule } from './graph.module';
 import { GraphqlSettings } from './settings';
-import { GraphComponent } from './graph.component';
 
 @Module({
   imports: [

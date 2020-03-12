@@ -1,9 +1,9 @@
 import {
-  LitElement,
   Component,
+  html,
+  LitElement,
   property,
-  TemplateResult,
-  html
+  TemplateResult
 } from '@rxdi/lit-html';
 
 /**

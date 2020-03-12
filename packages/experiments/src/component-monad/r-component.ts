@@ -27,7 +27,7 @@ export class RComponentOperator extends LitElement {
         selector,
         template() {
           return renderComponent
-            ? renderComponent.state(this, (state: any) => Object.assign(this, state))
+            ? renderComponent.state(this, state => Object.assign(this, state))
             : html`
                 Missing template
               `;
@@ -36,7 +36,7 @@ export class RComponentOperator extends LitElement {
         class extends LitElement {
           loading = true;
           static get properties() {
-            return {...propertiesComponent.props, loading: { type: Boolean }};
+            return { ...propertiesComponent.props, loading: { type: Boolean } };
           }
         }
       );

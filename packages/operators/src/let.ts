@@ -1,4 +1,4 @@
-import { Component, LitElement, property, html } from '@rxdi/lit-html';
+import { Component, html, LitElement, property } from '@rxdi/lit-html';
 /**
  * @customElement r-let
  */
@@ -21,15 +21,16 @@ import { Component, LitElement, property, html } from '@rxdi/lit-html';
 })
 export class LetOperator extends LitElement {
   @property({ type: Array })
-  public data: any = [];
+  public data = [];
 
-  @property()
-  public item: any = (v: any) =>
+  @property({ type: Object })
+  public item = v =>
     html`
       ${v}
     `;
 
-  private normalizeArray(state: Object) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private normalizeArray(state: Record<string, any>) {
     if (!state || typeof state === 'string') {
       return [];
     }

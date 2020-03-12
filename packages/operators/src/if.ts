@@ -1,4 +1,4 @@
-import { Component, LitElement, html, property } from '@rxdi/lit-html';
+import { Component, html, LitElement, property } from '@rxdi/lit-html';
 
 /**
  * @customElement r-if

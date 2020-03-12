@@ -1,19 +1,23 @@
 import {
-  LitElement,
   Component,
   html,
+  LitElement,
   property,
   TemplateResult
 } from '@rxdi/lit-html';
+import { map } from 'rxjs/operators';
+import { all, get, mod } from 'shades';
+
 import { FetchComponent } from './fetch';
+import { LensComponent } from './lens';
 import { RenderComponent } from './render';
+import { SettingsComponent } from './settings';
 import { StateComponent } from './state';
 import { GraphOptions } from './types';
-import { SettingsComponent } from './settings';
-import { LensComponent } from './lens';
-import { get, mod, all } from 'shades';
-import { isObservable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+function isObservable(obj) {
+  return typeof obj.lift === 'function' && typeof obj.subscribe === 'function';
+}
 
 /**
  * @customElement r-part
@@ -42,7 +46,7 @@ export class MonadComponent extends LitElement {
     const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
     const script = this.findNode(nodes, 'script') as HTMLScriptElement;
     if (script) {
-      (new Function(script.innerHTML)).call(this);
+      new Function(script.innerHTML).call(this);
     }
     const fetch: string = fetchComponent
       ? this.applyQueries(fetchComponent)
@@ -89,7 +93,7 @@ export class MonadComponent extends LitElement {
     }
     return '';
   }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private applyLenses(state: any = {}, lensComponent: LensComponent) {
     let newState = JSON.parse(JSON.stringify(state));
     if (lensComponent.match) {
@@ -99,6 +103,7 @@ export class MonadComponent extends LitElement {
       if (isObservable(newState)) {
         newState = newState.pipe(
           map(s => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const expectedState = (get as any)(...lensComponent.get)(s);
             if (!expectedState) {
               return s;
@@ -107,6 +112,7 @@ export class MonadComponent extends LitElement {
           })
         );
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         newState = (get as any)(...lensComponent.get)(newState);
       }
       if (lensComponent.ray) {
@@ -121,7 +127,7 @@ export class MonadComponent extends LitElement {
     }
     return newState;
   }
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private modState(args: any[], state) {
     return new Promise((resolve, reject) => {
       try {

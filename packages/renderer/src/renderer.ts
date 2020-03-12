@@ -1,4 +1,4 @@
-import { Component, html, property, LitElement } from '@rxdi/lit-html';
+import { Component, html, LitElement, property } from '@rxdi/lit-html';
 
 function Render(config) {
   return function(cls) {
@@ -41,6 +41,7 @@ function Render(config) {
 })
 export class Renderer extends LitElement {
   @property()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public options: any = {
     state: {},
     render: res =>
@@ -83,12 +84,11 @@ export class Renderer extends LitElement {
       }
     }
   }
-
-  private isObservable(value: any) {
+  private isObservable(value) {
     return this.isFunction(value.lift) && this.isFunction(value.subscribe);
   }
 
-  private isFunction(value: any) {
+  private isFunction(value) {
     return typeof value === 'function';
   }
 
