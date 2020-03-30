@@ -1,5 +1,5 @@
-type ObjectType<T> = new (...args: unknown[]) => T;
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type ObjectType<T> = new (...args: unknown[]) => T;
 const C = new Map();
 
 const ascii = (a: string) => a.charCodeAt(0);

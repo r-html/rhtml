@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@rxdi/lit-html": "^0.7.42",
-    "@rhtml/renderer": "0.0.25"
+    "@rhtml/renderer": "0.0.26"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
