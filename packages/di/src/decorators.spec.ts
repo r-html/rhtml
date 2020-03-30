@@ -1,8 +1,25 @@
-import { get, Inject } from './di';
-import { DI, Reader } from './experiments';
+import { DI, Inject, Reader } from './decorators';
+import { clear, get, set } from './di';
 
 describe('[Experiments]: test', () => {
-  it('Experimental', async () => {
+  afterEach(() => clear());
+
+  it('Should inject Test1 inside Test2 service', async () => {
+    class Test1 {
+      test1 = 40;
+    }
+    class Test2 {
+      @Inject(Test1) test: Test1;
+      myProperty = 42;
+    }
+    expect(new Test2().test.test1).toBe(40);
+    const test2 = set(Test2);
+    expect(test2.myProperty).toBe(42);
+    expect(test2.test.test1).toBe(40);
+    expect(get(Test2)).toBeTruthy();
+  });
+
+  it('DI', async () => {
     class Test {
       test = 42;
     }
@@ -108,9 +125,6 @@ describe('[Experiments]: test', () => {
   it('Should get same instance everytime ', async () => {
     class UserCache {
       string = '[UserCache]:';
-      constructor() {
-        console.log('dadada');
-      }
     }
 
     class App {

@@ -1,2 +1,2 @@
 export * from './di';
-export * from './experiments';
+export * from './decorators';

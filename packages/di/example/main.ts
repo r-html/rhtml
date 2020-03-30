@@ -19,7 +19,7 @@ class App {
 
   getPeshoAsync(
     name: string
-  ): PrivateReader<[UserService, UserCache], Promise<string>> {
+  ): PrivateReader<NonNullable<[UserService, UserCache]>, Promise<string>> {
     return async ([userService, userCache]) =>
       userService.cache.name + name + userCache.name;
   }
@@ -27,7 +27,6 @@ class App {
   @Reader(...AppModule)
   test2(name: string): Reader<[UserService, UserCache], Promise<string>> {
     return async ([userService, userCache]) => {
-      console.log(this);
       return (
         userService.cache.name +
         name +
@@ -36,8 +35,5 @@ class App {
     };
   }
 }
-const app = new App();
-const action = app.getPesho('Kristiyan Tachev');
-const asyncAction = app.test2('Kristiyan Tachev');
-console.log(action());
+const asyncAction = new App().test2('Kristiyan Tachev');
 asyncAction().then(console.log);

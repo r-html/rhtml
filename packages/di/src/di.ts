@@ -16,10 +16,3 @@ export const set = <T>(c: ObjectType<T>, hash = toHashKey(c)): T =>
   has(c) ? get(c) : C.set(hash, new c()).get(hash);
 export const clear = () => C.clear();
 export const remove = <T>(c: ObjectType<T>) => C.delete(toHashKey(c));
-
-export function Inject<T>(clazz: ObjectType<T>): PropertyDecorator {
-  return (target, name: string) =>
-    Object.defineProperty(target, name, {
-      get: () => set(clazz)
-    });
-}
