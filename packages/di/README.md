@@ -1,6 +1,6 @@
 # @rhtml/di
 
-Smallest Dependency Injection for Typescript and Javascript! Only `2.3kb`
+Smallest Dependency Injection for Typescript and Javascript! Only `2.4kb`
 
 #### Installation
 
@@ -11,10 +11,10 @@ npm i @rhtml/di
 #### Usage
 
 ```typescript
-import { Inject, set } from '@rhtml/di';
+import { Inject, PrivateReader, Reader } from '@rhtml/di';
 
 export class UserCache {
-  pesho = '[UserCache]: pesho';
+  name = '[UserCache]: My name is ';
 }
 
 export class UserService {
@@ -22,16 +22,38 @@ export class UserService {
   public cache: UserCache;
 }
 
-class App {
-  @Inject(UserService)
-  private userService: UserService;
+const AppModule = [UserService, UserCache];
 
-  getPesho() {
-    return this.userService.cache.pesho;
+class App {
+  @Reader(...AppModule)
+  getPesho(name: string): Reader<[UserService], string> {
+    return ([userService]) => userService.cache.name + name;
+  }
+
+  getPeshoAsync(
+    name: string
+  ): PrivateReader<[UserService, UserCache], Promise<string>> {
+    return async ([userService, userCache]) =>
+      userService.cache.name + name + userCache.name;
+  }
+
+  @Reader(...AppModule)
+  test2(name: string): Reader<[UserService, UserCache], Promise<string>> {
+    return async ([userService, userCache]) => {
+      console.log(this);
+      return (
+        userService.cache.name +
+        name +
+        (await this.getPeshoAsync('omg')([userService, userCache]))
+      );
+    };
   }
 }
-const app = set(App);
-console.log(app.getPesho());
+const app = new App();
+const action = app.getPesho('Kristiyan Tachev');
+const asyncAction = app.test2('Kristiyan Tachev');
+console.log(action());
+asyncAction().then(console.log);
 ```
 
 #### Monad Reader
@@ -63,5 +85,49 @@ const app = set(App);
 const action = app.getPesho('Kristiyan Tachev');
 const asyncAction = app.getPeshoAsync('Kristiyan Tachev');
 console.log(action());
+asyncAction().then(console.log);
+```
+
+##### Using Static methods
+
+```ts
+export class UserCache {
+  name = '[UserCache]: My name is ';
+}
+
+export class UserService {
+  @Inject(UserCache)
+  public cache: UserCache;
+}
+
+const AppModule = [UserService, UserCache];
+
+class App {
+  @Reader(...AppModule)
+  public static getPesho(name: string): Reader<[UserService], string> {
+    return ([userService]) => userService.cache.name + name;
+  }
+
+  public static getPeshoAsync(
+    name: string
+  ): PrivateReader<NonNullable<[UserService, UserCache]>, Promise<string>> {
+    return async ([userService, userCache]) =>
+      userService.cache.name + name + userCache.name;
+  }
+
+  @Reader(...AppModule)
+  public static test2(
+    name: string
+  ): Reader<[UserService, UserCache], Promise<string>> {
+    return async ([userService, userCache]) => {
+      return (
+        userService.cache.name +
+        name +
+        (await this.getPeshoAsync('omg')([userService, userCache]))
+      );
+    };
+  }
+}
+const asyncAction = App.test2('Kristiyan Tachev');
 asyncAction().then(console.log);
 ```

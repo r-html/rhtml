@@ -1,8 +1,9 @@
 import { ObjectType, set } from './di';
 
 export type Reader<T, K> = (d?: T) => K;
+export type PrivateReader<T, K> = (d: NonNullable<T>) => K;
 
-export function Reader<T>(...di: ObjectType<T>[]): MethodDecorator {
+export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   return (
     ...a: [
       Record<string, unknown>,
@@ -11,8 +12,9 @@ export function Reader<T>(...di: ObjectType<T>[]): MethodDecorator {
     ]
   ) => {
     const o = a[2].value as Function;
-    a[2].value = (...args: unknown[]) => () =>
-      o.apply(this, args)(di.map(p => set(p)));
+    a[2].value = function(...args: unknown[]) {
+      return () => o.apply(this, args)(di.map(p => set(p)));
+    };
   };
 }
 
@@ -25,10 +27,11 @@ export function DI<T>(...di: ObjectType<T>[]): MethodDecorator {
     ]
   ) => {
     const m = a[2].value as Function;
-    a[2].value = () =>
-      m.apply(
+    a[2].value = function() {
+      return m.apply(
         this,
         di.map(p => set(p))
       );
+    };
   };
 }

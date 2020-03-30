@@ -51,9 +51,9 @@ describe('[Experiments]: test', () => {
     }
     const test2 = new Omg();
     expect(test2).toBeTruthy();
-    const called = test2.test()();
-    expect(called.arg.test).toBe(42);
-    expect(called.arg2.test).toBe(43);
+    const called = test2.test();
+    expect(called().arg.test).toBe(42);
+    expect(called().arg2.test).toBe(43);
   });
 
   it('Should try to inject property and expect type string', async () => {
@@ -103,6 +103,40 @@ describe('[Experiments]: test', () => {
     expect(app).toBeTruthy();
     const called = app.getPesho('pesho', 'myName', 'myName2');
     expect(called()).toBe('[UserCache]:peshomyNamemyName2');
+  });
+
+  it('Should get same instance everytime ', async () => {
+    class UserCache {
+      string = '[UserCache]:';
+      constructor() {
+        console.log('dadada');
+      }
+    }
+
+    class App {
+      @Reader(UserCache)
+      getPesho(
+        name: string,
+        myName: string,
+        myName2: string
+      ): Reader<[UserCache], string> {
+        return ([userService]) => userService.string + name + myName + myName2;
+      }
+
+      @Reader(UserCache)
+      getGosho(): Reader<[UserCache], string> {
+        return ([userService]) => {
+          userService.string = 'dadadada';
+          return userService.string;
+        };
+      }
+    }
+    const app = new App();
+    expect(app).toBeTruthy();
+    const caller = app.getGosho();
+    expect(caller()).toBe('dadadada');
+    const caller2 = app.getPesho('1', '2', '3');
+    expect(caller2()).toBe('dadadada123');
   });
   //   it.skip('[Missing Feature]: Should try to inject property inside constructor', async () => {
   //     class Test {
