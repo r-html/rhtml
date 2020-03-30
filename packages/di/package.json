@@ -33,6 +33,9 @@
   "browserslist": [
     "last 1 chrome versions"
   ],
+  "files": [
+    "dist"
+  ],
   "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts"
