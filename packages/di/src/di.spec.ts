@@ -1,3 +1,4 @@
+import { remove } from './di';
 import { clear, get, has, Inject, set } from './index';
 
 describe('[DI]: tests', () => {
@@ -54,5 +55,16 @@ describe('[DI]: tests', () => {
     clear();
     expect(has(Test2)).toBeFalsy();
     expect(get(Test2)).toBeFalsy();
+  });
+
+  it('Should check if we can remove single dependency', async () => {
+    class Test2 {
+      myProperty = 42;
+    }
+    expect(has(Test2)).toBeFalsy();
+    expect(set(Test2)).toBeTruthy();
+    expect(has(Test2)).toBeTruthy();
+    expect(remove(Test2)).toBeTruthy();
+    expect(has(Test2)).toBeFalsy();
   });
 });

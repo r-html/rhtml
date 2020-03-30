@@ -1,54 +1,34 @@
-import '@abraham/reflection';
-
 import { ObjectType, set } from './di';
 
-interface MetadataParams {
-  index: number;
-  handler: ObjectType<unknown>;
-}
-const metadataSymbol = Symbol('descriptor:metadata:symbol');
+export type Reader<T, K> = (d?: T) => K;
 
-export function Reader<T>(...arg: ObjectType<T>[]): MethodDecorator {
+export function Reader<T>(...di: ObjectType<T>[]): MethodDecorator {
   return (
-    target: object,
-    propertyKey: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>
+    ...a: [
+      Record<string, unknown>,
+      string | symbol,
+      TypedPropertyDescriptor<unknown>
+    ]
   ) => {
-    const method = descriptor.value;
-    descriptor.value = function(args: unknown[]) {
-      args = args || [];
-      const requiredParameters =
-        (Reflect.getOwnMetadata(
-          metadataSymbol,
-          target,
-          propertyKey
-        ) as MetadataParams[]) || [];
-      requiredParameters.push(
-        ...arg.map((handler, index) => ({ handler, index }))
-      );
-      requiredParameters.forEach(
-        param => (args[param.index] = set(param.handler))
-      );
-      return method.apply(this, args);
-    };
+    const o = a[2].value as Function;
+    a[2].value = (args: unknown[] = []) => () =>
+      o.apply(this, args)(di.map(p => set(p)));
   };
 }
 
-export function Injector<T>(handler: ObjectType<T>): ParameterDecorator {
-  return (target: object, propertyKey: string | symbol, index: number) => {
-    const params =
-      (Reflect.getOwnMetadata(metadataSymbol, target, propertyKey) as Array<
-        MetadataParams
-      >) || [];
-    params.push({ index, handler });
-    Reflect.defineMetadata(metadataSymbol, params, target, propertyKey);
+export function DI<T>(...di: ObjectType<T>[]): MethodDecorator {
+  return (
+    ...a: [
+      Record<string, unknown>,
+      string | symbol,
+      TypedPropertyDescriptor<unknown>
+    ]
+  ) => {
+    const m = a[2].value as Function;
+    a[2].value = () =>
+      m.apply(
+        this,
+        di.map(p => set(p))
+      );
   };
 }
-
-// function Compact<T extends new (...args: any[]) => {}>(constructor: T) {
-//   console.log('-- decorator function invoked --');
-//   return class extends constructor {
-//     gears = 5;
-//     wheels = 3;
-//   };
-// }

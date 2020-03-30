@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type ObjectType<T> = new (...args: unknown[]) => T;
 const C = new Map();
 
@@ -16,6 +15,7 @@ export const has = <T>(c: ObjectType<T>): boolean => !!C.has(toHashKey(c));
 export const set = <T>(c: ObjectType<T>, hash = toHashKey(c)): T =>
   C.set(hash, new c()).get(hash);
 export const clear = () => C.clear();
+export const remove = <T>(c: ObjectType<T>) => C.delete(toHashKey(c));
 
 export function Inject<T>(clazz: ObjectType<T>): PropertyDecorator {
   return (target, name: string) =>
