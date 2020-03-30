@@ -1,6 +1,6 @@
 # @rhtml/di
 
-Smallest Dependency Injection for Typescript and Javascript! Only `2.8kb`
+Smallest Dependency Injection for Typescript and Javascript! Only `2.3kb`
 
 #### Installation
 
