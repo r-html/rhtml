@@ -1,7 +1,7 @@
-import { Inject, set } from '../src/index';
+import { Inject, Reader, set } from '../src/index';
 
 export class UserCache {
-  pesho = '[UserCache]: pesho';
+  name = '[UserCache]: My name is ';
 }
 
 export class UserService {
@@ -10,12 +10,11 @@ export class UserService {
 }
 
 class App {
-  @Inject(UserService)
-  private userService: UserService;
-
-  getPesho() {
-    return this.userService.cache.pesho;
+  @Reader(UserService)
+  getPesho(name: string): Reader<[UserService], string> {
+    return ([userService]) => userService.cache.name + name;
   }
 }
-const pav4e = set(App);
-console.log(pav4e);
+const app = set(App);
+const action = app.getPesho('Kristiyan Tachev');
+console.log(action());

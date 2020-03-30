@@ -37,10 +37,10 @@ console.log(app.getPesho());
 #### Monad Reader
 
 ```typescript
-import { Inject, set } from '@rhtml/di';
+import { Inject, Reader, set } from '@rhtml/di';
 
 export class UserCache {
-  pesho = '[UserCache]: pesho';
+  name = '[UserCache]: My name is ';
 }
 
 export class UserService {
@@ -50,10 +50,11 @@ export class UserService {
 
 class App {
   @Reader(UserService)
-  getPesho(): Reader<[UserService], { arg: Test; arg2: Test2 }> {
-    return ([userService]) => userService.cache.pesho;
+  getPesho(name: string): Reader<[UserService], string> {
+    return ([userService]) => userService.cache.name + name;
   }
 }
 const app = set(App);
-console.log(app.getPesho());
+const action = app.getPesho('Kristiyan Tachev');
+console.log(action());
 ```
