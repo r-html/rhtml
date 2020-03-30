@@ -20,6 +20,7 @@
     "build-docs": "npx parcel build ./examples/main/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml && cp ./docs/index.html ./docs/404.html",
     "patch": "npx bolt ws exec -- npm run patch",
     "clean": "git clean -dxf",
+    "test": "npx bolt ws exec -- npm run test",
     "lint": "npx bolt ws exec -- npm run lint",
     "lint-fix": "npx bolt ws exec -- npm run lint-fix",
     "build": "rm -rf dist && tsc"
@@ -31,6 +32,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^24.0.18",
     "husky": "^3.0.9",
     "typescript": "^3.8.3",
     "eslint": "^6.7.2",
@@ -40,7 +42,8 @@
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "prettier": "^1.19.1",
-    "ts-jest": "25.2.1"
+    "ts-jest": "25.2.1",
+    "jest": "^24.9.0"
   },
   "browserslist": [
     "last 1 chrome versions"
