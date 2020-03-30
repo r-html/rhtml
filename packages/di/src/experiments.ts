@@ -11,7 +11,7 @@ export function Reader<T>(...di: ObjectType<T>[]): MethodDecorator {
     ]
   ) => {
     const o = a[2].value as Function;
-    a[2].value = (args: unknown[] = []) => () =>
+    a[2].value = (...args: unknown[]) => () =>
       o.apply(this, args)(di.map(p => set(p)));
   };
 }

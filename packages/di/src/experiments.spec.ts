@@ -1,4 +1,4 @@
-import { get } from './di';
+import { get, Inject } from './di';
 import { DI, Reader } from './experiments';
 
 describe('[Experiments]: test', () => {
@@ -54,6 +54,55 @@ describe('[Experiments]: test', () => {
     const called = test2.test()();
     expect(called.arg.test).toBe(42);
     expect(called.arg2.test).toBe(43);
+  });
+
+  it('Should try to inject property and expect type string', async () => {
+    class UserCache {
+      string = '[UserCache]:';
+    }
+
+    class UserService {
+      @Inject(UserCache)
+      public cache: UserCache;
+    }
+
+    class App {
+      @Reader(UserService)
+      getPesho(name: string): Reader<[UserService], string> {
+        return ([userService]) => userService.cache.string + name;
+      }
+    }
+    const app = new App();
+    expect(app).toBeTruthy();
+    const called = app.getPesho('pesho')();
+    expect(called).toBe('[UserCache]:pesho');
+  });
+
+  it('Should try to inject 3 arguments and expect type string', async () => {
+    class UserCache {
+      string = '[UserCache]:';
+    }
+
+    class UserService {
+      @Inject(UserCache)
+      public cache: UserCache;
+    }
+
+    class App {
+      @Reader(UserService)
+      getPesho(
+        name: string,
+        myName: string,
+        myName2: string
+      ): Reader<[UserService], string> {
+        return ([userService]) =>
+          userService.cache.string + name + myName + myName2;
+      }
+    }
+    const app = new App();
+    expect(app).toBeTruthy();
+    const called = app.getPesho('pesho', 'myName', 'myName2');
+    expect(called()).toBe('[UserCache]:peshomyNamemyName2');
   });
   //   it.skip('[Missing Feature]: Should try to inject property inside constructor', async () => {
   //     class Test {
