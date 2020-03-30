@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/di",
-  "version": "0.0.24",
+  "version": "0.0.26",
   "description": "RHTML simplest Dependency Injection",
   "scripts": {
     "start": "npx gapi start --local --path=./example/main.ts",
