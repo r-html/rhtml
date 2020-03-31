@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/renderer",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
