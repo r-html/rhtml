@@ -43,18 +43,17 @@ export interface ModuleWithProviders<T = {}> {
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 
-const setProviders = <T>(imports: ObjectType<T>[]) =>
-  (imports || []).map(p => set(p));
+const setProviders = <T>(i: ObjectType<T>[]) => (i || []).map(p => set(p));
 
-export const Module = <T>(options?: ModuleWithProviders<T>) => <
+export const Module = <T>(o?: ModuleWithProviders<T>) => <
   TBase extends Constructor
 >(
   Base: TBase
 ) =>
   class extends Base {
     constructor(...args: any[]) {
-      setProviders(options.imports);
-      setProviders(options.providers);
+      setProviders(o.imports);
+      setProviders(o.providers);
       super(args);
     }
   };

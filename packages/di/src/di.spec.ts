@@ -51,4 +51,29 @@ describe('[DI]: tests', () => {
     expect(remove(Test2)).toBeTruthy();
     expect(has(Test2)).toBeFalsy();
   });
+
+  it('Should set private hash to specific provider', async () => {
+    class User {
+      id = 1;
+    }
+    expect(has(User)).toBeFalsy();
+    expect(get<User>('omg')).toBeFalsy();
+    set(User, 'omg');
+    expect(has('omg')).toBeTruthy();
+    expect(has(User)).toBeFalsy();
+    expect(get<User>('omg')).toBeTruthy();
+    expect(get<User>('omg').id).toBe(1);
+  });
+
+  it('Should set regular object to provider', async () => {
+    const User = { id: 1 };
+    expect(has('omg')).toBeFalsy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    set(User as any, 'omg');
+    expect(has('omg')).toBeTruthy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect(has(User as any)).toBeFalsy();
+    expect(get('omg')).toBeTruthy();
+    expect(get<typeof User>('omg').id).toBe(1);
+  });
 });
