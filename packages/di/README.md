@@ -2,7 +2,7 @@
 
 Smallest Dependency Injection for Typescript and Javascript!
 
-- Only 2.8kb bundle size
+- Only 2.3kb bundle size
 - Code coverage 100%
 
 #### Installation

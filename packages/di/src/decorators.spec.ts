@@ -1,5 +1,14 @@
-import { DI, Inject, Injectable, Module, Reader } from './decorators';
-import { clear, get, has, set } from './di';
+import {
+  clear,
+  DI,
+  get,
+  has,
+  Inject,
+  Injectable,
+  Module,
+  Reader,
+  set
+} from './index';
 
 describe('[Experiments]: test', () => {
   afterEach(() => clear());

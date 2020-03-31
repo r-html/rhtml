@@ -1,5 +1,13 @@
-import { Inject, Injectable } from './decorators';
-import { clear, get, has, InjectionToken, remove, set } from './di';
+import {
+  clear,
+  get,
+  has,
+  Inject,
+  Injectable,
+  InjectionToken,
+  remove,
+  set
+} from './index';
 
 describe('[DI]: tests', () => {
   afterEach(() => clear());
