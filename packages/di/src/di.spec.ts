@@ -68,11 +68,10 @@ describe('[DI]: tests', () => {
   it('Should set regular object to provider', async () => {
     const User = { id: 1 };
     expect(has('omg')).toBeFalsy();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    set(User as any, 'omg');
+    set(User, 'omg');
+    set(User, 'omg');
     expect(has('omg')).toBeTruthy();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    expect(has(User as any)).toBeFalsy();
+    expect(has(User)).toBeFalsy();
     expect(get('omg')).toBeTruthy();
     expect(get<typeof User>('omg').id).toBe(1);
   });

@@ -1,6 +1,6 @@
 # @rhtml/di
 
-Smallest Dependency Injection for Typescript and Javascript! Only `2.4kb`
+Smallest Dependency Injection for Typescript and Javascript! Only `2.5kb`
 
 #### Installation
 
@@ -59,7 +59,7 @@ asyncAction().then(console.log);
 #### Monad Reader
 
 ```typescript
-import { Inject, Reader, set } from '../src/index';
+import { Inject, Reader, set } from '@rhtml/di';
 
 export class UserCache {
   name = '[UserCache]: My name is ';
@@ -91,6 +91,8 @@ asyncAction().then(console.log);
 ##### Using Static methods
 
 ```ts
+import { Inject, Reader, set } from '@rhtml/di';
+
 export class UserCache {
   name = '[UserCache]: My name is ';
 }
@@ -135,6 +137,8 @@ asyncAction().then(console.log);
 ##### Module decorator
 
 ```ts
+import { Inject, set, get } from '@rhtml/di';
+
 class User {
   id = 1;
 }
