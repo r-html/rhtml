@@ -1,6 +1,9 @@
 # @rhtml/di
 
-Smallest Dependency Injection for Typescript and Javascript! Only `2.5kb`
+Smallest Dependency Injection for Typescript and Javascript!
+
+- Only 2.8kb bundle size
+- Code coverage 100%
 
 #### Installation
 
@@ -9,6 +12,22 @@ npm i @rhtml/di
 ```
 
 #### Usage
+
+```ts
+import { Inject, Injectable } from '@rhtml/di';
+
+class Test {
+  test = 42;
+}
+@Injectable()
+class Test2 {
+  constructor(@Inject(Test) public test: Test) {}
+}
+const test2 = set(Test2);
+console.log(test2.test.test); // 42
+```
+
+#### Monadic approach
 
 ```typescript
 import { Inject, PrivateReader, Reader } from '@rhtml/di';
@@ -40,7 +59,6 @@ class App {
   @Reader(...AppModule)
   test2(name: string): Reader<[UserService, UserCache], Promise<string>> {
     return async ([userService, userCache]) => {
-      console.log(this);
       return (
         userService.cache.name +
         name +
@@ -55,8 +73,6 @@ const asyncAction = app.test2('Kristiyan Tachev');
 console.log(action());
 asyncAction().then(console.log);
 ```
-
-#### Monad Reader
 
 ```typescript
 import { Inject, Reader, set } from '@rhtml/di';
@@ -137,17 +153,23 @@ asyncAction().then(console.log);
 ##### Module decorator
 
 ```ts
-import { Inject, set, get } from '@rhtml/di';
+import { Injectable, Inject, set, get } from '@rhtml/di';
 
 class User {
   id = 1;
 }
 class UserService {
-  @Inject(User) user: User;
+  @Inject(User)
+  user: User;
+}
+
+@Injectable()
+class InjectableService {
+  constructor(@Inject(User) private user: User) {}
 }
 
 @Module({
-  providers: [UserService]
+  providers: [UserService, InjectableService]
 })
 class UserModule {}
 

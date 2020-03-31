@@ -1,4 +1,5 @@
-import { clear, get, has, remove, set } from './di';
+import { Inject, Injectable } from './decorators';
+import { clear, get, has, InjectionToken, remove, set } from './di';
 
 describe('[DI]: tests', () => {
   afterEach(() => clear());
@@ -52,27 +53,80 @@ describe('[DI]: tests', () => {
     expect(has(Test2)).toBeFalsy();
   });
 
-  it('Should set private hash to specific provider', async () => {
+  it('Should set InjectionToken and get id from it', async () => {
     class User {
       id = 1;
     }
+    const token = new InjectionToken<User>();
     expect(has(User)).toBeFalsy();
-    expect(get<User>('omg')).toBeFalsy();
-    set(User, 'omg');
-    expect(has('omg')).toBeTruthy();
+    expect(get(token)).toBeFalsy();
+    set(User, token);
+    expect(has(token)).toBeTruthy();
     expect(has(User)).toBeFalsy();
-    expect(get<User>('omg')).toBeTruthy();
-    expect(get<User>('omg').id).toBe(1);
+    expect(get(token)).toBeTruthy();
+    expect(get(token).id).toBe(1);
   });
 
-  it('Should set regular object to provider', async () => {
+  it('Should set unique object token', async () => {
     const User = { id: 1 };
-    expect(has('omg')).toBeFalsy();
-    set(User, 'omg');
-    set(User, 'omg');
-    expect(has('omg')).toBeTruthy();
+    const token = { value: 'omg' };
+    expect(has(token)).toBeFalsy();
+    set(User, token);
+    expect(has(token)).toBeTruthy();
     expect(has(User)).toBeFalsy();
-    expect(get('omg')).toBeTruthy();
-    expect(get<typeof User>('omg').id).toBe(1);
+    expect(get(token)).toBeTruthy();
+    expect(get<typeof User>(token).id).toBe(1);
+  });
+
+  it('Should try to Inject service from token', async () => {
+    class User {
+      id = 1;
+    }
+    const token = new InjectionToken<User>();
+    class User2 {
+      @Inject(token)
+      user: User;
+    }
+    set(User, token);
+    expect(has(User2)).toBeFalsy();
+    set(User2);
+    expect(get(User2).user.id).toBe(1);
+  });
+
+  it('Should fail if injectable decorator is missing and we try to get it', async () => {
+    class User {}
+    expect(has(User)).toBeFalsy();
+  });
+
+  it('Should have User registered inside dependencies', async () => {
+    @Injectable()
+    class User {}
+    set(User);
+    expect(has(User)).toBeTruthy();
+  });
+
+  it('Should try create class Injectable with token', async () => {
+    interface User {
+      id: number;
+    }
+    const token = new InjectionToken<User>();
+    @Injectable(token)
+    class User2 {
+      id = 1;
+    }
+    expect(get(token).id).toBe(1);
+    const x = set(User2);
+    x.id = 2;
+    expect(get(User2).id).toBe(2);
+  });
+
+  it('Should try create class Injectable', async () => {
+    @Injectable()
+    class User2 {
+      id = 1;
+    }
+    expect(has(User2)).toBeFalsy();
+    set(User2);
+    expect(get(User2).id).toBe(1);
   });
 });

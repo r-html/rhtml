@@ -1,4 +1,4 @@
-import { DI, Inject, Module, Reader } from './decorators';
+import { DI, Inject, Injectable, Module, Reader } from './decorators';
 import { clear, get, has, set } from './di';
 
 describe('[Experiments]: test', () => {
@@ -159,7 +159,8 @@ describe('[Experiments]: test', () => {
       id = 1;
     }
     class UserService {
-      @Inject(User) user: User;
+      @Inject(User)
+      user: User;
     }
 
     @Module({
@@ -179,15 +180,17 @@ describe('[Experiments]: test', () => {
     expect(has(User)).toBeFalsy();
     expect(userService.user.id).toBe(1);
   });
-  //   it.skip('[Missing Feature]: Should try to inject property inside constructor', async () => {
-  //     class Test {
-  //       test = 42;
-  //     }
-  //     class Test2 {
-  //       constructor(@Reader(Test) public test: Test) {}
-  //     }
-  //     const test2 = set(Test2);
-  //     expect(test2).toBeTruthy();
-  //     expect(test2.test).toBeTruthy();
-  //   });
+  it('Should try to inject property inside constructor', async () => {
+    class Test {
+      test = 42;
+    }
+    @Injectable()
+    class Test2 {
+      constructor(@Inject(Test) public test: Test) {}
+    }
+    const test2 = set(Test2);
+    expect(test2).toBeTruthy();
+    expect(test2.test).toBeTruthy();
+    expect(test2.test.test).toBe(42);
+  });
 });
