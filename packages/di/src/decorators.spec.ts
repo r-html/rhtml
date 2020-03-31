@@ -163,13 +163,16 @@ describe('[Experiments]: test', () => {
       user: User;
     }
 
+    @Module()
+    class ModuleWithoutArguments {}
+
     @Module({
       providers: [UserService]
     })
     class UserModule {}
 
     @Module({
-      imports: [UserModule]
+      imports: [UserModule, ModuleWithoutArguments]
     })
     class AppModule {}
 
