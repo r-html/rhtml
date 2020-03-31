@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/graphql",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
