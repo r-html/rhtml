@@ -131,3 +131,28 @@ class App {
 const asyncAction = App.test2('Kristiyan Tachev');
 asyncAction().then(console.log);
 ```
+
+##### Module decorator
+
+```ts
+class User {
+  id = 1;
+}
+class UserService {
+  @Inject(User) user: User;
+}
+
+@Module({
+  providers: [UserService]
+})
+class UserModule {}
+
+@Module({
+  imports: [UserModule]
+})
+class AppModule {}
+console.log(has(AppModule)); // False
+set(AppModule);
+const userService = get(UserService);
+expect(userService.user.id).toBe(1);
+```

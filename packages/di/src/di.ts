@@ -13,6 +13,6 @@ const toHashKey = <T>(c: ObjectType<T>) =>
 export const get = <T>(c: ObjectType<T>): T => C.get(toHashKey(c));
 export const has = <T>(c: ObjectType<T>): boolean => !!C.has(toHashKey(c));
 export const set = <T>(c: ObjectType<T>, hash = toHashKey(c)): T =>
-  has(c) ? get(c) : C.set(hash, new c()).get(hash);
+  C.has(hash) ? C.get(hash) : C.set(hash, new c()).get(hash);
 export const clear = () => C.clear();
 export const remove = <T>(c: ObjectType<T>) => C.delete(toHashKey(c));

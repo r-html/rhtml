@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ObjectType, set } from './di';
 
 export type Reader<T, K> = (d?: T) => K;
@@ -34,3 +35,26 @@ export function Inject<T>(clazz: ObjectType<T>): PropertyDecorator {
       get: () => set(clazz)
     });
 }
+
+export interface ModuleWithProviders<T = {}> {
+  providers?: ObjectType<T>[];
+  imports?: ObjectType<T>[];
+}
+
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+const setProviders = <T>(imports: ObjectType<T>[]) =>
+  (imports || []).map(p => set(p));
+
+export const Module = <T>(options?: ModuleWithProviders<T>) => <
+  TBase extends Constructor
+>(
+  Base: TBase
+) =>
+  class extends Base {
+    constructor(...args: any[]) {
+      setProviders(options.imports);
+      setProviders(options.providers);
+      super(args);
+    }
+  };

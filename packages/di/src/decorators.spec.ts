@@ -1,5 +1,5 @@
-import { DI, Inject, Reader } from './decorators';
-import { clear, get, set } from './di';
+import { DI, Inject, Module, Reader } from './decorators';
+import { clear, get, has, set } from './di';
 
 describe('[Experiments]: test', () => {
   afterEach(() => clear());
@@ -133,8 +133,9 @@ describe('[Experiments]: test', () => {
         name: string,
         myName: string,
         myName2: string
-      ): Reader<[UserCache], string> {
-        return ([userService]) => userService.string + name + myName + myName2;
+      ): Reader<[UserCache], Promise<string>> {
+        return async ([userCache]) =>
+          userCache.string + name + myName + myName2;
       }
 
       @Reader(UserCache)
@@ -150,7 +151,33 @@ describe('[Experiments]: test', () => {
     const caller = app.getGosho();
     expect(caller()).toBe('dadadada');
     const caller2 = app.getPesho('1', '2', '3');
-    expect(caller2()).toBe('dadadada123');
+    expect(await caller2()).toBe('dadadada123');
+  });
+
+  it('Should check if @Module decorator is working', async () => {
+    class User {
+      id = 1;
+    }
+    class UserService {
+      @Inject(User) user: User;
+    }
+
+    @Module({
+      providers: [UserService]
+    })
+    class UserModule {}
+
+    @Module({
+      imports: [UserModule]
+    })
+    class AppModule {}
+
+    expect(has(AppModule)).toBeFalsy();
+    expect(set(AppModule)).toBeTruthy();
+    const userService = get(UserService);
+    expect(userService).toBeTruthy();
+    expect(has(User)).toBeFalsy();
+    expect(userService.user.id).toBe(1);
   });
   //   it.skip('[Missing Feature]: Should try to inject property inside constructor', async () => {
   //     class Test {
