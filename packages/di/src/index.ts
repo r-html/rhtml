@@ -9,8 +9,13 @@ export type MethodDecoratorArguments = [
 ];
 export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
 
+interface Provider<T = {}> {
+  provide: ObjectUnion<T>;
+  use: ObjectUnion<T>;
+}
+
 export interface ModuleWithProviders<T = {}> {
-  providers?: ObjectType<T>[];
+  providers?: Provider<T>[] | T;
   imports?: ObjectType<T>[];
 }
 export class InjectionToken<T> {}
@@ -52,9 +57,13 @@ export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   };
 }
 
-function setDeps(deps: ObjectType[] = []) {
-  for (const dep of deps) {
-    set(dep);
+function setProviders<T>(providers: Provider<T>[] | T = []) {
+  for (const provider of providers as Provider<T>[]) {
+    if (provider.use) {
+      set(provider.use, provider.provide);
+    } else {
+      set(provider);
+    }
   }
 }
 
@@ -65,8 +74,8 @@ export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
 ) =>
   class extends Base {
     constructor(...args: any[]) {
-      setDeps(o.imports);
-      setDeps(o.providers);
+      setProviders(o.imports);
+      setProviders(o.providers);
       super(...args);
     }
   };
@@ -110,13 +119,16 @@ const defineMetaInjectors = (
   }
 };
 
-export const Injectable = () => <K extends new (...args: any[]) => {}>(
+export const Injectable = (
+  { providers }: { providers: Provider[] } = { providers: [] }
+) => <K extends new (...args: any[]) => {}>(
   Base: K,
   metaParams = meta.get(Base) || []
 ) =>
   class extends Base {
     constructor(...args: any[]) {
       if (!args.length) {
+        setProviders(providers);
         if (Reflect['getMetadata']) {
           defineMetaInjectors(
             args,

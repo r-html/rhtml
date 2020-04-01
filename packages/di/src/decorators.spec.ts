@@ -159,7 +159,39 @@ describe('[Experiments]: test', () => {
     expect(userService).toBeTruthy();
     expect(has(User)).toBeFalsy();
     expect(userService.user.id).toBe(1);
+    expect(has(User)).toBeTruthy();
   });
+
+  it('Should check if we can provide custom value', async () => {
+    const provide = new InjectionToken<string>();
+
+    @Module({
+      providers: [{ provide, use: 'pesho' }]
+    })
+    class AppModule {}
+
+    expect(has(AppModule)).toBeFalsy();
+    expect(set(AppModule)).toBeTruthy();
+    const value = get(provide);
+    expect(value).toBe('pesho');
+  });
+
+  it('Should check if we can provide custom value to Injectable', async () => {
+    const provide = new InjectionToken<string>();
+
+    @Injectable({
+      providers: [{ provide, use: 'pesho' }]
+    })
+    class UserService {
+      constructor(@Inject(provide) public pesho: string) {}
+    }
+
+    expect(has(UserService)).toBeFalsy();
+    expect(set(UserService)).toBeTruthy();
+    const userService = get(UserService);
+    expect(userService.pesho).toBe('pesho');
+  });
+
   it('Should try to inject property inside constructor', async () => {
     class Test {
       test = 42;
@@ -294,5 +326,29 @@ describe('[Experiments]: test', () => {
     const appInjection = set(App2);
     expect(appInjection.test).toBe(42);
     expect(appInjection.test2.test).toBe(420);
+  });
+
+  it('Should provide dependencies', async () => {
+    class Test {
+      test = 42;
+    }
+
+    class Test2 {
+      test = 420;
+    }
+
+    @Injectable({
+      providers: [{ provide: Test2, use: Test }]
+    })
+    class App extends Test {
+      constructor(@Inject(Test2) public test2: Test2) {
+        super();
+      }
+    }
+    set(App, {});
+
+    class App2 extends App {}
+    const appInjection = set(App2);
+    expect(appInjection.test2.test).toBe(42);
   });
 });
