@@ -5,6 +5,7 @@ import {
   has,
   Inject,
   Injectable,
+  InjectionToken,
   Module,
   Reader,
   set
@@ -204,5 +205,49 @@ describe('[Experiments]: test', () => {
     expect(test2).toBeTruthy();
     expect(test2.test).toBeTruthy();
     expect(test2.test.test).toBe(42);
+  });
+
+  it('Should try to inject 4 params and token inside constructor', async () => {
+    @Injectable()
+    class Test {
+      test = 1;
+    }
+    @Injectable()
+    class Test2 {
+      test = 2;
+    }
+    @Injectable()
+    class Test3 {
+      test = 3;
+    }
+    @Injectable()
+    class Test4 {
+      test = 4;
+    }
+    @Injectable()
+    class Test5 {
+      test = 5;
+    }
+    const token = new InjectionToken<Test5>();
+    set(Test5, token);
+    @Injectable()
+    class App {
+      constructor(
+        @Inject(Test) public test: Test,
+        @Inject(Test2) public test2: Test2,
+        @Inject(Test3) public test3: Test3,
+        @Inject(Test4) public test4: Test4,
+        @Inject(token) public test5: Test5
+      ) {}
+    }
+    const app = set(App);
+    expect(app).toBeTruthy();
+    expect(app.test).toBeTruthy();
+    expect(app.test.test).toBe(1);
+    expect(app.test2.test).toBe(2);
+    expect(app.test3.test).toBe(3);
+    expect(app.test4.test).toBe(4);
+    expect(has(Test5)).toBeFalsy();
+    expect(app.test5.test).toBe(5);
   });
 });

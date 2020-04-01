@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import '@abraham/reflection';
 export type ObjectType<T = {}> = new (...args: any[]) => T;
 export class InjectionToken<T> {}
 
@@ -59,7 +58,11 @@ export interface ModuleWithProviders<T = {}> {
   imports?: ObjectType<T>[];
 }
 
-const setDeps = <T>(i: ObjectType<T>[]) => (i || []).map(p => set(p));
+const setDeps = <T>(deps: ObjectType<T>[] = []) => {
+  for (const dep of deps) {
+    set(dep);
+  }
+};
 
 export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
   TBase extends ObjectType
@@ -74,8 +77,10 @@ export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
     }
   };
 
-const ReflectionParam = Symbol();
-type ReflectionParam<T> = [number, ObjectUnion<T>];
+const meta = new WeakMap<
+  Record<string, any>,
+  Array<[number, ObjectUnion<ObjectType>]>
+>();
 
 export function Inject<T>(identifier: ObjectUnion<T>): any;
 export function Inject<T>(identifier: ObjectUnion<T>): PropertyDecorator;
@@ -84,30 +89,23 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
     target,
     name: string,
     index?: number,
-    params: ReflectionParam<T>[] = Reflect.getOwnMetadata(
-      ReflectionParam,
-      target,
-      name
-    ) || []
+    params = meta.get(target) || []
   ) => {
-    params.push([index, identifier]);
-    Reflect.defineMetadata(ReflectionParam, params, target, name);
-    Object.defineProperty(target, name, {
-      get: () => set(identifier)
-    });
+    if (name) {
+      Object.defineProperty(target, name, {
+        get: () => set(identifier)
+      });
+    } else {
+      params.push([index, identifier]);
+      meta.set(target, params);
+    }
   };
 }
 
-export const Injectable = <T>(token?: ObjectUnion<T>): any => <
-  K extends new (...args: any[]) => {}
->(
+export const Injectable = (): any => <K extends new (...args: any[]) => {}>(
   Base: K,
-  params: ReflectionParam<T>[] = Reflect.getOwnMetadata(
-    ReflectionParam,
-    Base
-  ) || []
+  params = meta.get(Base) || []
 ) => {
-  set(Base, token);
   return class extends Base {
     constructor(...args: any[]) {
       for (const [index, identifier] of params) {

@@ -2,8 +2,9 @@
 
 Smallest Dependency Injection for Typescript and Javascript!
 
-- Only 2.3kb bundle size
+- Only 2.2kb bundle size
 - Code coverage 100%
+- No dependencies
 
 #### Installation
 
@@ -25,6 +26,28 @@ class Test2 {
 }
 const test2 = set(Test2);
 console.log(test2.test.test); // 42
+```
+
+#### Token Injection
+
+```ts
+import { InjectionToken, Injectable, Inject } from '@rhtml/di';
+
+const Token = new InjectionToken<Test>();
+
+@Injectable()
+class Test {
+  myMethod() {}
+}
+
+set(Test, Token);
+
+@Injectable()
+class App {
+  constructor(@Inject(Token) private test: Test) {}
+}
+
+console.log(get(App).test.myMethod());
 ```
 
 #### Monadic approach

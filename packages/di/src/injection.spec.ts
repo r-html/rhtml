@@ -118,14 +118,15 @@ describe('[DI]: tests', () => {
       id: number;
     }
     const token = new InjectionToken<User>();
-    @Injectable(token)
+    @Injectable()
     class User2 {
       id = 1;
     }
-    expect(get(token).id).toBe(1);
-    const x = set(User2);
+    expect(has(token)).toBeFalsy();
+    const x = set(User2, token);
     x.id = 2;
-    expect(get(User2).id).toBe(2);
+    expect(set(User2).id).toBe(1);
+    expect(get(token).id).toBe(2);
   });
 
   it('Should try create class Injectable', async () => {
