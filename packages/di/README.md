@@ -2,7 +2,7 @@
 
 Smallest Dependency Injection for Typescript and Javascript!
 
-- Only 1.17kb bundled size
+- Only `1.3kb` bundled size without Reflection, `2.37kb` with `@abraham/reflection`;
 - Code coverage 100%
 - No dependencies
 
@@ -23,6 +23,28 @@ class Test {
 @Injectable()
 class Test2 {
   constructor(@Inject(Test) public test: Test) {}
+}
+const test2 = set(Test2);
+console.log(test2.test.test); // 42
+```
+
+#### With Reflection
+
+```bash
+npm i @abraham/reflection
+```
+
+```ts
+import '@abraham/reflection';
+
+import { Inject, Injectable } from '@rhtml/di';
+
+class Test {
+  test = 42;
+}
+@Injectable()
+class Test2 {
+  constructor(public test: Test) {}
 }
 const test2 = set(Test2);
 console.log(test2.test.test); // 42

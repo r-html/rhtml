@@ -1,3 +1,5 @@
+import '@abraham/reflection';
+
 import {
   clear,
   get,
@@ -7,9 +9,9 @@ import {
   InjectionToken,
   Module,
   Reader,
+  remove,
   set
 } from './index';
-
 describe('[Experiments]: test', () => {
   afterEach(() => clear());
 
@@ -215,7 +217,7 @@ describe('[Experiments]: test', () => {
     expect(app.test5.omg.test).toBe(4);
   });
 
-  it('[Missing feature]: Should try to inject negative', async () => {
+  it('Should try to inject class without @Inject decorator', async () => {
     class Test5 {
       test = 5;
     }
@@ -225,7 +227,50 @@ describe('[Experiments]: test', () => {
     }
     const app = set(App);
     expect(app).toBeTruthy();
-    expect(has(Test5)).toBeFalsy();
-    expect(app.test).toBeFalsy();
+    expect(has(Test5)).toBeTruthy();
+    expect(app.test.test).toBe(5);
+  });
+
+  it('Should inject custom class without @Inject', async () => {
+    class Test {
+      test = 5;
+    }
+    class Test6 {
+      test = 55;
+    }
+    class Test7 {
+      test = 42;
+    }
+    @Injectable()
+    class App {
+      constructor(@Inject(Test) public test: Test, public test6: Test6) {}
+    }
+    const app = new App(new Test6(), set(Test7));
+    expect(app.test.test).toBe(55);
+    expect(app.test6.test).toBe(42);
+
+    const appInjection = set(App);
+    expect(appInjection.test.test).toBe(5);
+    expect(appInjection.test6.test).toBe(55);
+  });
+
+  it('Should inject different token when another is provided', async () => {
+    class Test {
+      test = 42;
+    }
+    class Test2 {
+      test = 420;
+    }
+    @Injectable()
+    class App {
+      constructor(public test: Test) {}
+    }
+    let appInjection = set(App);
+    expect(appInjection.test.test).toBe(42);
+    remove(Test);
+    remove(App);
+    set(Test2, Test);
+    appInjection = set(App);
+    expect(appInjection.test.test).toBe(420);
   });
 });

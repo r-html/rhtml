@@ -73,15 +73,15 @@ export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
 
 const meta = new WeakMap<ObjectUnion, Array<[number, ObjectUnion]>>();
 
-function defineGetter(
+const defineGetter = (
   target: ObjectUnion,
   name: string | number,
   identifier: ObjectUnion
-) {
+) =>
   Object.defineProperty(target, name, {
-    get: () => set(identifier)
+    get: () => set(identifier),
+    configurable: true
   });
-}
 
 export function Inject<T>(identifier: ObjectUnion<T>): any;
 export function Inject<T>(identifier: ObjectUnion<T>): PropertyDecorator;
@@ -101,14 +101,34 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
   };
 }
 
+const defineMetaInjectors = (
+  args: any[],
+  metadata: [number, ObjectUnion][]
+) => {
+  for (const [index, identifier] of metadata) {
+    defineGetter(args, index, identifier);
+  }
+};
+
 export const Injectable = () => <K extends new (...args: any[]) => {}>(
   Base: K,
-  params = meta.get(Base) || []
+  metaParams = meta.get(Base) || []
 ) =>
   class extends Base {
     constructor(...args: any[]) {
-      for (const [index, identifier] of params) {
-        defineGetter(args, index, identifier);
+      if (!args.length) {
+        if (Reflect['getMetadata']) {
+          defineMetaInjectors(
+            args,
+            (Reflect['getMetadata']('design:paramtypes', Base) as ObjectUnion<
+              K
+            >[]).map((identifier, index) => [index, identifier]) as [
+              number,
+              ObjectUnion
+            ][]
+          );
+        }
+        defineMetaInjectors(args, metaParams);
       }
       super(...args);
     }

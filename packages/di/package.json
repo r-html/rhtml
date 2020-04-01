@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "prettier": "^1.19.1",
+    "@abraham/reflection": "^0.7.0",
     "jest": "^24.9.0",
     "ts-jest": "25.2.1"
   },
