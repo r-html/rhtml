@@ -33,18 +33,18 @@ type MethodDecoratorArguments = [
   TypedPropertyDescriptor<unknown>
 ];
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
-  return (...a: MethodDecoratorArguments) => {
-    const o = a[2].value as Function;
-    a[2].value = function(...args: unknown[]) {
+  return (...[, , desc]: MethodDecoratorArguments) => {
+    const o = desc.value as Function;
+    desc.value = function(...args: unknown[]) {
       return () => o.apply(this, args)(di.map(p => set(p)));
     };
   };
 }
 
 export function DI<T>(...di: ObjectType<T>[]): MethodDecorator {
-  return (...a: MethodDecoratorArguments) => {
-    const m = a[2].value as Function;
-    a[2].value = function() {
+  return (...[, , desc]: MethodDecoratorArguments) => {
+    const m = desc.value as Function;
+    desc.value = function() {
       return m.apply(
         this,
         di.map(p => set(p))
@@ -102,7 +102,7 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
   };
 }
 
-export const Injectable = (): any => <K extends new (...args: any[]) => {}>(
+export const Injectable = () => <K extends new (...args: any[]) => {}>(
   Base: K,
   params = meta.get(Base) || []
 ) => {
