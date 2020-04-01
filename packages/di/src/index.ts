@@ -37,7 +37,10 @@ export function remove<T>(c: T | ObjectType<T>): boolean;
 export function remove<T>(c: ObjectType<T>) {
   return C.delete(c);
 }
-export const clear = () => (C = new WeakMap());
+
+export const clear = function() {
+  C = new WeakMap();
+};
 
 export type Reader<T, K> = (d?: T) => K;
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
@@ -45,18 +48,6 @@ export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
     const o = desc.value as Function;
     desc.value = function(...args: unknown[]) {
       return () => o.apply(this, args)(di.map(p => set(p)));
-    };
-  };
-}
-
-export function DI<T>(...di: ObjectType<T>[]): MethodDecorator {
-  return (...[, , desc]: MethodDecoratorArguments) => {
-    const m = desc.value as Function;
-    desc.value = function() {
-      return m.apply(
-        this,
-        di.map(p => set(p))
-      );
     };
   };
 }
@@ -80,10 +71,10 @@ export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
     }
   };
 
-const meta = new WeakMap<Record<string, any>, Array<[number, ObjectUnion]>>();
+const meta = new WeakMap<ObjectUnion, Array<[number, ObjectUnion]>>();
 
 function defineGetter(
-  target: Record<string, any>,
+  target: ObjectUnion,
   name: string | number,
   identifier: ObjectUnion
 ) {
