@@ -273,4 +273,26 @@ describe('[Experiments]: test', () => {
     appInjection = set(App);
     expect(appInjection.test.test).toBe(420);
   });
+
+  it('Should extend class with @Injectable()', async () => {
+    class Test {
+      test = 42;
+    }
+
+    class Test2 {
+      test = 420;
+    }
+
+    @Injectable()
+    class App extends Test {
+      constructor(@Inject(Test2) public test2: Test2) {
+        super();
+      }
+    }
+
+    class App2 extends App {}
+    const appInjection = set(App2);
+    expect(appInjection.test).toBe(42);
+    expect(appInjection.test2.test).toBe(420);
+  });
 });
