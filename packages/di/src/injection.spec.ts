@@ -127,6 +127,12 @@ describe('[DI]: tests', () => {
     x.id = 2;
     expect(set(User2).id).toBe(1);
     expect(get(token).id).toBe(2);
+    remove(token);
+    expect(get(token)).toBeFalsy();
+    x.id = 3;
+    expect(get(User2).id).toBe(1);
+    remove(User2);
+    expect(has(User2)).toBeFalsy();
   });
 
   it('Should try create class Injectable', async () => {

@@ -22,7 +22,10 @@ export function set<T>(c: ObjectType<T>, k?: ObjectUnion<T>): T {
   return C.has(c) ? C.get(c) : C.set(k ? k : c, safeHandle(c)).get(k ? k : c);
 }
 
-export const remove = <T>(c: ObjectType<T>) => C.delete(c);
+export function remove<T>(c: T | ObjectType<T>): boolean;
+export function remove<T>(c: ObjectType<T>) {
+  return C.delete(c);
+}
 export const clear = () => (C = new WeakMap());
 
 export type Reader<T, K> = (d?: T) => K;

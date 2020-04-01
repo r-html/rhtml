@@ -208,28 +208,26 @@ describe('[Experiments]: test', () => {
   });
 
   it('Should try to inject 4 params and token inside constructor', async () => {
-    @Injectable()
     class Test {
       test = 1;
     }
-    @Injectable()
     class Test2 {
       test = 2;
     }
-    @Injectable()
     class Test3 {
       test = 3;
     }
-    @Injectable()
     class Test4 {
       test = 4;
     }
     @Injectable()
     class Test5 {
       test = 5;
+      constructor(@Inject(Test4) public omg: Test4) {}
     }
     const token = new InjectionToken<Test5>();
     set(Test5, token);
+
     @Injectable()
     class App {
       constructor(
@@ -249,5 +247,20 @@ describe('[Experiments]: test', () => {
     expect(app.test4.test).toBe(4);
     expect(has(Test5)).toBeFalsy();
     expect(app.test5.test).toBe(5);
+    expect(app.test5.omg.test).toBe(4);
+  });
+
+  it('[Missing feature]: Should try to inject negative', async () => {
+    class Test5 {
+      test = 5;
+    }
+    @Injectable()
+    class App {
+      constructor(public test: Test5) {}
+    }
+    const app = set(App);
+    expect(app).toBeTruthy();
+    expect(has(Test5)).toBeFalsy();
+    expect(app.test).toBeFalsy();
   });
 });
