@@ -1,8 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type ObjectType<T = {}> = new (...args: any[]) => T;
-export class InjectionToken<T> {}
 
-export type ObjectUnion<T> = T | ObjectType<T> | InjectionToken<T>;
+export type ObjectType<T = {}> = new (...args: any[]) => T;
+export type PrivateReader<T, K> = (d: NonNullable<T>) => K;
+export type MethodDecoratorArguments = [
+  Record<string, unknown>,
+  string | symbol,
+  TypedPropertyDescriptor<unknown>
+];
+export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
+
+export interface ModuleWithProviders<T = {}> {
+  providers?: ObjectType<T>[];
+  imports?: ObjectType<T>[];
+}
+export class InjectionToken<T> {}
 
 let C = new WeakMap();
 
@@ -29,12 +40,6 @@ export function remove<T>(c: ObjectType<T>) {
 export const clear = () => (C = new WeakMap());
 
 export type Reader<T, K> = (d?: T) => K;
-export type PrivateReader<T, K> = (d: NonNullable<T>) => K;
-type MethodDecoratorArguments = [
-  Record<string, unknown>,
-  string | symbol,
-  TypedPropertyDescriptor<unknown>
-];
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   return (...[, , desc]: MethodDecoratorArguments) => {
     const o = desc.value as Function;
@@ -56,16 +61,11 @@ export function DI<T>(...di: ObjectType<T>[]): MethodDecorator {
   };
 }
 
-export interface ModuleWithProviders<T = {}> {
-  providers?: ObjectType<T>[];
-  imports?: ObjectType<T>[];
-}
-
-const setDeps = <T>(deps: ObjectType<T>[] = []) => {
+function setDeps(deps: ObjectType[] = []) {
   for (const dep of deps) {
     set(dep);
   }
-};
+}
 
 export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
   TBase extends ObjectType
@@ -80,10 +80,17 @@ export const Module = <T>(o: ModuleWithProviders<T> = {}) => <
     }
   };
 
-const meta = new WeakMap<
-  Record<string, any>,
-  Array<[number, ObjectUnion<ObjectType>]>
->();
+const meta = new WeakMap<Record<string, any>, Array<[number, ObjectUnion]>>();
+
+function defineGetter(
+  target: Record<string, any>,
+  name: string | number,
+  identifier: ObjectUnion
+) {
+  Object.defineProperty(target, name, {
+    get: () => set(identifier)
+  });
+}
 
 export function Inject<T>(identifier: ObjectUnion<T>): any;
 export function Inject<T>(identifier: ObjectUnion<T>): PropertyDecorator;
@@ -95,9 +102,7 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
     params = meta.get(target) || []
   ) => {
     if (name) {
-      Object.defineProperty(target, name, {
-        get: () => set(identifier)
-      });
+      defineGetter(target, name, identifier);
     } else {
       params.push([index, identifier]);
       meta.set(target, params);
@@ -108,13 +113,12 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
 export const Injectable = () => <K extends new (...args: any[]) => {}>(
   Base: K,
   params = meta.get(Base) || []
-) => {
-  return class extends Base {
+) =>
+  class extends Base {
     constructor(...args: any[]) {
       for (const [index, identifier] of params) {
-        args[index] = set(identifier);
+        defineGetter(args, index, identifier);
       }
       super(...args);
     }
   };
-};
