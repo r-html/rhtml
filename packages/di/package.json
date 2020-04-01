@@ -17,6 +17,7 @@
     "type": "git",
     "url": "git@github.com:r-html/rhtml.git"
   },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "eslint": "^6.7.2",
