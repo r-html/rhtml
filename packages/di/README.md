@@ -2,7 +2,7 @@
 
 Smallest Dependency Injection for Typescript and Javascript!
 
-- Only `1.3kb` bundled size without Reflection, `2.37kb` with `@abraham/reflection`;
+- Only `1.31kb` bundled size without Reflection, `2.38kb` with `@abraham/reflection`;
 - Code coverage 100%
 - No dependencies
 
