@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/experiments",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "description": "RHTML Experiments repo",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
