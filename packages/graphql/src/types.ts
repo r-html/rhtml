@@ -30,5 +30,9 @@ export interface GraphOptions<T = any> extends OptionalProperties {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   subscribe?: any;
   defaultConfig?: boolean;
-  render(state: { data: T }, setState: (res: T) => void): TemplateResult;
+  render(
+    state: { data: T },
+    setState: (res: T) => void,
+    shadowRoot: ShadowRoot
+  ): TemplateResult;
 }

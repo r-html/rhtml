@@ -17,7 +17,11 @@ function Render(config) {
     return html`
       ${!this.loading
         ? this.options.render
-          ? this.options.render(this.state, s => (this.state = s))
+          ? this.options.render(
+              this.state,
+              s => (this.state = s),
+              this.shadowRoot
+            )
           : this.state
         : ''}
       ${this.loading

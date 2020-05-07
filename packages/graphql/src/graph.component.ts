@@ -30,11 +30,15 @@ import { GraphOptions } from './types';
     return html`
       ${async(
         this.result.pipe(
-          map(state => {
-            return this.options.render
-              ? this.options.render(state, data => this.result.next(data))
-              : state;
-          }),
+          map(state =>
+            this.options.render
+              ? this.options.render(
+                  state,
+                  data => this.result.next(data),
+                  this.shadowRoot
+                )
+              : state
+          ),
           tap(() => (this.loading = false)),
           catchError(e => {
             this.error = e;
