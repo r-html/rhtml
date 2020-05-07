@@ -87,8 +87,10 @@ export class GraphComponent extends LitElement {
   private subscription: Subscription;
   private pubsubSubscription: Subscription;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private result: ReplaySubject<any> = new ReplaySubject();
-
+  private result: ReplaySubject<any>;
+  OnInit() {
+    this.result = new ReplaySubject();
+  }
   OnUpdateFirst() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let task: Observable<any>;
