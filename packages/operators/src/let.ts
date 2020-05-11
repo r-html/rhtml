@@ -48,7 +48,9 @@ export class LetOperator extends LitElement {
   }
 
   private isObservable(value) {
-    return this.isFunction(value.lift) && this.isFunction(value.subscribe);
+    return (
+      value && this.isFunction(value.lift) && this.isFunction(value.subscribe)
+    );
   }
   private isFunction(value) {
     return typeof value === 'function';
