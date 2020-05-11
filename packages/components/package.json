@@ -12,8 +12,8 @@
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.42",
-    "@rhtml/renderer": "0.0.47",
+    "@rxdi/lit-html": "^0.7.63",
+    "@rhtml/renderer": "0.0.48",
     "rxjs": "^6.5.4",
     "shades": "^2.1.0"
   },

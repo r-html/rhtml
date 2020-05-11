@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/experiments",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "RHTML Experiments repo",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
@@ -28,7 +28,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.42"
+    "@rxdi/lit-html": "^0.7.63"
   },
   "browserslist": [
     "last 1 chrome versions"

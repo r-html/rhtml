@@ -350,19 +350,19 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@rxdi/core@^0.7.40":
-  version "0.7.41"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.41.tgz#6cf1ed8f321d7dfc069ae150419ffd89a376a9f6"
-  integrity sha512-nG0CD/yaEWFN3QY/nkp6qgWYgRirOOc+13XkFWIu2nVdYk4N4TCHafDAKtGT2iDd0pzdcwaRbB/IotX+lkxg0A==
+"@rxdi/core@^0.7.63":
+  version "0.7.63"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.63.tgz#9a29f5754bc5f88e2d91b4c798ceeb0aa38fa5bb"
+  integrity sha512-SuiVzFh4XQshaCQwPU3Z8NKV8Va2v1KhEWmyE88Hj4sgHTOTYEhhEaBF70SBcRHmeYwH7MH2PrtaZzh9sKr/gQ==
   dependencies:
     reflect-metadata "0.1.13"
     rxjs "^6.5.3"
     systemjs "0.21.4"
 
-"@rxdi/graphql-client@^0.7.38":
-  version "0.7.38"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.38.tgz#0733e06b416f4a866c608ff410e52dbe0d270a5a"
-  integrity sha512-vjEtcYY44Nh53oKFvll4AXK68ham2G40MujUesMwJ8YySrKAbsK1abUuGdcTfVsLU3nJqnLWRO0mtax7Al2BcA==
+"@rxdi/graphql-client@^0.7.63":
+  version "0.7.63"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.63.tgz#f549fcf43ee8573409f87f8bbdc9d448657e0040"
+  integrity sha512-yy1hJSiWF4x22bnCPSr13NGI3voFWgQBHyt7f+BJiBsworEzKSyL0XNHY94tGDVgcOHmjTGdlQ08Yjx+kgYklQ==
   dependencies:
     apollo-cache-inmemory "^1.6.2"
     apollo-client "^2.6.3"
@@ -372,10 +372,12 @@
     apollo-link-ws "^1.0.18"
     subscriptions-transport-ws "^0.9.16"
 
-"@rxdi/lit-html@^0.7.42":
-  version "0.7.42"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.42.tgz#0c0bd948496b2d869e68a56e3d8603a0cbc38ef9"
-  integrity sha512-XKoyXLp877C4+s9Qo2JSlmgrGLNGDanr9SDZlv0HrZ012LQJCjCJCH/s0Dl5OzXPyzUin97pCmZ64ntggpbSbQ==
+"@rxdi/lit-html@^0.7.63":
+  version "0.7.63"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.63.tgz#6b9f814d130579e3c1fc84e5a2f9e24bf0ee906c"
+  integrity sha512-TfyrMugqJlOahDek6IB5W+Ws6pisqzik7LWZaf2SoRvSvL395EP6WIdtyh574cbpH/CEJv9NUc/d5VUxI/g+vA==
+  dependencies:
+    "@abraham/reflection" "^0.7.0"
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"

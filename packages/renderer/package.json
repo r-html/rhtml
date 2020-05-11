@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/renderer",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
@@ -15,7 +15,7 @@
     "url": "git@github.com:rxdi/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.42"
+    "@rxdi/lit-html": "^0.7.63"
   },
   "devDependencies": {
     "eslint": "^6.7.2",

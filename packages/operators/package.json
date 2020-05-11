@@ -18,8 +18,8 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.42",
-    "@rhtml/renderer": "0.0.47"
+    "@rxdi/lit-html": "^0.7.63",
+    "@rhtml/renderer": "0.0.48"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
