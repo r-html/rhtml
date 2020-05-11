@@ -372,12 +372,10 @@
     apollo-link-ws "^1.0.18"
     subscriptions-transport-ws "^0.9.16"
 
-"@rxdi/lit-html@^0.7.63":
-  version "0.7.63"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.63.tgz#6b9f814d130579e3c1fc84e5a2f9e24bf0ee906c"
-  integrity sha512-TfyrMugqJlOahDek6IB5W+Ws6pisqzik7LWZaf2SoRvSvL395EP6WIdtyh574cbpH/CEJv9NUc/d5VUxI/g+vA==
-  dependencies:
-    "@abraham/reflection" "^0.7.0"
+"@rxdi/lit-html@^0.7.66":
+  version "0.7.66"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.66.tgz#29d3c5eb8977691d5fb18b3064bd4807669d678b"
+  integrity sha512-kfHzk8fO9nvmZqP9IINcxtYOf0Q3mxag4WCNEGy9mG8uiUjbCriuHsVHEhKxIKkbpQp4BhHE3c85HHX+AtquMQ==
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"

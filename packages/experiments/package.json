@@ -28,7 +28,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.63"
+    "@rxdi/lit-html": "^0.7.66"
   },
   "browserslist": [
     "last 1 chrome versions"

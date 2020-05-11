@@ -18,7 +18,7 @@
     "start-hydrate": "npx parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
     "start-performance": "npx parcel ./examples/performance/index.html --out-dir build/examples/performance",
     "build-docs": "npx parcel build ./examples/main/index.html --out-dir docs --experimental-scope-hoisting --public-url rhtml && cp ./docs/index.html ./docs/404.html",
-    "patch": "npx bolt ws exec -- npm run patch",
+    "patch": "npx bolt ws exec -- npm version patch",
     "build": "npx bolt ws exec -- npm run build",
     "publish-packages": "npx bolt ws exec -- npm publish --update-readme --access public",
     "clean": "git clean -dxf",
@@ -56,7 +56,7 @@
   "dependencies": {
     "@rxdi/core": "^0.7.63",
     "@rxdi/graphql-client": "^0.7.63",
-    "@rxdi/lit-html": "^0.7.63",
+    "@rxdi/lit-html": "^0.7.66",
     "shades": "^2.1.0",
     "rxjs": "^6.5.4",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
