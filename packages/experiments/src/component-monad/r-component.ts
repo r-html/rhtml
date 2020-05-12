@@ -20,7 +20,7 @@ export class RComponentOperator extends LitElement {
     if (propertiesComponent) {
       await propertiesComponent.requestUpdate();
     }
-    const selector = selectorComponent ? selectorComponent.innerHTML : null;
+    const selector = selectorComponent ? selectorComponent.innerText : null;
 
     if (!window.customElements.get(selector) && selector) {
       Component({

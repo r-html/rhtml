@@ -17,8 +17,8 @@ export class RPropsOperator extends LitElement {
     this.nodes.forEach(n => {
       const k = n.querySelector('r-key');
       const t = n.querySelector('r-type');
-      const key = n['key'] || k.innerHTML;
-      let type = n['type'] || t.innerHTML;
+      const key = n['key'] || k.innerText;
+      let type = n['type'] || t.innerText;
       if (this.isString(type)) {
         type = String;
       }
