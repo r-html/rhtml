@@ -199,6 +199,7 @@ asyncAction().then(console.log);
 
 ```ts
 import { Injectable, Inject, set, get } from '@rhtml/di';
+import { Module } from '@rhtml/di/module';
 
 class User {
   id = 1;

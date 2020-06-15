@@ -4,6 +4,7 @@
   "description": "RHTML simplest Dependency Injection",
   "scripts": {
     "start": "npx gapi start --local --path=./example/main.ts",
+    "module": "npx gapi start --local --path=./example/module/main.ts",
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
