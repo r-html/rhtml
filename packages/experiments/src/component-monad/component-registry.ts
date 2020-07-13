@@ -1,3 +1,5 @@
+import '@rhtml/operators';
+
 import {
   Component,
   html,

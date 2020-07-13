@@ -14,7 +14,6 @@ export class RComponentOperator extends LitElement {
     const nodes = this.shadowRoot.querySelector('slot').assignedNodes();
     const selectorComponent = this.findNode(nodes, 'r-selector');
     const renderComponent = this.findNode(nodes, 'r-render');
-
     const propertiesComponent = this.findNode(nodes, 'r-props');
 
     if (propertiesComponent) {
@@ -27,7 +26,11 @@ export class RComponentOperator extends LitElement {
         selector,
         template() {
           return renderComponent
-            ? renderComponent.state(this, state => Object.assign(this, state))
+            ? renderComponent.state(
+                this,
+                state => Object.assign(this, state),
+                this.shadowRoot
+              )
             : html`
                 Missing template
               `;

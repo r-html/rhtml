@@ -18,6 +18,7 @@ import {
 export class RenderComponent extends LitElement {
   @property({ type: Object }) state: <T>(
     state: T,
-    setState?: (res: T) => void
+    setState?: (res: T) => void,
+    shadowRoot?: ShadowRoot
   ) => TemplateResult;
 }
