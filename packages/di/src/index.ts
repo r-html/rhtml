@@ -9,6 +9,9 @@ export type MethodDecoratorArguments = [
 ];
 export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
 
+export interface Options {
+  providers: ObjectUnion[];
+}
 export class InjectionToken<T> {}
 
 let C = new WeakMap();
@@ -52,7 +55,7 @@ export const Metadata = new WeakMap<
   Array<[number, ObjectUnion]>
 >();
 
-const defineGetter = (
+export const defineGetter = (
   target: ObjectUnion,
   name: string | number,
   identifier: ObjectUnion
@@ -98,11 +101,17 @@ export const getReflection = <T>(Base: Function) =>
     []
   ).map((identifier, index) => [index, identifier]) as [number, ObjectUnion][];
 
-export const Injectable = () => <K extends new (...args: any[]) => {}>(
+export const createDecorator = (options?: Options) => <
+  K extends new (...args: any[]) => {}
+>(
   Base: K
 ) =>
   class extends Base {
     constructor(...args: any[]) {
+      args =
+        options && options.providers && options.providers.length
+          ? options.providers
+          : args;
       if (!args.length) {
         defineMetaInjectors(args, getReflection(Base));
         defineMetaInjectors(args, Metadata.get(Base));
@@ -110,3 +119,5 @@ export const Injectable = () => <K extends new (...args: any[]) => {}>(
       super(...args);
     }
   };
+
+export const Injectable = (options?: Options) => createDecorator(options);

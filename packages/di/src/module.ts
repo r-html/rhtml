@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  createDecorator,
   defineMetaInjectors,
+  get,
   getReflection,
   InjectionToken,
   Metadata,
   ObjectType,
   ObjectUnion,
+  Options,
   set
 } from './index';
 
-type WithProviders<T = unknown> = ObjectUnion<T> & {
-  provide: T | (string & InjectionToken<unknown>);
-  useFactory: () => Promise<unknown>;
-};
+export const Component = (options?: Options) => createDecorator(options);
 
 const ProvidersMetadata = new Map<ObjectUnion, WithProviders>();
 const BootstrapsMetadata = new Map<ObjectUnion, ObjectUnion>();
@@ -31,9 +31,15 @@ export const Module = <T>(
   class extends Base {
     constructor(...args: any[]) {
       for (const entry of filterNonNull(
-        (entries.imports || []) as ObjectUnion[]
+        (entries.imports || []) as ExtendedFunction[]
       )) {
-        set(entry);
+        const root = entry.forRoot && entry.forRoot();
+        if (root) {
+          root.providers.map(p => ProvidersMetadata.set(p, p));
+          set(root.module);
+        } else {
+          set(entry);
+        }
       }
       for (const entry of filterNonNull(
         (entries.providers || []) as WithProviders[]
@@ -54,13 +60,39 @@ export const Module = <T>(
       super(...args);
     }
   };
+export type WithProviders<T = unknown> = ObjectUnion<T> & {
+  provide: T | (string & InjectionToken<unknown>);
+  deps?: (T | (string & InjectionToken<unknown>))[];
+  useFactory: (...args) => Promise<unknown>;
+};
 
-export async function Bootstrap(app: Function) {
+export interface ModuleWithProviders<T = any> {
+  module: ExtendedFunction;
+  providers: WithProviders<T>[];
+}
+
+export interface ExtendedFunction extends Function {
+  forRoot?: () => ModuleWithProviders;
+}
+
+export async function Bootstrap(app: ExtendedFunction) {
+  const root = app.forRoot && app.forRoot();
+  if (root) {
+    root.providers.map(p => ProvidersMetadata.set(p, p));
+    set(root.module);
+  }
   set(app);
   await Promise.all(
-    [...ProvidersMetadata.values()].map(async value =>
-      set(await value.useFactory(), value.provide)
-    )
+    [...ProvidersMetadata.values()]
+      .map(async value =>
+        set(
+          value.useFactory
+            ? await value.useFactory(...(value.deps || []).map(get))
+            : value,
+          value.provide ? value.provide : null
+        )
+      )
+      .reverse()
   );
   [...BootstrapsMetadata.values()].map(value => set(value));
 }
