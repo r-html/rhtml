@@ -1,12 +1,6 @@
 import '@abraham/reflection';
 
-import {
-  Inject,
-  Injectable,
-  InjectionToken,
-  remove,
-  set
-} from '../../src/index';
+import { Inject, Injectable, InjectionToken, set } from '../../src/index';
 import {
   Bootstrap,
   Component,
@@ -120,5 +114,4 @@ export class MainModule {
 
 Bootstrap(MainModule).then(() => {
   console.log('Started', `after ${Date.now() - now}`);
-  remove(AppComponent);
 });

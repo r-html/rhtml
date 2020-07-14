@@ -42,7 +42,7 @@ export const Module = <T>(
       }
       for (const entry of filterNonNull(
         (entries.providers || []) as WithProviders[]
-      )) {
+      ).filter(e => typeof e.useFactory === 'function')) {
         ProvidersMetadata.set(entry, entry);
       }
       for (const entry of filterNonNull(
@@ -73,12 +73,7 @@ export async function Bootstrap(app: ExtendedFunction) {
   setImport(app);
   await Promise.all(
     [...ProvidersMetadata.values()].map(async value =>
-      set(
-        value.useFactory && typeof value.useFactory === 'function'
-          ? await value.useFactory(...(value.deps || []).map(set))
-          : value,
-        value.provide ? value.provide : null
-      )
+      set(await value.useFactory(...(value.deps || []).map(set)), value.provide)
     )
   );
   [...BootstrapsMetadata.values()].map(value => set(value));
