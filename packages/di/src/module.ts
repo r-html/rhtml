@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   createDecorator,
-  get,
   InjectionToken,
   ObjectType,
   ObjectUnion,
@@ -43,7 +42,7 @@ export const Module = <T>(
       }
       for (const entry of filterNonNull(
         (entries.providers || []) as WithProviders[]
-      ).filter(e => typeof e.useFactory === 'function')) {
+      )) {
         ProvidersMetadata.set(entry, entry);
       }
       for (const entry of filterNonNull(
@@ -75,8 +74,8 @@ export async function Bootstrap(app: ExtendedFunction) {
   await Promise.all(
     [...ProvidersMetadata.values()].map(async value =>
       set(
-        value.useFactory
-          ? await value.useFactory(...(value.deps || []).map(get))
+        value.useFactory && typeof value.useFactory === 'function'
+          ? await value.useFactory(...(value.deps || []).map(set))
           : value,
         value.provide ? value.provide : null
       )

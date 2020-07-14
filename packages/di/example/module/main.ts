@@ -1,7 +1,6 @@
 import '@abraham/reflection';
 
 import {
-  has,
   Inject,
   Injectable,
   InjectionToken,

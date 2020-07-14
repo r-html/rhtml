@@ -2,8 +2,10 @@
 
 Smallest Dependency Injection for Typescript and Javascript!
 
-- Only `1.31kb` bundled size without Reflection, `2.38kb` with `@abraham/reflection`;
-- Code coverage 100%
+- Only `1.42kb` bundled size without Reflection, `2.49kb` with `@abraham/reflection`;
+- Decorators available inside `@rhtml/di/module` `Module`, `Component`
+- Hooks available `OnInit`, `OnDestroy` `class { OnDestroy() {} OnInit() {} }`
+- 100% Code coverage and branches
 - No dependencies
 
 #### Installation
@@ -227,4 +229,127 @@ console.log(has(AppModule)); // False
 set(AppModule);
 const userService = get(UserService);
 expect(userService.user.id).toBe(1);
+```
+
+##### Advanced example using Lazy providers
+
+```ts
+import '@abraham/reflection';
+
+import { Inject, Injectable, InjectionToken, remove, set } from '@rhtml/di';
+import {
+  Bootstrap,
+  Component,
+  Module,
+  ModuleWithProviders
+} from '@rhtml/di/module';
+
+type Token1 = number;
+type Token2 = string;
+
+const Token1 = new InjectionToken<Token1>();
+const Token2 = new InjectionToken<Token2>();
+
+const now = Date.now();
+
+@Injectable()
+export class UserService66 {
+  constructor() {
+    console.log('[UserService66]');
+  }
+
+  getOmg() {
+    return 'ARE BE OMG';
+  }
+}
+
+@Injectable()
+export class UserService {
+  // @Inject(Token1) public token: number;
+  constructor(@Inject(Token1) public token: number) {
+    console.log('[UserService]', token);
+  }
+}
+
+@Injectable()
+export class UserService2 {
+  constructor(public userService: UserService) {
+    console.log('[UserService2]');
+  }
+}
+
+@Injectable()
+export class UserService3 {
+  // @Inject(Token1) public token: number;
+  constructor(@Inject(Token1) public token: Token1) {
+    console.log('[UserService3]', token);
+  }
+}
+
+@Injectable({ providers: [set(UserService66)] })
+export class UserService4 {
+  constructor(data: UserService66) {
+    console.log('[UserService4]', data.getOmg());
+  }
+
+  getPesh() {
+    return 6000;
+  }
+}
+
+@Component()
+class AppComponent {
+  constructor(
+    public userService2: UserService2,
+    @Inject(Token2) public token: Token2
+  ) {
+    console.log('[AppComponent]', userService2.userService.token, token);
+  }
+
+  OnInit() {
+    console.log('INITIALIZEEEDDDDD ');
+  }
+
+  OnDestroy() {
+    console.log('ON DESTROY ');
+  }
+}
+
+set(UserService4);
+
+@Module({
+  providers: [
+    UserService2,
+    {
+      provide: Token1,
+      deps: [UserService4],
+      useFactory: (data: UserService4) =>
+        new Promise<number>(resolve =>
+          setTimeout(() => resolve(data.getPesh()), 1000)
+        )
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class MainModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      module: MainModule,
+      providers: [
+        {
+          provide: Token2,
+          useFactory: () => {
+            console.log('aa');
+            return '1234';
+          }
+        }
+      ]
+    };
+  }
+}
+
+Bootstrap(MainModule).then(() => {
+  console.log('Started', `after ${Date.now() - now}`);
+  remove(AppComponent);
+});
 ```
