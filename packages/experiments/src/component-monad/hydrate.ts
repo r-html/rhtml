@@ -1,11 +1,11 @@
 import { TemplateResult } from '@rxdi/lit-html';
 
-import { ComponentRegister } from './component-registry';
+import { ComponentRegistry } from './component-registry';
 import { RegistryReadyEvent, selector } from './interface';
 
 export function Hydrate(template: TemplateResult) {
   return new Promise(resolve => {
-    let registry = document.querySelector(selector) as ComponentRegister;
+    let registry = document.querySelector(selector) as ComponentRegistry;
     if (registry) {
       registry.register(template);
       resolve(registry);

@@ -1,6 +1,6 @@
 import './component-registry';
 
-import { ComponentRegister } from './component-registry';
+import { ComponentRegistry } from './component-registry';
 import { RComponentOperator } from './r-component';
 import { RKeyOperator } from './r-key';
 import { RPropOperator } from './r-prop';
@@ -14,7 +14,7 @@ declare global {
     'r-prop': RPropOperator;
     'r-props': RPropsOperator;
     'r-type': RTypeOperator;
-    'r-component-register': ComponentRegister;
+    'r-component-registry': ComponentRegistry;
   }
 }
 

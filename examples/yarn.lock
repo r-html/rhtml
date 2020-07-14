@@ -62,6 +62,15 @@
     rxjs "^6.5.3"
     systemjs "0.21.4"
 
+"@rxdi/core@^0.7.63":
+  version "0.7.79"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.79.tgz#b50b16dbe1761141ac244f0d9da63e4079d028fc"
+  integrity sha512-luYDOqda51sxJ6J2ld85ca/VTFQSQaM96jRVVpjAc+xVHR7meBVBIjeFzQIzoeydCr40znnCKsqOxj3W7zqO0g==
+  dependencies:
+    reflect-metadata "0.1.13"
+    rxjs "^6.5.3"
+    systemjs "0.21.4"
+
 "@rxdi/graphql-client@^0.7.38":
   version "0.7.38"
   resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.38.tgz#0733e06b416f4a866c608ff410e52dbe0d270a5a"
@@ -79,6 +88,11 @@
   version "0.7.42"
   resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.42.tgz#0c0bd948496b2d869e68a56e3d8603a0cbc38ef9"
   integrity sha512-XKoyXLp877C4+s9Qo2JSlmgrGLNGDanr9SDZlv0HrZ012LQJCjCJCH/s0Dl5OzXPyzUin97pCmZ64ntggpbSbQ==
+
+"@rxdi/lit-html@^0.7.66":
+  version "0.7.79"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.79.tgz#4674b42df731d97a8dcc8339641d0ee2887bd7f6"
+  integrity sha512-6xA5MqL74hPixSuMYbQX4pyQouLfithmlYFDDXjDOZ/57f5YDJpp2MxgbtNZPqMxuxNazDsXHdhkRwnCL5aSrw==
 
 "@types/node@>=6":
   version "12.12.21"

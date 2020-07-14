@@ -11,7 +11,7 @@ import {
 import { RegistryReadyEvent, selector } from './interface';
 
 /**
- * @customElement r-component-register
+ * @customElement r-component-registry
  */
 @Component({
   selector,
@@ -23,7 +23,7 @@ import { RegistryReadyEvent, selector } from './interface';
     `;
   }
 })
-export class ComponentRegister extends LitElement {
+export class ComponentRegistry extends LitElement {
   @property({ type: Array })
   private components = [];
   OnInit() {
