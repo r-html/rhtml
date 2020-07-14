@@ -112,6 +112,6 @@ export class MainModule {
   }
 }
 
-Bootstrap(MainModule).then(() => {
+Bootstrap(MainModule.forRoot()).then(() => {
   console.log('Started', `after ${Date.now() - now}`);
 });

@@ -140,7 +140,7 @@ describe('[Module]: tests', () => {
       }
     }
 
-    await Bootstrap(MainModule);
+    await Bootstrap(MainModule.forRoot());
     remove(AppComponent);
   });
 });

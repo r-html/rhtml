@@ -142,8 +142,5 @@ export interface OptionsWithProviders extends Options {
 export const Injectable = (options?: OptionsWithProviders) =>
   createDecorator({
     ...options,
-    before: args =>
-      options && options.providers && options.providers.length
-        ? options.providers
-        : args
+    before: args => (options?.providers?.length ? options.providers : args)
   });

@@ -13,11 +13,10 @@ const BootstrapsMetadata = new Map<ObjectUnion, ObjectUnion>();
 
 const filterNonNull = <T>(p: T[]): T[] => p.filter(i => !!i);
 
-const setImport = (entry: ExtendedFunction) => {
-  const root = entry.forRoot && entry.forRoot();
-  if (root) {
-    root.providers.map(p => ProvidersMetadata.set(p, p));
-    set(root.module);
+const setImport = (entry: ModuleWithProviders) => {
+  if (entry.module) {
+    entry.providers.map(p => ProvidersMetadata.set(p, p));
+    set(entry.module);
   } else {
     set(entry);
   }
@@ -36,7 +35,7 @@ export const Module = <T>(
   createDecorator({
     before(args) {
       for (const entry of filterNonNull(
-        (entries.imports || []) as ExtendedFunction[]
+        ((entries.imports as unknown) || []) as ModuleWithProviders[]
       )) {
         setImport(entry);
       }
@@ -65,12 +64,12 @@ export interface ModuleWithProviders<T = any> {
   providers: WithProviders<T>[];
 }
 
-export interface ExtendedFunction extends Function {
+export interface ExtendedFunction {
   forRoot?: () => ModuleWithProviders;
 }
 
-export async function Bootstrap(app: ExtendedFunction) {
-  setImport(app);
+export async function Bootstrap<T>(app: T) {
+  setImport((app as unknown) as ModuleWithProviders);
   await Promise.all(
     [...ProvidersMetadata.values()].map(async value =>
       set(await value.useFactory(...(value.deps || []).map(set)), value.provide)

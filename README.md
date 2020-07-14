@@ -181,3 +181,60 @@ Later on you can use `r-fetch` component to specify `query`, `mutation`, `subscr
   </r-render>
 </r-part>
 ```
+
+##### Dependency Injection
+
+```
+npm i @rhtml/di
+```
+
+```ts
+import '@abraham/reflection';
+
+import { Inject, Injectable, InjectionToken } from '@rhtml/di';
+import { Bootstrap, Component, Module } from '@rhtml/di/module';
+
+type UserId = number;
+const UserId = new InjectionToken<UserId>();
+
+const now = Date.now();
+
+@Injectable()
+export class UserService {
+  constructor(@Inject(UserId) public userId: number) {
+    console.log('[UserService]', userId);
+  }
+}
+
+@Component()
+class AppComponent {
+  constructor(public userService: UserService) {
+    console.log('[AppComponent] ', userService.userId);
+  }
+
+  OnInit() {
+    console.log('[AppComponent] Init');
+  }
+
+  OnDestroy() {
+    console.log('[AppComponent] Destroy');
+  }
+}
+
+@Module({
+  providers: [
+    UserService,
+    {
+      provide: UserId,
+      useFactory: () =>
+        new Promise<number>(resolve => setTimeout(() => resolve(1234), 1000))
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+Bootstrap(AppModule).then(() =>
+  console.log('Started', `after ${Date.now() - now}`)
+);
+```

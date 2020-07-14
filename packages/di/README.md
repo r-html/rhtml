@@ -338,7 +338,7 @@ export class MainModule {
       providers: [
         {
           provide: Token2,
-          useFactory: () => {
+          useFactory: async () => {
             console.log('aa');
             return '1234';
           }
