@@ -9,6 +9,11 @@ export type MethodDecoratorArguments = [
 ];
 export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
 
+export interface Options {
+  before?: (...args: any[]) => any[];
+  after?: (...args: any[]) => any[];
+}
+
 export class InjectionToken<T> {}
 
 let C = new WeakMap();
@@ -29,8 +34,17 @@ export function set<T>(c: ObjectType<T>, k?: ObjectUnion<T>): T {
   return C.has(c) ? C.get(c) : C.set(k ? k : c, safeHandle(c)).get(k ? k : c);
 }
 
+export interface SystemComponent {
+  OnDestroy: () => void;
+  OnInit: () => void;
+}
+
 export function remove<T>(c: T | ObjectType<T>): boolean;
 export function remove<T>(c: ObjectType<T>) {
+  const e = get(c as unknown) as SystemComponent;
+  if (e && e.OnDestroy) {
+    e.OnDestroy();
+  }
   return C.delete(c);
 }
 
@@ -47,7 +61,8 @@ export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
     };
   };
 }
-const meta = new WeakMap<ObjectUnion, Array<[number, ObjectUnion]>>();
+
+const Metadata = new WeakMap<ObjectUnion, Array<[number, ObjectUnion]>>();
 
 const defineGetter = (
   target: ObjectUnion,
@@ -66,13 +81,13 @@ export function Inject<T>(identifier: ObjectType<T>): PropertyDecorator {
     target,
     name: string,
     index?: number,
-    params = meta.get(target) || []
+    params = Metadata.get(target) || []
   ) => {
     if (name) {
       defineGetter(target, name, identifier);
     } else {
       params.push([index, identifier]);
-      meta.set(target, params);
+      Metadata.set(target, params);
     }
   };
 }
@@ -95,33 +110,40 @@ const getReflection = <T>(Base: Function) =>
     []
   ).map((identifier, index) => [index, identifier]) as [number, ObjectUnion][];
 
-export const Injectable = () => <K extends new (...args: any[]) => {}>(
+export const createDecorator = (options?: Options) => <
+  K extends new (...args: any[]) => {}
+>(
   Base: K
 ) =>
   class extends Base {
     constructor(...args: any[]) {
+      if (options && options.before) {
+        args = options.before(args);
+      }
       if (!args.length) {
         defineMetaInjectors(args, getReflection(Base));
-        defineMetaInjectors(args, meta.get(Base));
+        defineMetaInjectors(args, Metadata.get(Base));
+      }
+      if (options && options.after) {
+        args = options.after(args);
       }
       super(...args);
+      const e = (this as unknown) as SystemComponent;
+      if (e.OnInit) {
+        e.OnInit();
+      }
     }
   };
 
-export const Module = <T>(
-  entries: {
-    imports?: T | ObjectType<T>[];
-  } = {}
-) => <TBase extends ObjectType>(Base: TBase) =>
-  class extends Base {
-    constructor(...args: any[]) {
-      for (const entry of (entries.imports || []) as ObjectUnion[]) {
-        set(entry);
-      }
-      if (!args.length) {
-        defineMetaInjectors(args, getReflection(Base));
-        defineMetaInjectors(args, meta.get(Base));
-      }
-      super(...args);
-    }
-  };
+export interface OptionsWithProviders extends Options {
+  providers?: ObjectUnion[];
+}
+
+export const Injectable = (options?: OptionsWithProviders) =>
+  createDecorator({
+    ...options,
+    before: args =>
+      options && options.providers && options.providers.length
+        ? options.providers
+        : args
+  });

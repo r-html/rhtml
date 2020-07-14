@@ -7,11 +7,11 @@ import {
   Inject,
   Injectable,
   InjectionToken,
-  Module,
   Reader,
   remove,
   set
 } from './index';
+import { Module } from './module';
 describe('[Experiments]: test', () => {
   afterEach(() => clear());
 
