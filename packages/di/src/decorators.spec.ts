@@ -11,7 +11,7 @@ import {
   remove,
   set
 } from './index';
-import { Module } from './module';
+import { Module } from './module/module';
 describe('[Experiments]: test', () => {
   afterEach(() => clear());
 

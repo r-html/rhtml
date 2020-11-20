@@ -6,7 +6,7 @@ import {
   ObjectUnion,
   Options,
   set
-} from './index';
+} from '../index';
 
 const ProvidersMetadata = new Map<ObjectUnion, WithProviders>();
 const BootstrapsMetadata = new Map<ObjectUnion, ObjectUnion>();

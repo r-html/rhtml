@@ -2,3 +2,9 @@ node_modules
 .cache
 build
 coverage
+
+*.js
+*.map.js
+*.d.ts
+
+module/*

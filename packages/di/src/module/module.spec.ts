@@ -6,7 +6,7 @@ import {
   InjectionToken,
   remove,
   set
-} from './index';
+} from '../index';
 import { Bootstrap, Component, Module, ModuleWithProviders } from './module';
 
 describe('[Module]: tests', () => {
