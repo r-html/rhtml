@@ -26,10 +26,10 @@ export const Component = (options?: Options) => createDecorator(options);
 
 export const Module = <T>(
   entries: {
-    imports?: T | ObjectType<T>[];
-    providers?: T | WithProviders<T>[];
-    components?: T | ObjectType<T>[];
-    bootstrap?: ObjectUnion;
+    imports?: T | ObjectType<unknown>[];
+    providers?: T | WithProviders<unknown>[] | ObjectUnion[];
+    components?: T | ObjectType<unknown>[];
+    bootstrap?: ObjectUnion[];
   } = {}
 ) =>
   createDecorator({
