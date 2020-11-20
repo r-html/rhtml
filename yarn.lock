@@ -389,19 +389,19 @@
     typeable-promisify "^2.0.1"
     yarn "^1.9.4"
 
-"@rxdi/core@^0.7.63":
-  version "0.7.63"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.63.tgz#9a29f5754bc5f88e2d91b4c798ceeb0aa38fa5bb"
-  integrity sha512-SuiVzFh4XQshaCQwPU3Z8NKV8Va2v1KhEWmyE88Hj4sgHTOTYEhhEaBF70SBcRHmeYwH7MH2PrtaZzh9sKr/gQ==
+"@rxdi/core@^0.7.87":
+  version "0.7.87"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.87.tgz#c673647a48895b438cbe9ba4bb9e37cdb6fa4754"
+  integrity sha512-pereY449ST/jrzr2xkdp2BxZhUtmyt1nYB1Ahm5NJ9I9ya8kgSKI0mgnusNALRmuxCHWRW6t5A60FCqdbkyGgA==
   dependencies:
     reflect-metadata "0.1.13"
     rxjs "^6.5.3"
     systemjs "0.21.4"
 
-"@rxdi/graphql-client@^0.7.63":
-  version "0.7.63"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.63.tgz#f549fcf43ee8573409f87f8bbdc9d448657e0040"
-  integrity sha512-yy1hJSiWF4x22bnCPSr13NGI3voFWgQBHyt7f+BJiBsworEzKSyL0XNHY94tGDVgcOHmjTGdlQ08Yjx+kgYklQ==
+"@rxdi/graphql-client@^0.7.87":
+  version "0.7.87"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.87.tgz#7c4299e2a9971294d1c948976bb11aabbc9faf8d"
+  integrity sha512-/OmCUJq1UVk3BE+z0OtRswx0eH0OEqfkc+/JPfow/lY3qIBvo5p9yJ25Izgm0m28+cBoYRlx7fdFXTYLXNiYFQ==
   dependencies:
     apollo-cache-inmemory "^1.6.2"
     apollo-client "^2.6.3"
@@ -411,10 +411,10 @@
     apollo-link-ws "^1.0.18"
     subscriptions-transport-ws "^0.9.16"
 
-"@rxdi/lit-html@^0.7.66":
-  version "0.7.66"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.66.tgz#29d3c5eb8977691d5fb18b3064bd4807669d678b"
-  integrity sha512-kfHzk8fO9nvmZqP9IINcxtYOf0Q3mxag4WCNEGy9mG8uiUjbCriuHsVHEhKxIKkbpQp4BhHE3c85HHX+AtquMQ==
+"@rxdi/lit-html@^0.7.87":
+  version "0.7.87"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.87.tgz#c8d4213276abc18d32d5b06c4451c8ec79a765b1"
+  integrity sha512-bixdjHu0p3MzQ+bOEEU0kL+T+HcUUeEA/aNdjMPkrAu8k1gUXqkqOu/YMkkngqSa9z1uCOY9XUx+aYLBmLAMlg==
 
 "@types/babel__core@^7.1.0":
   version "7.1.6"

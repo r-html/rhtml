@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, html, LitElement, property } from '@rxdi/lit-html';
 
 import { LetOperator } from './let';
@@ -14,7 +15,7 @@ import { LetOperator } from './let';
 })
 export class ForOperator extends LitElement {
   @property({ type: Array })
-  public of = [];
+  public of: any = [];
   OnUpdate() {
     const slotNodes = this.shadowRoot.querySelector('slot').assignedNodes();
     if (slotNodes.length) {

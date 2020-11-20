@@ -8,7 +8,7 @@ export interface GraphqlSettings {
   defaults: DEFAULTS;
 }
 
-export let GraphqlSettings: GraphqlSettings = {
+export const GraphqlSettings: GraphqlSettings = {
   config: {
     uri: 'https://countries.trevorblades.com/',
     pubsub: 'wss://pubsub.youvolio.com/subscriptions',
@@ -33,7 +33,3 @@ export let GraphqlSettings: GraphqlSettings = {
     }
   }
 };
-
-export function setConfig(config: GraphqlSettings) {
-  return (GraphqlSettings = config);
-}

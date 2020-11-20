@@ -4,12 +4,13 @@ import { GraphComponent } from './graph.component';
 import { GraphModule } from './graph.module';
 import { GraphqlSettings } from './settings';
 
-@Module({
-  imports: [
-    GraphModule.forRoot(GraphqlSettings.config, GraphqlSettings.defaults)
-  ]
-})
-export class GraphqlModule {}
+export function setConfig(graphqlSettings: GraphqlSettings) {
+  return Module({
+    imports: [
+      GraphModule.forRoot(graphqlSettings.config, graphqlSettings.defaults)
+    ]
+  })(class GraphqlModule {});
+}
 
 export * from './base.service';
 export * from './graph.component';
