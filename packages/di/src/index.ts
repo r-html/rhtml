@@ -144,3 +144,5 @@ export const Injectable = (options?: OptionsWithProviders) =>
     ...options,
     before: args => (options?.providers?.length ? options.providers : args)
   });
+
+export * from './module';
