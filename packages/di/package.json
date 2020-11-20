@@ -38,7 +38,8 @@
     "last 1 chrome versions"
   ],
   "files": [
-    "dist"
+    "dist",
+    "module"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
