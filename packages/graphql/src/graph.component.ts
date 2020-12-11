@@ -1,5 +1,12 @@
 import { Container, Inject } from '@rxdi/core';
-import { async, Component, html, LitElement, property } from '@rxdi/lit-html';
+import {
+  async,
+  Component,
+  css,
+  html,
+  LitElement,
+  property
+} from '@rxdi/lit-html';
 import {
   MutationOptions,
   QueryBaseOptions,
@@ -28,6 +35,9 @@ import { GraphOptions } from './types';
   selector: 'r-graph',
   template(this: GraphComponent) {
     return html`
+      <style>
+        ${this.options?.style}
+      </style>
       ${async(
         this.result.pipe(
           map(state =>
@@ -69,6 +79,7 @@ export class GraphComponent extends LitElement {
   @property({ type: Object })
   public options: GraphOptions = {
     fetch: '',
+    style: css``,
     state: new BehaviorSubject({}),
     render: res =>
       html`

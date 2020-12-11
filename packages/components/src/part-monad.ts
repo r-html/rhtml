@@ -13,6 +13,7 @@ import { LensComponent } from './lens';
 import { RenderComponent } from './render';
 import { SettingsComponent } from './settings';
 import { StateComponent } from './state';
+import { StyleComponent } from './style';
 import { GraphOptions } from './types';
 
 function isObservable(obj) {
@@ -44,6 +45,8 @@ export class MonadComponent extends LitElement {
     const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
     const settings = this.findNode(nodes, 'r-settings') as SettingsComponent;
     const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
+    const styleComponent = this.findNode(nodes, 'r-style') as StyleComponent;
+
     const script = this.findNode(nodes, 'script') as HTMLScriptElement;
     if (script) {
       new Function(script.innerHTML).call(this);
@@ -60,6 +63,7 @@ export class MonadComponent extends LitElement {
     this.options = {
       state,
       fetch,
+      style: styleComponent.value,
       render: renderComponent.state
     };
     this.options.settings = settings ? settings.value : null;
