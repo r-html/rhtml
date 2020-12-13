@@ -45,7 +45,7 @@ export class MonadComponent extends LitElement {
     const stateComponent = this.findNode(nodes, 'r-state') as StateComponent;
     const settings = this.findNode(nodes, 'r-settings') as SettingsComponent;
     const lensComponent = this.findNode(nodes, 'r-lens') as LensComponent;
-    const styleComponent = this.findNode(nodes, 'r-style') as StyleComponent;
+    const styleComponent = this.findNode<StyleComponent>(nodes, 'r-style');
 
     const script = this.findNode(nodes, 'script') as HTMLScriptElement;
     if (script) {
@@ -63,7 +63,7 @@ export class MonadComponent extends LitElement {
     this.options = {
       state,
       fetch,
-      style: styleComponent.value,
+      style: styleComponent?.value,
       render: renderComponent.state
     };
     this.options.settings = settings ? settings.value : null;
@@ -142,14 +142,14 @@ export class MonadComponent extends LitElement {
     });
   }
 
-  private findNode(nodes: Node[], localName: string) {
+  private findNode<T>(nodes: Node[], localName: string): T | null {
     const node = nodes.find(
       n =>
         n &&
         n.nextSibling &&
         (n.nextSibling as HTMLElement).localName === localName
     );
-    return node ? node.nextSibling : null;
+    return (node ? node.nextSibling : null) as never;
   }
 
   private get(obj = {}, path = '', defaultValue?) {
