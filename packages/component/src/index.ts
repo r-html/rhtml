@@ -1,4 +1,4 @@
-import '@rhtml/components';
+import '@rhtml/renderer';
 
 import {
   Component as OriginalComponent,
@@ -58,10 +58,10 @@ export const Compose = <S, D = [], K extends LitElement = LitElement>(
     ...options,
     template(this: K) {
       return html`
-        <r-part>
-          <r-state .value=${state.bind(this).call(this, deps)}></r-state>
-          <r-render
-            .state=${(
+        <r-renderer
+          .options=${{
+            state: state.bind(this).call(this, deps),
+            render: (
               state: S,
               setState: (s: S) => void,
               shadowRoot: ShadowRoot
@@ -70,9 +70,9 @@ export const Compose = <S, D = [], K extends LitElement = LitElement>(
               return render(deps)
                 .bind(this)
                 .call(this, state, setState, shadowRoot);
-            }}
-          ></r-render>
-        </r-part>
+            }
+          } as never}
+        ></r-renderer>
       `;
     }
   });
