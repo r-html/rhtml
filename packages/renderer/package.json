@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rxdi/rhtml.git"
+    "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.87"
+    "@rxdi/lit-html": "^0.7.92"
   },
   "devDependencies": {
     "eslint": "^6.7.2",

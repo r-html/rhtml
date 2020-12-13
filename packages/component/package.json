@@ -1,5 +1,5 @@
 {
-  "name": "@rhtml/hooks",
+  "name": "@rhtml/component",
   "version": "0.0.68",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
@@ -16,7 +16,11 @@
     "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.92"
+    "@rxdi/lit-html": "^0.7.92",
+    "@rhtml/components": "^0.0.68"
+  },
+  "peerDependencies": {
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "eslint": "^6.7.2",

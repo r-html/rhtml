@@ -11,9 +11,9 @@
     "@rhtml/hooks": "^0.0.21",
     "@rhtml/operators": "^0.0.21",
     "@rhtml/renderer": "^0.0.21",
-    "@rxdi/core": "^0.7.87",
-    "@rxdi/lit-html": "^0.7.87",
-    "rxjs": "^6.5.4"
+    "@rxdi/core": "^0.7.92",
+    "@rxdi/lit-html": "^0.7.92",
+    "rxjs": "^6.6.3"
   },
   "browserslist": [
     "last 1 chrome versions"

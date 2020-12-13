@@ -62,7 +62,7 @@
     rxjs "^6.5.3"
     systemjs "0.21.4"
 
-"@rxdi/core@^0.7.87":
+"@rxdi/core@^0.7.92":
   version "0.7.79"
   resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.79.tgz#b50b16dbe1761141ac244f0d9da63e4079d028fc"
   integrity sha512-luYDOqda51sxJ6J2ld85ca/VTFQSQaM96jRVVpjAc+xVHR7meBVBIjeFzQIzoeydCr40znnCKsqOxj3W7zqO0g==
@@ -89,7 +89,7 @@
   resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.42.tgz#0c0bd948496b2d869e68a56e3d8603a0cbc38ef9"
   integrity sha512-XKoyXLp877C4+s9Qo2JSlmgrGLNGDanr9SDZlv0HrZ012LQJCjCJCH/s0Dl5OzXPyzUin97pCmZ64ntggpbSbQ==
 
-"@rxdi/lit-html@^0.7.87":
+"@rxdi/lit-html@^0.7.92":
   version "0.7.79"
   resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.79.tgz#4674b42df731d97a8dcc8339641d0ee2887bd7f6"
   integrity sha512-6xA5MqL74hPixSuMYbQX4pyQouLfithmlYFDDXjDOZ/57f5YDJpp2MxgbtNZPqMxuxNazDsXHdhkRwnCL5aSrw==
@@ -1146,9 +1146,9 @@ rxjs@^6.5.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.5.4:
-  version "6.5.4"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
+rxjs@^6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
   dependencies:
     tslib "^1.9.0"

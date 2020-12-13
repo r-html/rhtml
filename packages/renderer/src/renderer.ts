@@ -1,4 +1,5 @@
-import { Component, html, LitElement, property } from '@rxdi/lit-html';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Component, css, html, LitElement, property } from '@rxdi/lit-html';
 
 function Render(config) {
   return function(cls) {
@@ -15,6 +16,9 @@ function Render(config) {
   selector: 'r-renderer',
   template(this: Renderer) {
     return html`
+      <style>
+        ${this.options?.style}
+      </style>
       ${!this.loading
         ? this.options.render
           ? this.options.render(
@@ -44,16 +48,16 @@ function Render(config) {
   }
 })
 export class Renderer extends LitElement {
-  @property()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public options: any = {
+  @property({ type: Object })
+  public options = {
     state: {},
-    render: res =>
+    render: (res, setState, shadowRoot) =>
       html`
         ${res}
       `,
+    style: css``,
     loading: () => html``,
-    error: () => html``
+    error: e => html``
   };
 
   @property({ type: Boolean })
@@ -69,7 +73,7 @@ export class Renderer extends LitElement {
   OnUpdateFirst() {
     if (this.options.state) {
       if (this.isObservable(this.options.state)) {
-        this.subscription = this.options.state.subscribe(
+        this.subscription = this.options.state['subscribe'](
           detail => {
             this.state = detail;
             this.loading = false;
