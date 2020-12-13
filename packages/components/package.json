@@ -12,9 +12,9 @@
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.87",
+    "@rxdi/lit-html": "^0.7.92",
     "@rhtml/renderer": "0.0.68",
-    "rxjs": "^6.5.4",
+    "rxjs": "^6.6.3",
     "shades": "^2.1.0"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rxdi/rhtml.git"
+    "url": "git@github.com:rhtml/rhtml.git"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",

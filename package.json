@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rxdi/rhtml.git"
+    "url": "git@github.com:rhtml/rhtml.git"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
@@ -55,11 +55,11 @@
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@rxdi/core": "^0.7.87",
-    "@rxdi/graphql-client": "^0.7.87",
-    "@rxdi/lit-html": "^0.7.87",
+    "@rxdi/core": "^0.7.92",
+    "@rxdi/graphql-client": "^0.7.92",
+    "@rxdi/lit-html": "^0.7.92",
     "shades": "^2.1.0",
-    "rxjs": "^6.5.4",
+    "rxjs": "^6.6.3",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
     "graphql-tag": "^2.10.1"
   }

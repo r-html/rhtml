@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rxdi/rhtml.git"
+    "url": "git@github.com:rhtml/rhtml.git"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.87",
+    "@rxdi/lit-html": "^0.7.92",
     "@rhtml/renderer": "0.0.68"
   },
   "devDependencies": {
