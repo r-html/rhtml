@@ -49,7 +49,7 @@ export type RenderResult<S, D, K extends LitElement> = (
 
 export type Options = Without<CustomElementConfig<never>, 'template'>;
 
-export const Compose = <S, D = [], K extends LitElement = LitElement>(
+export const Partial = <S, D = [], K extends LitElement = LitElement>(
   options?: Options
 ) => (deps: D = [] as never) => (state: StateToRender<S, D, K>) => (
   render: RenderResult<S, D, K>
@@ -77,20 +77,16 @@ export const Compose = <S, D = [], K extends LitElement = LitElement>(
     }
   });
 
-export const Component = <S, D = unknown, K extends LitElement = LitElement>([
-  options,
-  deps,
-  state,
-  render
-]: [Options, D, StateToRender<S, D, K>, RenderResult<S, D, K>]) =>
-  Compose(options)(deps as never)(state as never)(render as never);
-
-export const Settings = (o: Options) => o;
-
-export const Providers = <S, D, K>(o: D) => o;
-
-export const State = <S, D, K extends LitElement>(o: StateToRender<S, D, K>) =>
-  o;
-
-export const Render = <S, D, K extends LitElement>(o: RenderResult<S, D, K>) =>
-  o;
+export function Component<S, D = unknown, K extends LitElement = LitElement>({
+  Settings,
+  Providers,
+  State,
+  Render
+}: {
+  Settings: Options;
+  Providers?: D;
+  State?: StateToRender<S, D, K>;
+  Render?: RenderResult<S, D, K>;
+}) {
+  return Partial(Settings)(Providers as never)(State as never)(Render as never);
+}
