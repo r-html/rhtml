@@ -70,7 +70,8 @@ export class Renderer extends LitElement {
   private state = {};
   private subscription;
 
-  OnUpdateFirst() {
+  async OnUpdateFirst() {
+    this.options.state = await this.options.state;
     if (this.options.state) {
       if (this.isObservable(this.options.state)) {
         this.subscription = this.options.state['subscribe'](
