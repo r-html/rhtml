@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "component": {
+      "factory": "./dist/lib/component/component.factory#main",
+      "description": "Create a @rhtml component.",
+      "schema": "./dist/lib/component/schema.json"
+    },
+    "module": {
+      "factory": "./dist/lib/module/module.factory#main",
+      "description": "Create a @rhtml module.",
+      "schema": "./dist/lib/module/schema.json"
+    },
+    "provider": {
+      "factory": "./dist/lib/provider/provider.factory#main",
+      "description": "Create a @rhtml provider.",
+      "schema": "./dist/lib/provider/schema.json"
+    },
+    "service": {
+      "factory": "./dist/lib/service/service.factory#main",
+      "description": "Create a @rhtml service.",
+      "schema": "./dist/lib/service/schema.json"
+    }
+  }
+}
