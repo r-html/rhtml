@@ -39,16 +39,23 @@ export const Module = <T>(
       )) {
         setImport(entry);
       }
+
       for (const entry of filterNonNull(
         (entries.providers || []) as WithProviders[]
-      ).filter(e => typeof e.useFactory === 'function')) {
-        ProvidersMetadata.set(entry, entry);
+      )) {
+        if (typeof entry.useFactory === 'function') {
+          ProvidersMetadata.set(entry, entry);
+        } else {
+          set(entry);
+        }
       }
+
       for (const entry of filterNonNull(
         (entries.bootstrap || []) as ObjectUnion[]
       )) {
         BootstrapsMetadata.set(entry, entry);
       }
+
       return args;
     }
   });

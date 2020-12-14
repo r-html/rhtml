@@ -1,6 +1,7 @@
 import {
   clear,
   createDecorator,
+  has,
   Inject,
   Injectable,
   InjectionToken,
@@ -62,6 +63,19 @@ describe('[Module]: tests', () => {
     }
     const test1 = set(Test1);
     expect(test1.one).toBe(1);
+  });
+
+  it('Should automatically create new instance', async () => {
+    @Injectable()
+    class Test1 {}
+
+    @Module({
+      providers: [Test1]
+    })
+    class MyModule {}
+
+    await Bootstrap(MyModule);
+    expect(has(Test1)).toBeTruthy();
   });
 
   it('Should pass custom providers', async () => {
