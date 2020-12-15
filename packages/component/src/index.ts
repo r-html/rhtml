@@ -55,9 +55,9 @@ export const Partial = <S, D, K extends LitElement = LitElement>(
   options: Options
 ) => (deps: D = [] as never) => (
   state: StateToRender<S, D, K> = () => ({} as never)
-) => (loading: () => PossibleRender) => (error: () => PossibleRender) => (
-  render: RenderResult<S, D, K> = () => state as never
-) =>
+) => (loading: () => PossibleRender) => (
+  error: (e: Error | unknown) => PossibleRender
+) => (render: RenderResult<S, D, K> = () => state as never) =>
   OriginalComponent<K>({
     ...options,
     template(this: K) {
@@ -96,7 +96,7 @@ export function Component<S, D, K extends LitElement = LitElement>({
   State?: StateToRender<S, D, K>;
   Render?: RenderResult<S, D, K>;
   Loading?: () => PossibleRender;
-  Error?: () => PossibleRender;
+  Error?: (e: Error | unknown) => PossibleRender;
 }) {
   return Partial(Settings)(Providers)(State)(Loading)(Error)(Render);
 }
