@@ -39,6 +39,8 @@ export type StateToRender<S, D, K extends LitElement> = (
   deps: D
 ) => Observable<S> | S | Promise<S>;
 
+export type PossibleRender = TemplateResult | string | number | unknown;
+
 export type RenderResult<S, D, K extends LitElement> = (
   deps: D
 ) => (
@@ -49,11 +51,13 @@ export type RenderResult<S, D, K extends LitElement> = (
 
 export type Options = Without<CustomElementConfig<never>, 'template'>;
 
-export const Partial = <S, D = [], K extends LitElement = LitElement>(
+export const Partial = <S, D, K extends LitElement = LitElement>(
   options: Options
 ) => (deps: D = [] as never) => (
   state: StateToRender<S, D, K> = () => ({} as never)
-) => (render: RenderResult<S, D, K> = () => state as never) =>
+) => (loading: () => PossibleRender) => (error: () => PossibleRender) => (
+  render: RenderResult<S, D, K> = () => state as never
+) =>
   OriginalComponent<K>({
     ...options,
     template(this: K) {
@@ -61,6 +65,8 @@ export const Partial = <S, D = [], K extends LitElement = LitElement>(
         <r-renderer
           .options=${{
             state: state.bind(this).call(this, deps),
+            loading,
+            error,
             render: (
               state: S,
               setState: (s: S) => void,
@@ -77,16 +83,20 @@ export const Partial = <S, D = [], K extends LitElement = LitElement>(
     }
   });
 
-export function Component<S, D = unknown, K extends LitElement = LitElement>({
+export function Component<S, D, K extends LitElement = LitElement>({
   Settings,
   Providers,
   State,
-  Render
+  Render,
+  Loading,
+  Error
 }: {
   Settings: Options;
   Providers?: D;
   State?: StateToRender<S, D, K>;
   Render?: RenderResult<S, D, K>;
+  Loading?: () => PossibleRender;
+  Error?: () => PossibleRender;
 }) {
-  return Partial(Settings)(Providers as never)(State as never)(Render as never);
+  return Partial(Settings)(Providers)(State)(Loading)(Error)(Render);
 }

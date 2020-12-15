@@ -16,9 +16,13 @@ function Render(config) {
   selector: 'r-renderer',
   template(this: Renderer) {
     return html`
-      <style>
-        ${this.options?.style}
-      </style>
+      ${this.options?.style
+        ? html`
+            <style>
+              ${this.options.style}
+            </style>
+          `
+        : html``}
       ${!this.loading
         ? this.options.render
           ? this.options.render(

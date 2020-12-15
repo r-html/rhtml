@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@rxdi/lit-html": "^0.7.92",
-    "@rhtml/operators": "0.0.77"
+    "@rhtml/operators": "^0.0.77"
   },
   "browserslist": [
     "last 1 chrome versions"

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@rxdi/lit-html": "^0.7.92",
-    "@rhtml/renderer": "0.0.77"
+    "@rhtml/renderer": "^0.0.77"
   },
   "peerDependencies": {
     "rxjs": "^6.6.3"
