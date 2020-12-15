@@ -34,7 +34,7 @@ function Render(config) {
         : ''}
       ${this.loading
         ? html`
-            ${this.isFunction(this.options.error)
+            ${this.isFunction(this.options.loading)
               ? this.options.loading()
               : html``}
           `
