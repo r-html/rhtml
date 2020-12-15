@@ -50,10 +50,10 @@ export type RenderResult<S, D, K extends LitElement> = (
 export type Options = Without<CustomElementConfig<never>, 'template'>;
 
 export const Partial = <S, D = [], K extends LitElement = LitElement>(
-  options?: Options
-) => (deps: D = [] as never) => (state: StateToRender<S, D, K>) => (
-  render: RenderResult<S, D, K>
-) =>
+  options: Options
+) => (deps: D = [] as never) => (
+  state: StateToRender<S, D, K> = () => ({} as never)
+) => (render: RenderResult<S, D, K> = () => state as never) =>
   OriginalComponent<K>({
     ...options,
     template(this: K) {
@@ -85,7 +85,7 @@ export function Component<S, D = unknown, K extends LitElement = LitElement>({
 }: {
   Settings: Options;
   Providers?: D;
-  State?: StateToRender<S, D, K>;
+  State: StateToRender<S, D, K>;
   Render?: RenderResult<S, D, K>;
 }) {
   return Partial(Settings)(Providers as never)(State as never)(Render as never);
