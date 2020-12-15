@@ -85,7 +85,7 @@ export function Component<S, D = unknown, K extends LitElement = LitElement>({
 }: {
   Settings: Options;
   Providers?: D;
-  State: StateToRender<S, D, K>;
+  State?: StateToRender<S, D, K>;
   Render?: RenderResult<S, D, K>;
 }) {
   return Partial(Settings)(Providers as never)(State as never)(Render as never);
