@@ -22,5 +22,6 @@ module.exports = {
         "import/order": "off",
         "@typescript-eslint/camelcase": 0
     },
-    plugins: ["simple-import-sort"]
+    plugins: ["simple-import-sort"],
+    ignorePatterns: ['dist', './packages/schematics']
 };

@@ -7,6 +7,7 @@ Smallest Dependency Injection for Typescript and Javascript!
 - Hooks available `OnInit`, `OnDestroy` `class { OnDestroy() {} OnInit() {} }`
 - 100% Code coverage and branches
 - No dependencies
+- Works with [`deno`](https://deno.land/)
 
 #### Installation
 
@@ -28,6 +29,26 @@ class Test2 {
 }
 const test2 = set(Test2);
 console.log(test2.test.test); // 42
+```
+
+#### With `Deno` using `esm.sh` as a `cdn`
+
+```typescript
+import { Bootstrap, Module, set, Injectable } from 'http://esm.sh/@rhtml/di';
+
+@Injectable()
+class MyService {
+  OnInit() {
+    console.log('Initialized');
+  }
+}
+
+@Module({
+  providers: [MyService]
+})
+export class AppModule {}
+
+await Bootstrap(AppModule);
 ```
 
 #### With Reflection
