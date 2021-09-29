@@ -38,7 +38,11 @@ Example can be found [here](./example/deno)
 ```typescript
 import 'https://deno.land/x/reflect_metadata@v0.1.12/mod.ts';
 
-import { Bootstrap, Injectable, Module } from '@rhtml/di';
+import {
+  Bootstrap,
+  Injectable,
+  Module
+} from 'https://cdn.esm.sh/v53/@rhtml/di@0.0.81';
 
 @Injectable()
 class MyService {
@@ -65,6 +69,7 @@ class MyService2 {
 export class AppModule {}
 
 await Bootstrap(AppModule);
+
 ```
 
 #### With Reflection

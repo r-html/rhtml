@@ -17,5 +17,12 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "deno.path": "/home/rampage/.deno/bin/deno",
+  "deno.enable": true, // enables extension
+  "deno.lint": true, // inline deno lint diagnostics, requires `deno.unstable`
+  "deno.unstable": true,
+  "deno.suggest.imports.hosts": {
+    "https://cdn.esm.sh": false
+  } // also provides unstable type declarations in VS Code
 }
