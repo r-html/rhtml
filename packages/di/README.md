@@ -36,17 +36,31 @@ console.log(test2.test.test); // 42
 Example can be found [here](./example/deno)
 
 ```typescript
-import { Bootstrap, Module, set, Injectable } from 'http://esm.sh/@rhtml/di';
+import 'https://deno.land/x/reflect_metadata@v0.1.12/mod.ts';
+
+import { Bootstrap, Injectable, Module } from '@rhtml/di';
 
 @Injectable()
 class MyService {
   OnInit() {
-    console.log('Initialized');
+    console.log('[MyService]: initialized');
+  }
+
+  helloWorld() {
+    return 'Hello World from @rhtml/di';
+  }
+}
+
+@Injectable()
+class MyService2 {
+  constructor(private myService: MyService) {}
+  OnInit() {
+    console.log(this.myService.helloWorld());
   }
 }
 
 @Module({
-  providers: [MyService]
+  providers: [MyService, MyService2]
 })
 export class AppModule {}
 

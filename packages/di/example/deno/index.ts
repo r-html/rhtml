@@ -1,17 +1,23 @@
-import { Bootstrap, Inject, Injectable, Module } from '@rhtml/di';
+import '@reflect/metadata';
+
+import { Bootstrap, Injectable, Module } from '@rhtml/di';
 
 @Injectable()
 class MyService {
   OnInit() {
-    console.log('Initialized');
+    console.log('[MyService]: initialized');
+  }
+
+  helloWorld() {
+    return 'Hello World from @rhtml/di';
   }
 }
+
 @Injectable()
 class MyService2 {
-  constructor(@Inject(MyService) private myService: MyService) {}
+  constructor(private myService: MyService) {}
   OnInit() {
-    console.log(this.myService);
-    console.log('Initialized');
+    console.log(this.myService.helloWorld());
   }
 }
 

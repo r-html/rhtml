@@ -1,8 +1,8 @@
 dev:
-	mode=dev deno run --no-check --allow-net --allow-read --allow-env --allow-run --allow-write --import-map=importmap.json --unstable server.ts
+	mode=dev deno run --no-check --allow-net --allow-read --allow-env --allow-run --allow-write --import-map=importmap.json --unstable -c tsconfig.json index.ts
 
 start: 
-	deno run --no-check --allow-net --allow-read --allow-env --allow-run --allow-write --import-map=importmap.json --unstable server.js
+	deno run --no-check --allow-net --allow-read --allow-env --allow-run --allow-write --import-map=importmap.json --unstable -c tsconfig.json index.ts
 
 cache:
-	deno cache --reload --no-check server.js
+	deno cache --reload --no-check -c tsconfig.json index.ts
