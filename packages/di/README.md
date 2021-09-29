@@ -33,6 +33,8 @@ console.log(test2.test.test); // 42
 
 #### With `Deno` using `esm.sh` as a `cdn`
 
+Example can be found [here](./example/deno)
+
 ```typescript
 import { Bootstrap, Module, set, Injectable } from 'http://esm.sh/@rhtml/di';
 
