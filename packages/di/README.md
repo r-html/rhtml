@@ -34,6 +34,7 @@ console.log(test2.test.test); // 42
 #### With `Deno` using `esm.sh` as a `cdn`
 
 Example can be found [here](./example/deno)
+Deno land https://deno.land/x/rdi
 
 ```typescript
 import 'https://deno.land/x/reflect_metadata@v0.1.12/mod.ts';
