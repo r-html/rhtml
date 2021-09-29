@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "@rhtml/di": "https://cdn.esm.sh/v53/@rhtml/di@0.0.81",
+    "@reflect/metadata": "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts"
+  }
+}
