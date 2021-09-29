@@ -18,7 +18,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.92",
+    "@rxdi/lit-html": "^0.7.119",
     "@rhtml/renderer": "0.0.80"
   },
   "devDependencies": {

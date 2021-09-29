@@ -16,7 +16,7 @@
     "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.92"
+    "@rxdi/lit-html": "^0.7.119"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
