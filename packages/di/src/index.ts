@@ -16,7 +16,7 @@ export interface Options {
 
 export class InjectionToken<T> {}
 
-let C = new WeakMap();
+let C = new WeakMap<ObjectUnion>();
 
 const safeHandle = <T>(c: ObjectType<T>) =>
   c.prototype && c.prototype.constructor ? new c() : c;
