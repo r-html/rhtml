@@ -9,7 +9,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint"
+      "pre-commit": "npm run lint"
     }
   },
   "scripts": {
@@ -59,9 +59,9 @@
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "dependencies": {
-    "@rxdi/core": "^0.7.119",
-    "@rxdi/graphql-client": "^0.7.119",
-    "@rxdi/lit-html": "^0.7.119",
+    "@rxdi/core": "^0.7.133",
+    "@rxdi/graphql-client": "^0.7.133",
+    "@rxdi/lit-html": "^0.7.133",
     "shades": "^2.1.0",
     "rxjs": "^6.6.3",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",

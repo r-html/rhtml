@@ -1,11 +1,11 @@
-
+import { setConfig } from '@rhtml/graphql';
 import { html } from '@rxdi/lit-html';
-import { setConfig } from '@rhtml/graphql/dist/settings';
 
 setConfig({
   config: {
     uri: 'https://countries.trevorblades.com/',
-    pubsub: 'wss://pubsub.youvolio.com/subscriptions',
+    /* wss://your-domain/subscriptions */
+    pubsub: '',
     async onRequest() {
       return new Headers();
     }
@@ -26,4 +26,4 @@ setConfig({
       `;
     }
   }
-})
+});

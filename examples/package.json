@@ -2,17 +2,19 @@
   "name": "@rhtml/example",
   "version": "0.0.2",
   "scripts": {
-    "patch": "echo"
+    "start": "npx parcel ./main/index.html --out-dir build/main",
+    "start-hydrate": "npx parcel ./hydrate/index.html --out-dir build/hydrate",
+    "start-performance": "npx parcel ./performance/index.html --out-dir build/performance"
   },
   "dependencies": {
-    "@rhtml/components": "^0.0.77",
-    "@rhtml/experiments": "^0.0.77",
-    "@rhtml/graphql": "^0.0.77",
-    "@rhtml/hooks": "^0.0.77",
-    "@rhtml/operators": "^0.0.77",
-    "@rhtml/renderer": "^0.0.77",
-    "@rxdi/core": "^0.7.92",
-    "@rxdi/lit-html": "^0.7.92",
+    "@rhtml/components": "0.0.82",
+    "@rhtml/experiments": "0.0.82",
+    "@rhtml/graphql": "0.0.82",
+    "@rhtml/hooks": "0.0.82",
+    "@rhtml/operators": "0.0.82",
+    "@rhtml/renderer": "0.0.82",
+    "@rxdi/core": "^0.7.133",
+    "@rxdi/lit-html": "^0.7.133",
     "rxjs": "^6.6.3"
   },
   "browserslist": [

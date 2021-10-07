@@ -19,9 +19,9 @@
     "source.fixAll.eslint": true
   },
   "deno.path": "/home/rampage/.deno/bin/deno",
-  "deno.enable": true, // enables extension
-  "deno.lint": true, // inline deno lint diagnostics, requires `deno.unstable`
-  "deno.unstable": true,
+  "deno.enable": false, // enables extension
+  "deno.lint": false, // inline deno lint diagnostics, requires `deno.unstable`
+  "deno.unstable": false,
   "deno.suggest.imports.hosts": {
     "https://cdn.esm.sh": false,
     "https://deno.land": true
