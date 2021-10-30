@@ -26,8 +26,10 @@ function Render(config) {
       ${!this.loading
         ? this.options.render
           ? this.options.render(
-              this.state,
-              s => (this.state = s),
+              this.options.deepCloneState
+                ? JSON.parse(JSON.stringify(this.state))
+                : { ...this.state },
+              state => (this.state = { ...state }),
               this.shadowRoot
             )
           : this.state
@@ -60,6 +62,7 @@ export class Renderer extends LitElement {
         ${res}
       `,
     style: css``,
+    deepCloneState: false,
     loading: () => html``,
     error: e => html``
   };
@@ -80,7 +83,7 @@ export class Renderer extends LitElement {
       if (this.isObservable(this.options.state)) {
         this.subscription = this.options.state['subscribe'](
           detail => {
-            this.state = detail;
+            this.state = { ...detail };
             this.loading = false;
             this.dispatchEvent(new CustomEvent('onData', { detail }));
           },
@@ -93,7 +96,7 @@ export class Renderer extends LitElement {
         );
       } else {
         this.loading = false;
-        this.state = this.options.state;
+        this.state = { ...this.options.state };
       }
     }
   }

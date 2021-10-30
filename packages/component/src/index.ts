@@ -49,7 +49,10 @@ export type RenderResult<S, D, K extends LitElement> = (
   setState: (s: S) => void
 ) => TemplateResult | string | number | unknown;
 
-export type Options = Without<CustomElementConfig<never>, 'template'>;
+export interface Options
+  extends Without<CustomElementConfig<never>, 'template'> {
+  deepCloneState?: boolean;
+}
 
 export const Partial = <S, D, K extends LitElement = LitElement>(
   options: Options
@@ -67,6 +70,7 @@ export const Partial = <S, D, K extends LitElement = LitElement>(
             state: state.bind(this).call(this, deps),
             loading,
             error,
+            deepCloneState: options.deepCloneState,
             render: (
               state: S,
               setState: (s: S) => void,
