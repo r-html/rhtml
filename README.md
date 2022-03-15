@@ -1,5 +1,22 @@
 # Reactive HTML
 
+
+### Packages
+
+| Package                                   | Description                                                            |
+| ----------------------------------------- | ---------------------------------------------------------------------- |
+| [@rhtml/di](packages/di)                  | IOC container                                                          |
+| [@rhtml/component](packages/component)    | Main reactive component for building UI                                |
+| [@rhtml/components](packages/components)  | Declarative monadic approach defining WC using html                    |
+| [@rhtml/operators](packages/operators)    | Useful declarative operators like `for` `if`                           |
+| [@rhtml/graphql](packages/graphql)        | Declarative Graphql for executing `query` `mutation` or `subscription` |
+| [@rhtml/hooks](packages/hooks)            | React like hooks for use inside web components                         |
+| [@rhtml/renderer](packages/renderer)      | Main renderer for every component used also with observables           |
+| [@rhtml/schematics](packages/schematics)  | Angular like schematics for component generation using DI container    |
+| [@rhtml/experiments](packages/experiments)| Declarative way of defining web components only with HTML              |
+
+
+
 #### Installation
 
 ```bash
