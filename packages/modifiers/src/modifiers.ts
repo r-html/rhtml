@@ -49,11 +49,15 @@ export const setChildrensFlex = (div: HTMLElement) => {
 };
 
 export const setFxLayout = (element: HTMLElement) => {
-  return (fxLayout = ''): void => {
+  return (fxLayout = 'row'): void => {
     // element.style['flex-direction'] = fxLayout;
+    const splitted = fxLayout.split(' ');
+    const [mainAxis, crossAxis] = splitted;
+
     element.style['box-sizing'] = 'flex';
     element.style['display'] = 'flex';
-    element.style['flex-flow'] = `${fxLayout} wrap`;
+    element.style['flex-flow'] =
+      splitted.length > 1 ? `${mainAxis} ${crossAxis}` : mainAxis;
   };
 };
 
@@ -83,7 +87,7 @@ export const recursion = (div: HTMLElement): void => {
   if (isAttribute(fxLayoutGap)) {
     const divs = [...div.children] as HTMLElement[];
     for (const div of divs) {
-      div.style['padding'] = `0px ${fxLayoutGap} ${fxLayoutGap} 0px`;
+      div.style['margin'] = `0px ${fxLayoutGap} ${fxLayoutGap} 0px`;
       div.style.flex = '1 1 25%';
     }
   }
