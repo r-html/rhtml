@@ -83,13 +83,12 @@ export const setFxLayout = (element: HTMLElement) => {
   }
 };
 
-export const recursion = (div: HTMLElement): void => {
+export function recursion(div: HTMLElement) {
   const fxFlex = div.getAttribute(Attributes.FxFlex);
   const fxFlexFill = div.getAttribute(Attributes.FxFlexFill);
   const fxLayout = div.getAttribute(Attributes.FxLayout);
   const fxLayoutAlign = div.getAttribute(Attributes.FxLayoutAlign);
   const fxLayoutGap = div.getAttribute(Attributes.FxLayoutGap);
-
   if (isAttribute(fxFlex)) {
     subscribeToAttributeChanges(Attributes.FxFlex)(setChildrensFlex)(div);
   }
@@ -120,6 +119,6 @@ export const recursion = (div: HTMLElement): void => {
 
   const divs = [...div.children] as HTMLElement[];
   for (const div of divs) {
-    recursion(div);
+    recursion.call(this, div);
   }
-};
+}
