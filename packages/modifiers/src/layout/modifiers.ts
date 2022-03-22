@@ -21,7 +21,10 @@ export enum Attributes {
   FxFlex = 'fxFlex',
   FxFlexFill = 'fxFlexFill',
   FxLayoutAlign = 'fxLayoutAlign',
-  FxLayoutGap = 'fxLayoutGap'
+  FxLayoutGap = 'fxLayoutGap',
+  FxFlexAlign = 'fxFlexAlign',
+  FxFlexOffset = 'fxFlexOffset',
+  FxFlexOrder = 'fxFlexOrder'
 }
 /* TODO we need to update to typescript 4 */
 // export type FxLayoutAlign = `${MainAxis} ${CrossAxis}`;
@@ -33,8 +36,10 @@ export const setFxLayoutAlign = (element: HTMLElement) => {
   const fxLayoutAlign = element.getAttribute(Attributes.FxLayoutAlign);
   if (isAttribute(fxLayoutAlign)) {
     const [mainAxis, crossAxis] = fxLayoutAlign.split(' ');
-    element.style['place-content'] = `${crossAxis} ${mainAxis}`;
-    element.style['align-items'] = crossAxis;
+    element.style['place-content'] = crossAxis
+      ? `${crossAxis} ${mainAxis}`
+      : `${mainAxis} ${mainAxis}`;
+    element.style['align-items'] = crossAxis ? crossAxis : mainAxis;
   }
   element.style['display'] = 'flex';
 };
@@ -58,6 +63,29 @@ export const setChildrensFlex = (div: HTMLElement) => {
     if (fxFlex) {
       div.style['max-width'] = fxFlex;
     }
+  }
+};
+
+export const setFlexAlign = (div: HTMLElement) => {
+  const fxFlexAlign = div.getAttribute(Attributes.FxFlexAlign);
+  if (isAttribute(fxFlexAlign)) {
+    div.style['align-self'] = fxFlexAlign;
+  }
+};
+
+export const setFlexOffset = (div: HTMLElement) => {
+  const fxFlexOffset = div.getAttribute(Attributes.FxFlexOffset);
+  if (isAttribute(fxFlexOffset)) {
+    div.style['margin-left'] = fxFlexOffset;
+  }
+};
+
+export const setFlexOrder = (div: HTMLElement) => {
+  const fxFlexOrder = div.getAttribute(Attributes.FxFlexOrder);
+  if (isAttribute(fxFlexOrder)) {
+    div.style['order'] = fxFlexOrder;
+  } else {
+    div.style['order'] = '0';
   }
 };
 
@@ -89,6 +117,21 @@ export function recursion(div: HTMLElement) {
   const fxLayout = div.getAttribute(Attributes.FxLayout);
   const fxLayoutAlign = div.getAttribute(Attributes.FxLayoutAlign);
   const fxLayoutGap = div.getAttribute(Attributes.FxLayoutGap);
+  const fxFlexAlign = div.getAttribute(Attributes.FxFlexAlign);
+  const fxFlexOffset = div.getAttribute(Attributes.FxFlexOffset);
+  const fxFlexOrder = div.getAttribute(Attributes.FxFlexOrder);
+
+  if (isAttribute(fxFlexOrder)) {
+    subscribeToAttributeChanges(Attributes.FxFlexOrder)(setFlexOrder)(div);
+  }
+  if (isAttribute(fxFlexOffset)) {
+    subscribeToAttributeChanges(Attributes.FxFlexAlign)(setFlexOffset)(div);
+  }
+
+  if (isAttribute(fxFlexAlign)) {
+    subscribeToAttributeChanges(Attributes.FxFlexAlign)(setFlexAlign)(div);
+  }
+
   if (isAttribute(fxFlex)) {
     subscribeToAttributeChanges(Attributes.FxFlex)(setChildrensFlex)(div);
   }

@@ -18,18 +18,18 @@ import { recursion } from './modifiers';
 })
 export class FlexLayout extends LitElement {
   @property()
-  self: LitElement;
+  child: LitElement;
 
   OnUpdate(): void {
     const slot = this.shadowRoot.querySelector('slot');
     for (const div of [...slot?.assignedElements()]) {
-      recursion.call(this.self, div as never);
+      recursion.call(this.child, div as never);
     }
   }
 
   public static modifier(template: TemplateResult): TemplateResult {
     return html`
-      <flex-layout .self=${this}>${template}</flex-layout>
+      <flex-layout .child=${this}>${template}</flex-layout>
     `;
   }
 }
