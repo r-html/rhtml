@@ -1,0 +1,40 @@
+{
+  "name": "@rhtml/modifiers",
+  "version": "0.0.86",
+  "description": "Reactive HyperText Markup Language",
+  "scripts": {
+    "start": "npx parcel ./examples/index.html --out-dir build/examples",
+    "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
+    "delete-dist": "rm -rf dist",
+    "clean": "git clean -dxf",
+    "lint": "npx eslint . --ext .ts",
+    "lint-fix": "npx eslint . --fix --ext .ts",
+    "build": "rm -rf dist && npx npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rhtml/rhtml.git"
+  },
+  "dependencies": {
+    "@rxdi/lit-html": "^0.7.133"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-simple-import-sort": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "25.2.1"
+  },
+  "author": "Kristiyan Tachev",
+  "license": "MIT",
+  "browserslist": [
+    "last 1 chrome versions"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts"
+}
