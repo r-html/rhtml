@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/schematics",
-  "version": "0.0.89",
+  "version": "0.0.90",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
