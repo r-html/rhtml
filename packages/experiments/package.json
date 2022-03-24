@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/experiments",
-  "version": "0.0.91",
+  "version": "0.0.92",
   "description": "RHTML Experiments repo",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@rxdi/lit-html": "^0.7.133",
-    "@rhtml/operators": "0.0.91"
+    "@rhtml/operators": "0.0.92"
   },
   "browserslist": [
     "last 1 chrome versions"

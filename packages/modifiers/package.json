@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/modifiers",
-  "version": "0.0.91",
+  "version": "0.0.92",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
