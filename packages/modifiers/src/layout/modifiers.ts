@@ -143,14 +143,6 @@ export function recursion(div: HTMLElement) {
   }
 
   if (isAttribute(fxLayout)) {
-    const observer = new MutationObserver(() => {
-      observer.disconnect();
-      recursion.call(this, div);
-    });
-    observer.observe(div, {
-      subtree: true,
-      childList: true
-    });
     subscribeToAttributeChanges(Attributes.FxLayout)(setFxLayout)(div);
   }
 

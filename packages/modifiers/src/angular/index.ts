@@ -2,7 +2,10 @@ import {
   Component,
   html,
   LitElement,
+  OnDestroy,
+  OnUpdateFirst,
   property,
+  query,
   TemplateResult
 } from '@rxdi/lit-html';
 
@@ -37,20 +40,43 @@ function recursion(div: HTMLElement) {
     `;
   }
 })
-export class AngularLayout extends LitElement {
-  @property()
-  self: LitElement;
-
-  OnUpdate(): void {
-    const slot = this.shadowRoot.querySelector('slot');
-    for (const div of [...slot?.assignedElements()]) {
-      recursion.call(this.self, div as never);
-    }
-  }
-
+export class AngularLayout extends LitElement
+  implements OnUpdateFirst, OnDestroy {
+  /* Keep in mind that `this` here is the parent component where modifier will be used */
   public static modifier(template: TemplateResult): TemplateResult {
     return html`
-      <angular-layout .self=${this}>${template}</angular-layout>
+      <angular-layout .parent=${this}>${template}</angular-layout>
     `;
+  }
+
+  @property()
+  public parent: LitElement;
+
+  @query('slot')
+  private container: HTMLSlotElement;
+
+  private observer: MutationObserver;
+
+  OnUpdateFirst() {
+    this.triggerChanges();
+    this.listenForTreeChanges();
+  }
+
+  OnDestroy() {
+    this.observer.disconnect();
+  }
+
+  private listenForTreeChanges() {
+    this.observer = new MutationObserver(() => this.triggerChanges());
+    this.observer.observe(this.parent.shadowRoot, {
+      subtree: true,
+      childList: true
+    });
+  }
+
+  private triggerChanges() {
+    for (const div of this.container.assignedElements()) {
+      recursion.call(this.parent, div);
+    }
   }
 }
