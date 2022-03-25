@@ -37,24 +37,47 @@ class BackgroundColor extends Attribute {
 customAttributes.define('red', BackgroundColor);
 ```
 
-#### Interface of class Attribute
+#### Usage inside @rxdi/lit-html
 
 ```typescript
-export abstract class Attribute {
-  public element: HTMLElement;
-  public value: string;
-  public name: string;
+import { Component, LitElement, html } from '@rxdi/lit-html';
 
-  OnInit(): void {
-    /* */
+export class BackgroundColor extends Attribute {
+  static options(this: HTMLElement) {
+    return {
+      name: 'myAttribute',
+      registry: CustomAttributeRegistry
+    };
   }
 
-  OnDestroy(): void {
-    /* */
+  OnInit() {
+    console.log('Attribute initialized');
+    this.setColor();
   }
 
-  OnUpdate(_oldValue: string, _newValue: string) {
-    /* */
+  OnDestroy() {
+    console.log('Attribute destroyed');
+    this.element.style.backgroundColor = null;
+  }
+
+  OnUpdate(oldValue: string, newValue: string) {
+    console.log('Attribute updated');
+    this.setColor();
+  }
+
+  setColor() {
+    this.element.style.backgroundColor = this.value;
   }
 }
+
+@Component({
+  selector: 'home-component',
+  modifiers: [BackgroundColor],
+  template(this: HomeComponent) {
+    return html`
+      <div myAttribute="red">Background</div>
+    `;
+  }
+})
+export class HomeComponent extends LitElement {}
 ```
