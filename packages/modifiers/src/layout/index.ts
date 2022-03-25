@@ -1,60 +1,21 @@
-import {
-  Component,
-  html,
-  LitElement,
-  OnDestroy,
-  OnUpdateFirst,
-  property,
-  query,
-  TemplateResult
-} from '@rxdi/lit-html';
+import { Flex } from './flex';
+import { FlexAlign } from './flex-align';
+import { FlexFill } from './flex-fill';
+import { FlexOffset } from './flex-offset';
+import { FlexOrder } from './flex-order';
+import { Layout } from './layout';
+import { LayoutAlign } from './layout-align';
+import { LayoutGap } from './layout-gap';
 
-import { recursion } from './modifiers';
+export * from './layout';
 
-@Component({
-  selector: 'flex-layout',
-  template() {
-    return html`
-      <slot></slot>
-    `;
-  }
-})
-export class FlexLayout extends LitElement implements OnUpdateFirst, OnDestroy {
-  /* Keep in mind that `this` here is the parent component where modifier will be used */
-  public static modifier(template: TemplateResult): TemplateResult {
-    return html`
-      <flex-layout .parent=${this}>${template}</flex-layout>
-    `;
-  }
-
-  @property()
-  public parent: LitElement;
-
-  @query('slot')
-  private container: HTMLSlotElement;
-
-  private observer: MutationObserver;
-
-  OnUpdateFirst() {
-    this.triggerChanges();
-    this.listenForTreeChanges();
-  }
-
-  OnDestroy() {
-    this.observer.disconnect();
-  }
-
-  private listenForTreeChanges() {
-    this.observer = new MutationObserver(() => this.triggerChanges());
-    this.observer.observe(this.parent.shadowRoot, {
-      subtree: true,
-      childList: true
-    });
-  }
-
-  private triggerChanges() {
-    for (const div of this.container.assignedElements()) {
-      recursion.call(this.parent, div);
-    }
-  }
-}
+export const FlexLayout = [
+  Layout,
+  LayoutAlign,
+  LayoutGap,
+  FlexFill,
+  Flex,
+  FlexAlign,
+  FlexOffset,
+  FlexOrder
+];

@@ -14,9 +14,9 @@ export abstract class Attribute<T = {}> {
   public name?: string;
   public parent?: HTMLElement | Document | ShadowRoot;
   setStyles(keys: T) {
-    return (div: HTMLElement) => {
+    return (div: HTMLElement | Element | HTMLDivElement) => {
       for (const [key, value] of Object.entries(keys)) {
-        div.style[key] = value;
+        div['style'][key] = value;
       }
     };
   }

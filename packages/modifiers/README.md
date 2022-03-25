@@ -6,38 +6,11 @@
 npm i @rhtml/modifiers
 ```
 
-#### Modifiers
+Every modifier is actually `custom attribute` and modifiers is using package [@rhtml/custom-attributes](../custom-attributes)
 
-What is a modifier ?
+#### Usage
 
-In order to apply some logic before current template is loaded like custom directives, we need to wrap current template and pass it along the actual modifier template
-
-```typescript
-@Component({
-  selector: 'my-modifier',
-  template() {
-    return html`
-      <slot></slot>
-    `;
-  }
-})
-export class MyModifier extends LitElement {
-  OnUpdate() {
-    const slot = this.shadowRoot.querySelector('slot');
-    for (const element of [...slot.assignedElements()]) {
-      /// Do something here with element
-    }
-  }
-
-  public static html(template: TemplateResult) {
-    return html`
-      <my-modifier>${template}</my-modifier>
-    `;
-  }
-}
-```
-
-Another real example is to add FlexLayout modifier from `@rhtml/modifiers` which will apply useful directives
+Another real example is to add FlexLayout modifier from `@rhtml/modifiers` which will apply useful attributes
 to be used inside of the html inspired from Angular flex-layout https://github.com/angular/flex-layout/wiki/Declarative-API-Overview
 
 ```typescript
@@ -51,15 +24,16 @@ import { FlexLayout } from '@rhtml/modifiers';
 @Component({
   selector: 'home-component',
   style: css`
+    .container {
+      height: 200px;
+    }
+
     .block {
       background: red;
       flex: 1;
     }
-    .container {
-      height: 200px;
-    }
   `,
-  modifiers: [FlexLayout],
+  modifiers: [...FlexLayout],
   template(this: HomeComponent) {
     return html`
       <div class="container" fxLayout="row" fxLayoutGap="10px">
@@ -80,4 +54,39 @@ import { FlexLayout } from '@rhtml/modifiers';
   }
 })
 export class HomeComponent extends LitElement {}
+```
+
+#### Angular Layout
+
+`ngIf` attribute available at the moment to test the logic which represents
+
+```typescript
+import { Component, html, LitElement, state } from '@rxdi/lit-html';
+
+import { AngularLayout } from '@rhtml/modifiers';
+
+/**
+ * @customElement home-component
+ */
+@Component({
+  selector: 'home-component',
+  modifiers: [...AngularLayout],
+  template(this: HomeComponent) {
+    return html`
+      <div ngIf=${this.show}>
+        My Content
+      </div>
+
+      <button @click=${() => this.toggle()}>Toggle</button>
+    `;
+  }
+})
+export class HomeComponent extends LitElement {
+  @state()
+  show: boolean;
+
+  toggle() {
+    this.show = !this.show;
+  }
+}
 ```
