@@ -1,7 +1,7 @@
 export type Constructor<T> = new (...args: never[]) => T;
 
 export interface Options {
-  registry: Constructor<CustomAttributeRegistry>;
+  registry?: CustomAttributeRegistry;
   name: string;
 }
 
@@ -59,7 +59,7 @@ export class CustomAttributeRegistry {
   }
 
   private getConstructor(attrName: string) {
-    return this._attrMap.get(attrName);
+    return this._attrMap.get(attrName.toLowerCase());
   }
 
   private observe() {
@@ -145,7 +145,7 @@ export class CustomAttributeRegistry {
       map.set(attributeName, modifier);
       modifier.element = el;
       modifier.name = attributeName;
-      modifier.value = attribute;
+      modifier.value = attribute || modifier.value;
       modifier.parent = this.parent;
 
       if (modifier.OnInit) {
