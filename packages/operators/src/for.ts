@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, html, LitElement, property } from '@rxdi/lit-html';
+import { Component, css, html, LitElement, property } from '@rxdi/lit-html';
 
 import { LetOperator } from './let';
 /**
@@ -7,6 +7,13 @@ import { LetOperator } from './let';
  */
 @Component({
   selector: 'r-for',
+  styles: [
+    css`
+      :host {
+        display: none;
+      }
+    `
+  ],
   template() {
     return html`
       <slot></slot>

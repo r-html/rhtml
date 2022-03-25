@@ -11,7 +11,13 @@ import { Component, html, LitElement, property } from '@rxdi/lit-html';
             <r-renderer
               .options=${{
                 state: this.data,
-                render: s => this.normalizeArray(s).map(this.item)
+                render: (state, set, shadowRoot) => {
+                  this.parentElement.parentNode.insertBefore(
+                    shadowRoot,
+                    this.parentElement.nextSibling
+                  );
+                  return this.normalizeArray(state).map(this.item);
+                }
               }}
             ></r-renderer>
           `
@@ -28,7 +34,14 @@ export class LetOperator extends LitElement {
     html`
       ${v}
     `;
-
+  OnUpdateFirst() {
+    if (!this.isObservable(this.data)) {
+      this.parentElement.parentNode.insertBefore(
+        this.shadowRoot,
+        this.parentElement.nextSibling
+      );
+    }
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private normalizeArray(state: Record<string, any>) {
     if (!state || typeof state === 'string') {

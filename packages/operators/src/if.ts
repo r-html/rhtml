@@ -17,4 +17,8 @@ import { Component, html, LitElement, property } from '@rxdi/lit-html';
 })
 export class IfOperator extends LitElement {
   @property({ type: Boolean }) exp: boolean;
+
+  OnUpdateFirst() {
+    // this.parentNode.insertBefore(this.shadowRoot, this.nextSibling);
+  }
 }
