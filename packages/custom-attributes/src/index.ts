@@ -92,6 +92,10 @@ export class CustomAttributeRegistry {
     });
   }
 
+  unsubscribe() {
+    this.observer?.disconnect();
+  }
+
   private upgradeAttribute(attrName: string, doc?: HTMLElement) {
     const parent = doc || this.parent;
 
