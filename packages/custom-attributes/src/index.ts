@@ -120,7 +120,7 @@ export class CustomAttributeRegistry {
         }
       }
     });
-    this.observer.observe(this.parent, {
+    this.observer.observe(this.parent?.['shadowRoot'] ?? this.parent, {
       childList: true,
       subtree: true,
       attributes: true,

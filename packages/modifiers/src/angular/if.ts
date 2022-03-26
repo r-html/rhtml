@@ -7,7 +7,7 @@ import {
 @Modifier({
   selector: 'ngIf',
   registry(this) {
-    return new CustomAttributeRegistry(this.shadowRoot);
+    return new CustomAttributeRegistry(this);
   }
 })
 export class IfOperator extends Attribute {
