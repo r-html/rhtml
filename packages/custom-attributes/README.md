@@ -37,20 +37,19 @@ class BackgroundColor extends Attribute {
 customAttributes.define('background', BackgroundColor);
 ```
 
-#### Usage inside @rxdi/lit-html with custom registry
+#### Usage inside @rxdi/lit-html with custom registry and @Modifier decorator
 
 ```typescript
 import { Component, LitElement, html } from '@rxdi/lit-html';
-import { CustomAttributeRegistry } from '@rhtml/custom-attributes';
+import { Modifier, CustomAttributeRegistry } from '@rhtml/custom-attributes';
 
-export class BackgroundColor extends Attribute {
-  static options(this: HTMLElement) {
-    return {
-      selector: 'background',
-      registry: new CustomAttributeRegistry(this.shadowRoot)
-    };
+@Modifier({
+  selector: 'background',
+  registry(this) {
+    return new CustomAttributeRegistry(this.shadowRoot);
   }
-
+})
+export class BackgroundColor extends Attribute {
   OnInit() {
     console.log('Attribute initialized');
     this.setColor();
@@ -76,7 +75,7 @@ export class BackgroundColor extends Attribute {
   modifiers: [BackgroundColor],
   template(this: HomeComponent) {
     return html`
-      <div myAttribute="red">Background</div>
+      <div background="red">Background</div>
     `;
   }
 })
@@ -116,13 +115,13 @@ export class BackgroundColor extends Attribute {
   }
 }
 
-@Component({
+@Component<HomeComponent>({
   selector: 'home-component',
-  registry(this: HomeComponent) {
+  registry(this) {
     return new CustomAttributeRegistry(this.shadowRoot);
   },
   modifiers: [BackgroundColor],
-  template(this: HomeComponent) {
+  template(this) {
     return html`
       <div myAttribute="red">Background</div>
     `;
@@ -131,7 +130,7 @@ export class BackgroundColor extends Attribute {
 export class HomeComponent extends LitElement {}
 ```
 
-#### Decorator @CustomAttribute or @Modifier
+#### Decorator @CustomAttribute or @Modifier there are the same
 
 There is a way to define `options` static method as a typescript decorator
 
@@ -152,10 +151,10 @@ export class BackgroundColor extends Attribute {}
 #### Modifier accepts also decorators from @rhtml/decorators
 
 ```typescript
-import { CustomAttribute } from '@rhtml/custom-attributes';
-import { Input, HostListener } from '@rhtml/decorators';
+import { Modifier, Input } from '@rhtml/custom-attributes';
+import { HostListener } from '@rhtml/decorators';
 
-@CustomAttribute({
+@Modifier({
   selector: 'hover'
 })
 export class Hoverable extends Attribute {

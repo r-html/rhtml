@@ -11,6 +11,19 @@ interface ModifierOptions {
 }
 
 /**
+ * Decorator @Input
+ * Used to get attribute from element
+ */
+export const Input = () => (target: unknown, memberName: string) => {
+  Object.defineProperty(target, memberName, {
+    get: function() {
+      const element = this.element ?? this;
+      return element.getAttribute(memberName.toLowerCase());
+    }
+  });
+};
+
+/**
  * Decorator @Modifier
  * Accepts parameter options with selector and registry
  */
@@ -24,6 +37,7 @@ export const Modifier = (options: ModifierOptions) => {
     };
   };
 };
+
 /* Someone may like to use CustomAttribute instead of Modifier */
 export const CustomAttribute = Modifier;
 

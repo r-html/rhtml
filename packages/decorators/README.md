@@ -9,8 +9,8 @@ npm i @rhtml/decorators
 #### Usage
 
 ```typescript
-import { Attribute, Options } from '@rhtml/custom-attributes';
-import { Input, HostListener } from '@rhtml/decorators';
+import { Attribute, Options, Input } from '@rhtml/custom-attributes';
+import { HostListener } from '@rhtml/decorators';
 
 export class TestDirective extends Attribute {
   @Input()
