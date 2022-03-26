@@ -1,15 +1,13 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   'align-self': string;
 }
-export class FlexAlign extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      name: 'fxFlexAlign'
-    };
-  }
 
+@Modifier({
+  selector: 'fxFlexAlign'
+})
+export class FlexAlign extends Attribute<Styles> {
   OnInit() {
     this.modify();
   }

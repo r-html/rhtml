@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@rxdi/lit-html": "^0.7.133",
-    "@rhtml/renderer": "0.0.100",
+    "@rhtml/renderer": "0.0.101",
     "rxjs": "^6.6.3",
     "shades": "^2.1.0"
   },

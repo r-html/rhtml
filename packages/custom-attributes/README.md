@@ -34,7 +34,7 @@ class BackgroundColor extends Attribute {
   }
 }
 
-customAttributes.define('red', BackgroundColor);
+customAttributes.define('background', BackgroundColor);
 ```
 
 #### Usage inside @rxdi/lit-html with custom registry
@@ -46,7 +46,7 @@ import { CustomAttributeRegistry } from '@rhtml/custom-attributes';
 export class BackgroundColor extends Attribute {
   static options(this: HTMLElement) {
     return {
-      name: 'myAttribute',
+      selector: 'background',
       registry: new CustomAttributeRegistry(this.shadowRoot)
     };
   }
@@ -92,7 +92,7 @@ import { CustomAttributeRegistry } from '@rhtml/custom-attributes';
 export class BackgroundColor extends Attribute {
   static options(this: HTMLElement) {
     return {
-      name: 'myAttribute'
+      selector: 'myAttribute'
     };
   }
 
@@ -129,4 +129,51 @@ export class BackgroundColor extends Attribute {
   }
 })
 export class HomeComponent extends LitElement {}
+```
+
+#### Decorator @CustomAttribute or @Modifier
+
+There is a way to define `options` static method as a typescript decorator
+
+```typescript
+import { CustomAttribute, Modifier } from '@rhtml/custom-attributes';
+
+@CustomAttribute({
+  selector: 'background'
+})
+export class BackgroundColor extends Attribute {}
+
+@Modifier({
+  selector: 'background'
+})
+export class BackgroundColor extends Attribute {}
+```
+
+#### Modifier accepts also decorators from @rhtml/decorators
+
+```typescript
+import { CustomAttribute } from '@rhtml/custom-attributes';
+import { Input, HostListener } from '@rhtml/decorators';
+
+@CustomAttribute({
+  selector: 'hover'
+})
+export class Hoverable extends Attribute {
+  @Input()
+  myProperty: string;
+
+  @HostListener('mouseenter')
+  enter(event: Event) {
+    console.log('Enter', event);
+  }
+
+  @HostListener('mouseleave')
+  leave(event: Event) {
+    console.log('Leave', event);
+  }
+}
+```
+
+```html
+<div hover myProperty="123">Lorem ipsum dolor</div>
 ```

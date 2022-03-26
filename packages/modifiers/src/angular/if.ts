@@ -1,12 +1,16 @@
-import { Attribute, CustomAttributeRegistry } from '@rhtml/custom-attributes';
+import {
+  Attribute,
+  CustomAttributeRegistry,
+  Modifier
+} from '@rhtml/custom-attributes';
 
-export class IfOperator extends Attribute {
-  static options(this: HTMLElement) {
-    return {
-      name: 'ngIf',
-      registry: new CustomAttributeRegistry(this.shadowRoot)
-    };
+@Modifier({
+  selector: 'ngIf',
+  registry(this) {
+    return new CustomAttributeRegistry(this.shadowRoot);
   }
+})
+export class IfOperator extends Attribute {
   OnInit() {
     this.setColor();
   }

@@ -1,4 +1,8 @@
-import { Attribute, CustomAttributeRegistry } from '@rhtml/custom-attributes';
+import {
+  Attribute,
+  CustomAttributeRegistry,
+  Modifier
+} from '@rhtml/custom-attributes';
 
 interface Styles {
   'flex-flow': string;
@@ -6,14 +10,14 @@ interface Styles {
   display: string;
 }
 
+@Modifier({
+  selector: 'fxLayout',
+  registry(this) {
+    return new CustomAttributeRegistry(this.shadowRoot);
+  }
+})
 export class Layout extends Attribute<Styles> {
   value = 'row';
-  static options(this: HTMLElement) {
-    return {
-      name: 'fxLayout',
-      registry: new CustomAttributeRegistry(this.shadowRoot)
-    };
-  }
 
   OnInit() {
     this.modify();

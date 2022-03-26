@@ -1,4 +1,4 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   flex: string;
@@ -6,10 +6,13 @@ interface Styles {
   'max-width': string;
 }
 
+@Modifier({
+  selector: 'fxFlex'
+})
 export class Flex extends Attribute<Styles> {
   static options(this: HTMLElement) {
     return {
-      name: 'fxFlex'
+      selector: 'fxFlex'
     };
   }
 

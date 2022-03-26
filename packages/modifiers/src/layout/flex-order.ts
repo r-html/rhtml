@@ -1,13 +1,16 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   order: string;
 }
 
+@Modifier({
+  selector: 'fxFlexOrder'
+})
 export class FlexOrder extends Attribute<Styles> {
   static options(this: HTMLElement) {
     return {
-      name: 'fxFlexOrder'
+      selector: 'fxFlexOrder'
     };
   }
 

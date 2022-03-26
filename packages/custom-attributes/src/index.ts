@@ -2,8 +2,30 @@ export type Constructor<T> = new (...args: never[]) => T;
 
 export interface Options {
   registry?: CustomAttributeRegistry;
-  name: string;
+  selector: string;
 }
+
+interface ModifierOptions {
+  selector: string;
+  registry?(this: HTMLElement): CustomAttributeRegistry;
+}
+
+/**
+ * Decorator @Modifier
+ * Accepts parameter options with selector and registry
+ */
+export const Modifier = (options: ModifierOptions) => {
+  return (target: Function) => {
+    target['options'] = function(this: HTMLElement): Options {
+      return {
+        ...options,
+        registry: options.registry?.call(this)
+      };
+    };
+  };
+};
+/* Someone may like to use CustomAttribute instead of Modifier */
+export const CustomAttribute = Modifier;
 
 export abstract class Attribute<T = {}> {
   public static options(this: HTMLElement): Options {
@@ -11,7 +33,7 @@ export abstract class Attribute<T = {}> {
   }
   public element?: HTMLElement;
   public value?: string;
-  public name?: string;
+  public selector?: string;
   public parent?: HTMLElement | Document | ShadowRoot;
   setStyles(keys: T) {
     return (div: HTMLElement | Element | HTMLDivElement) => {
@@ -148,7 +170,7 @@ export class CustomAttributeRegistry {
       const modifier = new Constructor();
       map.set(attributeName, modifier);
       modifier.element = el;
-      modifier.name = attributeName;
+      modifier.selector = attributeName;
       modifier.value = attribute || modifier.value;
       modifier.parent = this.parent;
 

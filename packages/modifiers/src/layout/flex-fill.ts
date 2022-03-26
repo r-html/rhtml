@@ -1,4 +1,4 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   margin: string;
@@ -8,10 +8,13 @@ interface Styles {
   'min-height': string;
 }
 
+@Modifier({
+  selector: 'fxFlexFill'
+})
 export class FlexFill extends Attribute<Styles> {
   static options(this: HTMLElement) {
     return {
-      name: 'fxFlexFill'
+      selector: 'fxFlexFill'
     };
   }
 

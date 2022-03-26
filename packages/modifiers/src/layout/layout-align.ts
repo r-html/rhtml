@@ -1,4 +1,4 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   'place-content': string;
@@ -6,13 +6,10 @@ interface Styles {
   display: string;
 }
 
+@Modifier({
+  selector: 'fxLayoutAlign'
+})
 export class LayoutAlign extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      name: 'fxLayoutAlign'
-    };
-  }
-
   OnInit() {
     this.modify();
   }

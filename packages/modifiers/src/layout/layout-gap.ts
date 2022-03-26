@@ -1,17 +1,14 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   margin: string;
   flex: string;
 }
 
+@Modifier({
+  selector: 'fxLayoutGap'
+})
 export class LayoutGap extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      name: 'fxLayoutGap'
-    };
-  }
-
   private observer: MutationObserver;
 
   OnInit() {

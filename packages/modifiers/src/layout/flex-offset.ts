@@ -1,16 +1,13 @@
-import { Attribute } from '@rhtml/custom-attributes';
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
   'margin-left': string;
 }
 
+@Modifier({
+  selector: 'fxFlexOffset'
+})
 export class FlexOffset extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      name: 'fxFlexOffset'
-    };
-  }
-
   OnInit() {
     this.modify();
   }
