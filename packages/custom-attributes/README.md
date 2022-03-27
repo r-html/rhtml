@@ -89,11 +89,9 @@ import { Component, LitElement, html } from '@rxdi/lit-html';
 import { CustomAttributeRegistry } from '@rhtml/custom-attributes';
 
 export class BackgroundColor extends Attribute {
-  static options(this: HTMLElement) {
-    return {
-      selector: 'myAttribute'
-    };
-  }
+  static options = {
+    selector: 'myAttribute'
+  };
 
   OnInit() {
     console.log('Attribute initialized');

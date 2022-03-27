@@ -4,11 +4,6 @@ const noop = function() {
   /*  */
 };
 
-export interface Options {
-  registry?: CustomAttributeRegistry;
-  selector: string;
-}
-
 interface ModifierOptions {
   selector: string;
   registry?(this: HTMLElement): CustomAttributeRegistry;
@@ -72,12 +67,7 @@ export const Input = (options?: InputOptions) => (
  */
 export const Modifier = (options: ModifierOptions) => {
   return (target: Function) => {
-    target['options'] = function(this: HTMLElement): Options {
-      return {
-        ...options,
-        registry: options.registry?.call(this)
-      };
-    };
+    target['options'] = options;
   };
 };
 
@@ -85,9 +75,7 @@ export const Modifier = (options: ModifierOptions) => {
 export const CustomAttribute = Modifier;
 
 export abstract class Attribute<T = {}> {
-  public static options(this: HTMLElement): Options {
-    return;
-  }
+  public static options: ModifierOptions;
   public element?: HTMLElement;
   public value?: string;
   public selector?: string;

@@ -10,12 +10,6 @@ interface Styles {
   selector: 'fxFlex'
 })
 export class Flex extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      selector: 'fxFlex'
-    };
-  }
-
   OnInit() {
     this.modify();
   }

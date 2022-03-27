@@ -8,12 +8,6 @@ interface Styles {
   selector: 'fxFlexOrder'
 })
 export class FlexOrder extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      selector: 'fxFlexOrder'
-    };
-  }
-
   OnInit() {
     this.modify();
   }

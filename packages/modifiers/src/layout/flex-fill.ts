@@ -12,12 +12,6 @@ interface Styles {
   selector: 'fxFlexFill'
 })
 export class FlexFill extends Attribute<Styles> {
-  static options(this: HTMLElement) {
-    return {
-      selector: 'fxFlexFill'
-    };
-  }
-
   value = '100%';
 
   OnInit() {
