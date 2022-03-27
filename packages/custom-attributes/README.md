@@ -176,3 +176,23 @@ export class Hoverable extends Attribute {
 ```html
 <div hover myProperty="123">Lorem ipsum dolor</div>
 ```
+
+#### Observing properties defined with @Input decorator
+
+```typescript
+import { Modifier, Input } from '@rhtml/custom-attributes';
+import { HostListener } from '@rhtml/decorators';
+
+@Modifier({
+  selector: 'hover'
+})
+export class Hoverable extends Attribute {
+  @Input({ observe: true })
+  myProperty: string;
+
+  OnUpdateAttribute(name: string, value: string) {
+    /* This will be triggered on every update of the attribute myProperty */
+    console.log(this.myProperty);
+  }
+}
+```

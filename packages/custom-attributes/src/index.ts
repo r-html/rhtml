@@ -1,5 +1,9 @@
 export type Constructor<T> = new (...args: never[]) => T;
 
+const noop = function() {
+  /*  */
+};
+
 export interface Options {
   registry?: CustomAttributeRegistry;
   selector: string;
@@ -9,18 +13,57 @@ interface ModifierOptions {
   selector: string;
   registry?(this: HTMLElement): CustomAttributeRegistry;
 }
+interface InputOptions {
+  /**
+   * If enabled will trigger OnUpdate method on the Attribute
+   * */
+  observe: true;
+}
+
+const observe = (target: unknown, memberName: string) => {
+  const prototype = target.constructor.prototype;
+  const OnInit = prototype.OnInit || noop;
+  const OnDestroy = prototype.OnInit || noop;
+  const OnUpdateAttribute = prototype.OnUpdateAttribute || noop;
+
+  let observer: MutationObserver;
+  prototype.OnInit = function() {
+    const element = this.element ?? this;
+    if (observer) {
+      observer.disconnect();
+    }
+    observer = new MutationObserver(() =>
+      OnUpdateAttribute.call(this, memberName, element.getAttribute(memberName))
+    );
+    observer.observe(element, {
+      attributeFilter: [memberName],
+      attributes: true
+    });
+    return OnInit.call(this);
+  };
+  prototype.OnDestroy = function() {
+    observer.disconnect();
+    return OnDestroy.call(this);
+  };
+};
 
 /**
  * Decorator @Input
  * Used to get attribute from element
  */
-export const Input = () => (target: unknown, memberName: string) => {
+export const Input = (options?: InputOptions) => (
+  target: unknown,
+  memberName: string
+) => {
   Object.defineProperty(target, memberName, {
     get: function() {
       const element = this.element ?? this;
       return element.getAttribute(memberName.toLowerCase());
     }
   });
+  if (options?.observe) {
+    observe(target, memberName);
+  }
 };
 
 /**
@@ -64,6 +107,10 @@ export abstract class Attribute<T = {}> {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   OnUpdate(_oldValue: string, _newValue: string) {
+    /* */
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  OnUpdateAttribute(_name: string, _value: string) {
     /* */
   }
 }
