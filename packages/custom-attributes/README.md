@@ -177,6 +177,9 @@ export class Hoverable extends Attribute {
 
 #### Observing properties defined with @Input decorator
 
+Sometimes we want our Modifier to be more extensible and we want to create complex
+logic like for example to listen for specific property changes inside of our modifier
+
 ```typescript
 import { Modifier, Input } from '@rhtml/custom-attributes';
 import { HostListener } from '@rhtml/decorators';
@@ -193,4 +196,113 @@ export class Hoverable extends Attribute {
     console.log(this.myProperty);
   }
 }
+```
+
+#### Advanced usage without Decorators
+
+```typescript
+import { Attribute, CustomAttributeRegistry } from '@rhtml/custom-attributes';
+
+export class Animation extends Attribute {
+  static options = {
+    selector: 'animated',
+    registry(this: HTMLElement) {
+      return new CustomAttributeRegistry(this);
+    },
+    observedAttributes: ['delay']
+  };
+
+  get delay() {
+    return this.element.getAttribute('delay');
+  }
+
+  OnInit() {
+    this.modify();
+  }
+
+  OnDestroy() {
+    this.element.classList.remove('animated', this.value);
+    this.element.style.animationDelay = null;
+  }
+
+  OnUpdate() {
+    this.modify();
+  }
+
+  OnUpdateAttribute() {
+    this.modify();
+  }
+
+  private modify() {
+    this.element.classList.add('animated', this.value);
+    this.element.style.animationDelay = this.delay;
+  }
+}
+```
+
+#### Same example but with Decorators
+
+```typescript
+import {
+  Attribute,
+  CustomAttributeRegistry,
+  Input,
+  Modifier
+} from '@rhtml/custom-attributes';
+import { Animations, AnimationsType } from './animate.css';
+
+interface Styles {
+  animationDelay: string;
+}
+
+@Modifier({
+  selector: 'animated',
+  registry(this: HTMLElement) {
+    return new CustomAttributeRegistry(this);
+  }
+})
+export class Animation extends Attribute<Styles> {
+  @Input({ observe: true })
+  delay: string;
+
+  value: AnimationsType;
+
+  OnInit() {
+    this.pushStylesToParent();
+    this.modify();
+  }
+
+  OnDestroy() {
+    this.element.classList.remove('animated', this.value);
+    this.setStyles({ animationDelay: null })(this.element);
+  }
+
+  OnUpdate() {
+    this.modify();
+  }
+
+  OnUpdateAttribute() {
+    this.modify();
+  }
+
+  private modify() {
+    this.element.classList.add('animated', this.value);
+    this.setStyles({ animationDelay: this.delay })(this.element);
+  }
+
+  private pushStylesToParent() {
+    const style = document.createElement('style');
+    style.innerHTML = `${Animations}`;
+    const root = this.parent.shadowRoot ?? this.parent;
+    root.prepend(style);
+  }
+}
+```
+
+By changing `delay` attribute because we use `observe: true` method `OnUpdateAttribute` will be triggered
+
+```html
+<h2 animated="slideInLeft" delay="1s">
+  My Animated Element
+</h2>
 ```

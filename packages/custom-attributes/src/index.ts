@@ -1,4 +1,8 @@
-export type Constructor<T> = new (...args: never[]) => T;
+export type C<T> = new (...args: never[]) => T;
+
+export interface Constructor<T> extends C<T> {
+  options: ModifierOptions;
+}
 
 const noop = function() {
   /*  */
@@ -7,7 +11,9 @@ const noop = function() {
 interface ModifierOptions {
   selector: string;
   registry?(this: HTMLElement): CustomAttributeRegistry;
+  observedAttributes?: string[];
 }
+
 interface InputOptions {
   /**
    * If enabled will trigger OnUpdate method on the Attribute
@@ -79,7 +85,7 @@ export abstract class Attribute<T = {}> {
   public element?: HTMLElement;
   public value?: string;
   public selector?: string;
-  public parent?: HTMLElement | Document | ShadowRoot;
+  public parent?: HTMLElement;
   setStyles(keys: T) {
     return (div: HTMLElement | Element | HTMLDivElement) => {
       for (const [key, value] of Object.entries(keys)) {
@@ -111,7 +117,7 @@ export class CustomAttributeRegistry {
   > = new WeakMap();
   private observer: MutationObserver;
 
-  constructor(private parent: HTMLElement | Document | ShadowRoot) {
+  constructor(private parent: HTMLElement) {
     if (!parent) {
       throw new Error('Must be given a parent element');
     }
@@ -215,8 +221,13 @@ export class CustomAttributeRegistry {
     const attribute = el.getAttribute(attributeName);
 
     if (!modifier) {
-      const Constructor = this.getConstructor(attributeName);
-      const modifier = new Constructor();
+      const Modifier = this.getConstructor(attributeName);
+      const modifier = new Modifier();
+      if (Modifier.options?.observedAttributes?.length) {
+        for (const observedAttribute of Modifier.options.observedAttributes) {
+          observe(modifier, observedAttribute);
+        }
+      }
       map.set(attributeName, modifier);
       modifier.element = el;
       modifier.selector = attributeName;
