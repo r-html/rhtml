@@ -5,7 +5,7 @@ import {
 } from '@rhtml/custom-attributes';
 
 @Modifier({
-  selector: 'registry',
+  selector: 'flex-layout-registry',
   registry(this) {
     return new CustomAttributeRegistry(this);
   }

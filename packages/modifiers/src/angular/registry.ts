@@ -5,7 +5,7 @@ import {
 } from '@rhtml/custom-attributes';
 
 @Modifier({
-  selector: 'registry',
+  selector: 'angular-layout-registry',
   registry(this) {
     return new CustomAttributeRegistry(this);
   }

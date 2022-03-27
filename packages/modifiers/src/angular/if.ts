@@ -1,18 +1,13 @@
-import {
-  Attribute,
-  CustomAttributeRegistry,
-  Modifier
-} from '@rhtml/custom-attributes';
-
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
+interface Styles {
+  display: string;
+}
 @Modifier({
-  selector: 'ngIf',
-  registry(this) {
-    return new CustomAttributeRegistry(this);
-  }
+  selector: 'ngIf'
 })
-export class IfOperator extends Attribute {
+export class IfOperator extends Attribute<Styles> {
   OnInit() {
-    this.setColor();
+    this.modify();
   }
 
   OnDestroy() {
@@ -20,14 +15,14 @@ export class IfOperator extends Attribute {
   }
 
   OnUpdate() {
-    this.setColor();
+    this.modify();
   }
 
-  setColor() {
+  private modify() {
     if (this.value === 'true') {
-      this.element.style.display = null;
+      this.setStyles({ display: null });
     } else {
-      this.element.style.display = 'none';
+      this.setStyles({ display: 'none' });
     }
   }
 }

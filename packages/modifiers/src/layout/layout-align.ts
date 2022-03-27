@@ -1,8 +1,8 @@
 import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
-  'place-content': string;
-  'align-items': string;
+  placeContent: string;
+  alignItems: string;
   display: string;
 }
 
@@ -24,8 +24,8 @@ export class LayoutAlign extends Attribute<Styles> {
 
   private clean() {
     this.setStyles({
-      'align-items': null,
-      'place-content': null,
+      alignItems: null,
+      placeContent: null,
       display: null
     })(this.element);
   }
@@ -33,8 +33,8 @@ export class LayoutAlign extends Attribute<Styles> {
   private modify() {
     const [mainAxis, crossAxis] = this.value.split(' ');
     this.setStyles({
-      'align-items': crossAxis ? crossAxis : mainAxis,
-      'place-content': crossAxis
+      alignItems: crossAxis ? crossAxis : mainAxis,
+      placeContent: crossAxis
         ? `${crossAxis} ${mainAxis}`
         : `${mainAxis} ${mainAxis}`,
       display: 'flex'

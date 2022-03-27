@@ -1,7 +1,7 @@
 import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
-  'margin-left': string;
+  marginLeft: string;
 }
 
 @Modifier({
@@ -22,13 +22,13 @@ export class FlexOffset extends Attribute<Styles> {
 
   private clean() {
     this.setStyles({
-      'margin-left': null
+      marginLeft: null
     })(this.element);
   }
 
   private modify() {
     this.setStyles({
-      'margin-left': this.value || null
+      marginLeft: this.value || null
     })(this.element);
   }
 }

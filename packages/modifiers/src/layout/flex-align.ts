@@ -1,7 +1,7 @@
 import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
-  'align-self': string;
+  alignSelf: string;
 }
 
 @Modifier({
@@ -21,14 +21,10 @@ export class FlexAlign extends Attribute<Styles> {
   }
 
   private clean() {
-    this.setStyles({
-      'align-self': null
-    })(this.element);
+    this.setStyles({ alignSelf: null })(this.element);
   }
 
   private modify() {
-    this.setStyles({
-      'align-self': this.value || null
-    })(this.element);
+    this.setStyles({ alignSelf: this.value || null })(this.element);
   }
 }

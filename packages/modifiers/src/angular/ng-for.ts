@@ -32,7 +32,7 @@ export class NgFor extends Attribute {
     );
   }
 
-  modify() {
+  private modify() {
     const [, , , items] = this.ngFor.split(' ');
     const template = this.element.innerHTML;
     this.element.innerHTML = '';

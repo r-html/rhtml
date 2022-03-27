@@ -1,8 +1,8 @@
 import { Attribute, Modifier } from '@rhtml/custom-attributes';
 
 interface Styles {
-  'flex-flow': string;
-  'box-sizing': string;
+  flexFlow: string;
+  boxSizing: string;
   display: string;
 }
 
@@ -26,8 +26,8 @@ export class Layout extends Attribute<Styles> {
 
   private clean() {
     this.setStyles({
-      'box-sizing': null,
-      'flex-flow': null,
+      boxSizing: null,
+      flexFlow: null,
       display: null
     })(this.element);
   }
@@ -35,8 +35,8 @@ export class Layout extends Attribute<Styles> {
     const splitted = this.value.split(' ');
     const [mainAxis, crossAxis] = splitted;
     this.setStyles({
-      'box-sizing': 'flex',
-      'flex-flow': splitted.length > 1 ? `${mainAxis} ${crossAxis}` : mainAxis,
+      boxSizing: 'flex',
+      flexFlow: splitted.length > 1 ? `${mainAxis} ${crossAxis}` : mainAxis,
       display: 'flex'
     })(this.element);
   }
