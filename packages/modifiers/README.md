@@ -90,3 +90,29 @@ export class HomeComponent extends LitElement {
   }
 }
 ```
+
+#### Animation modifier
+
+List of available animations can be found [Here](./src/animation/interfaces.ts)
+
+```typescript
+import { Component, html, LitElement } from '@rxdi/lit-html';
+
+import { Animation } from '@rhtml/modifiers';
+
+/**
+ * @customElement home-component
+ */
+@Component({
+  selector: 'home-component',
+  modifiers: [Animation],
+  template(this: HomeComponent) {
+    return html`
+      <h2 animated="slideInLeft" delay="1s">
+        Your Animated Element
+      </h2>
+    `;
+  }
+})
+export class HomeComponent extends LitElement {}
+```
