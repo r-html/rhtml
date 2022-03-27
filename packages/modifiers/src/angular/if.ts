@@ -20,9 +20,9 @@ export class IfOperator extends Attribute<Styles> {
 
   private modify() {
     if (this.value === 'true') {
-      this.setStyles({ display: null });
+      this.setStyles({ display: null })(this.element);
     } else {
-      this.setStyles({ display: 'none' });
+      this.setStyles({ display: 'none' })(this.element);
     }
   }
 }
