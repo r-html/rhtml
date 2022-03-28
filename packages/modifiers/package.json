@@ -9,7 +9,7 @@
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && npx npx tsc"
+    "build": "rm -rf dist && npx tsc"
   },
   "repository": {
     "type": "git",

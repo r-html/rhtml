@@ -24,7 +24,7 @@ interface InputOptions {
 const observe = (target: unknown, memberName: string) => {
   const prototype = target.constructor.prototype;
   const OnInit = prototype.OnInit || noop;
-  const OnDestroy = prototype.OnInit || noop;
+  const OnDestroy = prototype.OnDestroy || noop;
   const OnUpdateAttribute = prototype.OnUpdateAttribute || noop;
 
   let observer: MutationObserver;
@@ -33,9 +33,14 @@ const observe = (target: unknown, memberName: string) => {
     if (observer) {
       observer.disconnect();
     }
-    observer = new MutationObserver(() =>
-      OnUpdateAttribute.call(this, memberName, element.getAttribute(memberName))
-    );
+    observer = new MutationObserver(() => {
+      OnUpdateAttribute.call(
+        this,
+        memberName,
+        element.getAttribute(memberName)
+      );
+      target[memberName] = element.getAttribute(memberName);
+    });
     observer.observe(element, {
       attributeFilter: [memberName],
       attributes: true
@@ -53,15 +58,31 @@ const observe = (target: unknown, memberName: string) => {
  * Used to get attribute from element
  */
 export const Input = (options?: InputOptions) => (
-  target: unknown,
+  target,
   memberName: string
 ) => {
-  Object.defineProperty(target, memberName, {
-    get: function() {
+  const OnInit = target.OnInit || noop;
+  Object.defineProperty(target, 'OnInit', {
+    value() {
+      let originalValue = this[memberName];
+
       const element = this.element ?? this;
-      return element.getAttribute(memberName.toLowerCase());
-    }
+      Object.defineProperty(this, memberName, {
+        get: function() {
+          originalValue = element.getAttribute(memberName.toLowerCase());
+          return originalValue;
+        },
+        set(value) {
+          element.setAttribute(memberName.toLowerCase(), value);
+          originalValue = value;
+        },
+        configurable: true
+      });
+      return OnInit.call(this);
+    },
+    configurable: true
   });
+
   if (options?.observe) {
     observe(target, memberName);
   }
