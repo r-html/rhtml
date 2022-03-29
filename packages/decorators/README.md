@@ -12,15 +12,12 @@ npm i @rhtml/decorators
 import { Attribute, Options, Input } from '@rhtml/custom-attributes';
 import { HostListener } from '@rhtml/decorators';
 
+@Modifier({
+  selector: 'test'
+})
 export class TestDirective extends Attribute {
   @Input()
   myProperty: string;
-
-  public static options(this: HTMLElement): Options {
-    return {
-      name: 'test'
-    };
-  }
 
   @HostListener('mouseenter')
   enter(event: Event) {
@@ -68,5 +65,33 @@ export class HomeComponent extends LitElement {
   @HostListener('mouseleave') onLeave() {
     console.log('Leave home');
   }
+}
+```
+
+#### @HostBinding and @Input decorators
+
+Specifiyng Input and HostBinding decorator gives you an reactive ability to assign styles directly to input properties
+This way by editing `padding`, `color` or `background` will reflect to the style associated with
+By doing this we can skip `OnInit`, `OnDestroy`, `OnUpdate` manual assign inside hooks
+
+```typescript
+import { Attribute, Input, Modifier } from '@rhtml/custom-attributes';
+import { HostBinding } from '@rhtml/decorators';
+
+@Modifier({
+  selector: 'layout'
+})
+export class CustomLayout extends Attribute {
+  @Input({ observe: true })
+  @HostBinding('style.padding')
+  padding: string;
+
+  @Input({ observe: true })
+  @HostBinding('style.color')
+  color: string;
+
+  @Input({ observe: true })
+  @HostBinding('style.background')
+  background: string;
 }
 ```
