@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ModifierOptions } from './types';
 
 /*  */
@@ -7,6 +8,7 @@ export abstract class Attribute<T = {}> {
   public value?: string;
   public selector?: string;
   public parent?: HTMLElement;
+  public observer?: MutationObserver;
   setStyles(keys: T) {
     return (div: HTMLElement | Element | HTMLDivElement) => {
       for (const [key, value] of Object.entries(keys)) {
@@ -20,12 +22,14 @@ export abstract class Attribute<T = {}> {
   OnDestroy(): void {
     /* */
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   OnUpdate(_oldValue: string, _newValue: string) {
     /* */
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   OnUpdateAttribute(_name: string, _value: string) {
+    /* */
+  }
+
+  OnChange(_records: MutationRecord[]): void {
     /* */
   }
 }

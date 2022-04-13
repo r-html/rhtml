@@ -66,6 +66,9 @@ export class CustomAttributeRegistry {
       const modifiers = [...elModifiers.values()];
       for (const modifier of modifiers) {
         modifier.OnDestroy();
+        if (modifier.observer) {
+          modifier.observer.disconnect();
+        }
       }
       elModifiers.clear();
     }
@@ -116,26 +119,33 @@ export class CustomAttributeRegistry {
       this._elementMap.set(el, map);
     }
 
-    const modifier = map.get(attributeName);
+    let modifier = map.get(attributeName);
     const attribute = el.getAttribute(attributeName);
 
     if (!modifier) {
       const Modifier = this.getConstructor(attributeName);
-      const modifier = new Modifier();
+      modifier = new Modifier();
       if (Modifier.options?.observedAttributes?.length) {
         for (const observedAttribute of Modifier.options.observedAttributes) {
           observe(modifier, observedAttribute);
         }
       }
-      map.set(attributeName, modifier);
       modifier.element = el;
       modifier.selector = attributeName;
+
       modifier.value = attribute || modifier.value;
       modifier.parent = this.parent;
 
       if (modifier.OnInit) {
         modifier.OnInit();
       }
+      if (Modifier.options.observe) {
+        modifier.observer = new MutationObserver(records =>
+          modifier.OnChange(records)
+        );
+        modifier.observer.observe(modifier.element, Modifier.options.observe);
+      }
+      map.set(attributeName, modifier);
       return;
     }
 
@@ -143,6 +153,9 @@ export class CustomAttributeRegistry {
       modifier.value = attribute;
       if (modifier.OnDestroy) {
         modifier.OnDestroy();
+      }
+      if (modifier.observer) {
+        modifier.observer.disconnect();
       }
       map.delete(attributeName);
       return;

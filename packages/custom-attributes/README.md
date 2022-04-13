@@ -396,3 +396,34 @@ export class Color extends MediaQueryAttribute<Styles> {
 | gt-sm      | screen and (min-width: 960px)                          |
 | gt-md      | screen and (min-width: 1280px)                         |
 | gt-lg      | screen and (min-width: 1920px)                         |
+
+#### Defining custom MutationObserver which is attached on the element used by the Attribute
+
+```typescript
+import { Attribute, Modifier } from '@rhtml/custom-attributes';
+
+@Modifier({
+  selector: 'color',
+  observe: {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['my-attribute']
+  }
+})
+export class Color extends Attribute {
+  OnChange(records: MutationRecord[]) {
+    console.log(records);
+    const attributeValue = this.element.getAttribute('my-attribute');
+    console.log(attributeValue); // 'test'
+  }
+}
+```
+
+```html
+<div color="red" my-attribute="test">
+  My element
+</div>
+```
+
+If we change `my-attribute` value we will trigger `OnChange` which will give us mutation records

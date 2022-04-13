@@ -7,9 +7,23 @@ export interface Constructor<T> extends C<T> {
 }
 
 export interface ModifierOptions {
+  /**
+   * Main selector of the attribute
+   */
   selector: string;
+  /**
+   * Define custom attribute registry
+   */
   registry?(this: HTMLElement): CustomAttributeRegistry;
+  /**
+   * Specify attributes to be listened
+   */
   observedAttributes?: string[];
+  /**
+   * Define MutationObserver to listen for parent element changes
+   * Defining property will attach observer to this.element
+   *  */
+  observe?: MutationObserverInit;
 }
 
 export interface InputOptions {

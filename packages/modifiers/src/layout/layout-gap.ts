@@ -11,30 +11,30 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxLayoutGap'
+  selector: 'fxLayoutGap',
+  observe: {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: createFiltersFromSelector('fxlayout')
+  }
 })
 export class LayoutGap extends MediaQueryAttribute<Styles> {
-  private observer: MutationObserver;
-
   OnInit() {
     this.modify();
-    this.observer = new MutationObserver(() => this.modify());
-    this.observer.observe(this.element, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: createFiltersFromSelector('fxlayout')
-    });
     super.OnInit();
   }
 
   OnDestroy() {
     this.clean();
-    this.observer.disconnect();
     super.OnDestroy();
   }
 
   OnUpdate() {
+    this.modify();
+  }
+
+  OnChange() {
     this.modify();
   }
 
@@ -49,11 +49,7 @@ export class LayoutGap extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  // OnElementAttributeChange() {
-
-  // }
-
-  clean() {
+  private clean() {
     const divs = [...this.element.children] as HTMLElement[];
     for (const div of divs) {
       this.setStyles({
@@ -63,7 +59,7 @@ export class LayoutGap extends MediaQueryAttribute<Styles> {
     }
   }
 
-  modify() {
+  private modify() {
     const layout = this.element.getAttribute('fxlayout');
     let margin = `0px ${this.value} ${this.value} 0px`;
     if (layout === 'row') {

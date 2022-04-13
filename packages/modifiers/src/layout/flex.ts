@@ -39,7 +39,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  clean() {
+  private clean() {
     this.setStyles({
       boxSizing: null,
       maxWidth: null,
@@ -47,7 +47,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     })(this.element);
   }
 
-  modify() {
+  private modify() {
     this.setStyles({
       boxSizing: 'border-box',
       maxWidth: this.value || null,

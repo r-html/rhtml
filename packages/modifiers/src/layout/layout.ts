@@ -43,7 +43,7 @@ export class Layout extends MediaQueryAttribute<Styles> {
     this.element.setAttribute('fxlayout', this.value);
   }
 
-  clean() {
+  private clean() {
     this.setStyles({
       boxSizing: null,
       flexFlow: null,
@@ -51,7 +51,7 @@ export class Layout extends MediaQueryAttribute<Styles> {
     })(this.element);
   }
 
-  modify() {
+  private modify() {
     if (!this.value) {
       return;
     }
