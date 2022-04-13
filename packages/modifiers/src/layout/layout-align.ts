@@ -1,4 +1,8 @@
-import { Attribute, Modifier } from '@rhtml/custom-attributes';
+import {
+  EnterMediaQueryAttributes,
+  MediaQueryAttribute,
+  Modifier
+} from '@rhtml/custom-attributes';
 
 interface Styles {
   placeContent: string;
@@ -9,20 +13,33 @@ interface Styles {
 @Modifier({
   selector: 'fxLayoutAlign'
 })
-export class LayoutAlign extends Attribute<Styles> {
+export class LayoutAlign extends MediaQueryAttribute<Styles> {
   OnInit() {
     this.modify();
+    super.OnInit();
   }
 
   OnDestroy() {
     this.clean();
+    super.OnDestroy();
   }
 
   OnUpdate() {
     this.modify();
   }
 
-  private clean() {
+  OnEnterMediaQuery([, attribute]: EnterMediaQueryAttributes) {
+    this.prevValue = this.value;
+    this.value = attribute.value ?? this.value;
+    this.modify();
+  }
+
+  OnExitMediaQuery() {
+    this.value = this.prevValue ?? this.value;
+    this.modify();
+  }
+
+  clean() {
     this.setStyles({
       alignItems: null,
       placeContent: null,
@@ -30,7 +47,7 @@ export class LayoutAlign extends Attribute<Styles> {
     })(this.element);
   }
 
-  private modify() {
+  modify() {
     const [mainAxis, crossAxis] = this.value.split(' ');
     this.setStyles({
       alignItems: crossAxis ? crossAxis : mainAxis,

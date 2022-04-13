@@ -1,4 +1,8 @@
-import { Attribute, Modifier } from '@rhtml/custom-attributes';
+import {
+  EnterMediaQueryAttributes,
+  MediaQueryAttribute,
+  Modifier
+} from '@rhtml/custom-attributes';
 
 interface Styles {
   flex: string;
@@ -9,20 +13,33 @@ interface Styles {
 @Modifier({
   selector: 'fxFlex'
 })
-export class Flex extends Attribute<Styles> {
+export class Flex extends MediaQueryAttribute<Styles> {
   OnInit() {
     this.modify();
+    super.OnInit();
   }
 
   OnDestroy() {
     this.clean();
+    super.OnDestroy();
   }
 
   OnUpdate() {
     this.modify();
   }
 
-  private clean() {
+  OnEnterMediaQuery([, attribute]: EnterMediaQueryAttributes) {
+    this.prevValue = this.value;
+    this.value = attribute.value ?? this.value;
+    this.modify();
+  }
+
+  OnExitMediaQuery() {
+    this.value = this.prevValue ?? this.value;
+    this.modify();
+  }
+
+  clean() {
     this.setStyles({
       boxSizing: null,
       maxWidth: null,
@@ -30,7 +47,7 @@ export class Flex extends Attribute<Styles> {
     })(this.element);
   }
 
-  private modify() {
+  modify() {
     this.setStyles({
       boxSizing: 'border-box',
       maxWidth: this.value || null,

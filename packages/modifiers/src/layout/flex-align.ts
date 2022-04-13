@@ -1,4 +1,8 @@
-import { Attribute, Modifier } from '@rhtml/custom-attributes';
+import {
+  EnterMediaQueryAttributes,
+  MediaQueryAttribute,
+  Modifier
+} from '@rhtml/custom-attributes';
 
 interface Styles {
   alignSelf: string;
@@ -7,24 +11,37 @@ interface Styles {
 @Modifier({
   selector: 'fxFlexAlign'
 })
-export class FlexAlign extends Attribute<Styles> {
+export class FlexAlign extends MediaQueryAttribute<Styles> {
   OnInit() {
     this.modify();
+    super.OnInit();
   }
 
   OnDestroy() {
     this.clean();
+    super.OnDestroy();
   }
 
   OnUpdate() {
     this.modify();
   }
 
-  private clean() {
+  OnEnterMediaQuery([, attribute]: EnterMediaQueryAttributes) {
+    this.prevValue = this.value;
+    this.value = attribute.value ?? this.value;
+    this.modify();
+  }
+
+  OnExitMediaQuery() {
+    this.value = this.prevValue ?? this.value;
+    this.modify();
+  }
+
+  clean() {
     this.setStyles({ alignSelf: null })(this.element);
   }
 
-  private modify() {
+  modify() {
     this.setStyles({ alignSelf: this.value || null })(this.element);
   }
 }

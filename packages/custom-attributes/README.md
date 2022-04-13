@@ -306,3 +306,93 @@ By changing `delay` attribute because we use `observe: true` method `OnUpdateAtt
   My Animated Element
 </h2>
 ```
+
+#### Media query matcher
+
+By extending `MediaQueryAttribute` we gain two more events to handle media matches `OnEnterMediaQuery` and `OnExitMediaQuery`
+
+For example when we define attribute selector `color` we can use available media breakpoints `xs`, `sm`, `md`,`lg`,`xl`.
+
+Extending `MediaQueryAttribute` will help you to track values from specific resolutions
+
+```typescript
+import {
+  EnterMediaQueryAttributes,
+  ExitMediaQueryAttributes,
+  MediaQueryAttribute,
+  Modifier
+} from '@rhtml/custom-attributes';
+
+interface Styles {
+  color: string;
+}
+
+@Modifier({
+  selector: 'color'
+})
+export class Color extends MediaQueryAttribute<Styles> {
+  OnInit() {
+    this.modify();
+    /* Executing media matcher init */
+    super.OnInit();
+  }
+
+  OnDestroy() {
+    this.clean();
+    /* Executing media matcher destroy */
+    super.OnDestroy();
+  }
+
+  OnUpdate() {
+    this.modify();
+  }
+
+  OnEnterMediaQuery([event, attribute]: EnterMediaQueryAttributes) {
+    console.log(event, attribute.value);
+    this.prevValue = this.value;
+    this.value = attribute.value ?? this.value;
+    this.modify();
+  }
+
+  OnExitMediaQuery([event, selector]: ExitMediaQueryAttributes) {
+    this.value = this.prevValue ?? this.originalValue;
+    this.modify();
+  }
+
+  clean() {
+    this.setStyles({ color: null })(this.element);
+  }
+
+  modify() {
+    this.setStyles({ color: this.value || null })(this.element);
+  }
+}
+```
+
+##### Usage
+
+```html
+<div color="red" color.xs="green" color.md="gray">
+  My text
+</div>
+```
+
+##### Available breakpoints
+
+| Breakpoint | Media Query                                            |
+| ---------- | ------------------------------------------------------ |
+| xs         | screen and (max-width: 599px)                          |
+| sm         | screen and (min-width: 600px) and (max-width: 959px)   |
+| md         | screen and (min-width: 960px) and (max-width: 1279px)  |
+| lg         | screen and (min-width: 1280px) and (max-width: 1919px) |
+| xl         | screen and (min-width: 1920px) and (max-width: 5000px) |
+|            |                                                        |
+| lt-sm      | screen and (max-width: 599px) (use xs)                 |
+| lt-md      | screen and (max-width: 959px)                          |
+| lt-lg      | screen and (max-width: 1279px)                         |
+| lt-xl      | screen and (max-width: 1919px)                         |
+|            |                                                        |
+| gt-xs      | screen and (min-width: 600px)                          |
+| gt-sm      | screen and (min-width: 960px)                          |
+| gt-md      | screen and (min-width: 1280px)                         |
+| gt-lg      | screen and (min-width: 1920px)                         |
