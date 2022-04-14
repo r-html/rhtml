@@ -7,7 +7,7 @@ import {
 
 interface Styles {
   margin: string;
-  flex: string;
+  flex?: string;
 }
 
 @Modifier({
@@ -63,19 +63,27 @@ export class LayoutGap extends MediaQueryAttribute<Styles> {
 
   private modify() {
     const layout = this.element.getAttribute('fxlayout');
-    let margin = `0px ${this.value} ${this.value} 0px`;
-    if (layout === 'row') {
-      margin = `0px ${this.value} 0px 0px`;
+    const isRow = layout === 'row';
+    const isColumn = layout === 'column';
+    let margin: (string | number)[] = [this.value];
+    if (isRow) {
+      margin = [0, this.value, 0, 0];
     }
-    if (layout === 'column') {
-      margin = `0px 0px ${this.value} 0px`;
+    if (isColumn) {
+      margin = [0, 0, this.value, 0];
     }
     const divs = this.element.children;
     for (const div of divs) {
       this.setStyles({
         flex: '1 1 25%',
-        margin,
+        margin: margin.join(' '),
       })(div);
+    }
+    const lastElement = this.element.children[this.element.children.length - 1];
+    if (lastElement && isRow) {
+      this.setStyles({
+        margin: null,
+      })(lastElement);
     }
   }
 }
