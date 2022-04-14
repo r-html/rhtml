@@ -1,4 +1,4 @@
-export const noop = function() {
+export const noop = function () {
   /*  */
 };
 
@@ -9,7 +9,7 @@ export const observe = (target: unknown, memberName: string) => {
   const OnUpdateAttribute = prototype.OnUpdateAttribute || noop;
 
   let observer: MutationObserver;
-  prototype.OnInit = function() {
+  prototype.OnInit = function () {
     const element = this.element ?? this;
     if (observer) {
       observer.disconnect();
@@ -24,11 +24,11 @@ export const observe = (target: unknown, memberName: string) => {
     });
     observer.observe(element, {
       attributeFilter: [memberName],
-      attributes: true
+      attributes: true,
     });
     return OnInit.call(this);
   };
-  prototype.OnDestroy = function() {
+  prototype.OnDestroy = function () {
     observer.disconnect();
     return OnDestroy.call(this);
   };

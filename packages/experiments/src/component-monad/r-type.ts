@@ -4,8 +4,6 @@ import { Component, html, LitElement } from '@rxdi/lit-html';
  */
 @Component({
   selector: 'r-type',
-  template: () => html`
-    <slot></slot>
-  `
+  template: () => html` <slot></slot> `,
 })
 export class RTypeOperator extends LitElement {}

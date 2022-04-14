@@ -20,8 +20,12 @@ module.exports = {
         "simple-import-sort/sort": "error",
         "sort-imports": "off",
         "import/order": "off",
-        "@typescript-eslint/camelcase": 0
+        "@typescript-eslint/camelcase": 0,
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["off"],
     },
     plugins: ["simple-import-sort"],
-    ignorePatterns: ['dist', './packages/schematics']
+    ignorePatterns: ['dist', './packages/schematics', 'module'],
 };

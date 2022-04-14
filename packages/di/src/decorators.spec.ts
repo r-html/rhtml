@@ -9,7 +9,7 @@ import {
   InjectionToken,
   Reader,
   remove,
-  set
+  set,
 } from './index';
 import { Module } from './module/module';
 describe('[Experiments]: test', () => {
@@ -144,12 +144,12 @@ describe('[Experiments]: test', () => {
     class ModuleWithoutArguments {}
 
     @Module({
-      imports: [UserService]
+      imports: [UserService],
     })
     class UserModule {}
 
     @Module({
-      imports: [UserModule, ModuleWithoutArguments]
+      imports: [UserModule, ModuleWithoutArguments],
     })
     class AppModule {}
 

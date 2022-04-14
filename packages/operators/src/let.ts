@@ -17,23 +17,20 @@ import { Component, html, LitElement, property } from '@rxdi/lit-html';
                     this.parentElement.nextSibling
                   );
                   return this.normalizeArray(state).map(this.item);
-                }
+                },
               }}
             ></r-renderer>
           `
         : this.normalizeArray(this.data).map(this.item)}
     `;
-  }
+  },
 })
 export class LetOperator extends LitElement {
   @property({ type: Array })
   public data = [];
 
   @property({ type: Object })
-  public item = v =>
-    html`
-      ${v}
-    `;
+  public item = (v) => html` ${v} `;
   OnUpdateFirst() {
     if (!this.isObservable(this.data)) {
       this.parentElement.parentNode.insertBefore(

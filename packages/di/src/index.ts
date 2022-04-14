@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type ObjectType<T = {}> = new (...args: any[]) => T;
+export type ObjectType<T = any> = new (...args: any[]) => T;
 export type PrivateReader<T, K> = (d: NonNullable<T>) => K;
 export type MethodDecoratorArguments = [
   Record<string, unknown>,
   string | symbol,
   TypedPropertyDescriptor<unknown>
 ];
-export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
+export type ObjectUnion<T = any> = T | ObjectType<T> | InjectionToken<T>;
 
 export interface Options {
   before?: (...args: any[]) => any[];
@@ -48,16 +48,16 @@ export function remove<T>(c: ObjectType<T>) {
   return C.delete(c);
 }
 
-export const clear = function() {
+export const clear = function () {
   C = new WeakMap();
 };
 
 export type Reader<T, K> = (d?: T) => K;
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   return (...[, , desc]: MethodDecoratorArguments) => {
-    const o = desc.value as Function;
-    desc.value = function(...args: unknown[]) {
-      return () => o.apply(this, args)(di.map(p => set(p)));
+    const o = desc.value as () => unknown;
+    desc.value = function (...args: unknown[]) {
+      return () => o.apply(this, args)(di.map((p) => set(p)));
     };
   };
 }
@@ -71,7 +71,7 @@ const defineGetter = (
 ) =>
   Object.defineProperty(target, name, {
     get: () => set(identifier),
-    configurable: true
+    configurable: true,
   });
 
 export function Inject<T>(identifier: ObjectUnion<T>): any;
@@ -101,39 +101,38 @@ const defineMetaInjectors = (
   }
 };
 
-const getReflection = <T>(Base: Function) =>
+const getReflection = <T>(Base: ObjectType<T>) =>
   (
     (Reflect['getMetadata'] &&
-      (Reflect['getMetadata']('design:paramtypes', Base) as ObjectUnion<
-        T
-      >[])) ||
+      (Reflect['getMetadata'](
+        'design:paramtypes',
+        Base
+      ) as ObjectUnion<T>[])) ||
     []
   ).map((identifier, index) => [index, identifier]) as [number, ObjectUnion][];
 
-export const createDecorator = (options?: Options) => <
-  K extends new (...args: any[]) => {}
->(
-  Base: K
-) =>
-  class extends Base {
-    constructor(...args: any[]) {
-      if (options && options.before) {
-        args = options.before(args);
+export const createDecorator =
+  (options?: Options) =>
+  <K extends ObjectType>(Base: K) =>
+    class extends Base {
+      constructor(...args: any[]) {
+        if (options && options.before) {
+          args = options.before(args);
+        }
+        if (!args.length) {
+          defineMetaInjectors(args, getReflection(Base));
+          defineMetaInjectors(args, Metadata.get(Base));
+        }
+        if (options && options.after) {
+          args = options.after(args);
+        }
+        super(...args);
+        const e = this as unknown as SystemComponent;
+        if (e.OnInit) {
+          e.OnInit();
+        }
       }
-      if (!args.length) {
-        defineMetaInjectors(args, getReflection(Base));
-        defineMetaInjectors(args, Metadata.get(Base));
-      }
-      if (options && options.after) {
-        args = options.after(args);
-      }
-      super(...args);
-      const e = (this as unknown) as SystemComponent;
-      if (e.OnInit) {
-        e.OnInit();
-      }
-    }
-  };
+    };
 
 export interface OptionsWithProviders extends Options {
   providers?: ObjectUnion[];
@@ -142,7 +141,7 @@ export interface OptionsWithProviders extends Options {
 export const Injectable = (options?: OptionsWithProviders) =>
   createDecorator({
     ...options,
-    before: args => (options?.providers?.length ? options.providers : args)
+    before: (args) => (options?.providers?.length ? options.providers : args),
   });
 
 export * from './module';

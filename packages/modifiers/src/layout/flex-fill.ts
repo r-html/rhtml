@@ -9,7 +9,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxFlexFill'
+  selector: 'fxFlexFill',
 })
 export class FlexFill extends Attribute<Styles> {
   value = '100%';
@@ -32,7 +32,7 @@ export class FlexFill extends Attribute<Styles> {
       margin: null,
       minHeight: null,
       minWidth: null,
-      width: null
+      width: null,
     })(this.element);
   }
 
@@ -42,7 +42,7 @@ export class FlexFill extends Attribute<Styles> {
       height: this.value,
       minHeight: this.value,
       minWidth: this.value,
-      width: this.value
+      width: this.value,
     })(this.element);
   }
 }

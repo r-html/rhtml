@@ -3,7 +3,7 @@ interface Styles {
   display: string;
 }
 @Modifier({
-  selector: 'ngIf'
+  selector: 'ngIf',
 })
 export class IfOperator extends Attribute<Styles> {
   OnInit() {

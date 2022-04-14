@@ -14,15 +14,11 @@ export const GraphqlSettings: GraphqlSettings = {
     pubsub: 'wss://pubsub.youvolio.com/subscriptions',
     async onRequest() {
       return new Headers();
-    }
+    },
   },
   defaults: {
-    error: e => {
-      return html`
-        <p style="color: black">
-          ${e}
-        </p>
-      `;
+    error: (e) => {
+      return html` <p style="color: black">${e}</p> `;
     },
     loading: () => {
       return html`
@@ -30,6 +26,6 @@ export const GraphqlSettings: GraphqlSettings = {
           <rx-loading palette="danger"></rx-loading>
         </div>
       `;
-    }
-  }
+    },
+  },
 };

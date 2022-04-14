@@ -14,7 +14,7 @@ export class GraphModule {
       module: GraphModule,
       components: [GraphComponent],
       providers: [{ provide: DEFAULTS, useValue: defaults }],
-      frameworkImports: [GraphqlModule.forRoot(config)]
+      frameworkImports: [GraphqlModule.forRoot(config)],
     };
   }
 }

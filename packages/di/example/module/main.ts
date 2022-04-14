@@ -5,7 +5,7 @@ import {
   Bootstrap,
   Component,
   Module,
-  ModuleWithProviders
+  ModuleWithProviders,
 } from '../../src/module';
 
 type Token1 = number;
@@ -88,12 +88,12 @@ set(UserService4);
       provide: Token1,
       deps: [UserService4],
       useFactory: (data: UserService4) =>
-        new Promise<number>(resolve =>
+        new Promise<number>((resolve) =>
           setTimeout(() => resolve(data.getPesh()), 1000)
-        )
-    }
+        ),
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class MainModule {
   static forRoot(): ModuleWithProviders {
@@ -105,9 +105,9 @@ export class MainModule {
           useFactory: () => {
             console.log('aa');
             return '1234';
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
   }
 }

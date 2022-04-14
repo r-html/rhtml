@@ -1,7 +1,7 @@
 import {
   MediaQueryAttribute,
   MediaQueryEvent,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 interface Styles {
@@ -11,7 +11,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxLayout'
+  selector: 'fxLayout',
 })
 export class Layout extends MediaQueryAttribute<Styles> {
   value = 'row';
@@ -46,7 +46,7 @@ export class Layout extends MediaQueryAttribute<Styles> {
     this.setStyles({
       boxSizing: null,
       flexFlow: null,
-      display: null
+      display: null,
     })(this.element);
   }
 
@@ -60,7 +60,7 @@ export class Layout extends MediaQueryAttribute<Styles> {
     this.setStyles({
       boxSizing: 'flex',
       flexFlow: splitted.length > 1 ? `${mainAxis} ${crossAxis}` : mainAxis,
-      display: 'flex'
+      display: 'flex',
     })(this.element);
   }
 }

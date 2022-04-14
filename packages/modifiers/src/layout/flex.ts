@@ -1,7 +1,7 @@
 import {
   MediaQueryAttribute,
   MediaQueryEvent,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 interface Styles {
@@ -11,7 +11,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxFlex'
+  selector: 'fxFlex',
 })
 export class Flex extends MediaQueryAttribute<Styles> {
   private prevValue: string;
@@ -45,7 +45,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     this.setStyles({
       boxSizing: null,
       maxWidth: null,
-      flex: null
+      flex: null,
     })(this.element);
   }
 
@@ -53,7 +53,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     this.setStyles({
       boxSizing: 'border-box',
       maxWidth: this.value || null,
-      flex: '1 1 100%'
+      flex: '1 1 100%',
     })(this.element);
   }
 }

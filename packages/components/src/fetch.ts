@@ -3,7 +3,7 @@ import { Component, LitElement, property } from '@rxdi/lit-html';
  * @customElement r-fetch
  */
 @Component({
-  selector: 'r-fetch'
+  selector: 'r-fetch',
 })
 export class FetchComponent extends LitElement {
   @property() query: string;

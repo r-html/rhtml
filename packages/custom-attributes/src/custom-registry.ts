@@ -30,7 +30,7 @@ export class CustomAttributeRegistry {
   }
 
   private observe() {
-    this.observer = new MutationObserver(mutations => {
+    this.observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.type === 'attributes') {
           const attr = this.getConstructor(mutation.attributeName);
@@ -55,7 +55,7 @@ export class CustomAttributeRegistry {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeOldValue: true
+      attributeOldValue: true,
     });
   }
 
@@ -140,7 +140,7 @@ export class CustomAttributeRegistry {
         modifier.OnInit();
       }
       if (Modifier.options.observe) {
-        modifier.observer = new MutationObserver(records =>
+        modifier.observer = new MutationObserver((records) =>
           modifier.OnChange(records)
         );
         modifier.observer.observe(modifier.element, Modifier.options.observe);

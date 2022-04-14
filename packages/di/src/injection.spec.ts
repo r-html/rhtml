@@ -6,7 +6,7 @@ import {
   Injectable,
   InjectionToken,
   remove,
-  set
+  set,
 } from './index';
 
 describe('[DI]: tests', () => {

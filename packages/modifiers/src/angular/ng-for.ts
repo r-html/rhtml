@@ -2,7 +2,7 @@ import { Attribute, Input, Modifier } from '@rhtml/custom-attributes';
 import { html, render, unsafeHTML } from '@rxdi/lit-html';
 
 @Modifier({
-  selector: 'ngFor'
+  selector: 'ngFor',
 })
 export class NgFor extends Attribute {
   @Input()
@@ -23,7 +23,7 @@ export class NgFor extends Attribute {
   }
 
   private interpolate(object, string: string) {
-    return string.replace(this.regexes[2], match =>
+    return string.replace(this.regexes[2], (match) =>
       match
         .slice(2, -1)
         .trim()
@@ -40,7 +40,7 @@ export class NgFor extends Attribute {
       html`
         <r-for .of=${this.parent[items]}>
           <r-let
-            .item=${i => unsafeHTML(this.interpolate(i, template))}
+            .item=${(i) => unsafeHTML(this.interpolate(i, template))}
           ></r-let>
         </r-for>
       `,

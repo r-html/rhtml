@@ -4,7 +4,7 @@ import { ComponentRegistry } from './component-registry';
 import { RegistryReadyEvent, selector } from './interface';
 
 export function Hydrate(template: TemplateResult) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     let registry = document.querySelector(selector) as ComponentRegistry;
     if (registry) {
       registry.register(template);

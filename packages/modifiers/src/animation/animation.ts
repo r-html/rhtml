@@ -2,7 +2,7 @@ import {
   Attribute,
   CustomAttributeRegistry,
   Input,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 import { Animations } from './animate.css';
@@ -16,7 +16,7 @@ interface Styles {
   selector: 'animated',
   registry(this: HTMLElement) {
     return new CustomAttributeRegistry(this);
-  }
+  },
 })
 export class Animation extends Attribute<Styles> {
   @Input({ observe: true })

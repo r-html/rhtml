@@ -2,7 +2,7 @@
 import { ModifierOptions } from './types';
 
 /*  */
-export abstract class Attribute<T = {}> {
+export abstract class Attribute<T = Record<string, unknown>> {
   public static options: ModifierOptions;
   public element?: HTMLElement;
   public value?: string;

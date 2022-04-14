@@ -2,17 +2,17 @@ export interface HookState {
   element: HTMLElement;
   renderIsInProgress: boolean;
   hooksExecutedThisRender: number;
-  elementUpdateFn: Function;
+  elementUpdateFn: () => void;
 }
 
 let hooksState: HookState;
 
-const OnRender = (element: HTMLElement, elementUpdateFn: Function) => {
+const OnRender = (element: HTMLElement, elementUpdateFn: () => void) => {
   hooksState = {
     element,
     renderIsInProgress: true,
     hooksExecutedThisRender: 0,
-    elementUpdateFn
+    elementUpdateFn,
   };
 };
 
@@ -21,14 +21,14 @@ const OnEndRender = () => {
     element: null,
     renderIsInProgress: false,
     hooksExecutedThisRender: 0,
-    elementUpdateFn: null
+    elementUpdateFn: null,
   };
 };
 
 export const renderWithHooks = (
   element: HTMLElement,
-  templateFn: Function,
-  elementUpdateFn: Function
+  templateFn: (element: HTMLElement) => unknown,
+  elementUpdateFn: () => void
 ) => {
   OnRender(element, elementUpdateFn);
   const template = templateFn(element);

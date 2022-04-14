@@ -2,7 +2,7 @@
 import { Component, css, html, LitElement, property } from '@rxdi/lit-html';
 
 function Render(config) {
-  return function(cls) {
+  return function (cls) {
     if (!window.customElements.get(config.selector)) {
       return Component(config)(cls);
     }
@@ -29,7 +29,7 @@ function Render(config) {
               this.options.deepCloneState
                 ? JSON.parse(JSON.stringify(this.state))
                 : this.state,
-              state => (this.state = { ...state }),
+              (state) => (this.state = { ...state }),
               this.shadowRoot
             )
           : this.state
@@ -45,26 +45,21 @@ function Render(config) {
         ? html`
             ${this.isFunction(this.options.error)
               ? this.options.error(this.error)
-              : html`
-                  ${this.error}
-                `}
+              : html` ${this.error} `}
           `
         : ''}
     `;
-  }
+  },
 })
 export class Renderer extends LitElement {
   @property({ type: Object })
   public options = {
     state: {},
-    render: (res, setState, shadowRoot) =>
-      html`
-        ${res}
-      `,
+    render: (res, setState, shadowRoot) => html` ${res} `,
     style: css``,
     deepCloneState: false,
     loading: () => html``,
-    error: e => html``
+    error: (e) => html``,
   };
 
   @property({ type: Boolean })
@@ -82,12 +77,12 @@ export class Renderer extends LitElement {
     if (this.options.state) {
       if (this.isObservable(this.options.state)) {
         this.subscription = this.options.state['subscribe'](
-          detail => {
+          (detail) => {
             this.state = detail;
             this.loading = false;
             this.dispatchEvent(new CustomEvent('onData', { detail }));
           },
-          error => {
+          (error) => {
             this.state = {};
             this.error = error;
             this.loading = false;

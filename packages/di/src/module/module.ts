@@ -5,17 +5,17 @@ import {
   ObjectType,
   ObjectUnion,
   Options,
-  set
+  set,
 } from '../index';
 
 const ProvidersMetadata = new Map<ObjectUnion, WithProviders>();
 const BootstrapsMetadata = new Map<ObjectUnion, ObjectUnion>();
 
-const filterNonNull = <T>(p: T[]): T[] => p.filter(i => !!i);
+const filterNonNull = <T>(p: T[]): T[] => p.filter((i) => !!i);
 
 const setImport = (entry: ModuleWithProviders) => {
   if (entry.module) {
-    entry.providers.map(p => ProvidersMetadata.set(p, p));
+    entry.providers.map((p) => ProvidersMetadata.set(p, p));
     set(entry.module);
   } else {
     set(entry);
@@ -57,7 +57,7 @@ export const Module = <T>(
       }
 
       return args;
-    }
+    },
   });
 
 export type WithProviders<T = unknown> = ObjectUnion<T> & {
@@ -76,11 +76,11 @@ export interface ExtendedFunction {
 }
 
 export async function Bootstrap<T>(app: T) {
-  setImport((app as unknown) as ModuleWithProviders);
+  setImport(app as unknown as ModuleWithProviders);
   await Promise.all(
-    [...ProvidersMetadata.values()].map(async value =>
+    [...ProvidersMetadata.values()].map(async (value) =>
       set(await value.useFactory(...(value.deps || []).map(set)), value.provide)
     )
   );
-  [...BootstrapsMetadata.values()].map(value => set(value));
+  [...BootstrapsMetadata.values()].map((value) => set(value));
 }

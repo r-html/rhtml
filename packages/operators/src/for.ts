@@ -12,13 +12,11 @@ import { LetOperator } from './let';
       :host {
         display: none;
       }
-    `
+    `,
   ],
   template() {
-    return html`
-      <slot></slot>
-    `;
-  }
+    return html` <slot></slot> `;
+  },
 })
 export class ForOperator extends LitElement {
   @property({ type: Array })

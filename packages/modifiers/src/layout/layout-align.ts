@@ -1,7 +1,7 @@
 import {
   MediaQueryAttribute,
   MediaQueryEvent,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 interface Styles {
@@ -11,7 +11,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxLayoutAlign'
+  selector: 'fxLayoutAlign',
 })
 export class LayoutAlign extends MediaQueryAttribute<Styles> {
   private prevValue: string;
@@ -45,7 +45,7 @@ export class LayoutAlign extends MediaQueryAttribute<Styles> {
     this.setStyles({
       alignItems: null,
       placeContent: null,
-      display: null
+      display: null,
     })(this.element);
   }
 
@@ -56,7 +56,7 @@ export class LayoutAlign extends MediaQueryAttribute<Styles> {
       placeContent: crossAxis
         ? `${crossAxis} ${mainAxis}`
         : `${mainAxis} ${mainAxis}`,
-      display: 'flex'
+      display: 'flex',
     })(this.element);
   }
 }

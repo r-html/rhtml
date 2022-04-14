@@ -19,5 +19,5 @@ export const FlexLayout = [
   Flex,
   FlexAlign,
   FlexOffset,
-  FlexOrder
+  FlexOrder,
 ];

@@ -5,13 +5,13 @@ import {
   css,
   html,
   LitElement,
-  property
+  property,
 } from '@rxdi/lit-html';
 import {
   MutationOptions,
   QueryBaseOptions,
   QueryOptions,
-  SubscriptionOptions
+  SubscriptionOptions,
 } from 'apollo-client';
 import gql from 'graphql-tag';
 import {
@@ -20,7 +20,7 @@ import {
   Observable,
   of,
   ReplaySubject,
-  Subscription
+  Subscription,
 } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -40,17 +40,17 @@ import { GraphOptions } from './types';
       </style>
       ${async(
         this.result.pipe(
-          map(state =>
+          map((state) =>
             this.options.render
               ? this.options.render(
                   state,
-                  data => this.result.next(data),
+                  (data) => this.result.next(data),
                   this.shadowRoot
                 )
               : state
           ),
           tap(() => (this.loading = false)),
-          catchError(e => {
+          catchError((e) => {
             this.error = e;
             this.loading = false;
             return of('');
@@ -73,7 +73,7 @@ import { GraphOptions } from './types';
         : ''}
       <slot></slot>
     `;
-  }
+  },
 })
 export class GraphComponent extends LitElement {
   @property({ type: Object })
@@ -81,13 +81,10 @@ export class GraphComponent extends LitElement {
     fetch: '',
     style: css``,
     state: new BehaviorSubject({}),
-    render: res =>
-      html`
-        ${res}
-      `,
+    render: (res) => html` ${res} `,
     loading: () => html``,
     error: () => html``,
-    settings: {} as QueryBaseOptions
+    settings: {} as QueryBaseOptions,
   };
 
   @Inject(BaseService)
@@ -128,22 +125,22 @@ export class GraphComponent extends LitElement {
         .subscribe({
           query: gql`
             ${this.options.subscribe}
-          `
+          `,
         })
         .subscribe(
-          data => this.result.next(data),
-          e => this.result.error(e)
+          (data) => this.result.next(data),
+          (e) => this.result.error(e)
         );
     }
     if (!task) {
       return;
     }
     this.subscription = task.subscribe(
-      detail => {
+      (detail) => {
         this.result.next(detail);
         this.dispatchEvent(new CustomEvent('onData', { detail }));
       },
-      error => {
+      (error) => {
         if (error && error.networkError) {
           if (error.networkError.result) {
             error.message = `${JSON.stringify(
