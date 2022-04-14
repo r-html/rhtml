@@ -317,7 +317,7 @@ Extending `MediaQueryAttribute` will help you to track values from specific reso
 
 ```typescript
 import {
-  EnterMediaQueryAttributes,
+  MediaQueryEvent,
   ExitMediaQueryAttributes,
   MediaQueryAttribute,
   Modifier
@@ -331,6 +331,8 @@ interface Styles {
   selector: 'color'
 })
 export class Color extends MediaQueryAttribute<Styles> {
+  private prevValue: string;
+
   OnInit() {
     this.modify();
     /* Executing media matcher init */
@@ -347,7 +349,7 @@ export class Color extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  OnEnterMediaQuery([event, attribute]: EnterMediaQueryAttributes) {
+  OnEnterMediaQuery([event, attribute]: MediaQueryEvent) {
     console.log(event, attribute.value);
     this.prevValue = this.value;
     this.value = attribute.value ?? this.value;

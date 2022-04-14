@@ -1,6 +1,6 @@
 import {
-  EnterMediaQueryAttributes,
   MediaQueryAttribute,
+  MediaQueryEvent,
   Modifier
 } from '@rhtml/custom-attributes';
 
@@ -14,6 +14,8 @@ interface Styles {
   selector: 'fxFlex'
 })
 export class Flex extends MediaQueryAttribute<Styles> {
+  private prevValue: string;
+
   OnInit() {
     this.modify();
     super.OnInit();
@@ -28,7 +30,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  OnEnterMediaQuery([, attribute]: EnterMediaQueryAttributes) {
+  OnEnterMediaQuery([, attribute]: MediaQueryEvent) {
     this.prevValue = this.value;
     this.value = attribute.value ?? this.value;
     this.modify();

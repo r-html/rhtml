@@ -1,6 +1,6 @@
 import {
-  EnterMediaQueryAttributes,
   MediaQueryAttribute,
+  MediaQueryEvent,
   Modifier
 } from '@rhtml/custom-attributes';
 
@@ -15,6 +15,7 @@ interface Styles {
 })
 export class Layout extends MediaQueryAttribute<Styles> {
   value = 'row';
+  private prevValue: string;
 
   OnInit() {
     this.modify();
@@ -30,17 +31,15 @@ export class Layout extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  OnEnterMediaQuery([, attribute]: EnterMediaQueryAttributes) {
+  OnEnterMediaQuery([, attribute]: MediaQueryEvent) {
     this.prevValue = this.value;
     this.value = attribute.value ?? this.value;
     this.modify();
-    this.element.setAttribute('fxlayout', this.value);
   }
 
   OnExitMediaQuery() {
     this.value = this.prevValue ?? this.value;
     this.modify();
-    this.element.setAttribute('fxlayout', this.value);
   }
 
   private clean() {
@@ -55,6 +54,7 @@ export class Layout extends MediaQueryAttribute<Styles> {
     if (!this.value) {
       return;
     }
+    this.element.setAttribute(this.selector, this.value);
     const splitted = this.value.split(' ');
     const [mainAxis, crossAxis] = splitted;
     this.setStyles({

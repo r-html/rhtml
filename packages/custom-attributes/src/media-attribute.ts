@@ -18,13 +18,13 @@ export const MediaMatchers = new Map([
   ['screen and (min-width: 1280px)', 'gt-md'],
   ['screen and (min-width: 1920px)', 'gt-lg']
 ]);
-type MediaEvent = MediaQueryList | MediaQueryListEvent;
-export type EnterMediaQueryAttributes = [MediaEvent, Attr];
-export type ExitMediaQueryAttributes = [MediaEvent, string];
+
+export type MediaEvent = MediaQueryList | MediaQueryListEvent;
+export type MediaQueryEvent = [MediaEvent, Attr];
 
 export interface OnUpdateMediaQuery {
-  OnEnterMediaQuery(tuple: [MediaEvent, Attr]): void;
-  OnExitMediaQuery(tuple: [MediaEvent, string]): void;
+  OnEnterMediaQuery(tuple: MediaQueryEvent): void;
+  OnExitMediaQuery(tuple: MediaQueryEvent): void;
 }
 
 export const Breakpoints = [...MediaMatchers.values()];
@@ -36,9 +36,6 @@ export const createFiltersFromSelector = (selector: string) => [
 
 export abstract class MediaQueryAttribute<T> extends Attribute<T>
   implements OnUpdateMediaQuery {
-  prevValue: string;
-  originalValue: string;
-
   private matchers: Map<MediaQueryList, MediaQueryList> = new Map();
   private cachedAttributes: Map<string, Attr> = new Map();
 
@@ -51,12 +48,11 @@ export abstract class MediaQueryAttribute<T> extends Attribute<T>
     if (event.matches && attribute) {
       return this.OnEnterMediaQuery([event, attribute]);
     }
-    return this.OnExitMediaQuery([event, key]);
+    return this.OnExitMediaQuery([event, attribute]);
   };
 
   OnInit() {
     if (this.OnEnterMediaQuery || this.OnExitMediaQuery) {
-      this.originalValue = this.value;
       for (const query of MediaMatchers.keys()) {
         const matcher = window.matchMedia(query);
 
@@ -87,6 +83,6 @@ export abstract class MediaQueryAttribute<T> extends Attribute<T>
     this.matchers.clear();
   }
 
-  abstract OnEnterMediaQuery(tuple: [MediaEvent, Attr]): void;
-  abstract OnExitMediaQuery(tuple: [MediaEvent, string]): void;
+  abstract OnEnterMediaQuery(tuple: MediaQueryEvent): void;
+  abstract OnExitMediaQuery(tuple: MediaQueryEvent): void;
 }
