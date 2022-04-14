@@ -1,6 +1,7 @@
 import { LitElement, property } from '@rxdi/lit-html';
 
-export class LitServiceElement<T = {}> extends LitElement {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export class LitServiceElement<T = any> extends LitElement {
   @property({ type: Object })
   run: (self: T) => void = () => null;
 

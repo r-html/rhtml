@@ -17,7 +17,7 @@ export type Injection = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Constructor<T = {}> = new (...args: any[]) => T;
+export type Constructor<T = any> = new (...args: any[]) => T;
 
 export type InstanceTypes<T> = {
   [P in keyof T]: T[P] extends Constructor<infer U> ? U : never;

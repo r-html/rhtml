@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "bolt": "npx bolt  --ignore-engines && rm -rf ./packages/graphql/node_modules/@rxdi/lit-html ./packages/components/node_modules/@rxdi/lit-html ./packages/renderer/node_modules/@rxdi/lit-html ./packages/operators/node_modules/@rxdi/lit-html ./packages/experiments/node_modules/@rxdi/lit-html",
+    "bolt": "npx bolt && rm -rf ./packages/graphql/node_modules/@rxdi/lit-html ./packages/components/node_modules/@rxdi/lit-html ./packages/renderer/node_modules/@rxdi/lit-html ./packages/operators/node_modules/@rxdi/lit-html ./packages/experiments/node_modules/@rxdi/lit-html",
     "start": "npx parcel ./examples/main/index.html --out-dir build/examples/main",
     "start-hydrate": "npx parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
     "start-performance": "npx parcel ./examples/performance/index.html --out-dir build/examples/performance",
@@ -38,11 +38,11 @@
     "@rxdi/bolt": "^0.24.3",
     "@abraham/reflection": "^0.7.0",
     "typescript": "^4.3.5",
-    "eslint": "^6.7.2",
+    "eslint": "^8.13.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-simple-import-sort": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "prettier": "^2.0.5",
     "ts-jest": "25.2.1",

@@ -39,7 +39,7 @@ export const Input =
  * Accepts parameter options with selector and registry
  */
 export const Modifier = (options: ModifierOptions) => {
-  return (target: Function) => {
+  return (target) => {
     target['options'] = options;
   };
 };

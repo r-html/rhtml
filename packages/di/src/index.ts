@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export type ObjectType<T = {}> = new (...args: any[]) => T;
+export type ObjectType<T = any> = new (...args: any[]) => T;
 export type PrivateReader<T, K> = (d: NonNullable<T>) => K;
 export type MethodDecoratorArguments = [
   Record<string, unknown>,
   string | symbol,
   TypedPropertyDescriptor<unknown>
 ];
-export type ObjectUnion<T = {}> = T | ObjectType<T> | InjectionToken<T>;
+export type ObjectUnion<T = any> = T | ObjectType<T> | InjectionToken<T>;
 
 export interface Options {
   before?: (...args: any[]) => any[];
@@ -55,7 +55,7 @@ export const clear = function () {
 export type Reader<T, K> = (d?: T) => K;
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   return (...[, , desc]: MethodDecoratorArguments) => {
-    const o = desc.value as Function;
+    const o = desc.value as () => unknown;
     desc.value = function (...args: unknown[]) {
       return () => o.apply(this, args)(di.map((p) => set(p)));
     };
@@ -101,7 +101,7 @@ const defineMetaInjectors = (
   }
 };
 
-const getReflection = <T>(Base: Function) =>
+const getReflection = <T>(Base: ObjectType<T>) =>
   (
     (Reflect['getMetadata'] &&
       (Reflect['getMetadata'](
@@ -113,7 +113,7 @@ const getReflection = <T>(Base: Function) =>
 
 export const createDecorator =
   (options?: Options) =>
-  <K extends new (...args: any[]) => {}>(Base: K) =>
+  <K extends ObjectType>(Base: K) =>
     class extends Base {
       constructor(...args: any[]) {
         if (options && options.before) {

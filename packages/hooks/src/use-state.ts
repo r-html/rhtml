@@ -5,7 +5,7 @@ const stateMap = new WeakMap<HTMLElement, Map<number, unknown>>();
 const updateState = <T>(
   element: HTMLElement,
   hookID: number,
-  elementUpdateFn: Function,
+  elementUpdateFn: () => void,
   newValue: T
 ) => {
   const currentValue = stateMap.get(element).get(hookID);
