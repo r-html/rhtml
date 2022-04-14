@@ -21,17 +21,15 @@ const UserProfile = html`
         setState: (s: IState) => void
       ) => html`
         <user-service
-          .run=${async function(this: UserService) {
+          .run=${async function (this: UserService) {
             setState({
               userId,
               user: await this.getUserById(userId),
-              loading: false
+              loading: false,
             });
           }}
         ></user-service>
-        <r-if .exp=${loading}>
-          Loading...
-        </r-if>
+        <r-if .exp=${loading}> Loading... </r-if>
         <r-if .exp=${!loading}>
           <p>User id: ${user.id}</p>
           <p>User name: ${user.name}</p>

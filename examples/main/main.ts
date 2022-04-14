@@ -27,7 +27,7 @@ interface IState {
  * @customElement user-service
  */
 @Component({
-  selector: 'user-service'
+  selector: 'user-service',
 })
 export class UserService extends LitElement {
   @property()
@@ -39,9 +39,7 @@ export class UserService extends LitElement {
   }
 
   getUserById(id: number) {
-    return of({ id, name: 'Kristyian Tachev' })
-      .pipe(delay(2000))
-      .toPromise();
+    return of({ id, name: 'Kristyian Tachev' }).pipe(delay(2000)).toPromise();
   }
 }
 
@@ -60,19 +58,13 @@ export class UserService extends LitElement {
           `,
           loading: () => html`
             <r-part>
-              <r-state .value=${interval(100).pipe(map(i => i / 10))}></r-state>
-              <r-render
-                .state=${(g, s) =>
-                  html`
-                    Loading ${g}s...
-                  `}
-              ></r-render>
+              <r-state
+                .value=${interval(100).pipe(map((i) => i / 10))}
+              ></r-state>
+              <r-render .state=${(g, s) => html` Loading ${g}s... `}></r-render>
             </r-part>
           `,
-          error: () =>
-            html`
-              Error
-            `
+          error: () => html` Error `,
         }}
       >
       </r-renderer>
@@ -85,11 +77,11 @@ export class UserService extends LitElement {
             setState: (state: IState) => void
           ) => html`
             <user-service
-              .run=${async function(this: UserService) {
+              .run=${async function (this: UserService) {
                 setState({
                   userId,
                   user: await this.getUserById(userId),
-                  loading: false
+                  loading: false,
                 });
               }}
             ></user-service>
@@ -117,7 +109,7 @@ export class UserService extends LitElement {
               Increment
             </button>
             <user-service
-              .run=${async function(this: UserService) {
+              .run=${async function (this: UserService) {
                 setState({ user: await this.getUserById(1), loading: false });
               }}
             ></user-service>
@@ -137,20 +129,13 @@ export class UserService extends LitElement {
       )}
       >
         <r-let
-          .item=${v => html`
-        <p>${v}</p>
-      `}
+          .item=${(v) => html` <p>${v}</p> `}
         ></r-let>
       </r-for> -->
 
       <r-part>
         <r-state .value=${'Kristiyan Tachev'}></r-state>
-        <r-render
-          .state=${name => html`
-            <p>${name}</p>
-          `}
-        >
-        </r-render>
+        <r-render .state=${(name) => html` <p>${name}</p> `}> </r-render>
       </r-part>
 
       <r-part>
@@ -172,8 +157,8 @@ export class UserService extends LitElement {
           .state=${(
             {
               data: {
-                notifications: { appUpdated }
-              }
+                notifications: { appUpdated },
+              },
             }: NotificationState,
             setState: (s: NotificationState) => void
           ) => html`
@@ -183,9 +168,9 @@ export class UserService extends LitElement {
                 setState({
                   data: {
                     notifications: {
-                      appUpdated: Number(appUpdated) + Number(appUpdated)
-                    }
-                  }
+                      appUpdated: Number(appUpdated) + Number(appUpdated),
+                    },
+                  },
                 });
               }}
             >
@@ -227,13 +212,11 @@ export class UserService extends LitElement {
           <r-prop key="pesho3" type="String"></r-prop>
         </r-props>
         <r-render
-          .state=${s => html`
-            ${s.pesho} | ${s.pesho2} | ${s.pesho3}
-          `}
+          .state=${(s) => html` ${s.pesho} | ${s.pesho2} | ${s.pesho3} `}
         >
         </r-render>
       </r-component>
     `;
-  }
+  },
 })
 export class RHtmlViewComponent extends LitElement {}
