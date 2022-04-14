@@ -12,7 +12,7 @@ const OnRender = (element: HTMLElement, elementUpdateFn: Function) => {
     element,
     renderIsInProgress: true,
     hooksExecutedThisRender: 0,
-    elementUpdateFn
+    elementUpdateFn,
   };
 };
 
@@ -21,7 +21,7 @@ const OnEndRender = () => {
     element: null,
     renderIsInProgress: false,
     hooksExecutedThisRender: 0,
-    elementUpdateFn: null
+    elementUpdateFn: null,
   };
 };
 

@@ -16,7 +16,7 @@ export const MediaMatchers = new Map([
   ['screen and (min-width: 600px)', 'gt-xs'],
   ['screen and (min-width: 960px)', 'gt-sm'],
   ['screen and (min-width: 1280px)', 'gt-md'],
-  ['screen and (min-width: 1920px)', 'gt-lg']
+  ['screen and (min-width: 1920px)', 'gt-lg'],
 ]);
 
 export type MediaEvent = MediaQueryList | MediaQueryListEvent;
@@ -30,12 +30,14 @@ export interface OnUpdateMediaQuery {
 export const Breakpoints = [...MediaMatchers.values()];
 
 export const createFiltersFromSelector = (selector: string) => [
-  ...Breakpoints.map(breakpoint => `${selector}.${breakpoint}`),
-  selector
+  ...Breakpoints.map((breakpoint) => `${selector}.${breakpoint}`),
+  selector,
 ];
 
-export abstract class MediaQueryAttribute<T> extends Attribute<T>
-  implements OnUpdateMediaQuery {
+export abstract class MediaQueryAttribute<T>
+  extends Attribute<T>
+  implements OnUpdateMediaQuery
+{
   private matchers: Map<MediaQueryList, MediaQueryList> = new Map();
   private cachedAttributes: Map<string, Attr> = new Map();
 
@@ -57,7 +59,7 @@ export abstract class MediaQueryAttribute<T> extends Attribute<T>
         const matcher = window.matchMedia(query);
 
         const attr = Object.values(this.element.attributes).find(
-          v =>
+          (v) =>
             v.name ===
             `${this.selector.toLowerCase()}.${MediaMatchers.get(query)}`
         );

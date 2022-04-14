@@ -32,6 +32,6 @@ export const useState = <T>(value: T) => {
 
   return [
     stateMap.get(element).get(hookID),
-    updateState.bind(null, element, hookID, elementUpdateFn)
+    updateState.bind(null, element, hookID, elementUpdateFn),
   ];
 };

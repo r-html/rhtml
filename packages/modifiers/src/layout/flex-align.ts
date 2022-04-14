@@ -1,7 +1,7 @@
 import {
   MediaQueryAttribute,
   MediaQueryEvent,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 interface Styles {
@@ -9,7 +9,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxFlexAlign'
+  selector: 'fxFlexAlign',
 })
 export class FlexAlign extends MediaQueryAttribute<Styles> {
   private prevValue: string;

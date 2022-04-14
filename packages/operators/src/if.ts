@@ -6,14 +6,8 @@ import { Component, html, LitElement, property } from '@rxdi/lit-html';
 @Component({
   selector: 'r-if',
   template(this: IfOperator) {
-    return html`
-      ${this.exp
-        ? html`
-            <slot></slot>
-          `
-        : ''}
-    `;
-  }
+    return html` ${this.exp ? html` <slot></slot> ` : ''} `;
+  },
 })
 export class IfOperator extends LitElement {
   @property({ type: Boolean }) exp: boolean;

@@ -5,7 +5,7 @@ import {
   CustomElementConfig,
   html,
   LitElement,
-  TemplateResult
+  TemplateResult,
 } from '@rxdi/lit-html';
 import { Observable } from 'rxjs';
 
@@ -23,16 +23,16 @@ export type InstanceTypes<T> = {
   [P in keyof T]: T[P] extends Constructor<infer U> ? U : never;
 };
 
-export const DefineDependencies = <T extends Constructor[]>(...deps: T) => (
-  injection: Injection
-): InstanceTypes<T> => {
-  for (const [index, dep] of deps.entries()) {
-    Object.defineProperty(deps, index, {
-      get: () => (injection && injection.has(dep) ? injection.get(dep) : dep)
-    });
-  }
-  return deps as never;
-};
+export const DefineDependencies =
+  <T extends Constructor[]>(...deps: T) =>
+  (injection: Injection): InstanceTypes<T> => {
+    for (const [index, dep] of deps.entries()) {
+      Object.defineProperty(deps, index, {
+        get: () => (injection && injection.has(dep) ? injection.get(dep) : dep),
+      });
+    }
+    return deps as never;
+  };
 
 export type StateToRender<S, D, K extends LitElement> = (
   this: K,
@@ -54,38 +54,38 @@ export interface Options
   deepCloneState?: boolean;
 }
 
-export const Partial = <S, D, K extends LitElement = LitElement>(
-  options: Options
-) => (deps: D = [] as never) => (
-  state: StateToRender<S, D, K> = () => ({} as never)
-) => (loading: () => PossibleRender) => (
-  error: (e: Error | unknown) => PossibleRender
-) => (render: RenderResult<S, D, K> = () => state as never) =>
-  OriginalComponent<K>({
-    ...options,
-    template(this: K) {
-      return html`
-        <r-renderer
-          .options=${{
-            state: state.bind(this).call(this, deps),
-            loading,
-            error,
-            deepCloneState: options.deepCloneState,
-            render: (
-              state: S,
-              setState: (s: S) => void,
-              shadowRoot: ShadowRoot
-            ) => {
-              this.shadowRoot.append(shadowRoot);
-              return render(deps)
-                .bind(this)
-                .call(this, state, setState, shadowRoot);
-            }
-          } as never}
-        ></r-renderer>
-      `;
-    }
-  });
+export const Partial =
+  <S, D, K extends LitElement = LitElement>(options: Options) =>
+  (deps: D = [] as never) =>
+  (state: StateToRender<S, D, K> = () => ({} as never)) =>
+  (loading: () => PossibleRender) =>
+  (error: (e: Error | unknown) => PossibleRender) =>
+  (render: RenderResult<S, D, K> = () => state as never) =>
+    OriginalComponent<K>({
+      ...options,
+      template(this: K) {
+        return html`
+          <r-renderer
+            .options=${{
+              state: state.bind(this).call(this, deps),
+              loading,
+              error,
+              deepCloneState: options.deepCloneState,
+              render: (
+                state: S,
+                setState: (s: S) => void,
+                shadowRoot: ShadowRoot
+              ) => {
+                this.shadowRoot.append(shadowRoot);
+                return render(deps)
+                  .bind(this)
+                  .call(this, state, setState, shadowRoot);
+              },
+            } as never}
+          ></r-renderer>
+        `;
+      },
+    });
 
 export function Component<S, D, K extends LitElement = LitElement>({
   Settings,
@@ -93,7 +93,7 @@ export function Component<S, D, K extends LitElement = LitElement>({
   State,
   Render,
   Loading,
-  Error
+  Error,
 }: {
   Settings: Options;
   Providers?: D;

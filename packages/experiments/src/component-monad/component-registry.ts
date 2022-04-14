@@ -5,7 +5,7 @@ import {
   html,
   LitElement,
   property,
-  TemplateResult
+  TemplateResult,
 } from '@rxdi/lit-html';
 
 import { RegistryReadyEvent, selector } from './interface';
@@ -18,10 +18,10 @@ import { RegistryReadyEvent, selector } from './interface';
   template() {
     return html`
       <r-for .of=${this.components}>
-        <r-let .item=${i => i}></r-let>
+        <r-let .item=${(i) => i}></r-let>
       </r-for>
     `;
-  }
+  },
 })
 export class ComponentRegistry extends LitElement {
   @property({ type: Array })

@@ -5,9 +5,7 @@ import { Component, html, LitElement } from '@rxdi/lit-html';
  */
 @Component({
   selector: 'r-component',
-  template: () => html`
-    <slot></slot>
-  `
+  template: () => html` <slot></slot> `,
 })
 export class RComponentOperator extends LitElement {
   async OnUpdateFirst() {
@@ -28,13 +26,11 @@ export class RComponentOperator extends LitElement {
           return renderComponent
             ? renderComponent.state(
                 this,
-                state => Object.assign(this, state),
+                (state) => Object.assign(this, state),
                 this.shadowRoot
               )
-            : html`
-                Missing template
-              `;
-        }
+            : html` Missing template `;
+        },
       })(
         class extends LitElement {
           loading = true;
@@ -67,7 +63,7 @@ export class RComponentOperator extends LitElement {
   }
   findNode(nodes, localName) {
     const node = nodes.find(
-      n => n && n.nextSibling && n.nextSibling.localName === localName
+      (n) => n && n.nextSibling && n.nextSibling.localName === localName
     );
     return node ? node.nextSibling : null;
   }

@@ -3,7 +3,7 @@ import {
   ApolloClient,
   MutationOptions,
   QueryOptions,
-  SubscriptionOptions
+  SubscriptionOptions,
 } from '@rxdi/graphql-client';
 import { WatchQueryOptions } from 'apollo-client';
 import { from, Observable } from 'rxjs';

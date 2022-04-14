@@ -5,7 +5,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxFlexOrder'
+  selector: 'fxFlexOrder',
 })
 export class FlexOrder extends Attribute<Styles> {
   OnInit() {
@@ -22,13 +22,13 @@ export class FlexOrder extends Attribute<Styles> {
 
   private clean() {
     this.setStyles({
-      order: null
+      order: null,
     })(this.element);
   }
 
   private modify() {
     this.setStyles({
-      order: this.value || null
+      order: this.value || null,
     })(this.element);
   }
 }

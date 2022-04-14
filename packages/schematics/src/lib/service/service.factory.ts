@@ -12,13 +12,13 @@ import {
   SchematicsException,
   template,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import { isNullOrUndefined } from 'util';
 
 import {
   DeclarationOptions,
-  ModuleDeclarator
+  ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
 import { Location, NameParser } from '../../utils/name.parser';
@@ -32,7 +32,7 @@ function addDeclarationToModule(options: ServiceOptions): Rule {
     }
     options.module = new ModuleFinder(tree).find({
       name: options.name,
-      path: options.path as Path
+      path: options.path as Path,
     });
     if (!options.module) {
       return tree;
@@ -69,12 +69,12 @@ function transform(source: ServiceOptions): ServiceOptions {
 function generate(options: ServiceOptions) {
   return (context: SchematicContext) =>
     apply(url(join('./files' as Path, options.language)), [
-      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+      options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       template({
         ...strings,
-        ...options
+        ...options,
       }),
-      move(options.path)
+      move(options.path),
     ])(context);
 }
 
@@ -85,7 +85,7 @@ export function main(options: ServiceOptions): Rule {
       chain([
         mergeSourceRoot(options),
         addDeclarationToModule(options),
-        mergeWith(generate(options))
+        mergeWith(generate(options)),
       ])
     )(tree, context);
   };

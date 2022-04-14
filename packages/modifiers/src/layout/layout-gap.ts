@@ -2,7 +2,7 @@ import {
   createFiltersFromSelector,
   MediaQueryAttribute,
   MediaQueryEvent,
-  Modifier
+  Modifier,
 } from '@rhtml/custom-attributes';
 
 interface Styles {
@@ -16,8 +16,8 @@ interface Styles {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: createFiltersFromSelector('fxlayout')
-  }
+    attributeFilter: createFiltersFromSelector('fxlayout'),
+  },
 })
 export class LayoutGap extends MediaQueryAttribute<Styles> {
   private prevValue: string;
@@ -56,7 +56,7 @@ export class LayoutGap extends MediaQueryAttribute<Styles> {
     for (const div of divs) {
       this.setStyles({
         flex: null,
-        margin: null
+        margin: null,
       })(div);
     }
   }
@@ -74,7 +74,7 @@ export class LayoutGap extends MediaQueryAttribute<Styles> {
     for (const div of divs) {
       this.setStyles({
         flex: '1 1 25%',
-        margin
+        margin,
       })(div);
     }
   }

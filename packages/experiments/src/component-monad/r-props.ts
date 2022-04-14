@@ -4,9 +4,7 @@ import { Component, html, LitElement } from '@rxdi/lit-html';
  */
 @Component({
   selector: 'r-props',
-  template: () => html`
-    <slot></slot>
-  `
+  template: () => html` <slot></slot> `,
 })
 export class RPropsOperator extends LitElement {
   private nodes: NodeListOf<Element>;
@@ -14,7 +12,7 @@ export class RPropsOperator extends LitElement {
   OnUpdateFirst() {
     this.nodes = this.querySelectorAll('r-prop');
 
-    this.nodes.forEach(n => {
+    this.nodes.forEach((n) => {
       const k = n.querySelector('r-key');
       const t = n.querySelector('r-type');
       const key = n['key'] || k.innerText;
@@ -35,7 +33,7 @@ export class RPropsOperator extends LitElement {
     });
   }
   OnDestroy() {
-    this.nodes.forEach(n => n.remove());
+    this.nodes.forEach((n) => n.remove());
   }
 
   isString(value) {

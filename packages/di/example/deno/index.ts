@@ -3,7 +3,7 @@ import 'https://deno.land/x/reflect_metadata@v0.1.12/mod.ts';
 import {
   Bootstrap,
   Injectable,
-  Module
+  Module,
 } from 'https://cdn.esm.sh/v53/@rhtml/di@0.0.81';
 
 @Injectable()
@@ -26,7 +26,7 @@ class MyService2 {
 }
 
 @Module({
-  providers: [MyService, MyService2]
+  providers: [MyService, MyService2],
 })
 export class AppModule {}
 

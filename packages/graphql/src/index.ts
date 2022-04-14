@@ -7,8 +7,8 @@ import { GraphqlSettings } from './settings';
 export function setConfig(graphqlSettings: GraphqlSettings) {
   return Module({
     imports: [
-      GraphModule.forRoot(graphqlSettings.config, graphqlSettings.defaults)
-    ]
+      GraphModule.forRoot(graphqlSettings.config, graphqlSettings.defaults),
+    ],
   })(class GraphqlModule {});
 }
 

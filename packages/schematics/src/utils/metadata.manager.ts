@@ -13,7 +13,7 @@ import {
   ScriptTarget,
   SourceFile,
   StringLiteral,
-  SyntaxKind
+  SyntaxKind,
 } from 'typescript';
 
 import { DeclarationOptions } from './module.declarator';
@@ -33,8 +33,10 @@ export class MetadataManager {
     );
     const decoratorNodes: Node[] = this.getDecoratorMetadata(source, '@Module');
     const node: Node = decoratorNodes[0];
-    const matchingProperties: ObjectLiteralElement[] = (node as ObjectLiteralExpression).properties
-      .filter(prop => prop.kind === SyntaxKind.PropertyAssignment)
+    const matchingProperties: ObjectLiteralElement[] = (
+      node as ObjectLiteralExpression
+    ).properties
+      .filter((prop) => prop.kind === SyntaxKind.PropertyAssignment)
       .filter((prop: PropertyAssignment) => {
         const name = prop.name;
         switch (name.kind) {
@@ -83,17 +85,17 @@ export class MetadataManager {
     identifier;
     return this.getSourceNodes(source)
       .filter(
-        node =>
+        (node) =>
           node.kind === SyntaxKind.Decorator &&
           (node as Decorator).expression.kind === SyntaxKind.CallExpression
       )
-      .map(node => (node as Decorator).expression as CallExpression)
+      .map((node) => (node as Decorator).expression as CallExpression)
       .filter(
-        expr =>
+        (expr) =>
           expr.arguments[0] &&
           expr.arguments[0].kind === SyntaxKind.ObjectLiteralExpression
       )
-      .map(expr => expr.arguments[0] as ObjectLiteralExpression);
+      .map((expr) => expr.arguments[0] as ObjectLiteralExpression);
   }
 
   private getSourceNodes(sourceFile: SourceFile): Node[] {
@@ -167,8 +169,8 @@ export class MetadataManager {
       node = arrLiteral.elements;
     }
     if (Array.isArray(node)) {
-      const nodeArray = (node as {}) as Node[];
-      const symbolsArray = nodeArray.map(childNode =>
+      const nodeArray = node as {} as Node[];
+      const symbolsArray = nodeArray.map((childNode) =>
         childNode.getText(source)
       );
       if (symbolsArray.includes(symbol)) {

@@ -6,7 +6,7 @@ import { Settings } from './types';
  * @customElement r-settings
  */
 @Component({
-  selector: 'r-settings'
+  selector: 'r-settings',
 })
 export class SettingsComponent extends LitElement {
   @property({ type: Object }) value: Settings;

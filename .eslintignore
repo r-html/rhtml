@@ -1,4 +1,6 @@
-./packages/schematics
 dist
 *.d.ts
 module
+
+*.js
+*.map.js

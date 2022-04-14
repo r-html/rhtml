@@ -3,7 +3,7 @@ import {
   html,
   LitElement,
   property,
-  TemplateResult
+  TemplateResult,
 } from '@rxdi/lit-html';
 import { map } from 'rxjs/operators';
 import { all, get, mod } from 'shades';
@@ -30,7 +30,7 @@ function isObservable(obj) {
       <slot></slot>
       ${this.options ? this.componentToRender : ''}
     `;
-  }
+  },
 })
 export class MonadComponent extends LitElement {
   @property({ type: Object })
@@ -64,7 +64,7 @@ export class MonadComponent extends LitElement {
       state,
       fetch,
       style: styleComponent?.value,
-      render: renderComponent.state
+      render: renderComponent.state,
     };
     this.options.settings = settings ? settings.value : null;
 
@@ -103,10 +103,10 @@ export class MonadComponent extends LitElement {
     if (lensComponent.match) {
       newState = this.get(newState, lensComponent.match);
     } else if (lensComponent.get) {
-      lensComponent.get = lensComponent.get.map(a => (a === 'all' ? all : a));
+      lensComponent.get = lensComponent.get.map((a) => (a === 'all' ? all : a));
       if (isObservable(newState)) {
         newState = newState.pipe(
-          map(s => {
+          map((s) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const expectedState = (get as any)(...lensComponent.get)(s);
             if (!expectedState) {
@@ -124,7 +124,7 @@ export class MonadComponent extends LitElement {
       }
     } else if (lensComponent.ray) {
       if (isObservable(newState)) {
-        newState = newState.pipe(map(s => lensComponent.ray(s)));
+        newState = newState.pipe(map((s) => lensComponent.ray(s)));
       } else {
         newState = lensComponent.ray(newState);
       }
@@ -144,7 +144,7 @@ export class MonadComponent extends LitElement {
 
   private findNode<T>(nodes: Node[], localName: string): T | null {
     const node = nodes.find(
-      n =>
+      (n) =>
         n &&
         n.nextSibling &&
         (n.nextSibling as HTMLElement).localName === localName

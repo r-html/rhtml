@@ -6,7 +6,7 @@ import {
   Injectable,
   InjectionToken,
   remove,
-  set
+  set,
 } from '../index';
 import { Bootstrap, Component, Module, ModuleWithProviders } from './module';
 
@@ -54,7 +54,7 @@ describe('[Module]: tests', () => {
   it('Should create custom decorator MyDecorator and try to use after hook', async () => {
     const MyDecorator = () =>
       createDecorator({
-        after: () => [1]
+        after: () => [1],
       });
 
     @MyDecorator()
@@ -70,7 +70,7 @@ describe('[Module]: tests', () => {
     class Test1 {}
 
     @Module({
-      providers: [Test1]
+      providers: [Test1],
     })
     class MyModule {}
 
@@ -133,12 +133,12 @@ describe('[Module]: tests', () => {
           provide: Token1,
           deps: [Test1],
           useFactory: (data: Test1) =>
-            new Promise<number>(resolve =>
+            new Promise<number>((resolve) =>
               setTimeout(() => resolve(data.myProperty), 1000)
-            )
-        }
+            ),
+        },
       ],
-      bootstrap: [AppComponent]
+      bootstrap: [AppComponent],
     })
     class MainModule {
       static forRoot(): ModuleWithProviders {
@@ -147,9 +147,9 @@ describe('[Module]: tests', () => {
           providers: [
             {
               provide: Token2,
-              useFactory: () => '1234'
-            }
-          ]
+              useFactory: () => '1234',
+            },
+          ],
         };
       }
     }

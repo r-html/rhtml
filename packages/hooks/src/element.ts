@@ -11,7 +11,7 @@ export const component = (
   renderFn: (e: HTMLElement) => TemplateResult,
   {
     observedAttributes,
-    shadowRoot
+    shadowRoot,
   }: HookElementOptions = {} as HookElementOptions
 ) =>
   class extends HTMLElement {

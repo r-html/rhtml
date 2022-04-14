@@ -11,12 +11,12 @@ import {
   SchematicContext,
   template,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 
 import {
   DeclarationOptions,
-  ModuleDeclarator
+  ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
 import { Location, NameParser } from '../../utils/name.parser';
@@ -47,12 +47,12 @@ function transform(source: ControllerOptions): ControllerOptions {
 function generate(options: ControllerOptions) {
   return (context: SchematicContext) =>
     apply(url(join('./files' as Path, options.language)), [
-      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+      options.spec ? noop() : filter((path) => !path.endsWith('.spec.ts')),
       template({
         ...strings,
-        ...options
+        ...options,
       }),
-      move(options.path)
+      move(options.path),
     ])(context);
 }
 
@@ -63,7 +63,7 @@ function addDeclarationToModule(options: ControllerOptions): Rule {
     }
     options.module = new ModuleFinder(tree).find({
       name: options.name,
-      path: options.path as Path
+      path: options.path as Path,
     });
     if (!options.module) {
       return tree;
@@ -85,7 +85,7 @@ export function main(options: ControllerOptions): Rule {
       chain([
         mergeSourceRoot(options),
         mergeWith(generate(options)),
-        addDeclarationToModule(options)
+        addDeclarationToModule(options),
       ])
     )(tree, context);
   };

@@ -9,12 +9,12 @@ import {
   SchematicContext,
   template,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 
 import {
   DeclarationOptions,
-  ModuleDeclarator
+  ModuleDeclarator,
 } from '../../utils/module.declarator';
 import { ModuleFinder } from '../../utils/module.finder';
 import { Location, NameParser } from '../../utils/name.parser';
@@ -28,7 +28,7 @@ export function main(options: ModuleOptions): Rule {
       chain([
         mergeSourceRoot(options),
         addDeclarationToModule(options),
-        mergeWith(generate(options))
+        mergeWith(generate(options)),
       ])
     )(tree, context);
   };
@@ -51,9 +51,9 @@ function generate(options: ModuleOptions) {
     apply(url(join('./files' as Path, options.language)), [
       template({
         ...strings,
-        ...options
+        ...options,
       }),
-      move(options.path)
+      move(options.path),
     ])(context);
 }
 
@@ -64,7 +64,7 @@ function addDeclarationToModule(options: ModuleOptions): Rule {
     }
     options.module = new ModuleFinder(tree).find({
       name: options.name,
-      path: options.path as Path
+      path: options.path as Path,
     });
     if (!options.module) {
       return tree;

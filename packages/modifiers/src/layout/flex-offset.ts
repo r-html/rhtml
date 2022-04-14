@@ -5,7 +5,7 @@ interface Styles {
 }
 
 @Modifier({
-  selector: 'fxFlexOffset'
+  selector: 'fxFlexOffset',
 })
 export class FlexOffset extends Attribute<Styles> {
   OnInit() {
@@ -22,13 +22,13 @@ export class FlexOffset extends Attribute<Styles> {
 
   private clean() {
     this.setStyles({
-      marginLeft: null
+      marginLeft: null,
     })(this.element);
   }
 
   private modify() {
     this.setStyles({
-      marginLeft: this.value || null
+      marginLeft: this.value || null,
     })(this.element);
   }
 }
