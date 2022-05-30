@@ -23,17 +23,7 @@ function Render(config) {
             </style>
           `
         : html``}
-      ${!this.loading
-        ? this.options.render
-          ? this.options.render(
-              this.options.deepCloneState
-                ? JSON.parse(JSON.stringify(this.state))
-                : this.state,
-              (state) => (this.state = { ...state }),
-              this.shadowRoot
-            )
-          : this.state
-        : ''}
+      ${!this.loading ? this.renderContent() : ''}
       ${this.loading
         ? html`
             ${this.isFunction(this.options.loading)
@@ -107,5 +97,22 @@ export class Renderer extends LitElement {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  private renderContent() {
+    if (this.options.render) {
+      const template = this.options.render(
+        this.options.deepCloneState
+          ? JSON.parse(JSON.stringify(this.state))
+          : this.state,
+        (state) => (this.state = { ...state }),
+        this.shadowRoot
+      );
+      if (template?.strings) {
+        return template;
+      }
+      return html``;
+    }
+    return this.state;
   }
 }
