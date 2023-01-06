@@ -1,3 +1,4 @@
+import { WatchQueryOptions } from '@apollo/client/core/watchQueryOptions';
 import { Injectable, Injector } from '@rxdi/core';
 import {
   ApolloClient,
@@ -5,7 +6,6 @@ import {
   QueryOptions,
   SubscriptionOptions,
 } from '@rxdi/graphql-client';
-import { WatchQueryOptions } from 'apollo-client';
 import { from, Observable } from 'rxjs';
 
 @Injectable()

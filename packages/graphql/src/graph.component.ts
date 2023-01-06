@@ -1,3 +1,8 @@
+import {
+  MutationOptions,
+  QueryOptions,
+  SubscriptionOptions,
+} from '@apollo/client/core/watchQueryOptions';
 import { Container, Inject } from '@rxdi/core';
 import {
   async,
@@ -7,12 +12,6 @@ import {
   LitElement,
   property,
 } from '@rxdi/lit-html';
-import {
-  MutationOptions,
-  QueryBaseOptions,
-  QueryOptions,
-  SubscriptionOptions,
-} from 'apollo-client';
 import gql from 'graphql-tag';
 import {
   BehaviorSubject,
@@ -84,7 +83,7 @@ export class GraphComponent extends LitElement {
     render: (res) => html` ${res} `,
     loading: () => html``,
     error: () => html``,
-    settings: {} as QueryBaseOptions,
+    settings: {} /* as QueryBaseOptions */,
   };
 
   @Inject(BaseService)

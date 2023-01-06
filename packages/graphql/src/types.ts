@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  ErrorPolicy,
+  FetchPolicy,
+} from '@apollo/client/core/watchQueryOptions';
 import { CSSResult, TemplateResult } from '@rxdi/lit-html';
-import { ErrorPolicy, FetchPolicy } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 
 export interface Settings {

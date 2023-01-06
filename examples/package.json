@@ -7,14 +7,14 @@
     "start-performance": "npx parcel ./performance/index.html --out-dir build/performance"
   },
   "dependencies": {
-    "@rhtml/components": "0.0.82",
-    "@rhtml/experiments": "0.0.82",
-    "@rhtml/graphql": "0.0.82",
-    "@rhtml/hooks": "0.0.82",
-    "@rhtml/operators": "0.0.82",
-    "@rhtml/renderer": "0.0.82",
-    "@rxdi/core": "^0.7.158",
-    "@rxdi/lit-html": "^0.7.158",
+    "@rhtml/components": "^0.0.117",
+    "@rhtml/experiments": "0.0.117",
+    "@rhtml/graphql": "0.0.117",
+    "@rhtml/hooks": "0.0.117",
+    "@rhtml/operators": "^0.0.117",
+    "@rhtml/renderer": "0.0.117",
+    "@rxdi/core": "^0.7.159",
+    "@rxdi/lit-html": "^0.7.159",
     "rxjs": "^6.6.3"
   },
   "browserslist": [

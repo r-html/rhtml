@@ -9,10 +9,10 @@
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc"
+    "build": "cp ./libs/types ../../node_modules/@apollo/client/link/core/types.d.ts && rm -rf dist && tsc"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.158",
+    "@rxdi/lit-html": "^0.7.159",
     "@rhtml/renderer": "0.0.117",
     "rxjs": "^6.6.3",
     "shades": "^2.1.0"
