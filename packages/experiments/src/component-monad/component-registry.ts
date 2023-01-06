@@ -15,7 +15,7 @@ import { RegistryReadyEvent, selector } from './interface';
  */
 @Component({
   selector,
-  template() {
+  template(this: ComponentRegistry) {
     return html`
       <r-for .of=${this.components}>
         <r-let .item=${(i) => i}></r-let>

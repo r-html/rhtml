@@ -22,7 +22,7 @@ export class RComponentOperator extends LitElement {
     if (!window.customElements.get(selector) && selector) {
       Component({
         selector,
-        template() {
+        template(this: LitElement) {
           return renderComponent
             ? renderComponent.state(
                 this,
