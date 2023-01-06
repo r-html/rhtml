@@ -16,7 +16,7 @@ import { Component, html, LitElement, property } from '@rxdi/lit-html';
                     shadowRoot,
                     this.parentElement.nextSibling
                   );
-                  return this.normalizeArray(state).map(this.item);
+                  return html`${this.normalizeArray(state).map(this.item)}`;
                 },
               }}
             ></r-renderer>
