@@ -20,7 +20,7 @@
     "@rhtml/renderer": "0.0.118"
   },
   "peerDependencies": {
-    "rxjs": "^6.6.3"
+    "rxjs": "^7.8.0"
   },
   "devDependencies": {},
   "author": "Kristiyan Tachev",
