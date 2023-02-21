@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/custom-attributes",
-  "version": "0.0.118",
+  "version": "0.0.119",
   "description": "Custom Attribute Registry",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
