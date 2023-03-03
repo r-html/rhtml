@@ -525,26 +525,26 @@
     typeable-promisify "^2.0.1"
     yarn "^1.9.4"
 
-"@rxdi/core@^0.7.159":
-  version "0.7.159"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.159.tgz#a005448e20ef4bba57b593cb170dc773fe7383a1"
-  integrity sha512-39FCixgvRPV2GLM7G49PkpS6B+NmhzHnAYrg5otQy+wSFNfap03FQ3T5CoahQF9Y/q/lWVRQerqHWt0T94N3vw==
+"@rxdi/core@^0.7.167":
+  version "0.7.167"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.167.tgz#33136af0aeb2bd8fcf2217a2d0fcb514f149166b"
+  integrity sha512-G9lL7cw2uBxD61lb0klnxrCf5bZPZBmOpABzhZwnmnpiKXx5iDr+8uY16mZoNN9r4l6wObARfVRTJ/vAGRPSnA==
   dependencies:
     "@abraham/reflection" "^0.8.0"
-    rxjs "^6.5.3"
+    rxjs "^7.8.0"
 
-"@rxdi/graphql-client@^0.7.159":
-  version "0.7.159"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.159.tgz#50ec323feaa3d78687595dccdf4c4d1ff3fc1230"
-  integrity sha512-atqfICcqqn0noVtBNLTKNobgX3wh43y5JJIRsXjODYtiQH85VQ39AJos4+vBSEE6ZtwjtFLpChXu5Ej4gZaLxg==
+"@rxdi/graphql-client@^0.7.167":
+  version "0.7.167"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.167.tgz#02135a6c6a5dc246e69b7631edc46a6a3beb5b1e"
+  integrity sha512-pQqXpjkWMGSayfaizAQspsq80xSFxPKTy10mS2XEdjWCCGK8JWqF0vqSMq5NM+9AkP1c7OCOFciZogn22fdtaA==
   dependencies:
     "@apollo/client" "^3.7.3"
     subscriptions-transport-ws "^0.9.19"
 
-"@rxdi/lit-html@^0.7.159":
-  version "0.7.159"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.159.tgz#353ab4e91dcfd32c532bb099e99f20e12067ed7d"
-  integrity sha512-vwH+t+lI1NUqmuszdNGkqTnvsVbSyFXwC4Mz7EM2mR+C7Sqk8VDCJCKvHMvkobdlwcL2wnTbhRg+NhTDneOquw==
+"@rxdi/lit-html@^0.7.167":
+  version "0.7.167"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.167.tgz#be73ac6868969881bbe9c34436d8de9e24c39f05"
+  integrity sha512-ncNmUF2lRi0lPFfKo6EItXqGzPG3RAtGls2lBU1n0y3o5NmFFyZaqEHkCX9O4TRP1guEoBskqHx77rRwRfuwCA==
   dependencies:
     lit "^2.5.0"
 
@@ -4542,7 +4542,7 @@ rxjs@6.3.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.1.0, rxjs@^6.5.3:
+rxjs@^6.1.0:
   version "6.6.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
   integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==

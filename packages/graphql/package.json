@@ -22,9 +22,9 @@
     "last 1 chrome versions"
   ],
   "dependencies": {
-    "@rxdi/core": "^0.7.159",
-    "@rxdi/graphql-client": "^0.7.159",
-    "@rxdi/lit-html": "^0.7.159",
+    "@rxdi/core": "^0.7.167",
+    "@rxdi/graphql-client": "^0.7.167",
+    "@rxdi/lit-html": "^0.7.167",
     "shades": "^2.1.0",
     "rxjs": "^7.8.0",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
