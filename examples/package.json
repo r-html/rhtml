@@ -13,8 +13,8 @@
     "@rhtml/hooks": "0.0.117",
     "@rhtml/operators": "^0.0.117",
     "@rhtml/renderer": "0.0.117",
-    "@rxdi/core": "^0.7.167",
-    "@rxdi/lit-html": "^0.7.167",
+    "@rxdi/core": "^0.7.168",
+    "@rxdi/lit-html": "^0.7.168",
     "rxjs": "^7.8.0"
   },
   "browserslist": [

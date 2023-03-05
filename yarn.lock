@@ -525,26 +525,26 @@
     typeable-promisify "^2.0.1"
     yarn "^1.9.4"
 
-"@rxdi/core@^0.7.167":
-  version "0.7.167"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.167.tgz#33136af0aeb2bd8fcf2217a2d0fcb514f149166b"
-  integrity sha512-G9lL7cw2uBxD61lb0klnxrCf5bZPZBmOpABzhZwnmnpiKXx5iDr+8uY16mZoNN9r4l6wObARfVRTJ/vAGRPSnA==
+"@rxdi/core@^0.7.168":
+  version "0.7.168"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.168.tgz#70ccfda27c85a2e8ee1c14e3eb027861f0e07ee5"
+  integrity sha512-tNOvBwzrKe06jKY7VpozfztOnmoGtgiMTzjzTEPPVEfuzAq1k8F24nR9rOf1ZCnXALIV7SKbpFTgE21IdbodOw==
   dependencies:
     "@abraham/reflection" "^0.8.0"
     rxjs "^7.8.0"
 
-"@rxdi/graphql-client@^0.7.167":
-  version "0.7.167"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.167.tgz#02135a6c6a5dc246e69b7631edc46a6a3beb5b1e"
-  integrity sha512-pQqXpjkWMGSayfaizAQspsq80xSFxPKTy10mS2XEdjWCCGK8JWqF0vqSMq5NM+9AkP1c7OCOFciZogn22fdtaA==
+"@rxdi/graphql-client@^0.7.168":
+  version "0.7.168"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.168.tgz#ababb4508142bd972630e188288ca0ce7643026b"
+  integrity sha512-1uOJtFePd15VqWjpJA1UpnFFdYwOKISSO63NDrGmiWoLRerM3NMcYPAQ2KmxFW+s0Hbb0yTyos+o7jeFvOv2FQ==
   dependencies:
     "@apollo/client" "^3.7.3"
     subscriptions-transport-ws "^0.9.19"
 
-"@rxdi/lit-html@^0.7.167":
-  version "0.7.167"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.167.tgz#be73ac6868969881bbe9c34436d8de9e24c39f05"
-  integrity sha512-ncNmUF2lRi0lPFfKo6EItXqGzPG3RAtGls2lBU1n0y3o5NmFFyZaqEHkCX9O4TRP1guEoBskqHx77rRwRfuwCA==
+"@rxdi/lit-html@^0.7.168":
+  version "0.7.168"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.168.tgz#39f2b3f1a020391967ab212acf308ea5cbf5d97b"
+  integrity sha512-//qFOYgJTxaMUqZh22e1IkJk+6WShpzHhxx9uboR6ciVpGw4KlySjUNIK0HOf98TjHmqWW4xNF3czR7UKMZx4A==
   dependencies:
     lit "^2.5.0"
 

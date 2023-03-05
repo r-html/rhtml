@@ -16,7 +16,7 @@
     "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.167",
+    "@rxdi/lit-html": "^0.7.168",
     "@rhtml/renderer": "0.0.121"
   },
   "peerDependencies": {
