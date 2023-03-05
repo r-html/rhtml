@@ -59,8 +59,10 @@ export class CustomAttributeRegistry {
     });
   }
 
-  unsubscribe() {
-    this.observer?.disconnect();
+  unsubscribe(force?: boolean) {
+    if (force) {
+      this.observer?.disconnect();
+    }
     const values = [...this._elementMap.values()];
     for (const elModifiers of values) {
       const modifiers = [...elModifiers.values()];
