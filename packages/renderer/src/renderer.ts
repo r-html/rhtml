@@ -73,7 +73,7 @@ export class Renderer extends LitElement {
             this.dispatchEvent(new CustomEvent('onData', { detail }));
           },
           (error) => {
-            this.state = {};
+            this.state = null;
             this.error = error;
             this.loading = false;
             this.dispatchEvent(new CustomEvent('onError', { detail: error }));
@@ -100,7 +100,7 @@ export class Renderer extends LitElement {
   }
 
   private renderContent() {
-    if (this.options.render) {
+    if (!this.error && this.options.render) {
       const template = this.options.render(
         this.options.deepCloneState
           ? JSON.parse(JSON.stringify(this.state))
