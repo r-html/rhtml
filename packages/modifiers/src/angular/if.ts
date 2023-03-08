@@ -1,7 +1,9 @@
 import { Attribute, Modifier } from '@rhtml/custom-attributes';
+
 interface Styles {
   display: string;
 }
+
 @Modifier({
   selector: 'ngIf',
 })
@@ -19,10 +21,16 @@ export class IfOperator extends Attribute<Styles> {
   }
 
   private modify() {
-    if (this.value === 'true') {
-      this.setStyles({ display: null })(this.element);
-    } else {
+    if (
+      !this.value ||
+      this.value === 'undefined' ||
+      this.value === '0' ||
+      this.value === 'null' ||
+      this.value === 'false'
+    ) {
       this.setStyles({ display: 'none' })(this.element);
+    } else {
+      this.setStyles({ display: null })(this.element);
     }
   }
 }
