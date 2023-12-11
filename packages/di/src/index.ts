@@ -52,7 +52,7 @@ export const clear = function () {
   C = new WeakMap();
 };
 
-export type Reader<T, K> = (d?: T) => K;
+export type Reader<T, K> = (...d: T[]) => K;
 export function Reader<T>(...di: ObjectType<unknown>[]): MethodDecorator {
   return (...[, , desc]: MethodDecoratorArguments) => {
     const o = desc.value as () => unknown;
