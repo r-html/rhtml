@@ -12,6 +12,7 @@ export type ObjectUnion<T = any> = T | ObjectType<T> | InjectionToken<T>;
 export interface Options {
   before?: (...args: any[]) => any[];
   after?: (...args: any[]) => any[];
+  meta?: (this: any) => any;
 }
 
 export class InjectionToken<T> {}
@@ -128,6 +129,10 @@ export const createDecorator =
         }
         super(...args);
         const e = this as unknown as SystemComponent;
+
+        if (options && options.meta) {
+          options.meta.call(this);
+        }
         if (e.OnInit) {
           e.OnInit();
         }

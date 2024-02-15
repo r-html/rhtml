@@ -63,16 +63,16 @@ export const Module = <T>(
 export type WithProviders<T = unknown> = ObjectUnion<T> & {
   provide: T | (string & InjectionToken<unknown>);
   deps?: (T | (string & InjectionToken<unknown>))[];
-  useFactory: (...args) => Promise<unknown>;
+  useFactory: (...args) => any;
 };
 
 export interface ModuleWithProviders<T = any> {
-  module: ExtendedFunction;
+  module: ExtendedFunction<T>;
   providers: WithProviders<T>[];
 }
 
-export interface ExtendedFunction {
-  forRoot?: () => ModuleWithProviders;
+export interface ExtendedFunction<T> {
+  forRoot?: (...args: any[]) => ModuleWithProviders<T>;
 }
 
 export async function Bootstrap<T>(app: T) {
