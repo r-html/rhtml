@@ -447,7 +447,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@lit/reactive-element@^1.3.0", "@lit/reactive-element@^1.5.0":
+"@lit/reactive-element@1.5.0", "@lit/reactive-element@^1.3.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-1.5.0.tgz#344cc33f2d1491d094b8ef824a9fe31d150d2375"
   integrity sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==
@@ -525,28 +525,30 @@
     typeable-promisify "^2.0.1"
     yarn "^1.9.4"
 
-"@rxdi/core@^0.7.168":
-  version "0.7.168"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.168.tgz#70ccfda27c85a2e8ee1c14e3eb027861f0e07ee5"
-  integrity sha512-tNOvBwzrKe06jKY7VpozfztOnmoGtgiMTzjzTEPPVEfuzAq1k8F24nR9rOf1ZCnXALIV7SKbpFTgE21IdbodOw==
+"@rxdi/core@^0.7.178":
+  version "0.7.178"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.178.tgz#e28edd387bcf2b82377fc65e171291f02b5818fe"
+  integrity sha512-iDxMKqCZrHWfkomjF3qUiZ/WCI19928FqOQSY1HWA/2DxNTtSX2xYl+UVonj44bN6Hnv7qlqlWjmv5LSkjn3dQ==
   dependencies:
     "@abraham/reflection" "^0.8.0"
     rxjs "^7.8.0"
 
-"@rxdi/graphql-client@^0.7.168":
-  version "0.7.168"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.168.tgz#ababb4508142bd972630e188288ca0ce7643026b"
-  integrity sha512-1uOJtFePd15VqWjpJA1UpnFFdYwOKISSO63NDrGmiWoLRerM3NMcYPAQ2KmxFW+s0Hbb0yTyos+o7jeFvOv2FQ==
+"@rxdi/graphql-client@^0.7.178":
+  version "0.7.178"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.178.tgz#41593d449837185f2e60e5bec0bea4a7b5266002"
+  integrity sha512-clbMPoWYzX8NbcL9GnU6NhlGL4JzbUISh6mNmRvG7rXvdDO+7+BebtDdytdLDfHmlH8+mHXNOrPzJ+50xwPN1w==
   dependencies:
     "@apollo/client" "^3.7.3"
     subscriptions-transport-ws "^0.9.19"
 
-"@rxdi/lit-html@^0.7.168":
-  version "0.7.168"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.168.tgz#39f2b3f1a020391967ab212acf308ea5cbf5d97b"
-  integrity sha512-//qFOYgJTxaMUqZh22e1IkJk+6WShpzHhxx9uboR6ciVpGw4KlySjUNIK0HOf98TjHmqWW4xNF3czR7UKMZx4A==
+"@rxdi/lit-html@^0.7.178":
+  version "0.7.178"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.178.tgz#a479e72717d4a0e185569721393d11320cf62fa6"
+  integrity sha512-xwN2F06Q8UMobUvQHhU6AH97/9zJTxJ2Qg6zRn3OWhR30VpcC5xSHeND1i3EyOpQhoTMCTYSt5IT0EYusxAJNQ==
   dependencies:
-    lit "^2.5.0"
+    "@lit/reactive-element" "1.5.0"
+    lit-element "3.2.2"
+    lit-html "2.5.0"
 
 "@schematics/schematics@0.13.10":
   version "0.13.10"
@@ -3402,7 +3404,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-lit-element@^3.2.0:
+lit-element@3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-3.2.2.tgz#d148ab6bf4c53a33f707a5168e087725499e5f2b"
   integrity sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==
@@ -3410,21 +3412,12 @@ lit-element@^3.2.0:
     "@lit/reactive-element" "^1.3.0"
     lit-html "^2.2.0"
 
-lit-html@^2.2.0, lit-html@^2.5.0:
+lit-html@2.5.0, lit-html@^2.2.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-2.5.0.tgz#9d4c0bb3652a6b10bc4ccdb627dfa9eff1215474"
   integrity sha512-bLHosg1XL3JRUcKdSVI0sLCs0y1wWrj2sqqAN3cZ7bDDPNgmDHH29RV48x6Wz3ZmkxIupaE+z7uXSZ/pXWAO1g==
   dependencies:
     "@types/trusted-types" "^2.0.2"
-
-lit@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-2.5.0.tgz#3a425d69ff8483effb2026957b86ae45de0bc51a"
-  integrity sha512-DtnUP6vR3l4Q8nRPPNBD+UxbAhwJPeky+OVbi3pdgMqm0g57xFSl1Sj64D1rIB+nVNdiVVg8YxB0hqKjvdadZA==
-  dependencies:
-    "@lit/reactive-element" "^1.5.0"
-    lit-element "^3.2.0"
-    lit-html "^2.5.0"
 
 load-json-file@^2.0.0:
   version "2.0.0"

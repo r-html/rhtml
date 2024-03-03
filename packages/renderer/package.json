@@ -15,7 +15,7 @@
     "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.168"
+    "@rxdi/lit-html": "^0.7.178"
   },
   "devDependencies": {},
   "author": "Kristiyan Tachev",

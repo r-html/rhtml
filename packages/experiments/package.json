@@ -19,7 +19,7 @@
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.168",
+    "@rxdi/lit-html": "^0.7.178",
     "@rhtml/operators": "0.0.126"
   },
   "browserslist": [

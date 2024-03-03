@@ -40,14 +40,16 @@ export const Module = <T>(
         setImport(entry);
       }
 
-      for (const entry of filterNonNull(
-        (entries.providers || []) as WithProviders[]
-      )) {
-        if (typeof entry.useFactory === 'function') {
-          ProvidersMetadata.set(entry, entry);
-        } else {
-          set(entry);
-        }
+      const providers = (entries.providers || []) as WithProviders[];
+      const factories = filterNonNull(providers).filter(v => !!v.useFactory);
+      const services = filterNonNull(providers).filter(v => !v.useFactory);
+      
+      for (const entry of factories) {
+        ProvidersMetadata.set(entry, entry);
+      }
+            
+      for (const entry of services) {
+        set(entry);
       }
 
       for (const entry of filterNonNull(
