@@ -9,5 +9,8 @@ dist
 *.js
 *.map.js
 *.d.ts
+*.js.map
 
 !docs/*
+
+packages/di/module/*

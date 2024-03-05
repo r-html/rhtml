@@ -11,7 +11,7 @@
     "test": "npx jest",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
-    "build": "rm -rf dist && tsc && cp -r ./dist/module module",
+    "build": "rm -rf dist && tsc",
     "build-prod": "npx gapi build --local --path=./src/index.ts"
   },
   "repository": {
