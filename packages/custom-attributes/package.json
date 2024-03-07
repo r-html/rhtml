@@ -6,6 +6,7 @@
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
+    "test": "echo 'missing tests'",
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",

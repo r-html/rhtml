@@ -9,6 +9,7 @@
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
+    "test": "echo 'missing tests'",
     "build": "rm -rf dist && tsc"
   },
   "repository": {

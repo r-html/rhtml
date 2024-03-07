@@ -42,14 +42,9 @@ export const Module = <T>(
 
       const providers = (entries.providers || []) as WithProviders[];
       const factories = filterNonNull(providers).filter(v => !!v.useFactory);
-      const services = filterNonNull(providers).filter(v => !v.useFactory);
-      
+
       for (const entry of factories) {
         ProvidersMetadata.set(entry, entry);
-      }
-            
-      for (const entry of services) {
-        set(entry);
       }
 
       for (const entry of filterNonNull(

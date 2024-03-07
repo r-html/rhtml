@@ -8,6 +8,7 @@
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
     "lint": "echo LINT",
+    "test": "echo 'missing tests'",
     "lint-fix": "echo LINT-FIX",
     "lint-old": "npx eslint . --ext .ts || true",
     "lint-fix-old": "npx eslint . --fix --ext .ts",

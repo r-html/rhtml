@@ -65,7 +65,7 @@ describe('[Module]: tests', () => {
     expect(test1.one).toBe(1);
   });
 
-  it('Should automatically create new instance', async () => {
+  it('Should not inject provider when defined in module (lazy loading of providers feature)', async () => {
     @Injectable()
     class Test1 {}
 
@@ -75,7 +75,7 @@ describe('[Module]: tests', () => {
     class MyModule {}
 
     await Bootstrap(MyModule);
-    expect(has(Test1)).toBeTruthy();
+    expect(has(Test1)).toBeFalsy();
   });
 
   it('Should pass custom providers', async () => {

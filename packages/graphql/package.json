@@ -8,6 +8,7 @@
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
     "lint": "npx eslint . --ext .ts",
+    "test": "echo 'missing tests'",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build": "cp ./libs/types ../../node_modules/@apollo/client/link/core/types.d.ts && rm -rf dist && tsc"
   },
