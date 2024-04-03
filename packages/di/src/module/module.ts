@@ -61,7 +61,8 @@ export const Module = <T>(
 export type WithProviders<T = unknown> = ObjectUnion<T> & {
   provide: T | (string & InjectionToken<unknown>);
   deps?: (T | (string & InjectionToken<unknown>))[];
-  useFactory: (...args) => any;
+  useFactory: (...args: T[]) => any;
+  provideAtEnd?: boolean;
 };
 
 export interface ModuleWithProviders<T = any> {
@@ -73,12 +74,21 @@ export interface ExtendedFunction<T> {
   forRoot?: (...args: any[]) => ModuleWithProviders<T>;
 }
 
+async function setProviders(providers: WithProviders[]) {
+  for (const { useFactory, deps, provide } of providers) {
+    set(await useFactory(...(deps ?? []).map(set)), provide)
+  }
+}
+
 export async function Bootstrap<T>(app: T) {
   setImport(app as unknown as ModuleWithProviders);
-  await Promise.all(
-    [...ProvidersMetadata.values()].map(async (value) =>
-      set(await value.useFactory(...(value.deps || []).map(set)), value.provide)
-    )
-  );
+
+  const providers = [...ProvidersMetadata.values()];
+
+  await setProviders(providers.filter(p => !p.provideAtEnd));
+
   [...BootstrapsMetadata.values()].map((value) => set(value));
+
+  await setProviders(providers.filter(p => p.provideAtEnd));
+
 }

@@ -10,7 +10,10 @@
     "esModuleInterop": true,
     "target": "es6",
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types", "./typings.d.ts"],
+    "typeRoots": [
+      "node_modules/@types",
+      "./typings.d.ts"
+    ],
     "lib": [
       "es2015",
       "es2016",
@@ -23,5 +26,8 @@
   "include": [
     "./typings.d.ts",
     "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
   ]
 }

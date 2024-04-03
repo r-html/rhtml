@@ -20,7 +20,7 @@ export class InjectionToken<T> {}
 let C = new WeakMap<ObjectUnion>();
 
 const safeHandle = <T>(c: ObjectType<T>) =>
-  c.prototype && c.prototype.constructor ? new c() : c;
+  c.prototype?.constructor ? new c() : c;
 
 export function get<T>(c: ObjectUnion<T>): T;
 export function get<T>(c: ObjectType<T>): T {
@@ -43,7 +43,7 @@ export interface SystemComponent {
 export function remove<T>(c: T | ObjectType<T>): boolean;
 export function remove<T>(c: ObjectType<T>) {
   const e = get(c as unknown) as SystemComponent;
-  if (e && e.OnDestroy) {
+  if (e?.OnDestroy) {
     e.OnDestroy();
   }
   return C.delete(c);
@@ -104,12 +104,10 @@ const defineMetaInjectors = (
 
 const getReflection = <T>(Base: ObjectType<T>) =>
   (
-    (Reflect['getMetadata'] &&
-      (Reflect['getMetadata'](
-        'design:paramtypes',
-        Base
-      ) as ObjectUnion<T>[])) ||
-    []
+    (Reflect?.['getMetadata']?.(
+      'design:paramtypes',
+      Base
+    ) as ObjectUnion<T>[]) || []
   ).map((identifier, index) => [index, identifier]) as [number, ObjectUnion][];
 
 export const createDecorator =
@@ -117,20 +115,20 @@ export const createDecorator =
   <K extends ObjectType>(Base: K) =>
     class extends Base {
       constructor(...args: any[]) {
-        if (options && options.before) {
+        if (options?.before) {
           args = options.before(args);
         }
         if (!args.length) {
           defineMetaInjectors(args, getReflection(Base));
           defineMetaInjectors(args, Metadata.get(Base));
         }
-        if (options && options.after) {
+        if (options?.after) {
           args = options.after(args);
         }
         super(...args);
         const e = this as unknown as SystemComponent;
 
-        if (options && options.meta) {
+        if (options?.meta) {
           options.meta.call(this);
         }
         if (e.OnInit) {
