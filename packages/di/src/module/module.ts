@@ -61,7 +61,7 @@ export const Module = <T>(
 export type WithProviders<T = unknown> = ObjectUnion<T> & {
   provide: T | (string & InjectionToken<unknown>);
   deps?: (T | (string & InjectionToken<unknown>))[];
-  useFactory: (...args: T[]) => any;
+  useFactory: (...args: any[]) => any;
   provideAtEnd?: boolean;
 };
 
