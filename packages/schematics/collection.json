@@ -20,6 +20,11 @@
       "factory": "./dist/lib/service/service.factory#main",
       "description": "Create a @rhtml service.",
       "schema": "./dist/lib/service/schema.json"
+    },
+    "controller": {
+      "factory": "./dist/lib/controller/controller.factory#main",
+      "description": "Create a @rhtml controller.",
+      "schema": "./dist/lib/controller/schema.json"
     }
   }
 }
