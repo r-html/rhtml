@@ -17,7 +17,7 @@
     "start": "npx parcel ./examples/main/index.html --out-dir build/examples/main",
     "start-hydrate": "npx parcel ./examples/hydrate/index.html --out-dir build/examples/hydrate",
     "start-performance": "npx parcel ./examples/performance/index.html --out-dir build/examples/performance",
-    "build-docs": "npx parcel build ./examples/main/index.html --out-dir docs --public-url rhtml && cp ./docs/index.html ./docs/404.html",
+    "build:docs": "npm --prefix ./documentation run build && cp -r ./documentation/build/ docs",
     "patch": "npx bolt ws exec -- npm version patch",
     "build": "npx bolt ws exec -- npm run build",
     "publish-packages": "npx bolt ws exec -- npm publish --update-readme --access public",
