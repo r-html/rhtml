@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://your-docusaurus-site.example.com/blog</id>
+    <title>Welcome to @rhtml documentation page Blog</title>
+    <updated>2024-05-19T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://your-docusaurus-site.example.com/blog"/>
+    <subtitle>Welcome to @rhtml documentation page Blog</subtitle>
+    <icon>https://your-docusaurus-site.example.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Welcome]]></title>
+        <id>https://your-docusaurus-site.example.com/blog/welcome</id>
+        <link href="https://your-docusaurus-site.example.com/blog/welcome"/>
+        <updated>2024-05-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Welcome to @rhtml documentation]]></summary>
+        <content type="html"><![CDATA[<p>Welcome to @rhtml documentation</p>]]></content>
+        <author>
+            <name>Kristiyan Tachev</name>
+            <uri>https://github.com/Stradivario</uri>
+        </author>
+        <category label="rtml" term="rtml"/>
+        <category label="dependency" term="dependency"/>
+        <category label="injection" term="injection"/>
+        <category label="functional programming" term="functional programming"/>
+        <category label="component as a service" term="component as a service"/>
+    </entry>
+</feed>
