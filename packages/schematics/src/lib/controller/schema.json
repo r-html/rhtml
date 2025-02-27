@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsRHTMLController",
+  "$id": "SchematicsRHTMLController",
   "title": "RHTML Controller Options Schema",
   "type": "object",
   "properties": {

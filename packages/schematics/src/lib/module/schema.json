@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsNestModule",
-  "title": "Nest Module Options Schema",
+  "$id": "SchematicsRhtmlModule",
+  "title": "Rhtml Module Options Schema",
   "type": "object",
   "properties": {
     "name": {
@@ -25,11 +25,11 @@
     },
     "language": {
       "type": "string",
-      "description": "Nest module language (ts/js)."
+      "description": "Rhtml module language (ts/js)."
     },
     "sourceRoot": {
       "type": "string",
-      "description": "Nest module source root directory."
+      "description": "Rhtml module source root directory."
     },
     "skipImport": {
       "description": "Flag to skip the module import.",

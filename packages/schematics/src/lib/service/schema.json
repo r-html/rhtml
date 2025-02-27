@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsNestService",
-  "title": "Nest Service Options Schema",
+  "$id": "SchematicsRhtmlService",
+  "title": "Rhtml Service Options Schema",
   "type": "object",
   "properties": {
     "name": {
@@ -20,7 +20,7 @@
     },
     "language": {
       "type": "string",
-      "description": "Nest service language (ts/js)."
+      "description": "Rhtml service language (ts/js)."
     },
     "sourceRoot": {
       "type": "string",

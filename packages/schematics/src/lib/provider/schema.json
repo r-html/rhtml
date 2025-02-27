@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsNestProvider",
-  "title": "Nest Provider Options Schema",
+  "$id": "SchematicsRhtmlProvider",
+  "title": "Rhtml Provider Options Schema",
   "type": "object",
   "properties": {
     "name": {
@@ -20,11 +20,11 @@
     },
     "language": {
       "type": "string",
-      "description": "Nest provider language (ts/js)."
+      "description": "Rhtml provider language (ts/js)."
     },
     "sourceRoot": {
       "type": "string",
-      "description": "Nest provider source root directory."
+      "description": "Rhtml provider source root directory."
     },
     "flat": {
       "default": true,
