@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction to @rhtml
 
-@rhtml (Reactive HyperText Markup Language) is a powerful framework for building modern web applications with a focus on reactive programming, declarative development, and dependency injection. It combines the best practices from various frameworks while maintaining simplicity and flexibility.
+@rhtml (Reactive HyperText Markup Language) is a revolutionary framework for building modern web applications with a focus on reactive programming, declarative development, and dependency injection. It combines the best practices from various frameworks while maintaining simplicity and flexibility.
 
 ## 🚀 Quick Start
 
@@ -19,171 +19,243 @@ npm start
 
 ## 🎯 Core Features
 
-1. **Declarative Development**
+### 1. **Declarative Development**
+- Write components directly in HTML using monadic approach
+- Clear separation of concerns with self-documenting structure
+- Functional programming principles with monadic composition
+- Zero JavaScript components using pure HTML
 
-   - Write components directly in HTML
-   - Clear separation of concerns
-   - Self-documenting structure
-   - Monadic approach to component composition
+### 2. **Reactive Programming**
+- Built-in RxJS integration for reactive state management
+- Observable patterns for data flow
+- Stream-based architecture with fine-grained reactivity
+- Event-driven component communication
 
-2. **Service Integration**
+### 3. **Cross-Platform Architecture**
+- Works seamlessly in both Frontend and Backend
+- Share code between platforms using unified API
+- Fastify integration for server-side development
+- Consistent development experience across platforms
 
-   - Components as services
-   - Clean up after execution
-   - Reusable API integrations
-   - Dependency injection support
+### 4. **Type Safety**
+- Full TypeScript support with compile-time checking
+- Runtime type validation
+- IDE autocompletion and IntelliSense
+- Interface-based design patterns
 
-3. **State Management**
-
-   - Built-in state handling
-   - Reactive updates
-   - Predictable data flow
-   - Type-safe state management
-
-4. **Type Safety**
-
-   - Full TypeScript support
-   - Compile-time checking
-   - IDE autocompletion
-   - Runtime type checking
-
-5. **Cross-Platform**
-   - Works in both Frontend and Backend
-   - Share code between platforms
-   - Unified development experience
-   - Consistent architecture
+### 5. **Modern Web Standards**
+- Web Components based architecture
+- Custom Elements and Shadow DOM
+- LitElement integration for efficient rendering
+- Progressive Web App support
 
 ## 📦 Core Packages
 
-@rhtml is built on top of several core packages that provide different functionalities:
+@rhtml is built on a modular architecture with specialized packages:
 
-1. **@rhtml/core** - The main package containing core functionality
+### Frontend Packages
 
-   - [Documentation](https://github.com/r-html/core/tree/master/packages/core)
-   - Provides base classes and utilities
-   - Implements dependency injection
-   - Handles component lifecycle
+| Package | Description | Link |
+|---------|-------------|------|
+| **@rhtml/component** | Main reactive component system for building UI | [Core Repository](https://github.com/r-html/core/tree/master/packages/component) |
+| **@rhtml/components** | Declarative monadic approach defining Web Components using HTML | [Core Repository](https://github.com/r-html/core/tree/master/packages/components) |
+| **@rhtml/operators** | Useful declarative operators like `for`, `if`, `let` | [Core Repository](https://github.com/r-html/core/tree/master/packages/operators) |
+| **@rhtml/graphql** | Declarative GraphQL for executing queries, mutations, and subscriptions | [Core Repository](https://github.com/r-html/core/tree/master/packages/graphql) |
+| **@rhtml/hooks** | React-like hooks for use inside web components | [Core Repository](https://github.com/r-html/core/tree/master/packages/hooks) |
+| **@rhtml/renderer** | Main renderer for every component used with observables | [Core Repository](https://github.com/r-html/core/tree/master/packages/renderer) |
+| **@rhtml/experiments** | Declarative way of defining web components only with HTML | [Core Repository](https://github.com/r-html/core/tree/master/packages/experiments) |
+| **@rhtml/decorators** | Useful decorators `@HostListener` and `@Input` | [Core Repository](https://github.com/r-html/core/tree/master/packages/decorators) |
+| **@rhtml/modifiers** | Modifiers created using Custom HTML Attributes | [Core Repository](https://github.com/r-html/core/tree/master/packages/modifiers) |
+| **@rhtml/custom-attributes** | Create your own custom Attributes | [Core Repository](https://github.com/r-html/core/tree/master/packages/custom-attributes) |
 
-2. **@rhtml/component** - Component system
+### Backend Packages
 
-   - [Documentation](https://github.com/r-html/core/tree/master/packages/component)
-   - Web Components implementation
-   - Template rendering
-   - Property binding
+| Package | Description | Link |
+|---------|-------------|------|
+| **@rhtml/di** | IOC container for dependency injection | [Core Repository](https://github.com/r-html/core/tree/master/packages/di) |
+| **@rhtml/fastify** | Fastify server integration with decorators | [Core Repository](https://github.com/r-html/core/tree/master/packages/fastify) |
+| **@rhtml/schematics** | Angular-like schematics for component generation | [Core Repository](https://github.com/r-html/core/tree/master/packages/schematics) |
 
-3. **@rhtml/operators** - Reactive operators
-
-   - [Documentation](https://github.com/r-html/core/tree/master/packages/operators)
-   - Reactive programming utilities
-   - Stream manipulation
-   - State management
-
-4. **@rhtml/experiments** - Experimental features
-
-   - [Documentation](https://github.com/r-html/core/tree/master/packages/experiments)
-   - Monadic components
-   - Advanced patterns
-   - Cutting-edge features
-
-5. **@rhtml/di** - Dependency injection
-   - [Documentation](https://github.com/r-html/core/tree/master/packages/di)
-   - Service container
-   - Provider registration
-   - Cross-platform DI
-
-## 🏗️ Architecture
+## 🏗️ Architecture Overview
 
 @rhtml follows a modular architecture that promotes:
 
-1. **Separation of Concerns**
+### 1. **Separation of Concerns**
+- Clear component boundaries with single responsibility
+- Service-based architecture for business logic
+- Dependency injection for loose coupling
+- Modular design for scalability
 
-   - Clear component boundaries
-   - Service-based architecture
-   - Dependency injection
-   - Modular design
+### 2. **Reactive Programming**
+- Observable patterns for data flow
+- Stream-based architecture
+- Event-driven component communication
+- State management with RxJS
 
-2. **Reactive Programming**
+### 3. **Monadic Components**
+- Functional programming principles
+- Declarative component composition
+- Self-contained logic with cleanup
+- Pure HTML component definition
 
-   - Observable patterns
-   - Stream-based data flow
-   - Event-driven architecture
-   - State management
+### 4. **Cross-Platform Support**
+- Unified API across platforms
+- Shared codebase capabilities
+- Platform-specific adapters
+- Consistent development experience
 
-3. **Type Safety**
+## 🎨 Key Concepts
 
-   - TypeScript integration
-   - Interface-based design
-   - Runtime type checking
-   - Compile-time validation
+### Monadic Components
+@rhtml introduces a revolutionary approach using functional programming principles:
 
-4. **Cross-Platform Support**
-   - Frontend and Backend
-   - Shared codebase
-   - Platform-specific adapters
-   - Unified API
+```html
+<r-component>
+  <r-selector>user-card</r-selector>
+  <r-props>
+    <r-prop key="name" type="String"></r-prop>
+    <r-prop key="age" type="Number"></r-prop>
+  </r-props>
+  <r-render .state=${(s) => html`
+    <div class="card">
+      <h2>${s.name}</h2>
+      <p>Age: ${s.age}</p>
+    </div>
+  `}>
+  </r-render>
+</r-component>
+```
+
+### Declarative GraphQL
+Write GraphQL queries directly in templates:
+
+```typescript
+@Component({
+  template: () => html`
+    <r-part>
+      <r-fetch query="{
+        continents {
+          name
+          countries {
+            code
+            name
+          }
+        }
+      }"></r-fetch>
+      <r-render .state=${({ data: { continents } }) => html`
+        <div class="continents">
+          ${continents.map(continent => html`
+            <div class="continent">
+              <h2>${continent.name}</h2>
+            </div>
+          `)}
+        </div>
+      `}>
+      </r-render>
+    </r-part>
+  `
+})
+```
+
+### Reactive Operators
+Use declarative operators for common patterns:
+
+```typescript
+@Component({
+  template: () => html`
+    <r-for .of=${['Item 1', 'Item 2', 'Item 3']}>
+      <r-let .item=${item => html`
+        <div class="item">${item}</div>
+      `}></r-let>
+    </r-for>
+  `
+})
+```
 
 ## 📚 Documentation Structure
 
 This documentation is organized into several sections:
 
-1. **Getting Started**
+### 1. **Getting Started**
+- [Installation](/docs/getting-started/installation) - Setup and configuration
+- [Components](/docs/getting-started/components) - Building UI components
+- [State Management](/docs/getting-started/state-management) - Managing application state
+- [Controllers](/docs/getting-started/controllers) - Backend API development
+- [Modules](/docs/getting-started/modules) - Application organization
+- [Providers](/docs/getting-started/providers) - Dependency injection
+- [Testing](/docs/getting-started/testing) - Testing strategies
 
-   - Installation
-   - First Application
-   - Basic Concepts
-   - Project Structure
+### 2. **Core Concepts**
+- [Dependency Injection](/docs/core-concepts/dependency-injection) - Service management
+- [Reactive Programming](/docs/core-concepts/reactive-programming) - RxJS integration
+- [Web Components](/docs/core-concepts/web-components) - Custom elements
+- [Monadic Patterns](/docs/core-concepts/monadic-patterns) - Functional programming
 
-2. **Core Concepts**
+### 3. **Advanced Topics**
+- [GraphQL Integration](/docs/advanced/graphql) - Data fetching and mutations
+- [Custom Decorators](/docs/advanced/decorators) - Creating custom decorators
+- [Performance Optimization](/docs/advanced/performance) - Optimization techniques
+- [Cross-Platform Development](/docs/advanced/cross-platform) - Platform sharing
 
-   - Components
-   - Services
-   - Dependency Injection
-   - State Management
-
-3. **Advanced Topics**
-
-   - Monadic Components
-   - Reactive Programming
-   - Cross-Platform Development
-   - Performance Optimization
-
-4. **Recipes**
-   - Common Patterns
-   - Best Practices
-   - Troubleshooting
-   - Migration Guides
+### 4. **Recipes**
+- [Common Patterns](/docs/recipes/patterns) - Reusable solutions
+- [Best Practices](/docs/recipes/best-practices) - Development guidelines
+- [Troubleshooting](/docs/recipes/troubleshooting) - Common issues
+- [Migration Guides](/docs/recipes/migration) - Framework migration
 
 ## 🎓 Learning Path
 
-1. **Beginner**
+### Beginner Level
+1. **Basic Components** - Creating simple UI components
+2. **Template Syntax** - Understanding HTML templates
+3. **Properties and Events** - Component communication
+4. **Basic Services** - Simple dependency injection
 
-   - Basic Components
-   - Simple Services
-   - Basic DI
-   - Template Syntax
+### Intermediate Level
+1. **Advanced Components** - Complex component patterns
+2. **State Management** - Reactive state handling
+3. **GraphQL Integration** - Data fetching and mutations
+4. **Testing Strategies** - Component and service testing
 
-2. **Intermediate**
+### Advanced Level
+1. **Monadic Patterns** - Functional programming concepts
+2. **Custom Decorators** - Extending framework capabilities
+3. **Performance Optimization** - Advanced optimization techniques
+4. **Cross-Platform Development** - Platform-agnostic code
 
-   - Advanced Components
-   - Service Patterns
-   - State Management
-   - Testing
+## 🌟 Why Choose @rhtml?
 
-3. **Advanced**
-   - Monadic Patterns
-   - Custom Operators
-   - Performance Tuning
-   - Architecture Design
+### 1. **Modern Architecture**
+- Built on Web Components standards
+- Reactive programming with RxJS
+- Functional programming principles
+- Type-safe development with TypeScript
 
-## 🤝 Community
+### 2. **Developer Experience**
+- Excellent IDE support with IntelliSense
+- Comprehensive debugging tools
+- Rich ecosystem of packages
+- Extensive documentation and examples
 
-- [GitHub Repository](https://github.com/r-html/rhtml)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/@rhtml)
+### 3. **Performance**
+- Efficient rendering with LitElement
+- Fine-grained reactivity
+- Minimal bundle sizes
+- Optimized for modern browsers
 
-## 📝 Contributing
+### 4. **Flexibility**
+- Modular package architecture
+- Cross-platform compatibility
+- Extensible through custom decorators
+- Framework-agnostic approach
 
-We welcome contributions! Please read our [Contributing Guide](https://github.com/r-html/rhtml/blob/master/CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+## 🚀 Next Steps
 
-## 📄 License
+Ready to get started? Choose your path:
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/r-html/rhtml/blob/master/LICENSE) file for details.
+- **[Quick Start Guide](/docs/getting-started/installation)** - Get up and running in minutes
+- **[Component Tutorial](/docs/getting-started/components)** - Build your first component
+- **[Backend Development](/docs/getting-started/controllers)** - Create API endpoints
+- **[GraphQL Integration](/docs/advanced/graphql)** - Connect to your data layer
+
+For more information, visit the [GitHub repository](https://github.com/r-html/core) or join our community discussions.

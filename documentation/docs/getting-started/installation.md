@@ -94,7 +94,7 @@ import { html, LitElement } from '@rxdi/lit-html';
       <h1>Welcome to @rhtml!</h1>
       <p>This is your first component.</p>
     </div>
-  `
+  `,
 })
 export class AppComponent extends LitElement {}
 ```
@@ -104,10 +104,7 @@ export class AppComponent extends LitElement {}
 ```typescript
 import '@rhtml/operators';
 import '@rhtml/components';
-import { AppComponent } from './components/app.component';
-
-// Register your component
-customElements.define('app-root', AppComponent);
+import './app.component';
 ```
 
 9. Create an HTML entry point (`src/index.html`):
@@ -186,4 +183,4 @@ If you encounter any issues during installation:
 - Join our [Discord Community](https://discord.gg/rhtml)
 - Check the [Documentation](/docs)
 - Search [Stack Overflow](https://stackoverflow.com/questions/tagged/rhtml)
-- Open an [Issue](https://github.com/r-html/rhtml/issues) 
+- Open an [Issue](https://github.com/r-html/rhtml/issues)
