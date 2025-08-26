@@ -3,8 +3,8 @@ import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
-  title: 'Welcome to @rhtml documentation page',
-  tagline: 'Programming can be easy using @rhtml',
+  title: '@rhtml - Modern Reactive Web Framework',
+  tagline: 'Build scalable web applications with Web Components, RxJS, and dependency injection',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

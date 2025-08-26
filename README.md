@@ -1783,13 +1783,11 @@ class CounterService {
   counter = 55;
 }
 
-const Providers = DefineDependencies(CounterService)(Container);
-
 @Component<{ counter: number }, typeof Providers, CounterComponent>({
   Settings: {
     selector: 'counter-component'
   },
-  Providers,
+  Providers: DefineDependencies(CounterService)(Container),
   State: function(this, [counterService]) {
     return interval(1000).pipe(
       map(value => ({ counter: this.counter + counterService.counter + value }))
