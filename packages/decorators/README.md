@@ -13,7 +13,7 @@ import { Attribute, Options, Input } from '@rhtml/custom-attributes';
 import { HostListener } from '@rhtml/decorators';
 
 @Modifier({
-  selector: 'test'
+  selector: 'test',
 })
 export class TestDirective extends Attribute {
   @Input()
@@ -34,9 +34,7 @@ export class TestDirective extends Attribute {
 ```
 
 ```html
-<div test myProperty="12312">
-  111
-</div>
+<div test myProperty="12312">111</div>
 ```
 
 #### Usage inside @rxdi/lit-html
@@ -52,10 +50,8 @@ import { HostListener } from '@rhtml/decorators';
 @Component({
   selector: 'home-component',
   template(this) {
-    return html`
-      Home Component
-    `;
-  }
+    return html` Home Component `;
+  },
 })
 export class HomeComponent extends LitElement {
   @HostListener('mouseenter') onEnter() {
@@ -63,6 +59,35 @@ export class HomeComponent extends LitElement {
   }
 
   @HostListener('mouseleave') onLeave() {
+    console.log('Leave home');
+  }
+}
+```
+
+#### Add window event listener
+
+```typescript
+import { Component, html, LitElement } from '@rxdi/lit-html';
+
+import { HostListener } from '@rhtml/decorators';
+
+/**
+ * @customElement home-component
+ */
+@Component({
+  selector: 'home-component',
+  template(this) {
+    return html` Home Component `;
+  },
+})
+export class HomeComponent extends LitElement {
+  @HostListener('window:mouseenter')
+  onEnter() {
+    console.log('Enter home');
+  }
+
+  @HostListener('window:mouseleave')
+  onLeave() {
     console.log('Leave home');
   }
 }
@@ -79,7 +104,7 @@ import { Attribute, Input, Modifier } from '@rhtml/custom-attributes';
 import { HostBinding } from '@rhtml/decorators';
 
 @Modifier({
-  selector: 'layout'
+  selector: 'layout',
 })
 export class CustomLayout extends Attribute {
   @Input({ observe: true })
