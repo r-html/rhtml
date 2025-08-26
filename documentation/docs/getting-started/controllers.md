@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ### Introduction
 
-In the context of the `@rhtml/fastify` package, the `@Controller` decorator plays a role similar to other web framework libraries like Express or NestJS. Here's an explanation of what `@Controller` is and how it's used:
+In the context of the `@rhtml/fastify` package, the `@Controller` decorator plays a role similar to other framework libraries. Here's an explanation of what `@Controller` is and how it's used:
 
 **Controller Definition**: The `@Controller` decorator is used to define a controller within your application. Controllers are responsible for handling incoming HTTP requests and returning appropriate responses.
 

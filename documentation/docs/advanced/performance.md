@@ -40,6 +40,9 @@ export class LazyComponent extends LitElement {
 Handle large datasets efficiently:
 
 ```typescript
+import { Component, html, LitElement, property } from '@rxdi/lit-html';
+import { HostListener } from '@rhtml/decorators';
+
 @Component({
   selector: 'virtual-list',
   template: () => html`
@@ -88,11 +91,7 @@ export class VirtualListComponent extends LitElement {
     }));
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.addEventListener('scroll', this.handleScroll.bind(this));
-  }
-
+  @HostListener('scroll')
   handleScroll(e: Event) {
     this.scrollTop = (e.target as HTMLElement).scrollTop;
     this.requestUpdate();

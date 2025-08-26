@@ -11,9 +11,12 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
  Create as many sidebars as you want.
  */
 const sidebars: SidebarsConfig = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
-  tutorialSidebar: [
-    'intro',
+  docs: [
+    {
+      type: 'doc',
+      id: 'intro',
+      label: 'Introduction',
+    },
     {
       type: 'category',
       label: 'Getting Started',
@@ -41,6 +44,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'advanced/graphql',
         'advanced/decorators',
+        'advanced/host-bindings-listeners',
         'advanced/performance',
       ],
     },

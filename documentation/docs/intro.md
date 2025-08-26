@@ -194,6 +194,7 @@ This documentation is organized into several sections:
 ### 3. **Advanced Topics**
 - [GraphQL Integration](/docs/advanced/graphql) - Data fetching and mutations
 - [Custom Decorators](/docs/advanced/decorators) - Creating custom decorators
+- [Host Bindings and Listeners](/docs/advanced/host-bindings-listeners) - DOM event handling
 - [Performance Optimization](/docs/advanced/performance) - Optimization techniques
 - [Cross-Platform Development](/docs/advanced/cross-platform) - Platform sharing
 
