@@ -4,55 +4,125 @@ sidebar_position: 1
 
 # Installation
 
+Get started with @rhtml by setting up your development environment and creating your first project.
+
 ## Prerequisites
 
 Before you begin, make sure you have the following installed:
 
-- Node.js (version 18 or higher)
-- npm (version 7 or higher)
-- TypeScript (version 5.2 or higher)
+- **Node.js** (v18.0.0 or higher)
+- **npm** (v8.0.0 or higher) or **yarn**
+- **Git** (for cloning starter templates)
 
-## Quick Installation
+## 🚀 Quick Start Options
 
-The easiest way to get started is by using the official starter template:
+### Option 1: Frontend Development
+
+For frontend applications, use the official starter template:
 
 ```bash
-git clone https://github.com/rxdi/starter-client-side-lit-html
-cd starter-client-side-lit-html
+# Clone the frontend starter
+git clone https://github.com/rxdi/starter-client-side-lit-html my-app
+cd my-app
+
+# Install dependencies
 npm install
+
+# Start development server
 npm start
 ```
 
-## Manual Installation
+### Option 2: Backend Development
 
-If you prefer to start from scratch, follow these steps:
-
-1. Create a new project directory:
+For backend applications, use the Fastify starter template:
 
 ```bash
-mkdir my-rhtml-app
-cd my-rhtml-app
+# Clone the backend starter
+git clone https://github.com/r-html/fastify-starter my-backend
+cd my-backend
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+
+# Start development server
+npm start
 ```
 
-2. Initialize a new npm project:
+### Option 3: Manual Setup
+
+If you prefer to start from scratch:
 
 ```bash
+# Create a new directory
+mkdir my-rhtml-project
+cd my-rhtml-project
+
+# Initialize package.json
 npm init -y
-```
 
-3. Install the core dependencies:
-
-```bash
-npm install @rhtml/core @rhtml/component @rhtml/operators @rhtml/di
-```
-
-4. Install development dependencies:
-
-```bash
+# Install core dependencies
+npm install @rhtml/component @rxdi/lit-html @rhtml/di rxjs
 npm install --save-dev typescript @types/node
 ```
 
-5. Create a `tsconfig.json` file:
+## 📦 Package Installation
+
+### Core Frontend Packages
+
+```bash
+# Component system
+npm install @rhtml/component @rxdi/lit-html
+
+# Reactive programming
+npm install rxjs
+
+# Dependency injection
+npm install @rhtml/di
+
+# Additional frontend packages
+npm install @rhtml/operators @rhtml/decorators @rhtml/hooks
+```
+
+### Backend Packages
+
+```bash
+# Fastify integration
+npm install @rhtml/fastify fastify
+
+# Database integration
+npm install @rhtml/mongoose mongoose
+
+# Message queue
+npm install @rhtml/amqp amqplib
+
+# GraphQL support
+npm install @rhtml/graphql graphql
+```
+
+### Development Tools
+
+```bash
+# TypeScript
+npm install --save-dev typescript @types/node
+
+# Build tools
+npm install --save-dev webpack webpack-cli webpack-dev-server
+
+# Testing
+npm install --save-dev jest @types/jest
+
+# Code quality
+npm install --save-dev eslint prettier
+```
+
+## ⚙️ Configuration
+
+### TypeScript Configuration
+
+Create a `tsconfig.json` file:
 
 ```json
 {
@@ -60,12 +130,13 @@ npm install --save-dev typescript @types/node
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "node",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "declaration": true,
     "outDir": "./dist",
     "rootDir": "./src"
@@ -75,94 +146,159 @@ npm install --save-dev typescript @types/node
 }
 ```
 
-6. Create a basic project structure:
+### Environment Variables
 
-```bash
-mkdir -p src/components src/services src/app
+For backend projects, create a `.env` file:
+
+```env
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Database Configuration
+MONGODB_URI=mongodb://localhost:27017/myapp
+
+# AMQP Configuration
+AMQP_URL=amqp://localhost
+
+# GraphQL Configuration
+GRAPHQL_ENDPOINT=/graphql
 ```
 
-7. Create your first component (`src/components/app.component.ts`):
+## 🏗️ Project Structure
 
-```typescript
-import { Component } from '@rhtml/component';
-import { html, LitElement } from '@rxdi/lit-html';
+### Frontend Project Structure
 
-@Component({
-  selector: 'app-root',
-  template: () => html`
-    <div>
-      <h1>Welcome to @rhtml!</h1>
-      <p>This is your first component.</p>
-    </div>
-  `,
-})
-export class AppComponent extends LitElement {}
+```
+my-app/
+├── src/
+│   ├── components/
+│   │   ├── app.component.ts
+│   │   └── user.component.ts
+│   ├── services/
+│   │   └── user.service.ts
+│   ├── styles/
+│   │   └── global.css
+│   └── main.ts
+├── public/
+│   └── index.html
+├── package.json
+├── tsconfig.json
+└── webpack.config.js
 ```
 
-8. Create your main application file (`src/app/main.ts`):
+### Backend Project Structure
 
-```typescript
-import '@rhtml/operators';
-import '@rhtml/components';
-import './app.component';
+```
+my-backend/
+├── src/
+│   ├── controllers/
+│   │   └── user.controller.ts
+│   ├── services/
+│   │   └── user.service.ts
+│   ├── modules/
+│   │   └── app.module.ts
+│   ├── models/
+│   │   └── user.model.ts
+│   └── main.ts
+├── tests/
+├── .env
+├── package.json
+└── tsconfig.json
 ```
 
-9. Create an HTML entry point (`src/index.html`):
+## 🚀 Development Scripts
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>@rhtml Application</title>
-  </head>
-  <body>
-    <app-root></app-root>
-    <script type="module" src="./app/main.ts"></script>
-  </body>
-</html>
-```
-
-10. Add scripts to your `package.json`:
+Add these scripts to your `package.json`:
 
 ```json
 {
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html",
-    "test": "jest"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
   }
 }
 ```
 
-11. Install Parcel for development:
+## 🔧 IDE Setup
 
-```bash
-npm install --save-dev parcel
+### VS Code Extensions
+
+Install these recommended extensions:
+
+- **TypeScript and JavaScript Language Features**
+- **ESLint**
+- **Prettier**
+- **LitElement Language Support**
+- **Web Components**
+
+### VS Code Settings
+
+Add to your `.vscode/settings.json`:
+
+```json
+{
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
 ```
 
-## Development Server
+## 🧪 Testing Setup
 
-To start the development server:
+### Jest Configuration
 
-```bash
-npm start
+Create `jest.config.js`:
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  moduleNameMapping: {
+    '^@/(.*)$': '<rootDir>/src/$1'
+  }
+};
 ```
 
-This will start a development server at `http://localhost:1234`.
+### Test Setup File
 
-## Building for Production
+Create `src/test-setup.ts`:
 
-To build your application for production:
+```typescript
+import '@testing-library/jest-dom';
 
-```bash
-npm run build
+// Mock Web Components
+customElements.define('test-element', class extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = '<div>Test Element</div>';
+  }
+});
 ```
 
-This will create a production-ready build in the `dist` directory.
+## 🌐 Browser Support
 
-## Next Steps
+@rhtml supports all modern browsers:
 
-Now that you have your basic setup ready, you can:
+- **Chrome** (v88+)
+- **Firefox** (v85+)
+- **Safari** (v14+)
+- **Edge** (v88+)
+
+For older browsers, you may need polyfills:
+
+```bash
+npm install @webcomponents/webcomponentsjs
+```
+
+## 📚 Next Steps
+
+Now that you have @rhtml installed, you can:
 
 1. Learn about [Components](/docs/getting-started/components)
 2. Explore [State Management](/docs/getting-started/state-management)
@@ -171,12 +307,32 @@ Now that you have your basic setup ready, you can:
 
 ## Troubleshooting
 
-If you encounter any issues during installation:
+### Common Issues
 
-1. Make sure all dependencies are installed correctly
-2. Check that your TypeScript version is compatible
-3. Verify that your Node.js version is supported
-4. Check the [GitHub Issues](https://github.com/r-html/rhtml/issues) for known problems
+**TypeScript Decorator Errors**
+```bash
+# Make sure experimentalDecorators is enabled in tsconfig.json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+**Web Components Not Working**
+```bash
+# Install polyfills for older browsers
+npm install @webcomponents/webcomponentsjs
+```
+
+**Fastify Server Issues**
+```bash
+# Check if port is already in use
+lsof -i :3000
+# Kill process if needed
+kill -9 <PID>
+```
 
 ## Need Help?
 

@@ -70,8 +70,7 @@ function CodeShowcaseSection() {
             </div>
             <div className={styles.codeContent}>
               <pre className={styles.codeBlock}>
-                {`// @rhtml/component - Functional Reactive
-import { Component, DefineDependencies } from '@rhtml/component';
+                {`import { Component, DefineDependencies } from '@rhtml/component';
 import { Container, Injectable } from '@rxdi/core';
 import { html, LitElement, property } from '@rxdi/lit-html';
 import { BehaviorSubject } from 'rxjs';
@@ -225,7 +224,10 @@ function CodeExamplesSection() {
               </div>
               <div className={styles.codeContent}>
                 <pre className={styles.codeBlock}>
-                  {`import { Component, DefineDependencies } from '@rhtml/component';
+                  {`import {
+  Component,
+  DefineDependencies
+} from '@rhtml/component';
 import { Container, Injectable } from '@rxdi/core';
 import { html, LitElement, property } from '@rxdi/lit-html';
 import { interval } from 'rxjs';
@@ -236,14 +238,12 @@ class CounterService {
   counter = 55;
 }
 
-const Providers = DefineDependencies(CounterService)(Container);
-
-@Component<{ counter: number }, typeof Providers, CounterComponent>({
+@Component({
   Settings: {
     selector: 'counter',
   },
-  Providers,
-  State: function(this, [counterService]) {
+  Providers: DefineDependencies(CounterService)(Container),
+  State: function(this: CounterComponent, [counterService]) {
     return interval(1000).pipe(
       map((value) => ({
         counter: this.counter + counterService.counter + value,
@@ -284,14 +284,17 @@ export class CounterComponent extends LitElement {
               </div>
               <div className={styles.codeContent}>
                 <pre className={styles.codeBlock}>
-                  {`import { Controller, Route, Post, Body } from '@rhtml/fastify';
-import { Injectable, Inject } from '@rhtml/di';
+                  {`import {
+  Controller,
+  Route,
+  Subscribe
+} from '@rhtml/fastify';
+import { Subscribe } from '@rhtml/amqp';
 import { MessageService } from './message.service';
 
-@Injectable()
+@Controller()
 export class NotificationController {
-  constructor(private messageService: MessageService) {}ga
-  
+  constructor(private messageService: MessageService) {}
 
   @Route({
     url: '/publish-message',
@@ -311,11 +314,28 @@ export class NotificationController {
     channel: AmqpChannel
   ) {
     channel.ack();
-  }`}
+  }
+}`}
                 </pre>
               </div>
             </div>
+            <div className={styles.exampleFooter}>
+              <p className={styles.exampleDescription}>
+                Build scalable backend APIs with <strong>@rhtml/fastify</strong> and decorators.
+                Get started quickly with the{' '}
+                <a
+                  href="https://github.com/r-html/fastify-starter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.exampleLink}
+                >
+                  fastify-starter template
+                </a>
+                .
+              </p>
+            </div>
           </div>
+
         </div>
 
         <div className={styles.examplesGrid}>
@@ -334,28 +354,33 @@ export class NotificationController {
               </div>
               <div className={styles.codeContent}>
                 <pre className={styles.codeBlock}>
-                  {`import { Component, DefineDependencies } from '@rhtml/component';
+                  {`import {
+  Component,
+  DefineDependencies
+} from '@rhtml/component';
 import { Container, Injectable } from '@rxdi/core';
 import { html, LitElement, property } from '@rxdi/lit-html';
 import { of } from 'rxjs';
 
 @Injectable()
 class UserService {
-  getUser() {
-    return { name: 'John Doe', email: 'john@example.com' };
+  getUser(userId: string) {
+    return {
+      id: userId,
+      name: 'John Doe',
+      email: 'john@example.com'
+    };
   }
 }
 
-const Providers = DefineDependencies(UserService)(Container);
-
-@Component<{ user: any; time: number }, typeof Providers, UserComponent>({
+@Component({
   Settings: {
     selector: 'user-list',
   },
-  Providers,
-  State: function(this, [userService]) {
+  Providers: DefineDependencies(UserService)(Container),
+  State: function(this: UserComponent, [userService]) {
     return of({
-      user: userService.getUser(),
+      user: userService.getUser(this.userId),
       time: new Date().getSeconds(),
     });
   },
@@ -395,7 +420,11 @@ export class UserComponent extends LitElement {
               <div className={styles.codeContent}>
                 <pre className={styles.codeBlock}>
                   {`import { Injectable, Inject } from '@rhtml/di';
-import { AmqpChannel, AmqpService, ConsumeMessage } from '@rhtml/amqp';
+import {
+  AmqpChannel,
+  AmqpService,
+  ConsumeMessage
+} from '@rhtml/amqp';
 
 @Injectable()
 export class MessageService {
@@ -410,7 +439,10 @@ export class MessageService {
 
 @Injectable()
 export class UserService {
-  constructor(@Inject(Repositories) private repos: Repositories) {}
+  constructor(
+    @Inject(Repositories) private repos: Repositories,
+    private messageService: MessageService
+  ) {}
 
   createFile(file: File) {
     return this.repos.file.create(file);
@@ -518,13 +550,11 @@ class CounterService {
   counter = 55;
 }
 
-const Providers = DefineDependencies(CounterService)(Container);
-
-@Component<{ counter: number }, typeof Providers, ReactiveCounter>({
+@Component({
   Settings: {
     selector: 'reactive-counter',
   },
-  Providers,
+  Providers: DefineDependencies(CounterService)(Container),
   State: function(this, [counterService]) {
     return interval(1000).pipe(
       map((value) => ({

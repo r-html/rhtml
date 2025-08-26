@@ -343,6 +343,31 @@
   color: #333;
 }
 
+.exampleFooter {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.exampleDescription {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.exampleLink {
+  color: #00d4aa;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.exampleLink:hover {
+  color: #00b894;
+  text-decoration: underline;
+}
+
 /* Comparison Section */
 .comparison {
   padding: 6rem 0;

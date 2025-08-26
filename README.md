@@ -1783,12 +1783,12 @@ class CounterService {
   counter = 55;
 }
 
-@Component<{ counter: number }, typeof Providers, CounterComponent>({
+@Component({
   Settings: {
     selector: 'counter-component'
   },
   Providers: DefineDependencies(CounterService)(Container),
-  State: function(this, [counterService]) {
+  State: function(this: CounterComponent, [counterService]) {
     return interval(1000).pipe(
       map(value => ({ counter: this.counter + counterService.counter + value }))
     );
@@ -1924,12 +1924,12 @@ const store = createStore(
 
 const Providers = DefineDependencies(Store)(Container);
 
-@Component<{ counter: number }, typeof Providers, CounterComponent>({
+@Componen({
   Settings: {
     selector: 'redux-counter'
   },
   Providers,
-  State: function(this, [store]) {
+  State: function(this: CounterComponent, [store]) {
     return combineLatest([
       store.select(selectCounter),
       store.select(selectLoading),

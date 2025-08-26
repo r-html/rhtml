@@ -54,12 +54,12 @@ class CounterService {
   counter = 55;
 }
 
-@Component<{ counter: number }, typeof Providers, CounterComponent>({
+@Component({
   Settings: {
     selector: 'reactive-counter',
   },
   Providers: DefineDependencies(CounterService)(Container),
-  State: function (this, [counterService]) {
+  State: function (this: CounterComponent, [counterService]) {
     return interval(1000).pipe(
       map((value) => ({
         counter: this.counter + counterService.counter + value,
