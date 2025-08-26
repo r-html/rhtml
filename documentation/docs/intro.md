@@ -74,6 +74,8 @@ npm start
 |---------|-------------|------|
 | **@rhtml/di** | IOC container for dependency injection | [Core Repository](https://github.com/r-html/core/tree/master/packages/di) |
 | **@rhtml/fastify** | Fastify server integration with decorators | [Core Repository](https://github.com/r-html/core/tree/master/packages/fastify) |
+| **@rhtml/mongoose** | MongoDB integration with reactive patterns | [Core Repository](https://github.com/r-html/core/tree/master/packages/mongoose) |
+| **@rhtml/amqp** | AMQP message queue integration | [Core Repository](https://github.com/r-html/core/tree/master/packages/amqp) |
 | **@rhtml/schematics** | Angular-like schematics for component generation | [Core Repository](https://github.com/r-html/core/tree/master/packages/schematics) |
 
 ## 🏗️ Architecture Overview

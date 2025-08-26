@@ -45,6 +45,8 @@ const sidebars: SidebarsConfig = {
         'advanced/graphql',
         'advanced/decorators',
         'advanced/host-bindings-listeners',
+        'advanced/mongoose',
+        'advanced/amqp',
         'advanced/performance',
       ],
     },
