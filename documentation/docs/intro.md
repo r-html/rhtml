@@ -188,23 +188,18 @@ This documentation is organized into several sections:
 - [Testing](/docs/getting-started/testing) - Testing strategies
 
 ### 2. **Core Concepts**
-- [Dependency Injection](/docs/core-concepts/dependency-injection) - Service management
-- [Reactive Programming](/docs/core-concepts/reactive-programming) - RxJS integration
-- [Web Components](/docs/core-concepts/web-components) - Custom elements
-- [Monadic Patterns](/docs/core-concepts/monadic-patterns) - Functional programming
+- [Reactive Operators](/docs/core-concepts/reactive-operators) - Declarative operators
+- [Monadic Components](/docs/core-concepts/monadic-components) - Functional components
 
 ### 3. **Advanced Topics**
 - [GraphQL Integration](/docs/advanced/graphql) - Data fetching and mutations
 - [Custom Decorators](/docs/advanced/decorators) - Creating custom decorators
 - [Host Bindings and Listeners](/docs/advanced/host-bindings-listeners) - DOM event handling
+- [Mongoose Integration](/docs/advanced/mongoose) - MongoDB integration
+- [AMQP Integration](/docs/advanced/amqp) - Message queue integration
 - [Performance Optimization](/docs/advanced/performance) - Optimization techniques
-- [Cross-Platform Development](/docs/advanced/cross-platform) - Platform sharing
 
-### 4. **Recipes**
-- [Common Patterns](/docs/recipes/patterns) - Reusable solutions
-- [Best Practices](/docs/recipes/best-practices) - Development guidelines
-- [Troubleshooting](/docs/recipes/troubleshooting) - Common issues
-- [Migration Guides](/docs/recipes/migration) - Framework migration
+
 
 ## 🎓 Learning Path
 

@@ -165,9 +165,9 @@ This will create a production-ready build in the `dist` directory.
 Now that you have your basic setup ready, you can:
 
 1. Learn about [Components](/docs/getting-started/components)
-2. Explore [Services](/docs/getting-started/services)
-3. Understand [Dependency Injection](/docs/getting-started/dependency-injection)
-4. Check out [State Management](/docs/getting-started/state-management)
+2. Explore [State Management](/docs/getting-started/state-management)
+3. Check out [Controllers](/docs/getting-started/controllers)
+4. Understand [Modules](/docs/getting-started/modules)
 
 ## Troubleshooting
 
@@ -181,6 +181,6 @@ If you encounter any issues during installation:
 ## Need Help?
 
 - Join our [Discord Community](https://discord.gg/rhtml)
-- Check the [Documentation](/docs)
+- Check the [Documentation](/docs/intro)
 - Search [Stack Overflow](https://stackoverflow.com/questions/tagged/rhtml)
 - Open an [Issue](https://github.com/r-html/rhtml/issues)
