@@ -1,0 +1,103 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Green gradient for the main elements -->
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4aa;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00b894;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00a085;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Secondary green gradient -->
+    <linearGradient id="greenGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e676;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00c853;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00a085" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with subtle gradient -->
+  <circle cx="60" cy="60" r="58" fill="url(#greenGradient)" filter="url(#shadow)" opacity="0.1"/>
+  
+  <!-- Main reactive arrows forming a circular flow -->
+  <g filter="url(#glow)">
+    <!-- Top arrow -->
+    <path d="M 60 20 L 60 35 L 50 35 L 60 45 L 70 35 L 60 35 Z" fill="url(#greenGradient)" opacity="0.9"/>
+    
+    <!-- Right arrow -->
+    <path d="M 100 60 L 85 60 L 85 50 L 75 60 L 85 70 L 85 60 Z" fill="url(#greenGradient)" opacity="0.9"/>
+    
+    <!-- Bottom arrow -->
+    <path d="M 60 100 L 60 85 L 50 85 L 60 75 L 70 85 L 60 85 Z" fill="url(#greenGradient)" opacity="0.9"/>
+    
+    <!-- Left arrow -->
+    <path d="M 20 60 L 35 60 L 35 50 L 45 60 L 35 70 L 35 60 Z" fill="url(#greenGradient)" opacity="0.9"/>
+  </g>
+  
+  <!-- Inner reactive flow arrows -->
+  <g filter="url(#glow)">
+    <!-- Diagonal arrows for more reactivity -->
+    <path d="M 75 25 L 85 35 L 80 35 L 85 40 L 90 35 L 85 35 Z" fill="url(#greenGradient2)" opacity="0.7"/>
+    <path d="M 95 75 L 85 85 L 90 85 L 85 90 L 80 85 L 85 85 Z" fill="url(#greenGradient2)" opacity="0.7"/>
+    <path d="M 25 95 L 35 85 L 30 85 L 35 80 L 40 85 L 35 85 Z" fill="url(#greenGradient2)" opacity="0.7"/>
+    <path d="M 5 25 L 15 35 L 10 35 L 15 40 L 20 35 L 15 35 Z" fill="url(#greenGradient2)" opacity="0.7"/>
+  </g>
+  
+  <!-- Central @ symbol with reactive dots -->
+  <g filter="url(#glow)">
+    <!-- @ symbol -->
+    <circle cx="60" cy="60" r="15" fill="none" stroke="url(#greenGradient)" stroke-width="3" opacity="0.8"/>
+    <path d="M 60 45 A 15 15 0 0 1 75 60 A 15 15 0 0 1 60 75 A 15 15 0 0 1 45 60 A 15 15 0 0 1 60 45 Z" fill="none" stroke="url(#greenGradient)" stroke-width="3" opacity="0.8"/>
+    <circle cx="60" cy="55" r="3" fill="url(#greenGradient)" opacity="0.9"/>
+    
+    <!-- Reactive dots around the @ symbol -->
+    <circle cx="60" cy="40" r="2" fill="url(#greenGradient2)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="60" r="2" fill="url(#greenGradient2)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="60" cy="80" r="2" fill="url(#greenGradient2)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle cx="40" cy="60" r="2" fill="url(#greenGradient2)" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+    </circle>
+  </g>
+  
+  <!-- Flowing reactive lines -->
+  <g opacity="0.4">
+    <path d="M 30 30 Q 60 20 90 30" stroke="url(#greenGradient2)" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 90 30 Q 100 60 90 90" stroke="url(#greenGradient2)" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 90 90 Q 60 100 30 90" stroke="url(#greenGradient2)" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 30 90 Q 20 60 30 30" stroke="url(#greenGradient2)" stroke-width="2" fill="none" opacity="0.6"/>
+  </g>
+  
+  <!-- Small reactive particles -->
+  <g>
+    <circle cx="25" cy="25" r="1" fill="url(#greenGradient2)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="95" cy="25" r="1" fill="url(#greenGradient2)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    <circle cx="95" cy="95" r="1" fill="url(#greenGradient2)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+    <circle cx="25" cy="95" r="1" fill="url(#greenGradient2)" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite" begin="0.9s"/>
+    </circle>
+  </g>
+</svg>

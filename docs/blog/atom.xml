@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://r-html.github.io/rhtml/blog</id>
-    <title>Welcome to @rhtml documentation page Blog</title>
+    <title>@rhtml - Modern Reactive Web Framework Blog</title>
     <updated>2024-05-19T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://r-html.github.io/rhtml/blog"/>
-    <subtitle>Welcome to @rhtml documentation page Blog</subtitle>
+    <subtitle>@rhtml - Modern Reactive Web Framework Blog</subtitle>
     <icon>https://r-html.github.io/rhtml/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>

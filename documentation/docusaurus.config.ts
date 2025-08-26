@@ -61,7 +61,7 @@ const config: Config = {
       title: '@rhtml',
       logo: {
         alt: '@rhtml Logo',
-        src: 'img/reactive-logo.png',
+        src: 'img/rhtml-logo.svg',
       },
       items: [
         {
