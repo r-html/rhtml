@@ -58,8 +58,8 @@ export const Partial =
   <S, D, K extends LitElement = LitElement>(options: Options) =>
   (deps: D = [] as never) =>
   (state: StateToRender<S, D, K> = () => ({} as never)) =>
-  (loading: () => PossibleRender) =>
-  (error: (e: Error | unknown) => PossibleRender) =>
+  (loading: () => PossibleRender = () => null) =>
+  (error: (e: Error | unknown) => PossibleRender = () => null) =>
   (render: RenderResult<S, D, K> = () => state as never) =>
     OriginalComponent<K>({
       ...options,
@@ -68,8 +68,8 @@ export const Partial =
           <r-renderer
             .options=${{
               state: state.bind(this).call(this, deps),
-              loading,
-              error,
+              loading: loading.bind(this),
+              error: error.bind(this),
               deepCloneState: options.deepCloneState,
               render: (
                 state: S,
