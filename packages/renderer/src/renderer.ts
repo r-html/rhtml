@@ -83,6 +83,9 @@ export class Renderer extends LitElement {
         this.loading = false;
         this.state = this.options.state;
       }
+      await this.updateComplete;
+      await new Promise(requestAnimationFrame);
+      this.dispatchEvent(new CustomEvent('loaded'));
     }
   }
   private isObservable(value) {

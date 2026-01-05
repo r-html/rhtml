@@ -54,6 +54,10 @@ export interface Options
   deepCloneState?: boolean;
 }
 
+export interface OnRendererLoaded {
+  OnRendererLoaded(): void;
+}
+
 export const Partial =
   <S, D, K extends LitElement = LitElement>(options: Options) =>
   (deps: D = [] as never) =>
@@ -66,6 +70,7 @@ export const Partial =
       template(this: K) {
         return html`
           <r-renderer
+            @loaded=${() => this['OnRendererLoaded']?.call(this)}
             .options=${{
               state: state.bind(this).call(this, deps),
               loading: loading.bind(this),
