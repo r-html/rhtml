@@ -58,6 +58,17 @@ export interface OnRendererLoaded {
   OnRendererLoaded(): void;
 }
 
+/**
+ * This method waits for the parent component to finish loading and then triggers event
+ * OnRendererLoaded is a specially designed hook to wait for the last dom rerender
+ * before calling the callback
+ */
+async function waitBeforeTrigger(this: LitElement & OnRendererLoaded) {
+  await this.updateComplete;
+  await new Promise(requestAnimationFrame);
+  this.OnRendererLoaded?.call(this);
+}
+
 export const Partial =
   <S, D, K extends LitElement = LitElement>(options: Options) =>
   (deps: D = [] as never) =>
@@ -70,7 +81,7 @@ export const Partial =
       template(this: K) {
         return html`
           <r-renderer
-            @loaded=${() => this['OnRendererLoaded']?.call(this)}
+            @loaded=${waitBeforeTrigger.bind(this)}
             .options=${{
               state: state.bind(this).call(this, deps),
               loading: loading.bind(this),
