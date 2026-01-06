@@ -1,5 +1,7 @@
 # Reactive HTML
 
+Documentation https://r-html.github.io/rhtml/docs/intro/
+
 ### Packages
 
 | Package                                                | Description                                                            |
@@ -57,33 +59,18 @@ interface NotificationState {
               </button>
               ${res.counter}
             `,
-          loading: () =>
-            html`
-              Loading...
-            `,
-          error: () =>
-            html`
-              Error
-            `
+          loading: () => html` Loading... `,
+          error: () => html` Error `,
         }}
       ></r-renderer>
 
       <r-for .of=${['IterableItem 1', 'Iterable Item 2']}>
-        <r-let
-          .item=${v => html`
-            ${v}
-          `}
-        ></r-let>
+        <r-let .item=${(v) => html` ${v} `}></r-let>
       </r-for>
 
       <r-part>
         <r-state .value=${'Kristiyan Tachev'}></r-state>
-        <r-render
-          .state=${name => html`
-            <p>${name}</p>
-          `}
-        >
-        </r-render>
+        <r-render .state=${(name) => html` <p>${name}</p> `}> </r-render>
       </r-part>
 
       <r-part>
@@ -105,8 +92,8 @@ interface NotificationState {
           .state=${(
             {
               data: {
-                notifications: { appUpdated }
-              }
+                notifications: { appUpdated },
+              },
             },
             setState: (s: NotificationState) => void
           ) => html`
@@ -116,9 +103,9 @@ interface NotificationState {
                 setState({
                   data: {
                     notifications: {
-                      appUpdated: Number(appUpdated) + Number(appUpdated)
-                    }
-                  }
+                      appUpdated: Number(appUpdated) + Number(appUpdated),
+                    },
+                  },
                 });
               }}
             >
@@ -130,7 +117,7 @@ interface NotificationState {
         </r-render>
       </r-part>
     `;
-  }
+  },
 })
 export class RHtmlViewComponent extends LitElement {}
 ```
@@ -150,15 +137,11 @@ setConfig({
     pubsub: 'wss://pubsub.youvolio.com/subscriptions',
     async onRequest() {
       return new Headers();
-    }
+    },
   },
   defaults: {
-    error: e => {
-      return html`
-        <p style="color: black">
-          ${e}
-        </p>
-      `;
+    error: (e) => {
+      return html` <p style="color: black">${e}</p> `;
     },
     loading: () => {
       return html`
@@ -166,8 +149,8 @@ setConfig({
           <rx-loading palette="danger"></rx-loading>
         </div>
       `;
-    }
-  }
+    },
+  },
 });
 
 import '@rhtml/graphql';
@@ -244,10 +227,10 @@ class AppComponent {
     {
       provide: UserId,
       useFactory: () =>
-        new Promise<number>(resolve => setTimeout(() => resolve(1234), 1000))
-    }
+        new Promise<number>((resolve) => setTimeout(() => resolve(1234), 1000)),
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 
@@ -255,10 +238,6 @@ Bootstrap(AppModule).then(() =>
   console.log('Started', `after ${Date.now() - now}`)
 );
 ```
-
-
-# AI Generated Documentation which is 95% correct
-
 
 # @rhtml - Modern Web Components Framework
 
@@ -297,15 +276,14 @@ import { FlexLayout } from '@rhtml/modifiers';
       .greeting {
         color: var(--primary-color, #2196f3);
       }
-    `
+    `,
   ],
+  modifiers: [...FlexLayout],
   template(this: HelloWorld) {
     return html`
-      <div class="greeting">
-        Hello, ${this.name}!
-      </div>
+      <div class="greeting" fxLayout="row">Hello, ${this.name}!</div>
     `;
-  }
+  },
 })
 export class HelloWorld extends LitElement {
   @property()
@@ -357,10 +335,8 @@ Components must be explicitly registered to be used:
   selector: 'app-root',
   components: [ChildComponent], // Register child components
   template(this: AppRoot) {
-    return html`
-      <child-component></child-component>
-    `;
-  }
+    return html` <child-component></child-component> `;
+  },
 })
 export class AppRoot extends LitElement {}
 ```
@@ -376,10 +352,10 @@ export class UserProfile extends LitElement {
   name: string = '';
 
   // Property with options
-  @property({ 
+  @property({
     type: Number,
     reflect: true, // Reflects to attribute
-    attribute: 'user-age' // Custom attribute name
+    attribute: 'user-age', // Custom attribute name
   })
   age: number = 0;
 
@@ -400,8 +376,8 @@ export class UserProfile extends LitElement {
   modifiers: [...FlexLayout], // Enable flex layout modifiers
   template(this: FlexLayoutDemo) {
     return html`
-      <div 
-        fxLayout="row" 
+      <div
+        fxLayout="row"
         fxLayoutAlign="space-between center"
         fxLayoutGap="16px">
         <div fxFlex="1 1 auto">Flexible item</div>
@@ -448,18 +424,16 @@ Clean and type-safe event handling:
   template(this: TodoItem) {
     return html`
       <div class="todo-item">
-        <input 
+        <input
           type="checkbox"
           .checked=${this.completed}
           @change=${this.handleToggle}
-        >
-        <span class=${this.completed ? 'completed' : ''}>
-          ${this.text}
-        </span>
+        />
+        <span class=${this.completed ? 'completed' : ''}> ${this.text} </span>
         <button @click=${this.handleDelete}>Delete</button>
       </div>
     `;
-  }
+  },
 })
 export class TodoItem extends LitElement {
   @property()
@@ -544,7 +518,7 @@ export class TodoList extends LitElement {
 
   // State updates trigger re-render automatically
   toggleTodo(id: number) {
-    this.todos = this.todos.map(todo =>
+    this.todos = this.todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
   }
@@ -609,7 +583,7 @@ Handle asynchronous data elegantly:
         html`<error-message></error-message>`
       )}
     `;
-  }
+  },
 })
 export class AsyncDemo extends LitElement {
   async fetchData() {
@@ -627,10 +601,14 @@ export class AsyncDemo extends LitElement {
 @rhtml provides a powerful system for creating custom attributes that can extend HTML elements:
 
 ```typescript
-import { CustomAttributeRegistry, Attribute, Modifier } from '@rhtml/custom-attributes';
+import {
+  CustomAttributeRegistry,
+  Attribute,
+  Modifier,
+} from '@rhtml/custom-attributes';
 
 @Modifier({
-  selector: 'background'
+  selector: 'background',
 })
 export class BackgroundColor extends Attribute {
   OnInit() {
@@ -654,10 +632,8 @@ export class BackgroundColor extends Attribute {
   selector: 'my-component',
   modifiers: [BackgroundColor],
   template(this: MyComponent) {
-    return html`
-      <div background="red">Colored background</div>
-    `;
-  }
+    return html` <div background="red">Colored background</div> `;
+  },
 })
 export class MyComponent extends LitElement {}
 ```
@@ -676,8 +652,8 @@ import { FlexLayout } from '@rhtml/modifiers';
   modifiers: [...FlexLayout],
   template(this: FlexDemo) {
     return html`
-      <div 
-        fxLayout="row" 
+      <div
+        fxLayout="row"
         fxLayoutAlign="space-between center"
         fxLayoutGap="16px"
         fxLayout.xs="column">
@@ -701,12 +677,10 @@ import { AngularLayout } from '@rhtml/modifiers';
   modifiers: [...AngularLayout],
   template(this: ConditionalDemo) {
     return html`
-      <div ngIf=${this.showContent}>
-        Conditional content
-      </div>
+      <div ngIf=${this.showContent}>Conditional content</div>
       <button @click=${() => this.toggle()}>Toggle</button>
     `;
-  }
+  },
 })
 export class ConditionalDemo extends LitElement {
   @state()
@@ -726,7 +700,7 @@ You can create modifiers with various features:
 
 ```typescript
 @Modifier({
-  selector: 'hover'
+  selector: 'hover',
 })
 export class Hoverable extends Attribute {
   @Input()
@@ -781,7 +755,7 @@ export class Color extends MediaQueryAttribute<Styles> {
 
 ```typescript
 @Modifier({
-  selector: 'watch'
+  selector: 'watch',
 })
 export class Watcher extends Attribute {
   @Input({ observe: true })
@@ -802,8 +776,8 @@ export class Watcher extends Attribute {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: ['data-value']
-  }
+    attributeFilter: ['data-value'],
+  },
 })
 export class ContentObserver extends Attribute {
   OnChange(records: MutationRecord[]) {
@@ -816,21 +790,21 @@ export class ContentObserver extends Attribute {
 
 Media query breakpoints for responsive modifiers:
 
-| Breakpoint | Media Query |
-|------------|-------------|
-| xs | screen and (max-width: 599px) |
-| sm | screen and (min-width: 600px) and (max-width: 959px) |
-| md | screen and (min-width: 960px) and (max-width: 1279px) |
-| lg | screen and (min-width: 1280px) and (max-width: 1919px) |
-| xl | screen and (min-width: 1920px) |
-| lt-sm | screen and (max-width: 599px) |
-| lt-md | screen and (max-width: 959px) |
-| lt-lg | screen and (max-width: 1279px) |
-| lt-xl | screen and (max-width: 1919px) |
-| gt-xs | screen and (min-width: 600px) |
-| gt-sm | screen and (min-width: 960px) |
-| gt-md | screen and (min-width: 1280px) |
-| gt-lg | screen and (min-width: 1920px) |
+| Breakpoint | Media Query                                            |
+| ---------- | ------------------------------------------------------ |
+| xs         | screen and (max-width: 599px)                          |
+| sm         | screen and (min-width: 600px) and (max-width: 959px)   |
+| md         | screen and (min-width: 960px) and (max-width: 1279px)  |
+| lg         | screen and (min-width: 1280px) and (max-width: 1919px) |
+| xl         | screen and (min-width: 1920px)                         |
+| lt-sm      | screen and (max-width: 599px)                          |
+| lt-md      | screen and (max-width: 959px)                          |
+| lt-lg      | screen and (max-width: 1279px)                         |
+| lt-xl      | screen and (max-width: 1919px)                         |
+| gt-xs      | screen and (min-width: 600px)                          |
+| gt-sm      | screen and (min-width: 960px)                          |
+| gt-md      | screen and (min-width: 1280px)                         |
+| gt-lg      | screen and (min-width: 1920px)                         |
 
 ## 🎠 Decorators
 
@@ -847,10 +821,8 @@ import { HostListener } from '@rhtml/decorators';
 @Component({
   selector: 'interactive-component',
   template(this: InteractiveComponent) {
-    return html`
-      <div>Hover or click me!</div>
-    `;
-  }
+    return html` <div>Hover or click me!</div> `;
+  },
 })
 export class InteractiveComponent extends LitElement {
   @HostListener('mouseenter')
@@ -900,7 +872,7 @@ export class DynamicStyles extends Attribute {
   modifiers: [DynamicStyles],
   template(this: StyledComponent) {
     return html`
-      <div 
+      <div
         dynamic-styles
         padding="16px"
         textColor="white"
@@ -917,16 +889,19 @@ export class DynamicStyles extends Attribute {
 Create powerful, reactive modifiers by combining decorators:
 
 ```typescript
+import { Attribute, Input, Modifier } from '@rhtml/custom-attributes';
+import { HostBinding, HostListener } from '@rhtml/decorators';
+
 @Modifier({
-  selector: 'interactive'
+  selector: 'interactive',
 })
 export class InteractiveModifier extends Attribute {
   @Input({ observe: true })
   @HostBinding('class.active')
-  isActive: boolean = false;
+  isActive = false;
 
   @Input({ observe: true })
-  effect: string = 'highlight';
+  effect = 'highlight';
 
   @HostListener('mouseenter')
   onEnter() {
@@ -941,9 +916,11 @@ export class InteractiveModifier extends Attribute {
   @HostListener('click')
   onClick() {
     this.isActive = !this.isActive;
-    this.dispatchEvent(new CustomEvent('activeChange', { 
-      detail: this.isActive 
-    }));
+    this.element.dispatchEvent(
+      new CustomEvent('activeChange', {
+        detail: this.isActive,
+      })
+    );
   }
 }
 
@@ -952,7 +929,7 @@ export class InteractiveModifier extends Attribute {
   modifiers: [InteractiveModifier],
   template(this: MyComponent) {
     return html`
-      <div 
+      <div
         interactive
         effect="pulse"
         @activeChange=${(e: CustomEvent) => this.handleActiveChange(e)}>
@@ -966,6 +943,7 @@ export class InteractiveModifier extends Attribute {
 ### Best Practices with Decorators
 
 1. **Reactive Properties**
+
 ```typescript
 // ✅ Good - Observable property with type safety
 @Input({ observe: true })
@@ -980,6 +958,7 @@ onClick() {
 ```
 
 2. **Event Handling**
+
 ```typescript
 // ✅ Good - Type-safe event handling
 @HostListener('click')
@@ -996,6 +975,7 @@ onClick(event: any) {
 ```
 
 3. **Property Observation**
+
 ```typescript
 // ✅ Good - Reactive property with change detection
 @Input({ observe: true })
@@ -1013,9 +993,10 @@ set isVisible(value: boolean) {
 ### Advanced Decorator Patterns
 
 #### Combining Multiple Host Bindings
+
 ```typescript
 @Modifier({
-  selector: 'responsive'
+  selector: 'responsive',
 })
 export class ResponsiveModifier extends Attribute {
   @Input({ observe: true })
@@ -1044,6 +1025,7 @@ export class ResponsiveModifier extends Attribute {
 ### Core Concepts
 
 Monadic components follow these fundamental rules:
+
 1. They act as containers with scoped logic
 2. Operators are pure components representing program settings
 3. The monad container creates composable logic based on provided operators
@@ -1079,7 +1061,7 @@ A revolutionary concept of "fire and forget" components that self-destruct after
 import { LitServiceElement } from '@rhtml/experiments';
 
 @Component({
-  selector: 'user-service'
+  selector: 'user-service',
 })
 export class UserService extends LitServiceElement {
   async getUserById(id: number) {
@@ -1089,11 +1071,13 @@ export class UserService extends LitServiceElement {
 
 // Usage in template
 html`
-  <user-service .run=${async function(this: UserService) {
-    const user = await this.getUserById(123);
-    console.log(user);
-  }}></user-service>
-`
+  <user-service
+    .run=${async function (this: UserService) {
+      const user = await this.getUserById(123);
+      console.log(user);
+    }}
+  ></user-service>
+`;
 ```
 
 ### Stateful Components
@@ -1139,19 +1123,25 @@ const UserProfile = html`
     <r-props>
       <r-prop key="userId" type="String"></r-prop>
     </r-props>
-    <r-render .state=${({ loading, userId, user }) => html`
-      <user-service .run=${async function() {
-        const userData = await this.getUserById(userId);
-        this.setState({ user: userData, loading: false });
-      }}></user-service>
-      
-      ${loading ? 'Loading...' : html`
-        <div class="profile">
-          <img src=${user.avatar} alt="Profile">
-          <h2>${user.name}</h2>
-        </div>
+    <r-render
+      .state=${({ loading, userId, user }) => html`
+        <user-service
+          .run=${async function () {
+            const userData = await this.getUserById(userId);
+            this.setState({ user: userData, loading: false });
+          }}
+        ></user-service>
+
+        ${loading
+          ? 'Loading...'
+          : html`
+              <div class="profile">
+                <img src=${user.avatar} alt="Profile" />
+                <h2>${user.name}</h2>
+              </div>
+            `}
       `}
-    `}>
+    >
     </r-render>
   </r-component>
 `;
@@ -1198,16 +1188,19 @@ The hierarchical structure of monadic components:
 ### Benefits of Monadic Components
 
 1. **Declarative Development**
+
    - Write components directly in HTML
    - Clear separation of concerns
    - Self-documenting structure
 
 2. **Service Integration**
+
    - Components as services
    - Clean up after execution
    - Reusable API integrations
 
 3. **State Management**
+
    - Built-in state handling
    - Reactive updates
    - Predictable data flow
@@ -1320,7 +1313,7 @@ Execute mutations and update local state:
             e.preventDefault();
             const form = e.target as HTMLFormElement;
             const text = new FormData(form).get('todo');
-            
+
             const result = await this.addTodo({ text });
             setState({
               todos: [...todos, result.data.addTodo]
@@ -1330,7 +1323,7 @@ Execute mutations and update local state:
             <input name="todo" placeholder="New todo...">
             <button type="submit">Add</button>
           </form>
-          
+
           <ul>
             ${todos.map(todo => html`
               <li class=${todo.completed ? 'completed' : ''}>
@@ -1392,16 +1385,19 @@ Configure how data is fetched and cached:
 ### Benefits of Template-First GraphQL
 
 1. **Seamless Integration**
+
    - Write queries directly in templates
    - Immediate visibility of data structure
    - No context switching between files
 
 2. **Type Safety**
+
    - Full TypeScript support
    - Automatic type inference from queries
    - Compile-time validation
 
 3. **Developer Experience**
+
    - Clear data dependencies
    - Collocated queries and UI
    - Easy to understand and maintain
@@ -1414,6 +1410,7 @@ Configure how data is fetched and cached:
 ### Best Practices
 
 1. **Query Organization**
+
 ```typescript
 // ✅ Good - Clear query structure
 <r-fetch query=${`
@@ -1436,11 +1433,12 @@ Configure how data is fetched and cached:
 ```
 
 2. **Error Handling**
+
 ```typescript
 // ✅ Good - Comprehensive error handling
 <r-render .state=${({ loading, error, data }) => html`
   ${error ? html`
-    <error-display 
+    <error-display
       .message=${error.message}
       .code=${error.extensions?.code}>
     </error-display>
@@ -1456,6 +1454,7 @@ Configure how data is fetched and cached:
 ```
 
 3. **Loading States**
+
 ```typescript
 // ✅ Good - Handle all states
 <r-render .state=${({ loading, error, data }) => html`
@@ -1507,10 +1506,10 @@ Configure how data is fetched and cached:
             ${items.map(item => html`
               <item-card .data=${item}></item-card>
             `)}
-            
+
             ${pageInfo.hasNextPage ? html`
-              <button @click=${() => setState({ 
-                cursor: pageInfo.endCursor 
+              <button @click=${() => setState({
+                cursor: pageInfo.endCursor
               })}>
                 Load More
               </button>
@@ -1532,7 +1531,7 @@ Configure how data is fetched and cached:
     return html`
       <r-part>
         <r-state .value=${{ messages: [], currentUser: null }}></r-state>
-        
+
         <!-- Subscribe to new messages -->
         <r-fetch .subscribe=${`
           subscription OnNewMessage($roomId: ID!) {
@@ -1569,7 +1568,7 @@ Configure how data is fetched and cached:
           <div class="chat-container">
             <div class="messages">
               ${messages.map(msg => html`
-                <message-bubble 
+                <message-bubble
                   .message=${msg}
                   ?is-mine=${msg.sender.id === currentUser.id}>
                 </message-bubble>
@@ -1683,7 +1682,7 @@ Configure how data is fetched and cached:
         `} .variables=${{ userId: this.currentUserId }}></r-fetch>
         <r-render .state=${({ data: { user } }) => html`
           <dashboard-layout>
-            <user-profile 
+            <user-profile
               slot="sidebar"
               .user=${user}>
             </user-profile>
@@ -1732,7 +1731,7 @@ Configure how data is fetched and cached:
         <r-render .state=${({ loading, error, data, networkStatus }, setState) => html`
           <error-boundary>
             ${networkStatus === 'retry' ? html`
-              <retry-notice 
+              <retry-notice
                 .attempt=${networkStatus.attempt}
                 .nextRetry=${networkStatus.nextRetryMs}>
               </retry-notice>
@@ -1785,20 +1784,20 @@ class CounterService {
 
 @Component({
   Settings: {
-    selector: 'counter-component'
+    selector: 'counter-component',
   },
   Providers: DefineDependencies(CounterService)(Container),
-  State: function(this: CounterComponent, [counterService]) {
+  State: function (this: CounterComponent, [counterService]) {
     return interval(1000).pipe(
-      map(value => ({ counter: this.counter + counterService.counter + value }))
+      map((value) => ({
+        counter: this.counter + counterService.counter + value,
+      }))
     );
   },
   Render: ([counterService]) =>
-    function(this, { counter }) {
-      return html`
-        ${counter} ${counterService.counter}
-      `;
-    }
+    function (this, { counter }) {
+      return html` ${counter} ${counterService.counter} `;
+    },
 })
 export class CounterComponent extends LitElement {
   @property({ type: Number })
@@ -1814,12 +1813,12 @@ import { Partial } from '@rhtml/component';
 const compose = <T, D = []>(selector: string, styles?: CSSResult[], deps?: D) =>
   Partial<T, D>({
     selector,
-    styles
+    styles,
   })(deps);
 
 const state = () => interval(1000).pipe(map(() => new Date().getSeconds()));
 
-@(compose<number>('date-component')(state)(() => date => date))
+@compose<number>('date-component')(state)(() => (date) => date)
 export class DateComponent extends LitElement {}
 ```
 
@@ -1834,23 +1833,23 @@ export class DateComponent extends LitElement {}
         background: red;
         color: white;
       }
-    `
+    `,
   },
   Providers: [],
-  State: function(this) {
+  State: function (this) {
     return combineLatest([this.counter, this.mega]).pipe(
       map(([value, v2]) => ({ counter: value + v2 }))
     );
   },
   Render: () =>
-    function(this, { counter }, setState) {
+    function (this, { counter }, setState) {
       return html`
         <p>${counter}</p>
         <button @click=${() => setState({ counter: counter + counter })}>
           CLICK ME
         </button>
       `;
-    }
+    },
 })
 export class CounterComponent extends LitElement {
   @property({ type: Object })
@@ -1877,24 +1876,27 @@ const decrement = () => ({ type: 'DECREMENT' });
 
 // Async action creators
 const fetchCounter = () => ({ type: 'FETCH_COUNTER_REQUEST' });
-const fetchCounterSuccess = (value: number) => ({ 
+const fetchCounterSuccess = (value: number) => ({
   type: 'FETCH_COUNTER_SUCCESS',
-  payload: value 
+  payload: value,
 });
-const fetchCounterFailure = (error: string) => ({ 
+const fetchCounterFailure = (error: string) => ({
   type: 'FETCH_COUNTER_FAILURE',
-  payload: error 
+  payload: error,
 });
 
 // Async action with side effects
 const incrementAsync = () => ({ type: 'INCREMENT_ASYNC' });
 
 // Define Redux reducer with async state
-const counterReducer = (state = { 
-  value: 0, 
-  loading: false, 
-  error: null 
-}, action: { type: string, payload?: any }) => {
+const counterReducer = (
+  state = {
+    value: 0,
+    loading: false,
+    error: null,
+  },
+  action: { type: string; payload?: any }
+) => {
   switch (action.type) {
     case 'FETCH_COUNTER_REQUEST':
       return { ...state, loading: true, error: null };
@@ -1926,63 +1928,65 @@ const Providers = DefineDependencies(Store)(Container);
 
 @Componen({
   Settings: {
-    selector: 'redux-counter'
+    selector: 'redux-counter',
   },
   Providers,
-  State: function(this: CounterComponent, [store]) {
+  State: function (this: CounterComponent, [store]) {
     return combineLatest([
       store.select(selectCounter),
       store.select(selectLoading),
-      store.select(selectError)
+      store.select(selectError),
     ]).pipe(
-      map(([counter, loading, error]) => ({ 
+      map(([counter, loading, error]) => ({
         counter,
         loading,
-        error
+        error,
       }))
     );
   },
   Render: () =>
-    function(this, { counter, loading, error }, setState) {
+    function (this, { counter, loading, error }, setState) {
       return html`
         <div class="counter-container">
-          ${error ? html`
-            <error-message .message=${error}></error-message>
-          ` : null}
-          
+          ${error
+            ? html` <error-message .message=${error}></error-message> `
+            : null}
+
           <div class="counter-display">
-            ${loading ? html`
-              <loading-spinner></loading-spinner>
-            ` : html`
-              <span>Counter: ${counter}</span>
-            `}
+            ${loading
+              ? html` <loading-spinner></loading-spinner> `
+              : html` <span>Counter: ${counter}</span> `}
           </div>
 
           <div class="counter-controls">
-            <button 
+            <button
               @click=${() => this.dispatch(increment())}
-              ?disabled=${loading}>
+              ?disabled=${loading}
+            >
               +
             </button>
-            <button 
+            <button
               @click=${() => this.dispatch(decrement())}
-              ?disabled=${loading}>
+              ?disabled=${loading}
+            >
               -
             </button>
-            <button 
+            <button
               @click=${() => this.dispatch(incrementAsync())}
-              ?disabled=${loading}>
+              ?disabled=${loading}
+            >
               Increment Async
             </button>
-            <button 
+            <button
               @click=${() => this.dispatch(fetchCounter())}
-              ?disabled=${loading}>
+              ?disabled=${loading}
+            >
               Fetch Counter
             </button>
           </div>
         </div>
       `;
-    }
+    },
 })
 export class ReduxCounterComponent extends LitElement {}
 ```
@@ -1991,7 +1995,7 @@ export class ReduxCounterComponent extends LitElement {}
 
 ```typescript
 // Custom middleware for handling async actions
-const asyncMiddleware = store => next => action => {
+const asyncMiddleware = (store) => (next) => (action) => {
   if (action.type === 'INCREMENT_ASYNC') {
     setTimeout(() => {
       store.dispatch(increment());
@@ -2001,13 +2005,13 @@ const asyncMiddleware = store => next => action => {
 };
 
 // API middleware for handling API calls
-const apiMiddleware = store => next => action => {
+const apiMiddleware = (store) => (next) => (action) => {
   if (action.type === 'FETCH_COUNTER_REQUEST') {
     // Simulate API call
     fetch('/api/counter')
-      .then(response => response.json())
-      .then(data => store.dispatch(fetchCounterSuccess(data.value)))
-      .catch(error => store.dispatch(fetchCounterFailure(error.message)));
+      .then((response) => response.json())
+      .then((data) => store.dispatch(fetchCounterSuccess(data.value)))
+      .catch((error) => store.dispatch(fetchCounterFailure(error.message)));
   }
   return next(action);
 };
@@ -2015,11 +2019,7 @@ const apiMiddleware = store => next => action => {
 // Create store with custom middleware
 const store = createStore(
   counterReducer,
-  applyMiddleware(
-    asyncMiddleware,
-    apiMiddleware,
-    thunkMiddleware
-  )
+  applyMiddleware(asyncMiddleware, apiMiddleware, thunkMiddleware)
 );
 ```
 
@@ -2030,15 +2030,15 @@ const store = createStore(
 const fetchCounterWithRetry = () => {
   return async (dispatch, getState) => {
     dispatch(fetchCounter());
-    
+
     try {
       const response = await fetch('/api/counter');
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch counter');
       }
-      
+
       dispatch(fetchCounterSuccess(data.value));
     } catch (error) {
       // Retry logic
@@ -2059,7 +2059,7 @@ const fetchCounterWithRetry = () => {
   Render: () =>
     function(this, { counter, loading, error }, setState) {
       return html`
-        <button 
+        <button
           @click=${() => this.dispatch(fetchCounterWithRetry())}
           ?disabled=${loading}>
           Fetch with Retry
@@ -2083,4 +2083,3 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ## 📄 License
 
 @rhtml is MIT licensed.
-
