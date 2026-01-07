@@ -73,8 +73,8 @@ export const Partial =
   <S, D, K extends LitElement = LitElement>(options: Options) =>
   (deps: D = [] as never) =>
   (state: StateToRender<S, D, K> = () => ({} as never)) =>
-  (loading: () => PossibleRender = () => null) =>
-  (error: (e: Error | unknown) => PossibleRender = () => null) =>
+  (loading: (this: K) => PossibleRender = () => null) =>
+  (error: (this: K, e: Error) => PossibleRender = () => null) =>
   (render: RenderResult<S, D, K> = () => state as never) =>
     OriginalComponent<K>({
       ...options,
