@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/operators",
-  "version": "0.0.139",
+  "version": "0.0.140",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@rxdi/lit-html": "^0.7.178",
-    "@rhtml/renderer": "0.0.139"
+    "@rhtml/renderer": "0.0.140"
   },
   "devDependencies": {},
   "browserslist": [
