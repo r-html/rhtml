@@ -10,6 +10,7 @@ import {
   UnpinnedEvent,
   VisibilityChangedEvent,
 } from './events';
+import { FlowLayout } from './layouts/flow';
 import {
   BaseLayoutConfig,
   ChildMeasurements,
@@ -447,8 +448,8 @@ export class Virtualizer {
 
     if (Ctor === undefined) {
       // If we don't have a constructor yet, load the default
-      DefaultLayoutConstructor = Ctor = (await import('./layouts/flow'))
-        .FlowLayout as unknown as LayoutConstructor;
+      DefaultLayoutConstructor = Ctor =
+        FlowLayout as unknown as LayoutConstructor;
     }
 
     this._layout = new Ctor(
