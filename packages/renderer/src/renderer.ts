@@ -1,5 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, css, html, LitElement, property } from '@rxdi/lit-html';
+import {
+  adoptStyles,
+  Component,
+  css,
+  html,
+  LitElement,
+  property,
+} from '@rxdi/lit-html';
 
 function Render(config) {
   return function (cls) {
@@ -16,13 +22,6 @@ function Render(config) {
   selector: 'r-renderer',
   template(this: Renderer) {
     return html`
-      ${this.options?.style
-        ? html`
-            <style>
-              ${this.options.style}
-            </style>
-          `
-        : html``}
       ${!this.loading ? this.renderContent() : ''}
       ${this.loading
         ? html`
@@ -45,24 +44,38 @@ export class Renderer extends LitElement {
   @property({ type: Object })
   public options = {
     state: {},
-    render: (res, setState, shadowRoot) => html` ${res} `,
+    render: (
+      res,
+      setState: (state: Record<never, never>) => void,
+      shadowRoot: ShadowRoot
+    ) => html` ${res} `,
     style: css``,
+    styles: [],
     deepCloneState: false,
     loading: () => html``,
-    error: (e) => html``,
+    error: (e: Error) => html`${e?.message}`,
   };
 
   @property({ type: Boolean })
   private loading = true;
 
-  @property({ type: String })
-  private error = '';
+  @property({ type: Object })
+  private error: Error;
 
   @property()
   private state = {};
-  private subscription;
+
+  private subscription: { unsubscribe: () => void };
 
   async OnUpdateFirst() {
+    if (this.options?.style) {
+      adoptStyles(this.shadowRoot, [this.options.style]);
+    }
+
+    if (this.options?.styles?.length) {
+      adoptStyles(this.shadowRoot, this.options.styles);
+    }
+
     this.options.state = await this.options.state;
     if (this.options.state) {
       if (this.isObservable(this.options.state)) {

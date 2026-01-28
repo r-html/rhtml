@@ -28,7 +28,7 @@ export const DefineDependencies =
   (injection: Injection): InstanceTypes<T> => {
     for (const [index, dep] of deps.entries()) {
       Object.defineProperty(deps, index, {
-        get: () => (injection && injection.has(dep) ? injection.get(dep) : dep),
+        get: () => (injection?.has(dep) ? injection.get(dep) : dep),
       });
     }
     return deps as never;
@@ -85,6 +85,8 @@ export const Partial =
             .options=${{
               state: state.bind(this).call(this, deps),
               loading: loading.bind(this),
+              style: options.style,
+              styles: options.styles,
               error: error.bind(this),
               deepCloneState: options.deepCloneState,
               render: (
@@ -97,7 +99,7 @@ export const Partial =
                   .bind(this)
                   .call(this, state, setState, shadowRoot);
               },
-            } as never}
+            }}
           ></r-renderer>
         `;
       },
