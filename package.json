@@ -1,6 +1,6 @@
 {
   "name": "rhtml",
-  "version": "0.0.141",
+  "version": "0.0.142",
   "description": "Reactive HyperText Markup Language",
   "bolt": {
     "workspaces": [
