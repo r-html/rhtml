@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/component",
-  "version": "0.0.143",
+  "version": "0.0.144",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@rxdi/lit-html": "^0.7.178",
-    "@rhtml/renderer": "0.0.143"
+    "@rhtml/renderer": "0.0.144"
   },
   "peerDependencies": {
     "rxjs": "^7.8.0"

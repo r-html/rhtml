@@ -1,6 +1,6 @@
 {
   "name": "@rhtml/modifiers",
-  "version": "0.0.143",
+  "version": "0.0.144",
   "description": "Reactive HyperText Markup Language",
   "scripts": {
     "start": "npx parcel ./examples/index.html --out-dir build/examples",
@@ -17,8 +17,8 @@
     "url": "git@github.com:rhtml/rhtml.git"
   },
   "dependencies": {
-    "@rhtml/custom-attributes": "0.0.143",
-    "@rhtml/decorators": "0.0.143"
+    "@rhtml/custom-attributes": "0.0.144",
+    "@rhtml/decorators": "0.0.144"
   },
   "devDependencies": {},
   "author": "Kristiyan Tachev",
