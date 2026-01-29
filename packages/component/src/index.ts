@@ -81,6 +81,7 @@ export const Partial =
       template(this: K) {
         return html`
           <r-renderer
+            style="display: none;"
             @loaded=${waitBeforeTrigger.bind(this)}
             .options=${{
               state: state.bind(this).call(this, deps),
