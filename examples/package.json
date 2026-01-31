@@ -14,8 +14,8 @@
     "@rhtml/hooks": "0.0.126",
     "@rhtml/operators": "^0.0.126",
     "@rhtml/renderer": "0.0.126",
-    "@rxdi/core": "^0.7.178",
-    "@rxdi/lit-html": "^0.7.178",
+    "@rxdi/core": "^0.7.225",
+    "@rxdi/lit-html": "^0.7.225",
     "@rxdi/ui-kit": "^0.7.138",
     "rxjs": "^7.8.0"
   },

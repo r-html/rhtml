@@ -671,26 +671,26 @@
     typeable-promisify "^2.0.1"
     yarn "^1.9.4"
 
-"@rxdi/core@^0.7.178":
-  version "0.7.178"
-  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.178.tgz#e28edd387bcf2b82377fc65e171291f02b5818fe"
-  integrity sha512-iDxMKqCZrHWfkomjF3qUiZ/WCI19928FqOQSY1HWA/2DxNTtSX2xYl+UVonj44bN6Hnv7qlqlWjmv5LSkjn3dQ==
+"@rxdi/core@^0.7.225":
+  version "0.7.225"
+  resolved "https://registry.yarnpkg.com/@rxdi/core/-/core-0.7.225.tgz#48b4207af636111754c77afa555b3c45e807eec0"
+  integrity sha512-xe4F8Zj5ooIgZqsCv/QWLu4ieOe0Du2RJ0wieVPigEEniQZsz35DVuHmF8ljTpfF/6bzuF4xbgc8wCT8Nn9cVA==
   dependencies:
     "@abraham/reflection" "^0.8.0"
-    rxjs "^7.8.0"
+    rxjs "^7.8.2"
 
-"@rxdi/graphql-client@^0.7.178":
-  version "0.7.178"
-  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.178.tgz#41593d449837185f2e60e5bec0bea4a7b5266002"
-  integrity sha512-clbMPoWYzX8NbcL9GnU6NhlGL4JzbUISh6mNmRvG7rXvdDO+7+BebtDdytdLDfHmlH8+mHXNOrPzJ+50xwPN1w==
+"@rxdi/graphql-client@^0.7.225":
+  version "0.7.225"
+  resolved "https://registry.yarnpkg.com/@rxdi/graphql-client/-/graphql-client-0.7.225.tgz#b8d47d9c37d48f75d1c8dae299004e24e7f038ba"
+  integrity sha512-UKI3tIDv41p/OZGQvVhJZUKIhOlw+uJ7ioPi+zhTh26iCTJMcDRwcCkFxk5cIeMJ/XFNYHTIEB0eLYBibQR+jg==
   dependencies:
     "@apollo/client" "^3.7.3"
     subscriptions-transport-ws "^0.9.19"
 
-"@rxdi/lit-html@^0.7.178":
-  version "0.7.178"
-  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.178.tgz#a479e72717d4a0e185569721393d11320cf62fa6"
-  integrity sha512-xwN2F06Q8UMobUvQHhU6AH97/9zJTxJ2Qg6zRn3OWhR30VpcC5xSHeND1i3EyOpQhoTMCTYSt5IT0EYusxAJNQ==
+"@rxdi/lit-html@^0.7.225":
+  version "0.7.225"
+  resolved "https://registry.yarnpkg.com/@rxdi/lit-html/-/lit-html-0.7.225.tgz#3edbc5194b2942a94a81ea280b2cdc313854dbf5"
+  integrity sha512-qQgXQ/OVDDqUQwrH38G6VBRZhOz/8JSNBVcN3zKrCQ+R3fomYDu+0C7b280UOwg7di77+J74CagC8PBpgbIYRg==
   dependencies:
     "@lit/reactive-element" "1.5.0"
     lit-element "3.2.2"
@@ -4752,6 +4752,13 @@ rxjs@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
   integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
+  dependencies:
+    tslib "^2.1.0"
+
+rxjs@^7.8.2:
+  version "7.8.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.2.tgz#955bc473ed8af11a002a2be52071bf475638607b"
+  integrity sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==
   dependencies:
     tslib "^2.1.0"
 

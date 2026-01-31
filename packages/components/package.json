@@ -13,7 +13,7 @@
     "build": "cp ./libs/types ../../node_modules/@apollo/client/link/core/types.d.ts && rm -rf dist && tsc"
   },
   "dependencies": {
-    "@rxdi/lit-html": "^0.7.178",
+    "@rxdi/lit-html": "^0.7.225",
     "@rhtml/renderer": "0.0.144",
     "rxjs": "^7.8.0",
     "shades": "^2.1.0"
