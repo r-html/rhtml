@@ -8,7 +8,10 @@ interface Styles {
   selector: 'ngIf',
 })
 export class IfOperator extends Attribute<Styles> {
+  private originalDisplay: string;
+
   OnInit() {
+    this.originalDisplay = this.element.style.display;
     this.modify();
   }
 
@@ -30,7 +33,7 @@ export class IfOperator extends Attribute<Styles> {
     ) {
       this.setStyles({ display: 'none' })(this.element);
     } else {
-      this.setStyles({ display: null })(this.element);
+      this.setStyles({ display: this.originalDisplay })(this.element);
     }
   }
 }
