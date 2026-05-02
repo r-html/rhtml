@@ -23,7 +23,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git@github.com:rhtml/rhtml.git"
+    "url": "git@github.com:r-html/rhtml.git"
   },
   "author": "Kristiyan Tachev",
   "license": "MIT",
