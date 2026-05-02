@@ -5,8 +5,7 @@ build
 coverage
 
 dist
-
-*.js
+docs
 *.map.js
 *.d.ts
 *.js.map

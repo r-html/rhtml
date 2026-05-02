@@ -13,18 +13,18 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: 24
           # registry-url: https://npm.pkg.github.com/
           # scope: "@rxdi"
       - run: npx @rxdi/bolt install
       - run: npm run lint --if-present
+      - run: npm run build
       - run: npm test --if-present
       - run: git config --global user.email 'kristiqn.tachev@gmail.com'
       - run: git config --global user.name "Kristiyan Tachev"
       - run: npm version patch
       - run: node ./change-version.js
       - run: npm config set '//registry.npmjs.org/:_authToken' "${{secrets.NPM_TOKEN}}"
-      - run: npm run build
       - run: npm run patch
       - run: npm run publish-packages
         env:
