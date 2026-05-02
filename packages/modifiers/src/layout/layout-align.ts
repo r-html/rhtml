@@ -41,7 +41,7 @@ export class LayoutAlign extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  private clean() {
+  clean() {
     this.setStyles({
       justifyContent: null,
       alignItems: null,
@@ -49,7 +49,7 @@ export class LayoutAlign extends MediaQueryAttribute<Styles> {
     })(this.element);
   }
 
-  private modify() {
+  modify() {
     const [mainAxis, crossAxis] = this.value.split(' ');
 
     this.setStyles({

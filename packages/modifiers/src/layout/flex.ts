@@ -42,7 +42,7 @@ export class Flex extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  private clean() {
+  clean() {
     this.setStyles({
       boxSizing: null,
       flex: null,
@@ -51,12 +51,12 @@ export class Flex extends MediaQueryAttribute<Styles> {
     })(this.element);
   }
 
-  private modify() {
+  modify() {
     let grow = '1';
     let shrink = '1';
     let basis = '0.000000001px';
     let flex = `${grow} ${shrink} ${basis}`;
-    let maxWidth = '100%';
+    let maxWidth: string = null;
 
     if (this.value) {
       const parts = this.value.split(' ');
@@ -75,15 +75,16 @@ export class Flex extends MediaQueryAttribute<Styles> {
         } else if (val.endsWith('%') || val.endsWith('px')) {
           basis = val;
           flex = `${grow} ${shrink} ${basis}`;
+          maxWidth = '100%';
         } else if (!isNaN(Number(val))) {
           basis = `${val}%`;
           flex = `${grow} ${shrink} ${basis}`;
+          maxWidth = '100%';
         } else {
           basis = val;
           flex = `${grow} ${shrink} ${basis}`;
         }
       } else {
-        maxWidth = 'none';
         [grow = '1', shrink = '1', basis = '0.000000001px'] = parts;
         flex = `${grow} ${shrink} ${basis}`;
       }

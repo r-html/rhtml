@@ -7,7 +7,7 @@
     "patch": "npm run build && npm version patch && npm publish --update-readme --access public && npm run delete-dist",
     "delete-dist": "rm -rf dist",
     "clean": "git clean -dxf",
-    "test": "echo 'missing tests'",
+    "test": "npx jest",
     "lint": "npx eslint . --ext .ts",
     "lint-fix": "npx eslint . --fix --ext .ts",
     "build": "rm -rf dist && npx tsc"
@@ -20,7 +20,12 @@
     "@rhtml/custom-attributes": "0.0.147",
     "@rhtml/decorators": "0.0.147"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@abraham/reflection": "^0.7.0",
+    "jest": "^24.9.0",
+    "ts-jest": "25.2.1"
+  },
   "author": "Kristiyan Tachev",
   "license": "MIT",
   "browserslist": [

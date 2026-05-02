@@ -39,11 +39,11 @@ export class FlexAlign extends MediaQueryAttribute<Styles> {
     this.modify();
   }
 
-  private clean() {
+  clean() {
     this.setStyles({ alignSelf: null })(this.element);
   }
 
-  private modify() {
+  modify() {
     this.setStyles({ alignSelf: this.value || null })(this.element);
   }
 }
