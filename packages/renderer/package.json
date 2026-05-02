@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rhtml/rhtml.git"
+    "url": "git@github.com:r-html/rhtml.git"
   },
   "dependencies": {
     "@rxdi/lit-html": "^0.7.225"
