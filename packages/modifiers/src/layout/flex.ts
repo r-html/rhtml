@@ -7,7 +7,8 @@ import {
 interface Styles {
   flex: string;
   boxSizing: string;
-  maxWidth: string;
+  minWidth: string;
+  maxWidth?: string;
 }
 
 @Modifier({
@@ -44,16 +45,55 @@ export class Flex extends MediaQueryAttribute<Styles> {
   private clean() {
     this.setStyles({
       boxSizing: null,
-      maxWidth: null,
       flex: null,
+      minWidth: null,
+      maxWidth: null,
     })(this.element);
   }
 
   private modify() {
+    let grow = '1';
+    let shrink = '1';
+    let basis = '0.000000001px';
+    let flex = `${grow} ${shrink} ${basis}`;
+    let maxWidth = '100%';
+
+    if (this.value) {
+      const parts = this.value.split(' ');
+      if (parts.length === 1) {
+        const val = parts[0];
+        if (val === 'none') {
+          flex = 'none';
+          maxWidth = 'none';
+        } else if (val === 'initial') {
+          flex = 'initial';
+        } else if (val === 'auto') {
+          grow = '1';
+          shrink = '1';
+          basis = 'auto';
+          flex = `${grow} ${shrink} ${basis}`;
+        } else if (val.endsWith('%') || val.endsWith('px')) {
+          basis = val;
+          flex = `${grow} ${shrink} ${basis}`;
+        } else if (!isNaN(Number(val))) {
+          basis = `${val}%`;
+          flex = `${grow} ${shrink} ${basis}`;
+        } else {
+          basis = val;
+          flex = `${grow} ${shrink} ${basis}`;
+        }
+      } else {
+        maxWidth = 'none';
+        [grow = '1', shrink = '1', basis = '0.000000001px'] = parts;
+        flex = `${grow} ${shrink} ${basis}`;
+      }
+    }
+
     this.setStyles({
       boxSizing: 'border-box',
-      maxWidth: this.value || null,
-      flex: '1 1 100%',
+      flex,
+      minWidth: '0',
+      maxWidth,
     })(this.element);
   }
 }

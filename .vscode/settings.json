@@ -25,5 +25,6 @@
   "deno.suggest.imports.hosts": {
     "https://cdn.esm.sh": false,
     "https://deno.land": true
-  } // also provides unstable type declarations in VS Code
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib" // also provides unstable type declarations in VS Code
 }

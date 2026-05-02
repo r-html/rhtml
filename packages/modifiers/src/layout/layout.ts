@@ -57,9 +57,17 @@ export class Layout extends MediaQueryAttribute<Styles> {
     this.element.setAttribute(this.selector, this.value);
     const splitted = this.value.split(' ');
     const [mainAxis, crossAxis] = splitted;
+
+    let flexFlow = mainAxis;
+    if (crossAxis === 'wrap' || crossAxis === 'inline') {
+      flexFlow = `${mainAxis} ${crossAxis}`;
+    } else if (crossAxis) {
+      flexFlow = `${mainAxis} ${crossAxis}`;
+    }
+
     this.setStyles({
-      boxSizing: 'flex',
-      flexFlow: splitted.length > 1 ? `${mainAxis} ${crossAxis}` : mainAxis,
+      boxSizing: 'border-box',
+      flexFlow,
       display: 'flex',
     })(this.element);
   }

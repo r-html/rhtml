@@ -5,7 +5,7 @@ import {
 } from '@rhtml/custom-attributes';
 
 interface Styles {
-  placeContent: string;
+  justifyContent: string;
   alignItems: string;
   display: string;
 }
@@ -43,19 +43,18 @@ export class LayoutAlign extends MediaQueryAttribute<Styles> {
 
   private clean() {
     this.setStyles({
+      justifyContent: null,
       alignItems: null,
-      placeContent: null,
       display: null,
     })(this.element);
   }
 
   private modify() {
     const [mainAxis, crossAxis] = this.value.split(' ');
+
     this.setStyles({
-      alignItems: crossAxis ? crossAxis : mainAxis,
-      placeContent: crossAxis
-        ? `${crossAxis} ${mainAxis}`
-        : `${mainAxis} ${mainAxis}`,
+      justifyContent: mainAxis,
+      alignItems: crossAxis || mainAxis,
       display: 'flex',
     })(this.element);
   }
